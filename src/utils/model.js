@@ -329,19 +329,25 @@ function getSummary(params) {
     verdictText = `Hung parliament — PH bloc ${phBloc} · PN+BN ${opp} · GPS (${gps}) is kingmaker`;
   }
 
-  // Per-state projected winner breakdown — returned once with summary, no extra API call needed
+  // Per-state projected winner breakdown — party-level, returned with summary (no extra API call)
   const byState = {};
   SEATS.forEach(seat => {
     const state = seat[2];
     const w = getWinner(seat, params);
-    const grp = w.startsWith('GPS') ? 'GPS' : w.startsWith('BN') ? 'BN' : w.startsWith('PN') ? 'PN' : w;
     if (!byState[state]) byState[state] = { total: 0 };
-    byState[state][grp] = (byState[state][grp] || 0) + 1;
+    byState[state][w] = (byState[state][w] || 0) + 1;
     byState[state].total++;
   });
 
   return {
     coalitions: { ph, bm, pn, bn, gps, war },
+    parties: {
+      PKR: t.PKR || 0, DAP: t.DAP || 0, AMANAH: t.AMANAH || 0,
+      BERSAMA: t.BERSAMA || 0,
+      'PN-BERSATU': t['_PN-BERSATU'] || 0, 'PN-PAS': t['_PN-PAS'] || 0,
+      'BN-UMNO': t['_BN-UMNO'] || 0, 'BN-MCA': t['_BN-MCA'] || 0,
+      GPS: t.GPS || 0, WARISAN: t.WARISAN || 0,
+    },
     phBloc, opp,
     verdict: { type: verdictType, text: verdictText },
     states: [...new Set(SEATS.map(s => s[2]))],

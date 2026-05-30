@@ -401,6 +401,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     <div class="sec-lbl">Coalition seat totals</div>
     <div class="scoreboard" id="scoreboard"><div class="loading"><div class="spinner"></div></div></div>
 
+    <div class="sec-lbl">By individual party</div>
+    <div class="scoreboard" id="party-sb"></div>
+
     <div class="parl-bar-wrap">
       <div class="sec-lbl" style="padding:0 0 .5rem">Seat distribution</div>
       <div style="position:relative;margin-bottom:18px">
@@ -705,17 +708,33 @@ function renderSummary(d){
   var vIco=v.type==='ok'?'&#10003;':v.type==='no'?'&#10007;':'&#9888;';
   document.getElementById('verdict').innerHTML='<div class="verdict '+vCls+'"><div class="v-icon">'+vIco+'</div><div>'+v.text+'</div></div>';
 
+  var p=d.parties||{};
   var REFS={base:{phb:99,pn:74,bn:32,gps:23,war:3},best:{phb:120,pn:67,bn:29,gps:23,war:3},worst:{phb:81,pn:82,bn:35,gps:23,war:3}};
   var ref=REFS[scen]||REFS.base;
   function delta(n,r){var dv=n-r;return dv>0?'<span class="cc-delta d-up">&#8593; +'+dv+'</span>':dv<0?'<span class="cc-delta d-dn">&#8595; '+dv+'</span>':'<span class="cc-delta d-eq">&#8212; &#8212;</span>';}
   document.getElementById('coal-row').innerHTML=[
-    {lbl:'PH Bloc',n:phB,sub:'PKR · DAP · AMANAH · BERSAMA',ref:ref.phb,col:'#2563EB'},
-    {lbl:'PN Bloc',n:pn,sub:'BERSATU · PAS',ref:ref.pn,col:'#7C3AED'},
-    {lbl:'BN',n:bn,sub:'UMNO · MCA · MIC',ref:ref.bn,col:'#D97706'},
-    {lbl:'GPS',n:gps,sub:'Sarawak parties',ref:ref.gps,col:'#059669'},
-    {lbl:'Others',n:war,sub:'WARISAN · Ind.',ref:ref.war,col:'#4B5563'}
+    {lbl:'PH Bloc',n:phB,sub:'PKR&nbsp;'+p.PKR+' &middot; DAP&nbsp;'+p.DAP+' &middot; AMN&nbsp;'+p.AMANAH+(bm?' &middot; BSMA&nbsp;'+p.BERSAMA:''),ref:ref.phb,col:'#2563EB'},
+    {lbl:'PN Bloc',n:pn,sub:'BSTU&nbsp;'+p['PN-BERSATU']+' &middot; PAS&nbsp;'+p['PN-PAS'],ref:ref.pn,col:'#7C3AED'},
+    {lbl:'BN',n:bn,sub:'UMNO&nbsp;'+p['BN-UMNO']+' &middot; MCA&nbsp;'+p['BN-MCA'],ref:ref.bn,col:'#D97706'},
+    {lbl:'GPS',n:gps,sub:'Sarawak&nbsp;('+gps+'&nbsp;seats)',ref:ref.gps,col:'#059669'},
+    {lbl:'Others',n:war,sub:'WAR&nbsp;'+(p.WARISAN||0),ref:ref.war,col:'#4B5563'}
   ].map(function(x){
     return '<div class="cc" style="border-top-color:'+x.col+'"><div class="cc-lbl" style="color:'+x.col+'">'+x.lbl+'</div><div class="cc-n" style="color:'+x.col+'">'+x.n+'</div><div class="cc-sub">'+x.sub+'</div>'+delta(x.n,x.ref)+'</div>';
+  }).join('');
+
+  // Individual-party scoreboard
+  var PARTY_ORDER=[
+    {key:'PKR',col:'#2563EB',grp:'PH'},{key:'DAP',col:'#1D4ED8',grp:'PH'},
+    {key:'AMANAH',col:'#1E40AF',grp:'PH'},{key:'BERSAMA',col:'#DC2626',grp:'PH+'},
+    {key:'PN-BERSATU',col:'#7C3AED',grp:'PN'},{key:'PN-PAS',col:'#8B5CF6',grp:'PN'},
+    {key:'BN-UMNO',col:'#D97706',grp:'BN'},{key:'BN-MCA',col:'#B45309',grp:'BN'},
+    {key:'GPS',col:'#059669',grp:'GPS'},{key:'WARISAN',col:'#4B5563',grp:'Other'}
+  ];
+  var psbEl=document.getElementById('party-sb');
+  if(psbEl)psbEl.innerHTML=PARTY_ORDER.filter(function(pm){return(p[pm.key]||0)>0;}).map(function(pm){
+    return '<div class="sbc"><div class="sbc-h"><span class="sbc-dot" style="background:'+pm.col+'"></span><div class="sbc-lbl">'+(PS[pm.key]||pm.key)+'</div></div>'
+      +'<div class="sbc-n" style="color:'+pm.col+'">'+(p[pm.key]||0)+'</div>'
+      +'<div class="sbc-d" style="color:var(--text3)">'+pm.grp+'</div></div>';
   }).join('');
 
   var sbRef={base:{phb:99,pn:74,bn:32},best:{phb:120,pn:67,bn:29},worst:{phb:81,pn:82,bn:35}};
@@ -873,11 +892,11 @@ function renderAnalysis(d){
 function renderStates(summaryData){
   var states=summaryData.states,byState=summaryData.byState||{};
   if(!states||!states.length)return;
-  var ord=['PKR','DAP','AMANAH','BERSAMA','GPS','BN','PN','WARISAN'];
+  var ord=['PKR','DAP','AMANAH','BERSAMA','GPS','BN-UMNO','BN-MCA','PN-BERSATU','PN-PAS','WARISAN'];
   document.getElementById('state-grid').innerHTML=states.map(function(st){
     var info=byState[st]||{total:0};
     var bar=ord.filter(function(g){return info[g]>0;}).map(function(g){
-      return '<div style="flex:'+info[g]+';background:'+GC(g)+';height:100%"></div>';
+      return '<div style="flex:'+info[g]+';background:'+(COL[g]||'#94A3B8')+';height:100%"></div>';
     }).join('');
     return '<div class="scard'+(selState===st?' sel':'')+'" onclick="clickState(\''+st.replace(/'/g,"\\'")+'\')">'
       +'<div class="scard-nm">'+st+'</div>'
@@ -891,7 +910,7 @@ async function loadStateDetail(st){
   try{
     var d=await api({action:'seats',filters:{state:st},page:1,pageSize:50});
     var t={};
-    d.seats.forEach(function(s){var g=s.projected.startsWith('GPS')?'GPS':s.projected.startsWith('BN')?'BN':s.projected.startsWith('PN')?'PN':s.projected;t[g]=(t[g]||0)+1;});
+    d.seats.forEach(function(s){t[s.projected]=(t[s.projected]||0)+1;});
     showStateDetail(st,d,t);
   }catch(e){showErr('State error: '+e.message);}
 }
@@ -901,7 +920,8 @@ function showStateDetail(st,d,t){
   sd.style.display='block';
   document.getElementById('sd-title').textContent=st+' — '+d.total+' seats';
   document.getElementById('sd-coal').innerHTML=Object.entries(t).sort(function(a,b){return b[1]-a[1];}).map(function(kv){
-    return '<span class="sd-coal-item" style="color:'+GC(kv[0])+'"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:'+GC(kv[0])+';margin-right:3px"></span>'+kv[0]+' <strong>'+kv[1]+'</strong></span>';
+    var col=COL[kv[0]]||GC(kv[0])||'#94A3B8';
+    return '<span class="sd-coal-item" style="color:'+col+'"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:'+col+';margin-right:3px"></span>'+(PS[kv[0]]||kv[0])+' <strong>'+kv[1]+'</strong></span>';
   }).join('');
   var fm=FOCUS_META[curFocus]||FOCUS_META.PH;
   document.getElementById('sd-body').innerHTML=d.seats.map(function(s){
