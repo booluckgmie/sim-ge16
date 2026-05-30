@@ -656,7 +656,11 @@ async function api(body){
   if(API_KEY)h['X-API-Key']=API_KEY;
   var prom=(async function(){
     var r=await fetch(API,{method:'POST',headers:h,body:k});
-    if(!r.ok)throw new Error('API '+r.status);
+    if(!r.ok){
+      var msg='API '+r.status;
+      try{var ej=await r.json();if(ej&&ej.error)msg=ej.error;}catch(_){}
+      throw new Error(msg);
+    }
     var j=await r.json();
     if(!j.ok)throw new Error(j.error||'API error');
     return j.data;
@@ -1164,7 +1168,11 @@ window.generateInsight=async function(){
     // Invalidate insight cache on next param change
     _lastInsightKey=JSON.stringify(getParams());
   }catch(e){
-    txt.innerHTML='<div style="color:var(--red);font-size:12px">'+e.message+'</div>';
+    var isConfig=e.message.toLowerCase().includes('groq')||e.message.toLowerCase().includes('configured')||e.message.toLowerCase().includes('key');
+    txt.innerHTML='<div style="padding:.75rem 1rem;background:var(--red-bg);border:1px solid var(--red-bd);border-radius:8px;font-size:12px;color:var(--red)">'
+      +'<strong>'+e.message+'</strong>'
+      +(isConfig?'<div style="margin-top:6px;font-size:11px;opacity:.8">Set <code>GROQ_API_KEY</code> in Netlify → Site settings → Environment variables, then redeploy.</div>':'')
+      +'</div>';
     btn.textContent='Retry';
   }finally{
     btn.disabled=false;
