@@ -3,6 +3,7 @@
 
 const { SEATS } = require('../data/seats');
 const { RACE } = require('../data/race');
+const { GE15 } = require('../data/ge15');
 
 function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
 
@@ -51,7 +52,10 @@ function getPHWinProb(seat, params) {
     return +(Math.max(0.10, Math.min(0.52, 0.25 + tot * 1.2)).toFixed(3));
   }
   if (bw === 'PKR' || bw === 'DAP' || bw === 'AMANAH') {
-    const center = bF >= 3 ? -F : -F * 1.6;
+    const g15 = GE15[seat[0]];
+    // Use actual GE-15 majority to set how far PH can afford to slip before seat is at risk
+    const margin = g15 ? g15.majority / 100 : (bF >= 3 ? 0.08 : 0.20);
+    const center = -(margin * 0.35 + F * 0.3);
     const steepness = 14 - Math.min(4, bF);
     return +(Math.max(0.05, Math.min(0.97, sigmoid((tot - center) * steepness))).toFixed(3));
   }
@@ -59,11 +63,17 @@ function getPHWinProb(seat, params) {
     return +(Math.max(0.10, Math.min(0.90, sigmoid(tot * 11))).toFixed(3));
   }
   if (bw === 'PN-PAS' || bw === 'PN-BERSATU') {
-    const center = pnF <= 2 ? F : F * 1.8;
+    const g15 = GE15[seat[0]];
+    // Calibrate flip difficulty using actual PN–PH gap from GE-15
+    const pnPhGap = g15 ? Math.max(0, (g15.pn - g15.ph) / 100) : (pnF <= 2 ? F : F * 1.8);
+    const center = F * 0.3 + pnPhGap * 0.35;
     return +(Math.max(0.03, Math.min(0.82, sigmoid((tot - center) * 10))).toFixed(3));
   }
   if (bw === 'BN-UMNO' || bw === 'BN-MCA') {
-    const center = pnF >= 2 ? F * 1.5 : F;
+    const g15 = GE15[seat[0]];
+    // Calibrate flip difficulty using actual BN–PH gap from GE-15
+    const bnPhGap = g15 ? Math.max(0, (g15.bn - g15.ph) / 100) : (pnF >= 2 ? F * 1.5 : F);
+    const center = F * 0.3 + bnPhGap * 0.4;
     return +(Math.max(0.05, Math.min(0.75, sigmoid((tot - center) * 10))).toFixed(3));
   }
   return 0.05;
@@ -85,16 +95,19 @@ function getCoalitionWinProb(seat, params, coalition) {
     if (bw.startsWith('GPS')) return +(Math.max(0.01, Math.min(0.06, 0.02 - tot * 0.1)).toFixed(3));
     // WARISAN: Sabah — PN has limited reach
     if (bw === 'WARISAN') return +(Math.max(0.03, Math.min(0.18, 0.07 - tot * 0.4)).toFixed(3));
-    // PN defending: steeper curve for PN fortresses (high pnF)
+    // PN defending: calibrate with actual GE-15 majority
     if (bw === 'PN-PAS' || bw === 'PN-BERSATU') {
-      const center = pnF <= 2 ? F : F * 1.8;
+      const g15 = GE15[seat[0]];
+      const margin = g15 ? g15.majority / 100 : (pnF <= 2 ? F : F * 1.8);
+      const center = margin * 0.40 + F * 0.25;
       const steepness = 11 + Math.min(3, pnF);
-      // inverted: positive tot (pro-PH) erodes PN probability
       return +(Math.max(0.15, Math.min(0.97, sigmoid(-(tot - center) * steepness))).toFixed(3));
     }
     // PH seats: PN can flip if swing is strongly negative and pnF is high
     if (bw === 'PKR' || bw === 'DAP' || bw === 'AMANAH') {
-      const center = pnF >= 3 ? -F * 0.8 : -F * 1.8;
+      const g15 = GE15[seat[0]];
+      const phPnGap = g15 ? Math.max(0, (g15.ph - g15.pn) / 100) : (pnF >= 3 ? F * 0.8 : F * 1.8);
+      const center = -(F * 0.3 + phPnGap * 0.35);
       return +(Math.max(0.02, Math.min(0.72, sigmoid(-(tot - center) * 10))).toFixed(3));
     }
     // BERSAMA: PN and PH compete; negative swing favours PN
@@ -114,10 +127,12 @@ function getCoalitionWinProb(seat, params, coalition) {
     if (bw.startsWith('GPS')) return 0.02;
     // WARISAN: some Sabah overlap with BN
     if (bw === 'WARISAN') return +(Math.max(0.06, Math.min(0.28, 0.14 + tot * 0.2)).toFixed(3));
-    // BN defending: squeezed by PH (positive tot) and PN (high pnF)
+    // BN defending: squeezed by PH (positive tot) and PN (high pnF), calibrated by GE-15 margin
     if (bw === 'BN-UMNO' || bw === 'BN-MCA') {
+      const g15 = GE15[seat[0]];
       const pnPressure = pnF >= 2 ? 0.15 : 0;
-      return +(Math.max(0.10, Math.min(0.88, 0.68 - tot * 0.8 - pnPressure)).toFixed(3));
+      const anchor = g15 ? 0.48 + g15.majority / 100 * 0.45 : 0.68;
+      return +(Math.max(0.10, Math.min(0.88, anchor - tot * 0.8 - pnPressure)).toFixed(3));
     }
     // PH seats: BN rarely the direct threat unless PN pressure is absent
     if (bw === 'PKR' || bw === 'DAP' || bw === 'AMANAH') {
@@ -207,6 +222,7 @@ function projectSeats(params, filters = {}, coalition = 'PH') {
     const prof = raceProfile(s[0]);
     const prob = getCoalitionWinProb(s, params, coalition);
     const tier = probTier(prob);
+    const g15  = GE15[s[0]];
     return {
       code: s[0], name: s[1], state: s[2], ge15: s[3],
       voters: s[4], youth: s[5], projected: w,
@@ -215,6 +231,12 @@ function projectSeats(params, filters = {}, coalition = 'PH') {
       swing: +calcSwing(s, params).toFixed(4),
       raceProfile: prof.type, raceLabel: prof.label, raceCol: prof.col,
       melayu: r[0], cina: r[1], india: r[2], lain: r[3],
+      ge15Majority: g15 ? g15.majority : null,
+      ge15Turnout:  g15 ? g15.turnout  : null,
+      ge15Ph:  g15 ? g15.ph  : null,
+      ge15Pn:  g15 ? g15.pn  : null,
+      ge15Bn:  g15 ? g15.bn  : null,
+      ge15Gps: g15 ? g15.gps : null,
     };
   });
 
@@ -276,6 +298,8 @@ function pick(s) {
     tierColor: s.tierColor, tierBg: s.tierBg,
     swing: s.swing,
     melayu: s.melayu, cina: s.cina, india: s.india, lain: s.lain,
+    ge15Majority: s.ge15Majority, ge15Ph: s.ge15Ph, ge15Pn: s.ge15Pn,
+    ge15Bn: s.ge15Bn, ge15Gps: s.ge15Gps,
   };
 }
 
