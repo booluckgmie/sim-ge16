@@ -286,7 +286,24 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .dr-sub{font-size:10px;color:var(--text3);margin-top:1px}
 .dr-pct{font-size:12px;font-weight:700;color:var(--text2);width:40px;text-align:right}
 
-/* ===== LOADING ===== */
+/* ===== AI INSIGHT ===== */
+.ai-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:1.25rem;overflow:hidden}
+.ai-panel-hdr{display:flex;align-items:center;justify-content:space-between;padding:.875rem 1rem;background:linear-gradient(135deg,#0f1f45,#1a2f5a);gap:10px;flex-wrap:wrap}
+.ai-panel-label{display:flex;align-items:center;gap:8px}
+.ai-panel-title{font-size:12px;font-weight:700;color:#fff}
+.ai-panel-sub{font-size:10px;color:rgba(255,255,255,.45)}
+.ai-spark{font-size:16px}
+.ai-gen-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;font-size:11px;font-weight:700;border-radius:20px;border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;cursor:pointer;transition:all .15s;white-space:nowrap}
+.ai-gen-btn:hover:not(:disabled){background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.5)}
+.ai-gen-btn:disabled{opacity:.5;cursor:not-allowed}
+.ai-body{padding:1rem}
+.ai-text{font-size:13px;line-height:1.75;color:var(--text);white-space:pre-wrap}
+.ai-text p{margin-bottom:.75rem}
+.ai-text p:last-child{margin-bottom:0}
+.ai-footer{display:flex;align-items:center;gap:8px;margin-top:.875rem;padding-top:.875rem;border-top:1px solid var(--border);font-size:10px;color:var(--text3)}
+.ai-dot{width:6px;height:6px;border-radius:50%;background:#22C55E;flex-shrink:0}
+.ai-loading{display:flex;align-items:center;gap:10px;padding:1.25rem;color:var(--text3);font-size:12px}
+.ai-loading .spinner{border-top-color:#7C3AED}
 .loading{display:flex;align-items:center;justify-content:center;padding:3rem;color:var(--text3);font-size:13px;gap:8px}
 .spinner{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -428,6 +445,27 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   <!-- TAB: ANALYSIS -->
   <div class="vp" id="tab-analysis">
     <div class="analysis-wrap">
+
+      <!-- AI Insight panel -->
+      <div class="ai-panel">
+        <div class="ai-panel-hdr">
+          <div class="ai-panel-label">
+            <span class="ai-spark">✦</span>
+            <div>
+              <div class="ai-panel-title">AI Synthesis</div>
+              <div class="ai-panel-sub">Groq · llama-3.3-70b · based on current simulation</div>
+            </div>
+          </div>
+          <button class="ai-gen-btn" id="ai-gen-btn" onclick="generateInsight()">Generate Insight</button>
+        </div>
+        <div id="ai-output" style="display:none">
+          <div class="ai-body">
+            <div class="ai-text" id="ai-text"></div>
+            <div class="ai-footer" id="ai-footer"></div>
+          </div>
+        </div>
+      </div>
+
       <div id="analysis-content"><div class="loading"><div class="spinner"></div>Computing per-seat probabilities…</div></div>
     </div>
   </div>
@@ -611,8 +649,9 @@ var _apiFlight=new Map(); // key → in-flight promise (dedup)
 
 async function api(body){
   var k=JSON.stringify(Object.assign({},getParams(),body));
-  if(_apiCache.has(k))return _apiCache.get(k);
-  if(_apiFlight.has(k))return _apiFlight.get(k);
+  var skipCache=body.action==='insight'; // LLM responses are generative — don't cache
+  if(!skipCache&&_apiCache.has(k))return _apiCache.get(k);
+  if(!skipCache&&_apiFlight.has(k))return _apiFlight.get(k);
   var h={'Content-Type':'application/json'};
   if(API_KEY)h['X-API-Key']=API_KEY;
   var prom=(async function(){
@@ -625,10 +664,12 @@ async function api(body){
   _apiFlight.set(k,prom);
   try{
     var d=await prom;
-    if(_apiCache.size>=80)_apiCache.delete(_apiCache.keys().next().value);
-    _apiCache.set(k,d);
+    if(!skipCache){
+      if(_apiCache.size>=80)_apiCache.delete(_apiCache.keys().next().value);
+      _apiCache.set(k,d);
+    }
     return d;
-  }finally{_apiFlight.delete(k);}
+  }finally{if(!skipCache)_apiFlight.delete(k);}
 }
 
 function showErr(msg){
@@ -1091,6 +1132,44 @@ window.clickState=function(st){
 window.openRaceDrill=openRaceDrill;
 window.closeModal=function(e){if(e.target===document.getElementById('modal-back'))closeModalDirect();};
 window.closeModalDirect=function(){document.getElementById('modal-back').classList.remove('open');};
+
+/* ── AI Insight ── */
+var _lastInsightKey='';
+window.generateInsight=async function(){
+  var btn=document.getElementById('ai-gen-btn');
+  var out=document.getElementById('ai-output');
+  var txt=document.getElementById('ai-text');
+  var ftr=document.getElementById('ai-footer');
+  if(!btn||!out||!txt)return;
+
+  // Show loading
+  btn.disabled=true;btn.textContent='Generating…';
+  out.style.display='block';
+  txt.innerHTML='<div class="ai-loading"><div class="spinner"></div>Analysing simulation data…</div>';
+  ftr.innerHTML='';
+
+  try{
+    var d=await api({action:'insight'});
+    // Format paragraphs
+    var html=d.text.split(/\n\n+/).filter(Boolean).map(function(p){
+      return '<p>'+p.replace(/\n/g,' ').trim()+'</p>';
+    }).join('');
+    txt.innerHTML=html||d.text;
+    var fm=FOCUS_META[curFocus]||FOCUS_META.PH;
+    ftr.innerHTML='<span class="ai-dot"></span>'
+      +'<span>'+fm.label+' perspective &middot; '+
+      (d.scen||scen)+' scenario &middot; '+(d.tokens||'')+(d.tokens?' tokens':'')+'</span>'
+      +'<span style="margin-left:auto;cursor:pointer;color:var(--blue)" onclick="generateInsight()">Regenerate ↻</span>';
+    btn.textContent='Regenerate ↻';
+    // Invalidate insight cache on next param change
+    _lastInsightKey=JSON.stringify(getParams());
+  }catch(e){
+    txt.innerHTML='<div style="color:var(--red);font-size:12px">'+e.message+'</div>';
+    btn.textContent='Retry';
+  }finally{
+    btn.disabled=false;
+  }
+};
 
 loadSummary();
 })();

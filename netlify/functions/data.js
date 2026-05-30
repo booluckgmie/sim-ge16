@@ -1,6 +1,7 @@
 // netlify/functions/data.js
 // Secure API endpoint — all data and model logic runs here, never in the browser
 
+const https = require('https');
 const { getSummary, projectSeats, getTopByRace, getSeatAnalysis } = require('../../src/utils/model');
 
 const ALLOWED_ORIGINS = [
@@ -37,6 +38,90 @@ function validateParams(body) {
     iS: clamp(body.iS,   0, 100, 68),
     lS: clamp(body.lS,   0, 100, 45),
   };
+}
+
+// ── Groq LLM call (server-side only — key never sent to browser) ──────────────
+function callGroq(params, summary, analysis, coalition) {
+  const key = process.env.GROQ_API_KEY;
+  if (!key) return Promise.reject(new Error('AI insight service not configured (GROQ_API_KEY missing)'));
+
+  const p   = summary.parties || {};
+  const c   = summary.coalitions || {};
+  const t   = analysis.tiers || {};
+  const v   = summary.verdict || {};
+  const atRisk  = (analysis.atRisk  || []).slice(0, 5);
+  const flipOps = (analysis.flipOpps || []).slice(0, 5);
+
+  const scenLabel = { base: 'Base case', best: 'Best case', worst: 'Worst case' }[params.scen] || params.scen;
+  const coalLabel = { PH: 'Pakatan Harapan (PH)', PN: 'Perikatan Nasional (PN)', BN: 'Barisan Nasional (BN)', GPS: 'Gabungan Parti Sarawak (GPS)' }[coalition] || coalition;
+
+  const prompt =
+`You are a senior Malaysian political analyst explaining a GE16 simulation result to a general audience.
+
+SIMULATION PARAMETERS
+Scenario: ${scenLabel} | Youth turnout: ${params.yT}% | Senior turnout: ${params.sT}%
+PH support — Malay: ${params.mS}%, Chinese: ${params.cS}%, Indian: ${params.iS}%, Other: ${params.lS}%
+
+PROJECTED SEAT TOTALS (222 seats, majority = 112)
+PH Bloc: ${summary.phBloc} (PKR ${p.PKR||0} · DAP ${p.DAP||0} · AMANAH ${p.AMANAH||0} · BERSAMA ${p.BERSAMA||0})
+PN: ${c.pn||0} (BERSATU ${p['PN-BERSATU']||0} · PAS ${p['PN-PAS']||0})
+BN: ${c.bn||0} (UMNO ${p['BN-UMNO']||0} · MCA ${p['BN-MCA']||0})
+GPS (Sarawak): ${c.gps||0}
+Overall verdict: ${v.text || '—'}
+
+ANALYSIS — ${coalLabel} PERSPECTIVE
+Stronghold: ${t.stronghold||0} | Safe: ${t.safe||0} | Leaning: ${t.leaning||0} | At-Risk: ${t.atRisk||0} | Flip Opportunities: ${t.flipOpps||0}
+${atRisk.length  ? 'Most vulnerable seats: ' + atRisk.map(s  => s.name + ' ' + Math.round(s.winProb*100) + '%').join(', ') : ''}
+${flipOps.length ? 'Top flip targets: '      + flipOps.map(s => s.name + ' ' + Math.round(s.winProb*100) + '%').join(', ') : ''}
+
+Write a focused political analysis in 3–4 short paragraphs:
+1. What this result means for government formation
+2. The decisive battleground seats and why they matter
+3. Which voter groups are the swing factor
+4. One realistic scenario that could shift the outcome
+
+Keep it clear, specific, and accessible to a non-expert Malaysian audience.`;
+
+  const reqBody = JSON.stringify({
+    model: 'llama-3.3-70b-versatile',
+    messages: [
+      { role: 'system', content: 'You are a concise, factual Malaysian political analyst. No bullet points — write in flowing paragraphs. Stay under 380 words.' },
+      { role: 'user', content: prompt },
+    ],
+    max_tokens: 520,
+    temperature: 0.5,
+  });
+
+  return new Promise((resolve, reject) => {
+    const req = https.request({
+      hostname: 'api.groq.com',
+      path: '/openai/v1/chat/completions',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${key}`,
+        'Content-Length': Buffer.byteLength(reqBody),
+      },
+    }, (res) => {
+      let raw = '';
+      res.on('data', chunk => { raw += chunk; });
+      res.on('end', () => {
+        try {
+          const json = JSON.parse(raw);
+          if (json.error) return reject(new Error(json.error.message || 'Groq error'));
+          const text = json.choices?.[0]?.message?.content?.trim() || '';
+          if (!text) return reject(new Error('Empty response from AI'));
+          resolve({ text, model: json.model || 'llama-3.3-70b-versatile', tokens: json.usage?.total_tokens || 0 });
+        } catch (e) {
+          reject(new Error('Failed to parse AI response'));
+        }
+      });
+    });
+    req.on('error', reject);
+    req.setTimeout(15000, () => { req.destroy(new Error('AI request timed out')); });
+    req.write(reqBody);
+    req.end();
+  });
 }
 
 exports.handler = async (event) => {
@@ -97,6 +182,11 @@ exports.handler = async (event) => {
     } else if (action === 'seat-analysis') {
       payload = getSeatAnalysis(params, coalition);
 
+    } else if (action === 'insight') {
+      const summary  = getSummary(params);
+      const analysis = getSeatAnalysis(params, coalition);
+      payload = await callGroq(params, summary, analysis, coalition);
+
     } else {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown action' }) };
     }
@@ -105,6 +195,6 @@ exports.handler = async (event) => {
 
   } catch (err) {
     console.error('GE16 API error:', err);
-    return { statusCode: 500, headers, body: JSON.stringify({ error: 'Server error' }) };
+    return { statusCode: 500, headers, body: JSON.stringify({ error: err.message || 'Server error' }) };
   }
 };
