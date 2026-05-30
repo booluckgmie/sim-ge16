@@ -1,0 +1,19 @@
+{
+  "name": "ge16-simulation",
+  "version": "1.0.0",
+  "description": "GE16 Malaysia Parliamentary Simulation Dashboard",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "node scripts/build.js",
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

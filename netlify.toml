@@ -1,0 +1,22 @@
+[build]
+  command = "node scripts/build.js"
+  publish = "public"
+  functions = "netlify/functions"
+
+[dev]
+  command = "node scripts/dev-server.js"
+  port = 3000
+  targetPort = 3001
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"

@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>GE16 — Malaysia Parliamentary Simulation</title>
+<meta name="description" content="Race-adjusted GE16 Malaysia Parliamentary Simulation · 222 seats · SPR voter data">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0B1629;--navy2:#152040;--navy3:#1E2F5A;
+  --blue:#2563EB;--blue-h:#1D4ED8;--blue-l:#3B82F6;
+  --bg:#F0F4FA;--surface:#FFFFFF;--surface2:#F1F5F9;--surface3:#E8EEF8;
+  --border:#DDE5F0;--border2:#C8D5E8;
+  --text:#0D1B34;--text2:#455570;--text3:#8A9BBF;--text4:#C8D5E8;
+  --green:#15803D;--green-bg:#F0FDF4;--green-bd:#86EFAC;
+  --red:#DC2626;--red-bg:#FEF2F2;--red-bd:#FECACA;
+  --amber:#B45309;--amber-bg:#FFFBEB;--amber-bd:#FCD34D;
+  --c-ph:#2563EB;--c-bm:#DC2626;--c-pn:#7C3AED;--c-bn:#D97706;--c-gps:#059669;--c-war:#4B5563;
+  --r:12px;--r-sm:8px;
+  --sh-xs:0 1px 2px rgba(0,0,0,.05);
+  --sh:0 2px 8px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.04);
+  --sh-md:0 4px 16px rgba(0,0,0,.1),0 2px 6px rgba(0,0,0,.05);
+  --sh-lg:0 8px 32px rgba(0,0,0,.14),0 4px 12px rgba(0,0,0,.06);
+}
+@media(prefers-color-scheme:dark){:root{
+  --navy:#060D1C;--navy2:#0A1426;--navy3:#111E38;
+  --bg:#060D1C;--surface:#0F1A30;--surface2:#152040;--surface3:#1A2848;
+  --border:#1E2E4A;--border2:#2A3D5E;
+  --text:#E8EFF8;--text2:#8A9BBF;--text3:#4A5E80;--text4:#2A3D5E;
+  --green:#22C55E;--green-bg:#052E16;--green-bd:#166534;
+  --red:#F87171;--red-bg:#2D0A0A;--red-bd:#7F1D1D;
+  --amber:#FCD34D;--amber-bg:#2D1B00;--amber-bd:#78350F;
+}}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+#app{max-width:980px;margin:0 auto}
+
+/* ===== HEADER ===== */
+.hdr{
+  background:var(--navy);
+  padding:.875rem 1.25rem;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.625rem;
+  position:sticky;top:0;z-index:100;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  box-shadow:0 4px 24px rgba(0,0,0,.35);
+}
+.hdr-brand{display:flex;flex-direction:column;gap:2px}
+.hdr-title{font-size:15px;font-weight:800;color:#FFF;letter-spacing:-.03em;display:flex;align-items:center;gap:8px}
+.hdr-badge{font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);letter-spacing:.3px;text-transform:uppercase}
+.hdr-sub{font-size:10px;color:rgba(255,255,255,.38);letter-spacing:.1px}
+.hdr-right{display:flex;align-items:center;gap:.875rem}
+.live-count{display:flex;flex-direction:column;align-items:flex-end;padding:.25rem .75rem;border-radius:var(--r-sm);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.lc-label{font-size:9px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.5px}
+.lc-num{font-size:20px;font-weight:800;color:#FFF;line-height:1;letter-spacing:-1px}
+.lc-sub{font-size:9px;color:rgba(255,255,255,.3)}
+.scen-grp{display:flex;gap:3px;background:rgba(0,0,0,.2);padding:3px;border-radius:22px;border:1px solid rgba(255,255,255,.07)}
+.sb{padding:5px 13px;font-size:11px;font-weight:500;border-radius:20px;border:none;background:transparent;color:rgba(255,255,255,.5);cursor:pointer;transition:all .15s;line-height:1.3;white-space:nowrap}
+.sb:hover{color:rgba(255,255,255,.8)}
+.sb.on{font-weight:700;color:#fff}
+.sb-base.on{background:var(--blue)}
+.sb-best.on{background:#15803D}
+.sb-worst.on{background:#DC2626}
+
+/* ===== ERROR ===== */
+.err-banner{margin:.75rem 1.25rem;padding:.875rem 1rem;background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd);border-radius:var(--r-sm);font-size:12px;display:flex;align-items:center;gap:8px}
+
+/* ===== PARLIAMENT HERO ===== */
+.parl-hero{background:var(--surface);border-bottom:1px solid var(--border);padding:1.25rem 1.25rem 1rem}
+.parl-hero-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.875rem;flex-wrap:wrap;gap:8px}
+.parl-label{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.6px}
+.parl-info{font-size:11px;color:var(--text3)}
+.parl-svg-wrap{max-width:540px;margin:0 auto;width:100%}
+.parl-legend{display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:center;margin-top:.875rem}
+.pl-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2);font-weight:500}
+.pl-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* ===== VERDICT ===== */
+.verdict{margin:.875rem 1.25rem;padding:.875rem 1.125rem;border-radius:var(--r);display:flex;align-items:center;gap:10px;font-size:13px;font-weight:500;border:1px solid}
+.v-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.v-ok{background:var(--green-bg);color:var(--green);border-color:var(--green-bd)}
+.v-ok .v-icon{background:var(--green);color:#fff}
+.v-no{background:var(--red-bg);color:var(--red);border-color:var(--red-bd)}
+.v-no .v-icon{background:var(--red);color:#fff}
+.v-warn{background:var(--amber-bg);color:var(--amber);border-color:var(--amber-bd)}
+.v-warn .v-icon{background:var(--amber);color:#fff}
+
+/* ===== COALITION CARDS ===== */
+.coal-row{display:flex;gap:8px;padding:.125rem 1.25rem 1rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.coal-row::-webkit-scrollbar{display:none}
+.cc{flex:0 0 auto;min-width:114px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.875rem 1rem;border-top:3px solid;transition:box-shadow .15s,transform .12s}
+.cc:hover{box-shadow:var(--sh-md);transform:translateY(-2px)}
+.cc-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.cc-n{font-size:30px;font-weight:800;line-height:1;letter-spacing:-2px}
+.cc-sub{font-size:10px;color:var(--text3);margin-top:3px;line-height:1.4}
+.cc-delta{display:inline-flex;align-items:center;gap:2px;font-size:10px;font-weight:600;margin-top:6px;padding:2px 7px;border-radius:20px}
+.d-up{background:var(--green-bg);color:var(--green)}
+.d-dn{background:var(--red-bg);color:var(--red)}
+.d-eq{background:var(--surface2);color:var(--text3)}
+
+/* ===== NAV TABS ===== */
+.tab-nav{display:flex;border-bottom:1px solid var(--border);padding:0 1.25rem;background:var(--surface);position:sticky;top:57px;z-index:90;overflow-x:auto;scrollbar-width:none}
+.tab-nav::-webkit-scrollbar{display:none}
+.tn{padding:10px 14px;font-size:12px;font-weight:500;color:var(--text3);cursor:pointer;border:none;border-bottom:2.5px solid transparent;background:none;white-space:nowrap;transition:color .15s,border-color .15s;display:flex;align-items:center;gap:5px}
+.tn:hover{color:var(--text2)}
+.tn.on{color:var(--text);border-bottom-color:var(--blue);font-weight:700}
+.tn-ico{font-size:14px}
+
+/* ===== TABS ===== */
+.tab-content{padding-bottom:4rem}
+.vp{display:none}.vp.on{display:block;animation:fadeUp .2s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+/* Section label */
+.sec-lbl{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;padding:.875rem 1.25rem .375rem}
+
+/* ===== SCOREBOARD ===== */
+.scoreboard{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;padding:0 1.25rem .875rem}
+.sbc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:.75rem .875rem}
+.sbc-h{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.sbc-dot{width:8px;height:8px;border-radius:50%}
+.sbc-lbl{font-size:11px;font-weight:500;color:var(--text2)}
+.sbc-n{font-size:28px;font-weight:800;line-height:1;letter-spacing:-1.5px}
+.sbc-d{font-size:10px;margin-top:3px;color:var(--text3)}
+.du{color:var(--green)}.dd{color:var(--red)}.dn{color:var(--text3)}
+
+/* ===== PARL BAR ===== */
+.parl-bar-wrap{padding:.875rem 1.25rem .875rem;border-top:1px solid var(--border)}
+.parl-track{height:34px;display:flex;border-radius:var(--r-sm);overflow:hidden;border:1px solid var(--border);position:relative}
+.pb-seg{height:100%;display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;transition:flex .55s cubic-bezier(.4,0,.2,1)}
+.pb-seg span{font-size:10px;font-weight:600;color:rgba(255,255,255,.95);padding:0 4px;white-space:nowrap;overflow:hidden}
+.parl-maj{position:absolute;top:0;bottom:0;width:2px;background:#EF4444;opacity:.65}
+.parl-maj-lbl{position:absolute;top:-17px;transform:translateX(-50%);font-size:9px;color:#DC2626;font-weight:700;white-space:nowrap}
+.parl-leg{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:.625rem}
+.pleg{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text2)}
+.pleg-sq{width:10px;height:10px;border-radius:3px}
+
+/* ===== RACE CARDS ===== */
+.race-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;padding:0 1.25rem .875rem}
+.rc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1rem;border-left:3px solid;cursor:pointer;transition:box-shadow .15s,transform .12s}
+.rc:hover{box-shadow:var(--sh-md);transform:translateY(-2px)}
+.rc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:5px;gap:8px}
+.rc-comm{font-size:12px;font-weight:700;color:var(--text)}
+.rc-pct{font-size:24px;font-weight:800;line-height:1;letter-spacing:-1.5px}
+.rc-body{font-size:11px;color:var(--text2);line-height:1.55}
+.rc-tag{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:2px 7px;border-radius:20px;margin-top:7px}
+.rc-cta{font-size:10px;color:var(--text4);margin-top:5px}
+
+/* ===== COALITION BARS ===== */
+.cbar-section{padding:.875rem 1.25rem 1.25rem;border-top:1px solid var(--border)}
+.cbar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.cbar-lbl{font-size:11px;color:var(--text2);width:155px;flex-shrink:0;font-weight:500}
+.cbar-track{flex:1;height:22px;background:var(--surface2);border-radius:5px;overflow:visible;position:relative}
+.cbar-fill{height:100%;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;min-width:28px;transition:width .55s cubic-bezier(.4,0,.2,1)}
+.cbar-fill span{font-size:10px;font-weight:700;color:rgba(255,255,255,.95)}
+.cbar-mk{position:absolute;top:-3px;bottom:-3px;width:2px;background:#EF4444;opacity:.5;border-radius:1px}
+.cbar-mk-lbl{position:absolute;top:-17px;transform:translateX(-50%);font-size:9px;color:#DC2626;font-weight:700;white-space:nowrap}
+
+/* ===== CONTROLS ===== */
+.ctrl-wrap{padding:.875rem 1.25rem 1.25rem}
+.preset-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.25rem}
+.pcard{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:.875rem;cursor:pointer;text-align:center;transition:all .15s}
+.pcard:hover{border-color:var(--blue-l)}
+.pcard.sel{border-color:var(--blue);background:rgba(37,99,235,.05)}
+.pcard-ico{font-size:22px;margin-bottom:4px}
+.pcard-lbl{font-size:11px;font-weight:700;color:var(--text);margin-bottom:2px}
+.pcard-prob{font-size:10px;color:var(--text3)}
+.ctrl-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:1rem;background:var(--surface)}
+.ctrl-panel{padding:1.125rem 1rem}
+.ctrl-panel:first-child{border-right:1px solid var(--border)}
+.ctrl-title{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.875rem}
+.sl-row{display:flex;align-items:center;gap:8px;margin-bottom:.75rem}
+.sl-name{font-size:11px;font-weight:500;color:var(--text2);width:82px;flex-shrink:0}
+input[type=range]{flex:1;cursor:pointer;height:4px;-webkit-appearance:none;appearance:none;background:var(--border);border-radius:3px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--blue);cursor:pointer;border:2.5px solid var(--surface);box-shadow:0 0 0 1.5px var(--blue),var(--sh-xs)}
+.sl-val{font-size:11px;font-weight:700;width:34px;text-align:right;color:var(--text)}
+.ctrl-preview{border:1px solid var(--border);border-radius:var(--r);background:var(--surface);padding:.875rem 1rem;display:flex;flex-wrap:wrap;gap:8px}
+.cp-card{padding:.5rem .875rem;border-radius:var(--r-sm);background:var(--surface2)}
+.cp-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:2px}
+.cp-n{font-size:24px;font-weight:800;line-height:1;letter-spacing:-1.5px}
+
+/* ===== STATES ===== */
+.state-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:8px;padding:.875rem 1.25rem}
+.scard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:.75rem .875rem;cursor:pointer;border-left:3px solid transparent;transition:all .15s}
+.scard:hover{border-color:var(--border2)}
+.scard.sel{border-left-color:var(--blue);background:var(--surface2)}
+.scard-nm{font-size:12px;font-weight:600;color:var(--text)}
+.scard-info{font-size:10px;color:var(--text3);margin-top:1px}
+.scard-bar{display:flex;height:4px;border-radius:2px;overflow:hidden;margin-top:7px;gap:1px}
+.state-detail{margin:0 1.25rem 1rem;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.sd-hdr{padding:.875rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.sd-title{font-size:14px;font-weight:700}
+.sd-coal-wrap{display:flex;flex-wrap:wrap;gap:6px}
+.sd-coal-item{font-size:11px;color:var(--text2);display:flex;align-items:center;gap:3px}
+.sd-body{max-height:320px;overflow-y:auto;scrollbar-width:thin}
+
+/* ===== SEATS TABLE ===== */
+.seats-wrap{padding:1rem 1.25rem}
+.search-row{display:flex;gap:8px;margin-bottom:.875rem;flex-wrap:wrap;align-items:center}
+.search-row input,.search-row select{font-size:12px;padding:7px 10px;border-radius:var(--r-sm);border:1px solid var(--border2);background:var(--surface);color:var(--text);outline:none;transition:border-color .15s}
+.search-row input:focus,.search-row select:focus{border-color:var(--blue)}
+.search-row input{flex:1;min-width:140px}
+.seats-count{font-size:11px;color:var(--text3);white-space:nowrap}
+.table-wrap{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;overflow-x:auto}
+.gt{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+.gt thead{background:var(--surface2)}
+.gt th{padding:8px 10px;text-align:left;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--border);white-space:nowrap}
+.gt td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
+.gt tbody tr:last-child td{border-bottom:none}
+.gt tbody tr:hover td{background:var(--surface2)}
+.gt tbody tr.flip-row td{background:rgba(220,38,38,.04)}
+.seat-nm{font-weight:600;font-size:12px}
+.seat-st{font-size:10px;color:var(--text3);margin-top:1px}
+.pill{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;color:#fff;white-space:nowrap}
+.rbar-sm{display:flex;height:5px;border-radius:3px;overflow:hidden;gap:1px;width:52px;margin-bottom:2px}
+.flip-lbl{font-size:9px;color:#DC2626;font-weight:700;margin-left:5px}
+.pg-row{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:.875rem;flex-wrap:wrap}
+.pgb{padding:5px 11px;font-size:11px;font-weight:500;border-radius:var(--r-sm);border:1px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .15s}
+.pgb:hover:not(:disabled):not(.on){background:var(--surface2)}
+.pgb.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.pgb:disabled{opacity:.3;cursor:default}
+.pg-inf{font-size:11px;color:var(--text3);padding:0 4px}
+.no-res{text-align:center;padding:2.5rem;color:var(--text3);font-size:13px}
+
+/* ===== MODAL ===== */
+.modal-back{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;align-items:flex-start;justify-content:center;padding:2rem 1rem 1rem;overflow-y:auto;backdrop-filter:blur(4px)}
+.modal-back.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:560px;padding:1.5rem;animation:slideUp .2s cubic-bezier(.4,0,.2,1);box-shadow:var(--sh-lg)}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.modal-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;gap:1rem}
+.modal-title{font-size:16px;font-weight:800;color:var(--text);line-height:1.3}
+.modal-close{flex-shrink:0;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r-sm);padding:5px 11px;font-size:11px;font-weight:500;color:var(--text2);cursor:pointer;transition:all .15s}
+.modal-close:hover{background:var(--border)}
+.modal-sub{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border)}
+.modal-sec{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin:.875rem 0 .5rem}
+.drill-row{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);gap:8px}
+.drill-row:last-child{border-bottom:none}
+.dr-nm{font-size:12px;font-weight:500;color:var(--text)}
+.dr-sub{font-size:10px;color:var(--text3);margin-top:1px}
+.dr-pct{font-size:12px;font-weight:700;color:var(--text2);width:40px;text-align:right}
+
+/* ===== LOADING ===== */
+.loading{display:flex;align-items:center;justify-content:center;padding:3rem;color:var(--text3);font-size:13px;gap:8px}
+.spinner{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:640px){
+  .ctrl-grid{grid-template-columns:1fr}
+  .ctrl-panel:first-child{border-right:none;border-bottom:1px solid var(--border)}
+  .race-grid{grid-template-columns:1fr 1fr}
+  .scoreboard{grid-template-columns:1fr 1fr}
+  .preset-row{grid-template-columns:1fr 1fr 1fr}
+  .cc{min-width:100px}.cc-n{font-size:26px}
+  .hdr{padding:.75rem 1rem}
+  .live-count{display:none}
+  .cbar-lbl{width:110px;font-size:10px}
+}
+@media(max-width:420px){
+  .race-grid{grid-template-columns:1fr}
+  .preset-row{grid-template-columns:1fr}
+  .tab-nav{top:49px}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-brand">
+    <div class="hdr-title">GE16 Simulation <span class="hdr-badge">MALAYSIA</span></div>
+    <div class="hdr-sub">Race-adjusted model · 222 parliamentary seats · SPR voter data</div>
+  </div>
+  <div class="hdr-right">
+    <div class="scen-grp">
+      <button class="sb sb-base on" onclick="setScen('base',this)">Base <span style="opacity:.5;font-size:10px">55%</span></button>
+      <button class="sb sb-best" onclick="setScen('best',this)">Best <span style="opacity:.5;font-size:10px">20%</span></button>
+      <button class="sb sb-worst" onclick="setScen('worst',this)">Worst <span style="opacity:.5;font-size:10px">25%</span></button>
+    </div>
+    <div class="live-count">
+      <div class="lc-label">PH Bloc</div>
+      <div class="lc-num" id="lc-num">—</div>
+      <div class="lc-sub">of 112 needed</div>
+    </div>
+  </div>
+</header>
+
+<div id="err-banner" class="err-banner" style="display:none"><span>⚠</span><span id="err-text"></span></div>
+
+<!-- PARLIAMENT HERO -->
+<div class="parl-hero">
+  <div class="parl-hero-top">
+    <span class="parl-label">Parliament hemicycle — 222 seats</span>
+    <span class="parl-info" id="parl-info"></span>
+  </div>
+  <div class="parl-svg-wrap" id="parl-arc">
+    <div class="loading"><div class="spinner"></div>Building hemicycle…</div>
+  </div>
+  <div class="parl-legend">
+    <div class="pl-item"><div class="pl-dot" style="background:#2563EB"></div>PH</div>
+    <div class="pl-item"><div class="pl-dot" style="background:#DC2626"></div>BERSAMA</div>
+    <div class="pl-item"><div class="pl-dot" style="background:#059669"></div>GPS</div>
+    <div class="pl-item"><div class="pl-dot" style="background:#4B5563"></div>WARISAN</div>
+    <div class="pl-item"><div class="pl-dot" style="background:#D97706"></div>BN</div>
+    <div class="pl-item"><div class="pl-dot" style="background:#7C3AED"></div>PN</div>
+  </div>
+</div>
+
+<!-- VERDICT -->
+<div id="verdict"></div>
+
+<!-- COALITION CARDS -->
+<div class="coal-row" id="coal-row">
+  <div class="loading"><div class="spinner"></div></div>
+</div>
+
+<!-- TAB NAV -->
+<nav class="tab-nav">
+  <button class="tn on" onclick="switchTab('overview',this)"><span class="tn-ico">📊</span>Overview</button>
+  <button class="tn" onclick="switchTab('controls',this)"><span class="tn-ico">🎛</span>Adjust Model</button>
+  <button class="tn" onclick="switchTab('states',this)"><span class="tn-ico">🗺</span>By State</button>
+  <button class="tn" onclick="switchTab('seats',this)"><span class="tn-ico">📋</span>All 222 Seats</button>
+</nav>
+
+<div class="tab-content">
+
+  <!-- TAB: OVERVIEW -->
+  <div class="vp on" id="tab-overview">
+    <div class="sec-lbl">Coalition seat totals</div>
+    <div class="scoreboard" id="scoreboard"><div class="loading"><div class="spinner"></div></div></div>
+
+    <div class="parl-bar-wrap">
+      <div class="sec-lbl" style="padding:0 0 .5rem">Seat distribution</div>
+      <div style="position:relative;margin-bottom:18px">
+        <div class="parl-track" id="parl-track"></div>
+        <div id="parl-maj-wrap"></div>
+      </div>
+      <div class="parl-leg" id="parl-leg"></div>
+    </div>
+
+    <div class="sec-lbl" style="margin-bottom:.125rem">
+      Race community analysis
+      <span style="font-size:10px;color:var(--text3);text-transform:none;letter-spacing:0;font-weight:400"> — tap to drill down</span>
+    </div>
+    <div class="race-grid" id="race-cards"></div>
+
+    <div class="cbar-section">
+      <div class="sec-lbl" style="padding:0 0 .625rem">Coalition breakdown</div>
+      <div id="cbar-rows"></div>
+    </div>
+  </div>
+
+  <!-- TAB: ADJUST MODEL -->
+  <div class="vp" id="tab-controls">
+    <div class="ctrl-wrap">
+      <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.75rem">Scenario</div>
+      <div class="preset-row">
+        <div class="pcard sel" data-scen="base" onclick="clickPreset('base')">
+          <div class="pcard-ico">📊</div>
+          <div class="pcard-lbl">Baseline</div>
+          <div class="pcard-prob">55% prob.</div>
+        </div>
+        <div class="pcard" data-scen="best" onclick="clickPreset('best')">
+          <div class="pcard-ico">📈</div>
+          <div class="pcard-lbl">Best case</div>
+          <div class="pcard-prob">20% prob.</div>
+        </div>
+        <div class="pcard" data-scen="worst" onclick="clickPreset('worst')">
+          <div class="pcard-ico">📉</div>
+          <div class="pcard-lbl">Worst case</div>
+          <div class="pcard-prob">25% prob.</div>
+        </div>
+      </div>
+
+      <div class="ctrl-grid">
+        <div class="ctrl-panel">
+          <div class="ctrl-title">Turnout settings</div>
+          <div class="sl-row">
+            <div class="sl-name">Youth 18–39</div>
+            <input type="range" id="sl-y" min="40" max="95" step="1" value="72" oninput="onSl('y',this.value)">
+            <div class="sl-val" id="vl-y">72%</div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-name">Senior 40+</div>
+            <input type="range" id="sl-s" min="50" max="95" step="1" value="78" oninput="onSl('s',this.value)">
+            <div class="sl-val" id="vl-s">78%</div>
+          </div>
+          <div style="margin-top:1.25rem">
+            <div class="ctrl-title">Overall PH sentiment</div>
+            <div class="sl-row">
+              <div class="sl-name">PH support</div>
+              <input type="range" id="sl-ph" min="0" max="100" step="1" value="55" oninput="onSl('ph',this.value)">
+              <div class="sl-val" id="vl-ph">55%</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text3);padding:0 0 0 90px;margin-top:-5px">
+              <span>Anti-PH</span><span>Neutral</span><span>Pro-PH</span>
+            </div>
+          </div>
+        </div>
+        <div class="ctrl-panel">
+          <div class="ctrl-title">Race sentiment → PH</div>
+          <div class="sl-row">
+            <div class="sl-name" style="color:#2563EB">Melayu</div>
+            <input type="range" id="sl-m" min="0" max="100" step="1" value="48" oninput="onSl('m',this.value)">
+            <div class="sl-val" id="vl-m">48%</div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-name" style="color:#DC2626">Cina</div>
+            <input type="range" id="sl-c" min="0" max="100" step="1" value="78" oninput="onSl('c',this.value)">
+            <div class="sl-val" id="vl-c">78%</div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-name" style="color:#D97706">India</div>
+            <input type="range" id="sl-i" min="0" max="100" step="1" value="68" oninput="onSl('i',this.value)">
+            <div class="sl-val" id="vl-i">68%</div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-name" style="color:#4B5563">Lain-lain</div>
+            <input type="range" id="sl-l" min="0" max="100" step="1" value="45" oninput="onSl('l',this.value)">
+            <div class="sl-val" id="vl-l">45%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-lbl" style="padding:.875rem 0 .5rem">Live projection</div>
+      <div class="ctrl-preview" id="ctrl-preview">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: BY STATE -->
+  <div class="vp" id="tab-states">
+    <div class="state-grid" id="state-grid">
+      <div class="loading"><div class="spinner"></div></div>
+    </div>
+    <div class="state-detail" id="state-detail" style="display:none">
+      <div class="sd-hdr">
+        <div class="sd-title" id="sd-title">—</div>
+        <div class="sd-coal-wrap" id="sd-coal"></div>
+      </div>
+      <div class="sd-body" id="sd-body"></div>
+    </div>
+  </div>
+
+  <!-- TAB: ALL 222 SEATS -->
+  <div class="vp" id="tab-seats">
+    <div class="seats-wrap">
+      <div class="search-row">
+        <input type="text" id="srch" placeholder="Search constituency or state…" oninput="onSearch()">
+        <select id="sf-state" onchange="onSearch()"><option value="">All states</option></select>
+        <select id="sf-race" onchange="onSearch()">
+          <option value="">All profiles</option>
+          <option value="malay">Malay-dominant</option>
+          <option value="chinese">Chinese-dominant</option>
+          <option value="mixed">Mixed</option>
+          <option value="indian">High Indian</option>
+        </select>
+        <span class="seats-count" id="seats-count"></span>
+      </div>
+      <div class="table-wrap">
+        <table class="gt">
+          <thead><tr>
+            <th style="width:54px">Code</th>
+            <th>Constituency</th>
+            <th style="width:70px">GE15</th>
+            <th style="width:70px">GE16 Proj.</th>
+            <th style="width:86px">Race mix</th>
+            <th style="width:52px">Youth</th>
+          </tr></thead>
+          <tbody id="seat-tbody"></tbody>
+        </table>
+      </div>
+      <div id="no-res" class="no-res" style="display:none">No constituencies match your filters.</div>
+      <div class="pg-row" id="pg-row"></div>
+    </div>
+  </div>
+
+</div><!-- /tab-content -->
+</div><!-- /app -->
+
+<!-- MODAL -->
+<div class="modal-back" id="modal-back" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-hdr">
+      <div class="modal-title" id="modal-title"></div>
+      <button class="modal-close" onclick="closeModalDirect()">&#10005; Close</button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+var API='/.netlify/functions/data';
+var API_KEY='';
+
+var COL={
+  PKR:'#2563EB',DAP:'#1D4ED8',AMANAH:'#1E40AF',
+  BERSAMA:'#DC2626',
+  'PN-PAS':'#8B5CF6','PN-BERSATU':'#7C3AED',
+  'BN-UMNO':'#D97706','BN-MCA':'#B45309',
+  GPS:'#059669',WARISAN:'#4B5563'
+};
+var PS={
+  PKR:'PKR',DAP:'DAP',AMANAH:'AMN',BERSAMA:'BSMA',
+  'PN-PAS':'PAS','PN-BERSATU':'BSTU',
+  'BN-UMNO':'UMNO','BN-MCA':'MCA',GPS:'GPS',WARISAN:'WAR'
+};
+function GC(g){return({PKR:'#2563EB',DAP:'#1D4ED8',AMANAH:'#1E40AF',BERSAMA:'#DC2626',PN:'#7C3AED',BN:'#D97706',GPS:'#059669',WARISAN:'#4B5563'})[g]||'#94A3B8';}
+
+var scen='base',yT=72,sT=78,mS=48,cS=78,iS=68,lS=45;
+var seatsPage=1,seatsTotal=0,seatsPages=1,selState='',curView='overview';
+
+function getParams(){return{scen:scen,yT:yT,sT:sT,mS:mS,cS:cS,iS:iS,lS:lS};}
+
+async function api(body){
+  var h={'Content-Type':'application/json'};
+  if(API_KEY)h['X-API-Key']=API_KEY;
+  var r=await fetch(API,{method:'POST',headers:h,body:JSON.stringify(Object.assign({},getParams(),body))});
+  if(!r.ok)throw new Error('API '+r.status);
+  var j=await r.json();
+  if(!j.ok)throw new Error(j.error||'API error');
+  return j.data;
+}
+
+function showErr(msg){
+  var et=document.getElementById('err-text');if(et)et.textContent=msg;
+  var b=document.getElementById('err-banner');
+  if(b){b.style.display='flex';setTimeout(function(){b.style.display='none';},5000);}
+}
+
+var debTimer=null;
+function debounce(fn,ms){clearTimeout(debTimer);debTimer=setTimeout(fn,ms||350);}
+
+/* ── Parliament hemicycle ── */
+var ROWS=[{r:70,n:20},{r:100,n:30},{r:130,n:40},{r:160,n:50},{r:190,n:60},{r:220,n:22}];
+var CX=240,CY=258;
+var POSITIONS=(function(){
+  var arr=[];
+  ROWS.forEach(function(row){
+    for(var i=0;i<row.n;i++){
+      var a=Math.PI-(i/Math.max(row.n-1,1))*Math.PI;
+      arr.push({x:+(CX+row.r*Math.cos(a)).toFixed(2),y:+(CY-row.r*Math.sin(a)).toFixed(2)});
+    }
+  });
+  return arr;
+})();
+
+function buildParliament(c){
+  var palette=[
+    {k:'ph',col:'#2563EB'},{k:'bm',col:'#DC2626'},
+    {k:'gps',col:'#059669'},{k:'war',col:'#4B5563'},
+    {k:'bn',col:'#D97706'},{k:'pn',col:'#7C3AED'}
+  ];
+  var cols=[];
+  palette.forEach(function(p){for(var i=0;i<(c[p.k]||0);i++)cols.push(p.col);});
+  while(cols.length<222)cols.push('#C8D5E8');
+  var dots=POSITIONS.map(function(p,i){
+    return '<circle cx="'+p.x+'" cy="'+p.y+'" r="4.2" fill="'+(cols[i]||'#C8D5E8')+'" opacity="0.92"/>';
+  }).join('');
+  var line='<line x1="'+CX+'" y1="'+(CY-72)+'" x2="'+CX+'" y2="'+(CY-232)+'" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.5"/>';
+  var lbl='<text x="'+(CX+6)+'" y="'+(CY-234)+'" font-size="9" fill="#EF4444" font-family="Inter,sans-serif" font-weight="700" opacity="0.7">112 majority</text>';
+  return '<svg viewBox="0 0 480 270" width="100%" xmlns="http://www.w3.org/2000/svg">'+dots+line+lbl+'</svg>';
+}
+
+/* ── Summary ── */
+async function loadSummary(){
+  try{var d=await api({action:'summary'});renderSummary(d);populateStateFilter(d.states);}
+  catch(e){showErr('Failed to load: '+e.message);}
+}
+
+function renderSummary(d){
+  var c=d.coalitions,v=d.verdict;
+  var ph=c.ph,bm=c.bm,pn=c.pn,bn=c.bn,gps=c.gps,war=c.war,phB=ph+bm;
+
+  var lcEl=document.getElementById('lc-num');
+  if(lcEl){lcEl.textContent=phB;lcEl.style.color=phB>=112?'#4ADE80':phB>=100?'#FCD34D':'#F87171';}
+
+  var piEl=document.getElementById('parl-info');
+  if(piEl)piEl.textContent='PH '+phB+' · PN '+pn+' · BN '+bn+' · GPS '+gps;
+
+  document.getElementById('parl-arc').innerHTML=buildParliament({ph:ph,bm:bm,pn:pn,bn:bn,gps:gps,war:war});
+
+  var vCls=v.type==='ok'?'v-ok':v.type==='no'?'v-no':'v-warn';
+  var vIco=v.type==='ok'?'&#10003;':v.type==='no'?'&#10007;':'&#9888;';
+  document.getElementById('verdict').innerHTML='<div class="verdict '+vCls+'"><div class="v-icon">'+vIco+'</div><div>'+v.text+'</div></div>';
+
+  var REFS={base:{phb:99,pn:74,bn:32,gps:23,war:3},best:{phb:120,pn:67,bn:29,gps:23,war:3},worst:{phb:81,pn:82,bn:35,gps:23,war:3}};
+  var ref=REFS[scen]||REFS.base;
+  function delta(n,r){var dv=n-r;return dv>0?'<span class="cc-delta d-up">&#8593; +'+dv+'</span>':dv<0?'<span class="cc-delta d-dn">&#8595; '+dv+'</span>':'<span class="cc-delta d-eq">&#8212; &#8212;</span>';}
+  document.getElementById('coal-row').innerHTML=[
+    {lbl:'PH Bloc',n:phB,sub:'PKR · DAP · AMANAH · BERSAMA',ref:ref.phb,col:'#2563EB'},
+    {lbl:'PN Bloc',n:pn,sub:'BERSATU · PAS',ref:ref.pn,col:'#7C3AED'},
+    {lbl:'BN',n:bn,sub:'UMNO · MCA · MIC',ref:ref.bn,col:'#D97706'},
+    {lbl:'GPS',n:gps,sub:'Sarawak parties',ref:ref.gps,col:'#059669'},
+    {lbl:'Others',n:war,sub:'WARISAN · Ind.',ref:ref.war,col:'#4B5563'}
+  ].map(function(x){
+    return '<div class="cc" style="border-top-color:'+x.col+'"><div class="cc-lbl" style="color:'+x.col+'">'+x.lbl+'</div><div class="cc-n" style="color:'+x.col+'">'+x.n+'</div><div class="cc-sub">'+x.sub+'</div>'+delta(x.n,x.ref)+'</div>';
+  }).join('');
+
+  var sbRef={base:{phb:99,pn:74,bn:32},best:{phb:120,pn:67,bn:29},worst:{phb:81,pn:82,bn:35}};
+  var sbR=sbRef[scen]||sbRef.base;
+  function dt(n,r){var dv=n-r;return dv>0?'<span class="du">+'+dv+'</span>':dv<0?'<span class="dd">'+dv+'</span>':'<span class="dn">&#8212;</span>';}
+  document.getElementById('scoreboard').innerHTML=[
+    {lbl:'PH Bloc',dot:'#2563EB',n:phB,r:sbR.phb},
+    {lbl:'PN Bloc',dot:'#7C3AED',n:pn,r:sbR.pn},
+    {lbl:'BN',dot:'#D97706',n:bn,r:sbR.bn},
+    {lbl:'GPS',dot:'#059669',n:gps,r:23},
+    {lbl:'Others',dot:'#4B5563',n:war,r:3}
+  ].map(function(x){
+    return '<div class="sbc"><div class="sbc-h"><span class="sbc-dot" style="background:'+x.dot+'"></span><div class="sbc-lbl">'+x.lbl+'</div></div><div class="sbc-n">'+x.n+'</div><div class="sbc-d">'+dt(x.n,x.r)+' vs base</div></div>';
+  }).join('');
+
+  var ph65=Math.round(ph*0.65)||1,ph28=Math.round(ph*0.28)||1;
+  var pb=[
+    {k:'PKR',s:ph65,cl:'#2563EB'},{k:'DAP',s:ph28,cl:'#1D4ED8'},
+    {k:'AMN',s:Math.max(0,ph-ph65-ph28),cl:'#1E40AF'},
+    {k:'BSMA',s:bm,cl:'#DC2626'},{k:'GPS',s:gps,cl:'#059669'},
+    {k:'BN',s:bn,cl:'#D97706'},{k:'PN',s:pn,cl:'#7C3AED'},
+    {k:'WAR',s:war,cl:'#4B5563'}
+  ].filter(function(g){return g.s>0;});
+  var majPct=(112/222*100).toFixed(2);
+  document.getElementById('parl-track').innerHTML=pb.map(function(g){
+    return '<div class="pb-seg" style="flex:'+g.s+';background:'+g.cl+'">'+(g.s>=8?'<span>'+g.k+' '+g.s+'</span>':'')+'</div>';
+  }).join('');
+  document.getElementById('parl-maj-wrap').innerHTML='<div class="parl-maj" style="left:'+majPct+'%"><span class="parl-maj-lbl">112</span></div>';
+  document.getElementById('parl-leg').innerHTML=pb.map(function(g){
+    return '<div class="pleg"><div class="pleg-sq" style="background:'+g.cl+'"></div>'+g.k+' <strong>'+g.s+'</strong></div>';
+  }).join('');
+
+  var insights=[
+    {key:'m',comm:'Melayu',pct:mS,dot:'#2563EB',bc:'#2563EB',
+     tag:mS>58?{t:'Boosting PH',bg:'#F0FDF4',tc:'#15803D'}:mS<42?{t:'Risk to PH',bg:'#FEF2F2',tc:'#DC2626'}:{t:'Neutral',bg:'#F1F5F9',tc:'#64748B'},
+     body:mS>58?'High Melayu support — PKR marginals in Kedah, Perak, Selangor &amp; Johor secured.':mS<42?'Low Melayu support — 15–20 PKR marginals at flip risk.':'Baseline Melayu split holds; competitive marginals.'},
+    {key:'c',comm:'Cina',pct:cS,dot:'#DC2626',bc:'#DC2626',
+     tag:cS>82?{t:'Boosting PH',bg:'#F0FDF4',tc:'#15803D'}:cS<65?{t:'Risk to PH',bg:'#FEF2F2',tc:'#DC2626'}:{t:'Stable',bg:'#F1F5F9',tc:'#64748B'},
+     body:cS>82?'Strong Chinese bloc — DAP seats &amp; PKR urban marginals reinforced.':cS<65?'Chinese pullback — 10+ mixed urban seats at risk.':'DAP base steady; mixed seats competitive.'},
+    {key:'i',comm:'India',pct:iS,dot:'#D97706',bc:'#D97706',
+     tag:iS>72?{t:'Boosting PH',bg:'#F0FDF4',tc:'#15803D'}:iS<55?{t:'Swing risk',bg:'#FFFBEB',tc:'#92400E'}:{t:'Stable',bg:'#F1F5F9',tc:'#64748B'},
+     body:iS>72?'Indian vote firms PKR — Kapar, Kota Raja, Sungai Siput secure.':iS<55?'Indian swing risks 5–8 Klang Valley losses.':'Indian vote tracking with PH norms.'},
+    {key:'l',comm:'Lain-lain',pct:lS,dot:'#4B5563',bc:'#4B5563',
+     tag:lS>52?{t:'PH gain',bg:'#F0FDF4',tc:'#15803D'}:lS<38?{t:'E.M\'sia risk',bg:'#FFFBEB',tc:'#92400E'}:{t:'Steady',bg:'#F1F5F9',tc:'#64748B'},
+     body:lS>52?'Sabah Bumiputera lean PH — Sepanggar, Tenom, Penampang consolidated.':lS<38?'BN retains coastal Sabah; WARISAN loses 2–3 seats.':'BN-WARISAN-PKR Sabah split holds.'}
+  ];
+  document.getElementById('race-cards').innerHTML=insights.map(function(x){
+    return '<div class="rc" style="border-left-color:'+x.bc+'" onclick="openRaceDrill(\''+x.key+'\')"><div class="rc-top"><div style="display:flex;align-items:center;gap:6px"><div class="pl-dot" style="background:'+x.dot+'"></div><div class="rc-comm">'+x.comm+'</div></div><div class="rc-pct" style="color:'+x.dot+'">'+x.pct+'%</div></div><div class="rc-body">'+x.body+'</div><span class="rc-tag" style="background:'+x.tag.bg+';color:'+x.tag.tc+'">'+x.tag.t+'</span><div class="rc-cta">&#8599; Drill down</div></div>';
+  }).join('');
+
+  document.getElementById('cbar-rows').innerHTML=[
+    {l:'PH (PKR + DAP + AMN)',s:ph,cl:'#2563EB'},
+    {l:'BERSAMA',s:bm,cl:'#DC2626'},
+    {l:'PN (BERSATU + PAS)',s:pn,cl:'#7C3AED'},
+    {l:'BN (UMNO + MCA)',s:bn,cl:'#D97706'},
+    {l:'GPS (Sarawak)',s:gps,cl:'#059669'},
+    {l:'Others (WARISAN)',s:war,cl:'#4B5563'}
+  ].map(function(r){
+    var p=(r.s/222*100).toFixed(1),mp=(112/222*100).toFixed(1);
+    return '<div class="cbar-row"><div class="cbar-lbl">'+r.l+'</div><div class="cbar-track"><div class="cbar-fill" style="width:'+p+'%;background:'+r.cl+'"><span>'+r.s+'</span></div><div class="cbar-mk" style="left:'+mp+'%"><span class="cbar-mk-lbl">112</span></div></div></div>';
+  }).join('');
+
+  document.getElementById('ctrl-preview').innerHTML=[
+    {l:'PH',v:ph,cl:'#2563EB'},{l:'BERSAMA',v:bm,cl:'#DC2626'},
+    {l:'PN',v:pn,cl:'#7C3AED'},{l:'BN',v:bn,cl:'#D97706'},
+    {l:'GPS',v:gps,cl:'#059669'},{l:'Others',v:war,cl:'#4B5563'}
+  ].map(function(x){return '<div class="cp-card"><div class="cp-lbl">'+x.l+'</div><div class="cp-n" style="color:'+x.cl+'">'+x.v+'</div></div>';}).join('');
+
+  renderStates(d.states);
+}
+
+function populateStateFilter(states){
+  var sel=document.getElementById('sf-state');
+  if(sel.options.length>1)return;
+  states.slice().sort().forEach(function(st){var o=document.createElement('option');o.value=o.textContent=st;sel.appendChild(o);});
+}
+
+/* ── States ── */
+function renderStates(states){
+  if(!states||!states.length)return;
+  document.getElementById('state-grid').innerHTML=states.map(function(st){
+    var sid=st.replace(/[^a-z0-9]/gi,'_');
+    return '<div class="scard'+(selState===st?' sel':'')+'" onclick="clickState(\''+st.replace(/'/g,"\\'")+'\')">'
+      +'<div class="scard-nm">'+st+'</div>'
+      +'<div class="scard-info" id="si-'+sid+'">—</div>'
+      +'<div class="scard-bar" id="sb-'+sid+'"></div>'
+      +'</div>';
+  }).join('');
+  states.forEach(loadStateMini);
+}
+
+async function loadStateMini(st){
+  try{
+    var d=await api({action:'seats',filters:{state:st},page:1,pageSize:50});
+    var t={};
+    d.seats.forEach(function(s){var g=s.projected.startsWith('GPS')?'GPS':s.projected.startsWith('BN')?'BN':s.projected.startsWith('PN')?'PN':s.projected;t[g]=(t[g]||0)+1;});
+    var sid=st.replace(/[^a-z0-9]/gi,'_');
+    var siEl=document.getElementById('si-'+sid);if(siEl)siEl.textContent=d.total+' seats';
+    var sbEl=document.getElementById('sb-'+sid);
+    if(sbEl){var ord=['PKR','DAP','BERSAMA','GPS','BN','PN','WARISAN','AMANAH'];sbEl.innerHTML=ord.filter(function(g){return t[g];}).map(function(g){return '<div style="flex:'+t[g]+';background:'+GC(g)+';height:100%"></div>';}).join('');}
+    if(selState===st)showStateDetail(st,d,t);
+  }catch(e){/* silent */}
+}
+
+async function loadStateDetail(st){
+  try{
+    var d=await api({action:'seats',filters:{state:st},page:1,pageSize:50});
+    var t={};
+    d.seats.forEach(function(s){var g=s.projected.startsWith('GPS')?'GPS':s.projected.startsWith('BN')?'BN':s.projected.startsWith('PN')?'PN':s.projected;t[g]=(t[g]||0)+1;});
+    showStateDetail(st,d,t);
+  }catch(e){showErr('State error: '+e.message);}
+}
+
+function showStateDetail(st,d,t){
+  var sd=document.getElementById('state-detail');if(!sd)return;
+  sd.style.display='block';
+  document.getElementById('sd-title').textContent=st+' — '+d.total+' seats';
+  document.getElementById('sd-coal').innerHTML=Object.entries(t).sort(function(a,b){return b[1]-a[1];}).map(function(kv){
+    return '<span class="sd-coal-item" style="color:'+GC(kv[0])+'"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:'+GC(kv[0])+';margin-right:3px"></span>'+kv[0]+' <strong>'+kv[1]+'</strong></span>';
+  }).join('');
+  document.getElementById('sd-body').innerHTML=d.seats.map(function(s){
+    var rb='<div class="rbar-sm"><div style="flex:'+s.melayu+';background:#2563EB;height:100%"></div><div style="flex:'+s.cina+';background:#DC2626;height:100%"></div><div style="flex:'+s.india+';background:#D97706;height:100%"></div><div style="flex:'+s.lain+';background:#4B5563;height:100%"></div></div>';
+    var flip=s.ge15!==s.projected;
+    return '<div class="drill-row" style="padding:7px 1rem;'+(flip?'background:rgba(220,38,38,.04)':'')+'">'
+      +'<div style="flex:1"><div class="dr-nm">'+s.name+' <span style="font-size:10px;color:var(--text3)">'+s.code+'</span>'+(flip?'<span class="flip-lbl">FLIP</span>':'')+'</div></div>'
+      +'<div style="display:flex;align-items:center;gap:8px">'+rb+'<span class="pill" style="background:'+(COL[s.projected]||'#888')+'">'+((PS[s.projected])||s.projected)+'</span></div></div>';
+  }).join('');
+}
+
+/* ── Race drill-down ── */
+async function openRaceDrill(key){
+  var labels={m:'Melayu',c:'Cina',i:'India',l:'Lain-lain (East Malaysia)'};
+  var summaries={
+    m:'Melayu voters are decisive in 165+ seats, predominantly Peninsular. Highest concentrations in Kelantan (13 seats) and Terengganu (8) — safe PN regardless of sentiment. Contested zone: 60–80% Melayu seats where PKR competes against PN-BERSATU. Current setting '+mS+'%: '+(mS>58?'PKR marginals in Kedah, Perak, Selangor and Johor secured.':mS<42?'~15–20 PKR marginals at flip risk.':'No major swing from baseline.'),
+    c:'Cina voters decide 45+ seats. Chinese-dominant seats (&gt;55%) — Bagan, Jelutong, Tanjong, Kepong, Bukit Bintang, Seputeh, Cheras — are safe DAP. Battleground: mixed-Chinese seats (30–50%) in Klang Valley. Current '+cS+'%: '+(cS>82?'All DAP and PKR mixed seats defended.':cS<65?'Urban seats at BERSAMA risk.':'DAP base stable.'),
+    i:'Indian voters (15–27%) are swing in 20+ seats. Highest: Sungai Siput (21.2%), Ipoh Barat (27.1%), Batu Kawan (21.8%), Kapar (18.1%). Swing &gt;10pts risks 5–8 Klang Valley losses. Current '+iS+'%: '+(iS>72?'High-Indian PKR constituencies secure.':iS<55?'Kota Raja, Kapar, Klang, Sungai Siput at risk.':'Indian vote within PH norms.'),
+    l:'Lain-lain covers Sabah Bumiputera, Orang Asli and indigenous groups — decisive in 25 Sabah seats. GPS (31 Sarawak seats) votes as a unified bloc on East Malaysia autonomy. Current '+lS+'%: '+(lS>52?'PKR Sabah consolidates Sepanggar, Tenom, Penampang.':lS<38?'BN retains coastal Sabah; PKR Sabah loses 3–5.':'Historical BN-WARISAN-PKR split holds.')
+  };
+  document.getElementById('modal-title').textContent=(labels[key]||key)+' community — race drill-down';
+  document.getElementById('modal-body').innerHTML='<div class="modal-sub">'+summaries[key]+'</div><div class="loading"><div class="spinner"></div>Loading top seats…</div>';
+  document.getElementById('modal-back').classList.add('open');
+  try{
+    var d=await api({action:'race-drill',community:key});
+    var rows=d.topSeats.map(function(s){
+      return '<div class="drill-row"><div><div class="dr-nm">'+s.name+'</div><div class="dr-sub">'+s.code+' · '+s.state+'</div></div><div style="display:flex;align-items:center;gap:8px"><div class="dr-pct">'+s.pct.toFixed(1)+'%</div><span class="pill" style="background:'+(COL[s.projected]||'#888')+'">'+((PS[s.projected])||s.projected)+'</span></div></div>';
+    }).join('');
+    document.getElementById('modal-body').innerHTML='<div class="modal-sub">'+summaries[key]+'</div><div class="modal-sec">Top 10 highest-concentration constituencies</div>'+rows+'<div style="margin-top:1rem;font-size:11px;color:var(--text3)">Projections update with slider changes in Adjust Model.</div>';
+  }catch(e){showErr('Drill-down error: '+e.message);}
+}
+
+/* ── All 222 seats ── */
+async function loadSeats(){
+  var srch=document.getElementById('srch').value;
+  var stF=document.getElementById('sf-state').value;
+  var rcF=document.getElementById('sf-race').value;
+  try{
+    var d=await api({action:'seats',filters:{state:stF,race:rcF,search:srch},page:seatsPage,pageSize:25});
+    seatsTotal=d.total;seatsPages=d.pages;
+    var tb=document.getElementById('seat-tbody'),nr=document.getElementById('no-res'),sc=document.getElementById('seats-count');
+    if(sc)sc.textContent=d.total+' results';
+    if(!d.seats.length){tb.innerHTML='';nr.style.display='block';}
+    else{
+      nr.style.display='none';
+      tb.innerHTML=d.seats.map(function(s){
+        var rb='<div class="rbar-sm"><div style="flex:'+s.melayu+';background:#2563EB;height:100%"></div><div style="flex:'+s.cina+';background:#DC2626;height:100%"></div><div style="flex:'+s.india+';background:#D97706;height:100%"></div><div style="flex:'+s.lain+';background:#4B5563;height:100%"></div></div><div style="font-size:9px;color:'+s.raceCol+';margin-top:1px">'+s.raceLabel+'</div>';
+        var yc=s.youth>=55?'#DC2626':s.youth>=48?'#D97706':'#16A34A';
+        var flip=s.ge15!==s.projected;
+        return '<tr class="'+(flip?'flip-row':'')+'">'
+          +'<td style="font-size:10px;color:var(--text3)">'+s.code+'</td>'
+          +'<td><div class="seat-nm">'+s.name+(flip?'<span class="flip-lbl">FLIP</span>':'')+'</div><div class="seat-st">'+s.state+'</div></td>'
+          +'<td><span class="pill" style="background:'+(COL[s.ge15]||'#888')+'">'+((PS[s.ge15])||s.ge15)+'</span></td>'
+          +'<td><span class="pill" style="background:'+(COL[s.projected]||'#888')+'">'+((PS[s.projected])||s.projected)+'</span></td>'
+          +'<td>'+rb+'</td>'
+          +'<td><span style="font-size:10px;font-weight:700;padding:2px 6px;border-radius:20px;background:'+yc+'22;color:'+yc+'">'+s.youth+'%</span></td>'
+          +'</tr>';
+      }).join('');
+    }
+    var h='<button class="pgb" onclick="goPage('+(seatsPage-1)+')" '+(seatsPage<=1?'disabled':'')+'>&#8249;</button>';
+    var s2=Math.max(1,seatsPage-2),e2=Math.min(seatsPages,seatsPage+2);
+    if(s2>1)h+='<button class="pgb" onclick="goPage(1)">1</button>';
+    if(s2>2)h+='<span class="pg-inf">&#8230;</span>';
+    for(var i=s2;i<=e2;i++)h+='<button class="pgb '+(i===seatsPage?'on':'')+'" onclick="goPage('+i+')">'+i+'</button>';
+    if(e2<seatsPages-1)h+='<span class="pg-inf">&#8230;</span>';
+    if(e2<seatsPages)h+='<button class="pgb" onclick="goPage('+seatsPages+')">'+seatsPages+'</button>';
+    h+='<button class="pgb" onclick="goPage('+(seatsPage+1)+')" '+(seatsPage>=seatsPages?'disabled':'')+'>&#8250;</button>';
+    h+='<span class="pg-inf">'+seatsTotal+' seats</span>';
+    document.getElementById('pg-row').innerHTML=h;
+  }catch(e){showErr('Seats error: '+e.message);}
+}
+
+/* ── Event handlers ── */
+window.setScen=function(s,el){
+  scen=s;
+  document.querySelectorAll('.sb').forEach(function(b){b.classList.remove('on');});
+  el.classList.add('on');
+  document.querySelectorAll('.pcard').forEach(function(c){c.classList.toggle('sel',c.dataset.scen===s);});
+  loadSummary();
+  if(curView==='seats')loadSeats();
+};
+window.clickPreset=function(s){
+  var el=document.querySelector('.sb-'+s);
+  if(el)window.setScen(s,el);
+};
+window.switchTab=function(id,el){
+  curView=id;
+  document.querySelectorAll('.tn').forEach(function(b){b.classList.remove('on');});
+  document.querySelectorAll('.vp').forEach(function(p){p.classList.remove('on');});
+  el.classList.add('on');
+  document.getElementById('tab-'+id).classList.add('on');
+  if(id==='seats'){seatsPage=1;loadSeats();}
+  if(id==='states')loadSummary();
+};
+window.onSl=function(k,v){
+  var n=parseInt(v);
+  if(k==='y'){yT=n;document.getElementById('vl-y').textContent=n+'%';}
+  else if(k==='s'){sT=n;document.getElementById('vl-s').textContent=n+'%';}
+  else if(k==='ph'){
+    document.getElementById('vl-ph').textContent=n+'%';
+    mS=Math.round(30+n*0.36);cS=Math.round(62+n*0.3);iS=Math.round(48+n*0.38);lS=Math.round(25+n*0.4);
+    [{id:'m',val:mS},{id:'c',val:cS},{id:'i',val:iS},{id:'l',val:lS}].forEach(function(x){
+      var sl=document.getElementById('sl-'+x.id);if(sl)sl.value=x.val;
+      var vl=document.getElementById('vl-'+x.id);if(vl)vl.textContent=x.val+'%';
+    });
+  }
+  else if(k==='m'){mS=n;document.getElementById('vl-m').textContent=n+'%';}
+  else if(k==='c'){cS=n;document.getElementById('vl-c').textContent=n+'%';}
+  else if(k==='i'){iS=n;document.getElementById('vl-i').textContent=n+'%';}
+  else if(k==='l'){lS=n;document.getElementById('vl-l').textContent=n+'%';}
+  debounce(function(){loadSummary();if(curView==='seats')loadSeats();});
+};
+window.onSearch=function(){seatsPage=1;debounce(loadSeats,250);};
+window.goPage=function(p){seatsPage=p;loadSeats();};
+window.clickState=function(st){
+  selState=(selState===st)?'':st;
+  document.querySelectorAll('.scard').forEach(function(c){
+    var nm=c.querySelector('.scard-nm');
+    c.classList.toggle('sel',!!(nm&&nm.textContent===selState));
+  });
+  if(selState){loadStateDetail(selState);}
+  else{var sd=document.getElementById('state-detail');if(sd)sd.style.display='none';}
+};
+window.openRaceDrill=openRaceDrill;
+window.closeModal=function(e){if(e.target===document.getElementById('modal-back'))closeModalDirect();};
+window.closeModalDirect=function(){document.getElementById('modal-back').classList.remove('open');};
+
+loadSummary();
+})();
+</script>
+</body>
+</html>
