@@ -603,14 +603,29 @@ function getParams(){
   return{scen:scen,yT:yT,sT:sT,mS:mS,cS:cS,iS:iS,lS:lS,coalition:curFocus};
 }
 
+var _apiCache=new Map();  // key → resolved data
+var _apiFlight=new Map(); // key → in-flight promise (dedup)
+
 async function api(body){
+  var k=JSON.stringify(Object.assign({},getParams(),body));
+  if(_apiCache.has(k))return _apiCache.get(k);
+  if(_apiFlight.has(k))return _apiFlight.get(k);
   var h={'Content-Type':'application/json'};
   if(API_KEY)h['X-API-Key']=API_KEY;
-  var r=await fetch(API,{method:'POST',headers:h,body:JSON.stringify(Object.assign({},getParams(),body))});
-  if(!r.ok)throw new Error('API '+r.status);
-  var j=await r.json();
-  if(!j.ok)throw new Error(j.error||'API error');
-  return j.data;
+  var prom=(async function(){
+    var r=await fetch(API,{method:'POST',headers:h,body:k});
+    if(!r.ok)throw new Error('API '+r.status);
+    var j=await r.json();
+    if(!j.ok)throw new Error(j.error||'API error');
+    return j.data;
+  })();
+  _apiFlight.set(k,prom);
+  try{
+    var d=await prom;
+    if(_apiCache.size>=80)_apiCache.delete(_apiCache.keys().next().value);
+    _apiCache.set(k,d);
+    return d;
+  }finally{_apiFlight.delete(k);}
 }
 
 function showErr(msg){
@@ -769,7 +784,7 @@ function renderSummary(d){
     {l:'GPS',v:gps,cl:'#059669'},{l:'Others',v:war,cl:'#4B5563'}
   ].map(function(x){return '<div class="cp-card"><div class="cp-lbl">'+x.l+'</div><div class="cp-n" style="color:'+x.cl+'">'+x.v+'</div></div>';}).join('');
 
-  renderStates(d.states);
+  renderStates(d);
 }
 
 function populateStateFilter(states){
@@ -855,30 +870,21 @@ function renderAnalysis(d){
 }
 
 /* ── States ── */
-function renderStates(states){
+function renderStates(summaryData){
+  var states=summaryData.states,byState=summaryData.byState||{};
   if(!states||!states.length)return;
+  var ord=['PKR','DAP','AMANAH','BERSAMA','GPS','BN','PN','WARISAN'];
   document.getElementById('state-grid').innerHTML=states.map(function(st){
-    var sid=st.replace(/[^a-z0-9]/gi,'_');
+    var info=byState[st]||{total:0};
+    var bar=ord.filter(function(g){return info[g]>0;}).map(function(g){
+      return '<div style="flex:'+info[g]+';background:'+GC(g)+';height:100%"></div>';
+    }).join('');
     return '<div class="scard'+(selState===st?' sel':'')+'" onclick="clickState(\''+st.replace(/'/g,"\\'")+'\')">'
       +'<div class="scard-nm">'+st+'</div>'
-      +'<div class="scard-info" id="si-'+sid+'">—</div>'
-      +'<div class="scard-bar" id="sb-'+sid+'"></div>'
+      +'<div class="scard-info">'+info.total+' seats</div>'
+      +'<div class="scard-bar">'+bar+'</div>'
       +'</div>';
   }).join('');
-  states.forEach(loadStateMini);
-}
-
-async function loadStateMini(st){
-  try{
-    var d=await api({action:'seats',filters:{state:st},page:1,pageSize:50});
-    var t={};
-    d.seats.forEach(function(s){var g=s.projected.startsWith('GPS')?'GPS':s.projected.startsWith('BN')?'BN':s.projected.startsWith('PN')?'PN':s.projected;t[g]=(t[g]||0)+1;});
-    var sid=st.replace(/[^a-z0-9]/gi,'_');
-    var siEl=document.getElementById('si-'+sid);if(siEl)siEl.textContent=d.total+' seats';
-    var sbEl=document.getElementById('sb-'+sid);
-    if(sbEl){var ord=['PKR','DAP','BERSAMA','GPS','BN','PN','WARISAN','AMANAH'];sbEl.innerHTML=ord.filter(function(g){return t[g];}).map(function(g){return '<div style="flex:'+t[g]+';background:'+GC(g)+';height:100%"></div>';}).join('');}
-    if(selState===st)showStateDetail(st,d,t);
-  }catch(e){/* silent */}
 }
 
 async function loadStateDetail(st){

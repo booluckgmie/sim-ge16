@@ -329,11 +329,23 @@ function getSummary(params) {
     verdictText = `Hung parliament — PH bloc ${phBloc} · PN+BN ${opp} · GPS (${gps}) is kingmaker`;
   }
 
+  // Per-state projected winner breakdown — returned once with summary, no extra API call needed
+  const byState = {};
+  SEATS.forEach(seat => {
+    const state = seat[2];
+    const w = getWinner(seat, params);
+    const grp = w.startsWith('GPS') ? 'GPS' : w.startsWith('BN') ? 'BN' : w.startsWith('PN') ? 'PN' : w;
+    if (!byState[state]) byState[state] = { total: 0 };
+    byState[state][grp] = (byState[state][grp] || 0) + 1;
+    byState[state].total++;
+  });
+
   return {
     coalitions: { ph, bm, pn, bn, gps, war },
     phBloc, opp,
     verdict: { type: verdictType, text: verdictText },
     states: [...new Set(SEATS.map(s => s[2]))],
+    byState,
   };
 }
 
