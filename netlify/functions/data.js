@@ -113,7 +113,7 @@ Keep it clear, specific, and accessible to a non-expert Malaysian audience.`;
           if (!text) return reject(new Error('Empty response from AI'));
           resolve({ text, model: json.model || 'llama-3.3-70b-versatile', tokens: json.usage?.total_tokens || 0 });
         } catch (e) {
-          reject(new Error('Failed to parse AI response'));
+          reject(new Error('AI service error (HTTP ' + res.statusCode + '): ' + raw.slice(0, 120)));
         }
       });
     });
