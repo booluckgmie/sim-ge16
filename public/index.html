@@ -20,7 +20,7 @@
   --green:#15803D;--green-bg:#F0FDF4;--green-bd:#86EFAC;
   --red:#DC2626;--red-bg:#FEF2F2;--red-bd:#FECACA;
   --amber:#B45309;--amber-bg:#FFFBEB;--amber-bd:#FCD34D;
-  --c-ph:#2563EB;--c-bm:#DC2626;--c-pn:#7C3AED;--c-bn:#D97706;--c-gps:#059669;--c-war:#4B5563;
+  --focus-col:#2563EB;
   --r:12px;--r-sm:8px;
   --sh-xs:0 1px 2px rgba(0,0,0,.05);
   --sh:0 2px 8px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.04);
@@ -40,15 +40,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 #app{max-width:980px;margin:0 auto}
 
 /* ===== HEADER ===== */
-.hdr{
-  background:var(--navy);
-  padding:.875rem 1.25rem;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:.625rem;
-  position:sticky;top:0;z-index:100;
-  border-bottom:1px solid rgba(255,255,255,.05);
-  box-shadow:0 4px 24px rgba(0,0,0,.35);
-}
+.hdr{background:var(--navy);padding:.875rem 1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.625rem;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(255,255,255,.05);box-shadow:0 4px 24px rgba(0,0,0,.35)}
 .hdr-brand{display:flex;flex-direction:column;gap:2px}
 .hdr-title{font-size:15px;font-weight:800;color:#FFF;letter-spacing:-.03em;display:flex;align-items:center;gap:8px}
 .hdr-badge{font-size:9px;font-weight:600;padding:2px 7px;border-radius:20px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);letter-spacing:.3px;text-transform:uppercase}
@@ -65,6 +57,16 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .sb-base.on{background:var(--blue)}
 .sb-best.on{background:#15803D}
 .sb-worst.on{background:#DC2626}
+
+/* ===== FOCUS BAR ===== */
+.focus-bar{display:flex;align-items:center;gap:10px;padding:.5rem 1.25rem;background:var(--navy2);border-bottom:1px solid rgba(255,255,255,.06);flex-wrap:wrap}
+.focus-lbl{font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.6px;white-space:nowrap}
+.focus-grp{display:flex;gap:3px;background:rgba(0,0,0,.25);padding:3px;border-radius:22px;border:1px solid rgba(255,255,255,.07)}
+.fb{display:flex;align-items:center;gap:5px;padding:5px 13px;font-size:11px;font-weight:600;border-radius:18px;border:none;background:transparent;color:rgba(255,255,255,.45);cursor:pointer;transition:all .15s;white-space:nowrap}
+.fb:hover{color:rgba(255,255,255,.8)}
+.fb.on{color:#fff;font-weight:700}
+.fb-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;opacity:.8}
+.focus-hint{font-size:10px;color:rgba(255,255,255,.3);margin-left:auto}
 
 /* ===== ERROR ===== */
 .err-banner{margin:.75rem 1.25rem;padding:.875rem 1rem;background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd);border-radius:var(--r-sm);font-size:12px;display:flex;align-items:center;gap:8px}
@@ -103,19 +105,17 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .d-eq{background:var(--surface2);color:var(--text3)}
 
 /* ===== NAV TABS ===== */
-.tab-nav{display:flex;border-bottom:1px solid var(--border);padding:0 1.25rem;background:var(--surface);position:sticky;top:57px;z-index:90;overflow-x:auto;scrollbar-width:none}
+.tab-nav{display:flex;border-bottom:1px solid var(--border);padding:0 1.25rem;background:var(--surface);position:sticky;top:95px;z-index:90;overflow-x:auto;scrollbar-width:none}
 .tab-nav::-webkit-scrollbar{display:none}
 .tn{padding:10px 14px;font-size:12px;font-weight:500;color:var(--text3);cursor:pointer;border:none;border-bottom:2.5px solid transparent;background:none;white-space:nowrap;transition:color .15s,border-color .15s;display:flex;align-items:center;gap:5px}
 .tn:hover{color:var(--text2)}
-.tn.on{color:var(--text);border-bottom-color:var(--blue);font-weight:700}
+.tn.on{color:var(--text);border-bottom-color:var(--focus-col);font-weight:700}
 .tn-ico{font-size:14px}
 
 /* ===== TABS ===== */
 .tab-content{padding-bottom:4rem}
 .vp{display:none}.vp.on{display:block;animation:fadeUp .2s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-
-/* Section label */
 .sec-lbl{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.7px;padding:.875rem 1.25rem .375rem}
 
 /* ===== SCOREBOARD ===== */
@@ -187,7 +187,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .state-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:8px;padding:.875rem 1.25rem}
 .scard{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:.75rem .875rem;cursor:pointer;border-left:3px solid transparent;transition:all .15s}
 .scard:hover{border-color:var(--border2)}
-.scard.sel{border-left-color:var(--blue);background:var(--surface2)}
+.scard.sel{border-left-color:var(--focus-col);background:var(--surface2)}
 .scard-nm{font-size:12px;font-weight:600;color:var(--text)}
 .scard-info{font-size:10px;color:var(--text3);margin-top:1px}
 .scard-bar{display:flex;height:4px;border-radius:2px;overflow:hidden;margin-top:7px;gap:1px}
@@ -200,16 +200,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 
 /* ===== SEATS TABLE ===== */
 .seats-wrap{padding:1rem 1.25rem}
-.search-row{display:flex;gap:8px;margin-bottom:.875rem;flex-wrap:wrap;align-items:center}
+.search-row{display:flex;gap:8px;margin-bottom:.625rem;flex-wrap:wrap;align-items:center}
 .search-row input,.search-row select{font-size:12px;padding:7px 10px;border-radius:var(--r-sm);border:1px solid var(--border2);background:var(--surface);color:var(--text);outline:none;transition:border-color .15s}
 .search-row input:focus,.search-row select:focus{border-color:var(--blue)}
 .search-row input{flex:1;min-width:140px}
 .seats-count{font-size:11px;color:var(--text3);white-space:nowrap}
-.sort-row{display:flex;align-items:center;gap:6px;margin-bottom:.625rem;flex-wrap:wrap}
-.sort-lbl{font-size:10px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.sort-row{display:flex;align-items:center;gap:6px;margin-bottom:.75rem;flex-wrap:wrap}
+.sort-lbl{font-size:10px;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
 .sort-btn{padding:4px 10px;font-size:10px;font-weight:600;border-radius:20px;border:1px solid var(--border2);background:var(--surface);color:var(--text3);cursor:pointer;transition:all .15s;white-space:nowrap}
 .sort-btn:hover{border-color:var(--blue-l);color:var(--text)}
-.sort-btn.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.sort-btn.on{background:var(--focus-col);color:#fff;border-color:var(--focus-col)}
 .table-wrap{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;overflow-x:auto}
 .gt{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
 .gt thead{background:var(--surface2)}
@@ -226,35 +226,32 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .pg-row{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:.875rem;flex-wrap:wrap}
 .pgb{padding:5px 11px;font-size:11px;font-weight:500;border-radius:var(--r-sm);border:1px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .15s}
 .pgb:hover:not(:disabled):not(.on){background:var(--surface2)}
-.pgb.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+.pgb.on{background:var(--focus-col);color:#fff;border-color:var(--focus-col)}
 .pgb:disabled{opacity:.3;cursor:default}
 .pg-inf{font-size:11px;color:var(--text3);padding:0 4px}
 .no-res{text-align:center;padding:2.5rem;color:var(--text3);font-size:13px}
-/* prob cell in table */
-.prob-cell{display:flex;align-items:center;gap:5px}
-.prob-fill{height:5px;border-radius:3px;min-width:2px;transition:width .3s}
+.prob-cell{display:flex;flex-direction:column;gap:2px}
+.prob-bar-row{display:flex;align-items:center;gap:5px}
+.prob-fill{height:5px;border-radius:3px;min-width:2px}
 .prob-pct{font-size:10px;font-weight:700;white-space:nowrap}
 
 /* ===== ANALYSIS TAB ===== */
 .analysis-wrap{padding:.875rem 1.25rem 1.25rem}
-/* tier strip */
 .tier-strip{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
-.tier-pill{flex:1;min-width:100px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.75rem .875rem;text-align:center;border-top:3px solid}
+.tier-pill{flex:1;min-width:90px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.75rem .875rem;text-align:center;border-top:3px solid}
 .tier-pill-n{font-size:28px;font-weight:800;line-height:1;letter-spacing:-1.5px}
-.tier-pill-lbl{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-top:4px;color:var(--text3)}
-/* histogram */
+.tier-pill-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-top:4px;color:var(--text3)}
 .dist-chart{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:1.25rem}
-.dist-chart-hdr{padding:.875rem 1rem .5rem;display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--border)}
+.dist-chart-hdr{padding:.875rem 1rem .5rem;display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:6px}
 .dist-chart-title{font-size:12px;font-weight:700;color:var(--text)}
 .dist-chart-sub{font-size:10px;color:var(--text3)}
 .dist-body{padding:.625rem 1rem}
 .dist-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
 .dist-range{font-size:10px;font-weight:600;color:var(--text3);width:56px;flex-shrink:0;text-align:right}
-.dist-bar-track{flex:1;height:20px;background:var(--surface2);border-radius:4px;overflow:hidden;position:relative}
+.dist-bar-track{flex:1;height:20px;background:var(--surface2);border-radius:4px;overflow:hidden}
 .dist-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:6px;min-width:0;transition:width .45s cubic-bezier(.4,0,.2,1)}
 .dist-bar span{font-size:10px;font-weight:700;color:rgba(255,255,255,.9);white-space:nowrap}
 .dist-count{font-size:10px;font-weight:700;color:var(--text2);width:24px;text-align:right;flex-shrink:0}
-/* seat lists */
 .prob-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);margin-bottom:1.25rem;overflow:hidden}
 .prob-section-hdr{padding:.875rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px}
 .prob-section-title{font-size:12px;font-weight:700;color:var(--text)}
@@ -271,7 +268,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .pr-bar-fill{height:100%;border-radius:3px;transition:width .4s}
 .pr-pct{font-size:11px;font-weight:700;width:38px;text-align:right;flex-shrink:0}
 .pr-tier{font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;flex-shrink:0;white-space:nowrap}
-.pr-proj{flex-shrink:0}
 
 /* ===== MODAL ===== */
 .modal-back{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;align-items:flex-start;justify-content:center;padding:2rem 1rem 1rem;overflow-y:auto;backdrop-filter:blur(4px)}
@@ -308,11 +304,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   .cbar-lbl{width:110px;font-size:10px}
   .tier-strip{flex-direction:row}
   .tier-pill{min-width:80px}
+  .focus-hint{display:none}
+  .tab-nav{top:85px}
 }
 @media(max-width:420px){
   .race-grid{grid-template-columns:1fr}
   .preset-row{grid-template-columns:1fr}
-  .tab-nav{top:49px}
 }
 </style>
 </head>
@@ -338,6 +335,26 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     </div>
   </div>
 </header>
+
+<!-- FOCUS / SIDE PICKER -->
+<div class="focus-bar">
+  <span class="focus-lbl">View from</span>
+  <div class="focus-grp">
+    <button class="fb on" data-focus="PH" onclick="setFocus('PH',this)">
+      <span class="fb-dot" style="background:#2563EB"></span>PH
+    </button>
+    <button class="fb" data-focus="PN" onclick="setFocus('PN',this)">
+      <span class="fb-dot" style="background:#7C3AED"></span>PN
+    </button>
+    <button class="fb" data-focus="BN" onclick="setFocus('BN',this)">
+      <span class="fb-dot" style="background:#D97706"></span>BN
+    </button>
+    <button class="fb" data-focus="GPS" onclick="setFocus('GPS',this)">
+      <span class="fb-dot" style="background:#059669"></span>GPS
+    </button>
+  </div>
+  <span class="focus-hint" id="focus-hint">Win % shows Pakatan Harapan · PKR · DAP · AMANAH</span>
+</div>
 
 <div id="err-banner" class="err-banner" style="display:none"><span>⚠</span><span id="err-text"></span></div>
 
@@ -418,22 +435,15 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:.75rem">Scenario</div>
       <div class="preset-row">
         <div class="pcard sel" data-scen="base" onclick="clickPreset('base')">
-          <div class="pcard-ico">📊</div>
-          <div class="pcard-lbl">Baseline</div>
-          <div class="pcard-prob">55% prob.</div>
+          <div class="pcard-ico">📊</div><div class="pcard-lbl">Baseline</div><div class="pcard-prob">55% prob.</div>
         </div>
         <div class="pcard" data-scen="best" onclick="clickPreset('best')">
-          <div class="pcard-ico">📈</div>
-          <div class="pcard-lbl">Best case</div>
-          <div class="pcard-prob">20% prob.</div>
+          <div class="pcard-ico">📈</div><div class="pcard-lbl">Best case</div><div class="pcard-prob">20% prob.</div>
         </div>
         <div class="pcard" data-scen="worst" onclick="clickPreset('worst')">
-          <div class="pcard-ico">📉</div>
-          <div class="pcard-lbl">Worst case</div>
-          <div class="pcard-prob">25% prob.</div>
+          <div class="pcard-ico">📉</div><div class="pcard-lbl">Worst case</div><div class="pcard-prob">25% prob.</div>
         </div>
       </div>
-
       <div class="ctrl-grid">
         <div class="ctrl-panel">
           <div class="ctrl-title">Turnout settings</div>
@@ -483,7 +493,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           </div>
         </div>
       </div>
-
       <div class="sec-lbl" style="padding:.875rem 0 .5rem">Live projection</div>
       <div class="ctrl-preview" id="ctrl-preview">
         <div class="loading"><div class="spinner"></div></div>
@@ -531,11 +540,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           <thead><tr>
             <th style="width:50px">Code</th>
             <th>Constituency</th>
-            <th style="width:64px">GE15</th>
-            <th style="width:64px">GE16 Proj.</th>
-            <th style="width:110px">PH Win %</th>
-            <th style="width:80px">Race mix</th>
-            <th style="width:46px">Youth</th>
+            <th style="width:62px">GE15</th>
+            <th style="width:62px">GE16 Proj.</th>
+            <th style="width:115px" id="win-hdr">PH Win %</th>
+            <th style="width:78px">Race mix</th>
+            <th style="width:44px">Youth</th>
           </tr></thead>
           <tbody id="seat-tbody"></tbody>
         </table>
@@ -578,12 +587,21 @@ var PS={
   'PN-PAS':'PAS','PN-BERSATU':'BSTU',
   'BN-UMNO':'UMNO','BN-MCA':'MCA',GPS:'GPS',WARISAN:'WAR'
 };
+var FOCUS_META={
+  PH:{col:'#2563EB',label:'Pakatan Harapan',hint:'Win % shows Pakatan Harapan · PKR · DAP · AMANAH'},
+  PN:{col:'#7C3AED',label:'Perikatan Nasional',hint:'Win % shows Perikatan Nasional · BERSATU · PAS'},
+  BN:{col:'#D97706',label:'Barisan Nasional',hint:'Win % shows Barisan Nasional · UMNO · MCA'},
+  GPS:{col:'#059669',label:'GPS',hint:'Win % shows Gabungan Parti Sarawak'}
+};
+
 function GC(g){return({PKR:'#2563EB',DAP:'#1D4ED8',AMANAH:'#1E40AF',BERSAMA:'#DC2626',PN:'#7C3AED',BN:'#D97706',GPS:'#059669',WARISAN:'#4B5563'})[g]||'#94A3B8';}
 
 var scen='base',yT=72,sT=78,mS=48,cS=78,iS=68,lS=45;
-var seatsPage=1,seatsTotal=0,seatsPages=1,selState='',curView='overview',curSort='';
+var seatsPage=1,seatsTotal=0,seatsPages=1,selState='',curView='overview',curSort='',curFocus='PH';
 
-function getParams(){return{scen:scen,yT:yT,sT:sT,mS:mS,cS:cS,iS:iS,lS:lS};}
+function getParams(){
+  return{scen:scen,yT:yT,sT:sT,mS:mS,cS:cS,iS:iS,lS:lS,coalition:curFocus};
+}
 
 async function api(body){
   var h={'Content-Type':'application/json'};
@@ -604,7 +622,7 @@ function showErr(msg){
 var debTimer=null;
 function debounce(fn,ms){clearTimeout(debTimer);debTimer=setTimeout(fn,ms||350);}
 
-/* ── Probability color helper ── */
+/* ── Probability colour (green → red) ── */
 function probColor(p){
   if(p>=0.80)return'#15803D';
   if(p>=0.65)return'#16A34A';
@@ -612,6 +630,11 @@ function probColor(p){
   if(p>=0.40)return'#D97706';
   if(p>=0.25)return'#EA580C';
   return'#DC2626';
+}
+
+/* ── Apply focus colour to CSS variable ── */
+function applyFocusColor(col){
+  document.documentElement.style.setProperty('--focus-col', col);
 }
 
 /* ── Parliament hemicycle ── */
@@ -770,17 +793,18 @@ async function loadAnalysis(){
 function renderAnalysis(d){
   var t=d.tiers,ac=document.getElementById('analysis-content');
   if(!ac)return;
+  var fm=FOCUS_META[curFocus]||FOCUS_META.PH;
+  var fc=fm.col;
+  var fn=fm.label;
 
-  /* tier strip */
   var strip='<div class="tier-strip">'
     +'<div class="tier-pill" style="border-top-color:#15803D"><div class="tier-pill-n" style="color:#15803D">'+t.stronghold+'</div><div class="tier-pill-lbl">Stronghold</div></div>'
     +'<div class="tier-pill" style="border-top-color:#16A34A"><div class="tier-pill-n" style="color:#16A34A">'+t.safe+'</div><div class="tier-pill-lbl">Safe</div></div>'
-    +'<div class="tier-pill" style="border-top-color:#CA8A04"><div class="tier-pill-n" style="color:#CA8A04">'+t.leaning+'</div><div class="tier-pill-lbl">Leaning PH</div></div>'
-    +'<div class="tier-pill" style="border-top-color:#EA580C"><div class="tier-pill-n" style="color:#EA580C">'+t.atRisk+'</div><div class="tier-pill-lbl">PH At Risk</div></div>'
-    +'<div class="tier-pill" style="border-top-color:#7C3AED"><div class="tier-pill-n" style="color:#7C3AED">'+t.flipOpps+'</div><div class="tier-pill-lbl">Flip Opps</div></div>'
+    +'<div class="tier-pill" style="border-top-color:#CA8A04"><div class="tier-pill-n" style="color:#CA8A04">'+t.leaning+'</div><div class="tier-pill-lbl">Leaning</div></div>'
+    +'<div class="tier-pill" style="border-top-color:#EA580C"><div class="tier-pill-n" style="color:#EA580C">'+t.atRisk+'</div><div class="tier-pill-lbl">At Risk</div></div>'
+    +'<div class="tier-pill" style="border-top-color:'+fc+'"><div class="tier-pill-n" style="color:'+fc+'">'+t.flipOpps+'</div><div class="tier-pill-lbl">Flip Opps</div></div>'
     +'</div>';
 
-  /* distribution histogram (highest decile first) */
   var maxCount=Math.max.apply(null,d.distribution.map(function(b){return b.count;}));
   var distRows=d.distribution.slice().reverse().map(function(b){
     var pct=maxCount>0?Math.round(b.count/maxCount*100):0;
@@ -792,42 +816,39 @@ function renderAnalysis(d){
       +'</div>';
   }).join('');
   var dist='<div class="dist-chart">'
-    +'<div class="dist-chart-hdr"><span class="dist-chart-title">PH Win Probability Distribution</span><span class="dist-chart-sub">avg '+Math.round(d.avgProb*100)+'% across '+d.total+' seats</span></div>'
+    +'<div class="dist-chart-hdr"><span class="dist-chart-title">'+fn+' Win Probability Distribution</span><span class="dist-chart-sub">avg '+Math.round(d.avgProb*100)+'% across '+d.total+' seats</span></div>'
     +'<div class="dist-body">'+distRows+'</div>'
     +'</div>';
 
   function probRow(s){
-    var pc=Math.round(s.phWinProb*100);
-    var col=probColor(s.phWinProb);
+    var pc=Math.round(s.winProb*100);
+    var col=probColor(s.winProb);
     var proj=s.projected||'';
     return '<div class="prob-row">'
       +'<div class="pr-main">'
       +'<div class="pr-nm">'+s.name+' <span style="font-size:10px;color:var(--text3)">'+s.code+'</span></div>'
-      +'<div class="pr-sub">'+s.state+' · GE15: <span style="font-weight:600">'+s.ge15+'</span></div>'
+      +'<div class="pr-sub">'+s.state+' · GE15: <strong>'+s.ge15+'</strong></div>'
       +'<div class="pr-bar-wrap"><div class="pr-bar-track"><div class="pr-bar-fill" style="width:'+pc+'%;background:'+col+'"></div></div></div>'
       +'</div>'
       +'<div class="pr-pct" style="color:'+col+'">'+pc+'%</div>'
       +'<div class="pr-tier" style="background:'+s.tierBg+';color:'+s.tierColor+'">'+s.tierLabel+'</div>'
-      +'<div class="pr-proj"><span class="pill" style="background:'+(COL[proj]||'#888')+'">'+((PS[proj])||proj)+'</span></div>'
+      +'<div><span class="pill" style="background:'+(COL[proj]||'#888')+'">'+((PS[proj])||proj)+'</span></div>'
       +'</div>';
   }
 
-  /* at-risk */
   var atRiskHTML='<div class="prob-section">'
-    +'<div class="prob-section-hdr"><span class="prob-section-title">PH Seats at Risk</span><span class="prob-section-sub">PH-projected with win% below 65% · '+d.atRisk.length+' seats</span></div>'
+    +'<div class="prob-section-hdr"><span class="prob-section-title">'+fn+' Seats at Risk</span><span class="prob-section-sub">Held seats with win% below 65% · '+d.atRisk.length+'</span></div>'
     +'<div class="prob-list">'+(d.atRisk.length?d.atRisk.map(probRow).join(''):'<div style="padding:1.5rem;text-align:center;color:var(--text3);font-size:12px">No at-risk seats under current settings</div>')+'</div>'
     +'</div>';
 
-  /* battleground */
   var bgHTML='<div class="prob-section">'
-    +'<div class="prob-section-hdr"><span class="prob-section-title">Battleground Seats</span><span class="prob-section-sub">All parties · win probability 38–65% · '+d.battleground.length+' seats</span></div>'
-    +'<div class="prob-list">'+(d.battleground.length?d.battleground.map(probRow).join(''):'<div style="padding:1.5rem;text-align:center;color:var(--text3);font-size:12px">No battleground seats under current settings</div>')+'</div>'
+    +'<div class="prob-section-hdr"><span class="prob-section-title">Battleground Seats</span><span class="prob-section-sub">All parties · win% 38–65% · '+d.battleground.length+'</span></div>'
+    +'<div class="prob-list">'+(d.battleground.length?d.battleground.map(probRow).join(''):'<div style="padding:1.5rem;text-align:center;color:var(--text3);font-size:12px">No battleground seats</div>')+'</div>'
     +'</div>';
 
-  /* flip opps */
   var flipHTML='<div class="prob-section">'
-    +'<div class="prob-section-hdr"><span class="prob-section-title">PH Flip Opportunities</span><span class="prob-section-sub">Non-PH seats with PH win% above 28% · '+d.flipOpps.length+' seats</span></div>'
-    +'<div class="prob-list">'+(d.flipOpps.length?d.flipOpps.map(probRow).join(''):'<div style="padding:1.5rem;text-align:center;color:var(--text3);font-size:12px">No flip opportunities under current settings</div>')+'</div>'
+    +'<div class="prob-section-hdr"><span class="prob-section-title">'+fn+' Flip Opportunities</span><span class="prob-section-sub">Non-'+curFocus+' seats with win% above 28% · '+d.flipOpps.length+'</span></div>'
+    +'<div class="prob-list">'+(d.flipOpps.length?d.flipOpps.map(probRow).join(''):'<div style="padding:1.5rem;text-align:center;color:var(--text3);font-size:12px">No flip opportunities</div>')+'</div>'
     +'</div>';
 
   ac.innerHTML=strip+dist+atRiskHTML+bgHTML+flipHTML;
@@ -876,16 +897,16 @@ function showStateDetail(st,d,t){
   document.getElementById('sd-coal').innerHTML=Object.entries(t).sort(function(a,b){return b[1]-a[1];}).map(function(kv){
     return '<span class="sd-coal-item" style="color:'+GC(kv[0])+'"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:'+GC(kv[0])+';margin-right:3px"></span>'+kv[0]+' <strong>'+kv[1]+'</strong></span>';
   }).join('');
+  var fm=FOCUS_META[curFocus]||FOCUS_META.PH;
   document.getElementById('sd-body').innerHTML=d.seats.map(function(s){
     var rb='<div class="rbar-sm"><div style="flex:'+s.melayu+';background:#2563EB;height:100%"></div><div style="flex:'+s.cina+';background:#DC2626;height:100%"></div><div style="flex:'+s.india+';background:#D97706;height:100%"></div><div style="flex:'+s.lain+';background:#4B5563;height:100%"></div></div>';
     var flip=s.ge15!==s.projected;
-    var pc=Math.round((s.phWinProb||0)*100);
-    var pcol=probColor(s.phWinProb||0);
+    var pc=Math.round((s.winProb||0)*100);
+    var pcol=probColor(s.winProb||0);
     return '<div class="drill-row" style="padding:7px 1rem;'+(flip?'background:rgba(220,38,38,.04)':'')+'">'
-      +'<div style="flex:1"><div class="dr-nm">'+s.name+' <span style="font-size:10px;color:var(--text3)">'+s.code+'</span>'+(flip?'<span class="flip-lbl">FLIP</span>':'')+'</div></div>'
-      +'<div style="display:flex;align-items:center;gap:8px">'
-      +'<span style="font-size:10px;font-weight:700;color:'+pcol+'">'+pc+'%</span>'
-      +rb
+      +'<div style="flex:1"><div class="dr-nm">'+s.name+' <span style="font-size:10px;color:var(--text3)">'+s.code+'</span>'+(flip?'<span class="flip-lbl">FLIP</span>':'')+'</div>'
+      +'<div style="font-size:9px;color:var(--text3);margin-top:1px">'+curFocus+' win: <span style="font-weight:700;color:'+pcol+'">'+pc+'%</span></div></div>'
+      +'<div style="display:flex;align-items:center;gap:8px">'+rb
       +'<span class="pill" style="background:'+(COL[s.projected]||'#888')+'">'+((PS[s.projected])||s.projected)+'</span></div></div>';
   }).join('');
 }
@@ -905,16 +926,19 @@ async function openRaceDrill(key){
   try{
     var d=await api({action:'race-drill',community:key});
     var rows=d.topSeats.map(function(s){
-      var pc=Math.round((s.phWinProb||0)*100);
-      var pcol=probColor(s.phWinProb||0);
+      var pc=Math.round((s.winProb||0)*100);
+      var pcol=probColor(s.winProb||0);
       return '<div class="drill-row"><div><div class="dr-nm">'+s.name+'</div><div class="dr-sub">'+s.code+' · '+s.state+'</div></div>'
         +'<div style="display:flex;align-items:center;gap:8px">'
         +'<div class="dr-pct">'+s.pct.toFixed(1)+'%</div>'
-        +'<span style="font-size:10px;font-weight:700;color:'+pcol+'">PH '+pc+'%</span>'
+        +'<span style="font-size:10px;font-weight:700;color:'+pcol+'">'+curFocus+' '+pc+'%</span>'
         +'<span class="pill" style="background:'+(COL[s.projected]||'#888')+'">'+((PS[s.projected])||s.projected)+'</span>'
         +'</div></div>';
     }).join('');
-    document.getElementById('modal-body').innerHTML='<div class="modal-sub">'+summaries[key]+'</div><div class="modal-sec">Top 10 highest-concentration constituencies</div>'+rows+'<div style="margin-top:1rem;font-size:11px;color:var(--text3)">Projections update with slider changes in Adjust Model.</div>';
+    document.getElementById('modal-body').innerHTML='<div class="modal-sub">'+summaries[key]+'</div>'
+      +'<div class="modal-sec">Top 10 highest-concentration constituencies</div>'
+      +rows
+      +'<div style="margin-top:1rem;font-size:11px;color:var(--text3)">Win % reflects '+curFocus+' perspective. Changes with slider and focus settings.</div>';
   }catch(e){showErr('Drill-down error: '+e.message);}
 }
 
@@ -931,20 +955,23 @@ async function loadSeats(){
     if(!d.seats.length){tb.innerHTML='';nr.style.display='block';}
     else{
       nr.style.display='none';
+      var fcol=FOCUS_META[curFocus].col;
       tb.innerHTML=d.seats.map(function(s){
         var rb='<div class="rbar-sm"><div style="flex:'+s.melayu+';background:#2563EB;height:100%"></div><div style="flex:'+s.cina+';background:#DC2626;height:100%"></div><div style="flex:'+s.india+';background:#D97706;height:100%"></div><div style="flex:'+s.lain+';background:#4B5563;height:100%"></div></div><div style="font-size:9px;color:'+s.raceCol+';margin-top:1px">'+s.raceLabel+'</div>';
         var yc=s.youth>=55?'#DC2626':s.youth>=48?'#D97706':'#16A34A';
         var flip=s.ge15!==s.projected;
-        var pc=Math.round((s.phWinProb||0)*100);
-        var pcol=probColor(s.phWinProb||0);
-        var probBar='<div class="prob-cell"><div class="prob-fill" style="width:'+pc+'%;background:'+pcol+';max-width:60px;height:5px;border-radius:3px"></div><span class="prob-pct" style="color:'+pcol+'">'+pc+'%</span></div>'
-          +'<div style="font-size:9px;padding:2px 5px;border-radius:10px;background:'+s.tierBg+';color:'+s.tierColor+';margin-top:2px;display:inline-block">'+s.tierLabel+'</div>';
+        var pc=Math.round((s.winProb||0)*100);
+        var pcol=probColor(s.winProb||0);
+        var probCell='<div class="prob-cell">'
+          +'<div class="prob-bar-row"><div class="prob-fill" style="width:'+pc+'%;background:'+pcol+';max-width:64px;height:5px;border-radius:3px"></div><span class="prob-pct" style="color:'+pcol+'">'+pc+'%</span></div>'
+          +'<div style="font-size:9px;padding:1px 5px;border-radius:8px;background:'+s.tierBg+';color:'+s.tierColor+';display:inline-block;margin-top:2px">'+s.tierLabel+'</div>'
+          +'</div>';
         return '<tr class="'+(flip?'flip-row':'')+'">'
           +'<td style="font-size:10px;color:var(--text3)">'+s.code+'</td>'
           +'<td><div class="seat-nm">'+s.name+(flip?'<span class="flip-lbl">FLIP</span>':'')+'</div><div class="seat-st">'+s.state+'</div></td>'
           +'<td><span class="pill" style="background:'+(COL[s.ge15]||'#888')+'">'+((PS[s.ge15])||s.ge15)+'</span></td>'
           +'<td><span class="pill" style="background:'+(COL[s.projected]||'#888')+'">'+((PS[s.projected])||s.projected)+'</span></td>'
-          +'<td>'+probBar+'</td>'
+          +'<td>'+probCell+'</td>'
           +'<td>'+rb+'</td>'
           +'<td><span style="font-size:10px;font-weight:700;padding:2px 6px;border-radius:20px;background:'+yc+'22;color:'+yc+'">'+s.youth+'%</span></td>'
           +'</tr>';
@@ -964,6 +991,19 @@ async function loadSeats(){
 }
 
 /* ── Event handlers ── */
+window.setFocus=function(f,el){
+  curFocus=f;
+  var fm=FOCUS_META[f]||FOCUS_META.PH;
+  document.querySelectorAll('.fb').forEach(function(b){b.classList.remove('on');});
+  el.classList.add('on');
+  applyFocusColor(fm.col);
+  var hint=document.getElementById('focus-hint');if(hint)hint.textContent=fm.hint;
+  var wh=document.getElementById('win-hdr');if(wh)wh.textContent=f+' Win %';
+  // refresh active views
+  if(curView==='analysis')loadAnalysis();
+  if(curView==='seats'){seatsPage=1;loadSeats();}
+  if(curView==='states'&&selState)loadStateDetail(selState);
+};
 window.setSort=function(s,el){
   curSort=s;
   document.querySelectorAll('.sort-btn').forEach(function(b){b.classList.remove('on');});

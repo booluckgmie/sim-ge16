@@ -9,6 +9,8 @@ const ALLOWED_ORIGINS = [
   'http://localhost:8888',
 ].filter(Boolean);
 
+const VALID_COALITIONS = ['PH', 'PN', 'BN', 'GPS'];
+
 function corsHeaders(origin) {
   const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
   return {
@@ -49,7 +51,7 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
-  const apiKey     = event.headers['x-api-key'] || '';
+  const apiKey      = event.headers['x-api-key'] || '';
   const expectedKey = process.env.API_SECRET_KEY;
   if (expectedKey && apiKey !== expectedKey) {
     return { statusCode: 401, headers, body: JSON.stringify({ error: 'Unauthorized' }) };
@@ -63,7 +65,8 @@ exports.handler = async (event) => {
   }
 
   const { action = 'summary', filters = {}, page = 1, pageSize = 25 } = body;
-  const params = validateParams(body);
+  const params    = validateParams(body);
+  const coalition = VALID_COALITIONS.includes(body.coalition) ? body.coalition : 'PH';
 
   try {
     let payload;
@@ -78,7 +81,7 @@ exports.handler = async (event) => {
         race:   typeof filters.race   === 'string' ? filters.race   : '',
         search: typeof filters.search === 'string' ? filters.search.slice(0, 100) : '',
         sortBy: ['prob-asc','prob-desc',''].includes(sortBy) ? sortBy : '',
-      });
+      }, coalition);
       const pg = Math.max(1, parseInt(page) || 1);
       const ps = Math.min(50, Math.max(1, parseInt(pageSize) || 25));
       payload = {
@@ -89,10 +92,10 @@ exports.handler = async (event) => {
 
     } else if (action === 'race-drill') {
       const idx = { m: 0, c: 1, i: 2, l: 3 }[body.community] ?? 0;
-      payload = { topSeats: getTopByRace(params, idx, 10) };
+      payload = { topSeats: getTopByRace(params, idx, 10, coalition) };
 
     } else if (action === 'seat-analysis') {
-      payload = getSeatAnalysis(params);
+      payload = getSeatAnalysis(params, coalition);
 
     } else {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Unknown action' }) };
