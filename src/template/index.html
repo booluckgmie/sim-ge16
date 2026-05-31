@@ -671,12 +671,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           </div>
           <!-- BERSAMA -->
           <div style="margin-bottom:.875rem">
-            <div style="font-size:10px;font-weight:700;color:#DC2626;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">BERSAMA — Separate New Party (PH-allied)</div>
+            <div style="font-size:10px;font-weight:700;color:#DC2626;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">BERSAMA — New Party (est. May 2026)</div>
             <div class="party-block">
               <div class="party-swatch" style="background:#DC2626"></div>
               <div>
-                <div class="party-info-nm">BERSAMA<span class="party-note pn-sep">NOT part of PH</span></div>
-                <div class="party-info-sub">A new political party that contests under its own banner but cooperates with PH for government formation. BERSAMA seats count separately from PH in all projections and party tallies. In coalition math, PH + BERSAMA seats are combined to estimate government-formation potential, but they are always displayed as distinct.</div>
+                <div class="party-info-nm">BERSAMA<span class="party-note pn-sep">New · Independent</span></div>
+                <div class="party-info-sub">A newly established Malaysian political party, announced May 2026. BERSAMA is an independent party — it is not a member of PH, PN, BN, or GPS. Its seats are counted separately in all projections and party tallies. Coalition alignment and government-formation stance are yet to be formally declared.</div>
               </div>
             </div>
           </div>
@@ -845,7 +845,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
             <div class="abbr-row"><div class="abbr-code">PN</div><div class="abbr-def">Perikatan Nasional — National Alliance (BERSATU + PAS)</div></div>
             <div class="abbr-row"><div class="abbr-code">BN</div><div class="abbr-def">Barisan Nasional — National Front (UMNO + MCA + others)</div></div>
             <div class="abbr-row"><div class="abbr-code">GPS</div><div class="abbr-def">Gabungan Parti Sarawak — Sarawak Parties Alliance (Sarawak bloc)</div></div>
-            <div class="abbr-row"><div class="abbr-code">BSMA / BERSAMA</div><div class="abbr-def">New independent party. PH-allied for government formation but not a PH member party</div></div>
+            <div class="abbr-row"><div class="abbr-code">BSMA / BERSAMA</div><div class="abbr-def">Newly established independent party (announced May 2026). Not a member of any existing coalition.</div></div>
             <div class="abbr-row"><div class="abbr-code">PKR</div><div class="abbr-def">Parti Keadilan Rakyat — People's Justice Party</div></div>
             <div class="abbr-row"><div class="abbr-code">DAP</div><div class="abbr-def">Democratic Action Party</div></div>
             <div class="abbr-row"><div class="abbr-code">AMN / AMANAH</div><div class="abbr-def">Parti Amanah Negara — National Trust Party</div></div>
@@ -1038,7 +1038,7 @@ function renderSummary(d){
   }
   document.getElementById('coal-row').innerHTML=[
     {lbl:'Pakatan Harapan',n:ph, sub:'PKR&nbsp;'+p.PKR+' &middot; DAP&nbsp;'+p.DAP+' &middot; AMN&nbsp;'+p.AMANAH,                         ref:ref.ph,  col:'#2563EB', note:null},
-    {lbl:'BERSAMA',        n:bm, sub:'PH-allied &middot; <em>separate party</em>',                                                            ref:ref.bm,  col:'#DC2626', note:'new party'},
+    {lbl:'BERSAMA',        n:bm, sub:'New party (est. May 2026) &middot; <em>independent</em>',                                               ref:ref.bm,  col:'#DC2626', note:'new party'},
     {lbl:'Perikatan Nasional',n:pn,sub:'BSTU&nbsp;'+p['PN-BERSATU']+' &middot; PAS&nbsp;'+p['PN-PAS'],                                      ref:ref.pn,  col:'#7C3AED', note:null},
     {lbl:'Barisan Nasional',n:bn, sub:'UMNO&nbsp;'+p['BN-UMNO']+' &middot; MCA&nbsp;'+p['BN-MCA'],                                          ref:ref.bn,  col:'#D97706', note:null},
     {lbl:'GPS',            n:gps,sub:'Gabungan Parti Sarawak',                                                                                ref:ref.gps, col:'#059669', note:null},
@@ -1068,7 +1068,7 @@ function renderSummary(d){
   }
   document.getElementById('scoreboard').innerHTML=[
     {lbl:'Pakatan Harapan',   dot:'#2563EB',n:ph, r:ref.ph},
-    {lbl:'BERSAMA (ally)',    dot:'#DC2626',n:bm, r:ref.bm, note:'new party'},
+    {lbl:'BERSAMA',          dot:'#DC2626',n:bm, r:ref.bm, note:'new party · independent'},
     {lbl:'Perikatan Nasional',dot:'#7C3AED',n:pn, r:ref.pn},
     {lbl:'Barisan Nasional',  dot:'#D97706',n:bn, r:ref.bn},
     {lbl:'GPS',               dot:'#059669',n:gps,r:ref.gps},
