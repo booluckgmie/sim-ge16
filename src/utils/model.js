@@ -317,16 +317,16 @@ function getSummary(params) {
   let verdictType, verdictText;
   if (phBloc + gps >= 112) {
     verdictType = 'ok';
-    verdictText = `PH + GPS bloc totals ${phBloc + gps} seats — majority secured (need 112 of 222)`;
+    verdictText = `PH ${ph} + BERSAMA ${bm} + GPS ${gps} = ${phBloc + gps} seats — government majority secured (112 needed)`;
   } else if (phBloc >= 112) {
     verdictType = 'ok';
-    verdictText = `PH bloc alone at ${phBloc} — majority. GPS adds governing stability.`;
+    verdictText = `PH ${ph} + BERSAMA ${bm} = ${phBloc} — bloc majority without GPS. GPS adds stability.`;
   } else if (opp + gps >= 112) {
     verdictType = 'no';
-    verdictText = `PN+BN+GPS reach ${opp + gps} — opposition can form government`;
+    verdictText = `PN+BN ${opp} + GPS ${gps} = ${opp + gps} — opposition bloc can form government`;
   } else {
     verdictType = 'warn';
-    verdictText = `Hung parliament — PH bloc ${phBloc} · PN+BN ${opp} · GPS (${gps}) is kingmaker`;
+    verdictText = `Hung parliament — PH+BERSAMA ${phBloc} · PN+BN ${opp} · GPS (${gps}) is kingmaker`;
   }
 
   // Per-state projected winner breakdown — party-level, returned with summary (no extra API call)

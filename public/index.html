@@ -308,8 +308,50 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .spinner{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* ===== METHODOLOGY TAB ===== */
+.method-wrap{padding:.875rem 1.25rem 2rem}
+.method-intro{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:1.5rem;padding:.875rem 1rem;background:var(--surface2);border-left:3px solid var(--blue);border-radius:0 var(--r-sm) var(--r-sm) 0}
+.method-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.method-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.method-card.full{grid-column:1/-1}
+.method-card-hdr{padding:.75rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.method-card-ico{font-size:15px}
+.method-card-title{font-size:12px;font-weight:700;color:var(--text)}
+.method-card-body{padding:.875rem 1rem}
+.method-p{font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:.625rem}
+.method-p:last-child{margin-bottom:0}
+.method-tag{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:2px 7px;border-radius:20px;margin-right:4px;margin-bottom:4px}
+.method-hl{background:rgba(37,99,235,.08);color:var(--blue);border:1px solid rgba(37,99,235,.2);border-radius:var(--r-sm);padding:.5rem .75rem;font-size:11px;line-height:1.6;margin:.5rem 0}
+.abbr-grid{display:grid;grid-template-columns:auto 1fr;gap:0}
+.abbr-row{display:contents}
+.abbr-row:nth-child(odd) .abbr-code,.abbr-row:nth-child(odd) .abbr-def{background:var(--surface2)}
+.abbr-code{padding:7px 10px;font-size:11px;font-weight:700;color:var(--text);border-bottom:1px solid var(--border);font-family:monospace;white-space:nowrap}
+.abbr-def{padding:7px 10px;font-size:11px;color:var(--text2);border-bottom:1px solid var(--border);line-height:1.4}
+.abbr-row:last-child .abbr-code,.abbr-row:last-child .abbr-def{border-bottom:none}
+.tier-table{width:100%;border-collapse:collapse;font-size:11px}
+.tier-table th{padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--border);background:var(--surface2)}
+.tier-table td{padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
+.tier-table tr:last-child td{border-bottom:none}
+.tier-pill-sm{display:inline-block;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;color:#fff;white-space:nowrap}
+.party-block{display:flex;align-items:flex-start;gap:8px;padding:.5rem 0;border-bottom:1px solid var(--border)}
+.party-block:last-child{border-bottom:none}
+.party-swatch{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:2px}
+.party-info-nm{font-size:12px;font-weight:600;color:var(--text)}
+.party-info-sub{font-size:11px;color:var(--text2);line-height:1.5;margin-top:1px}
+.party-note{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;padding:1px 6px;border-radius:10px;margin-left:5px;vertical-align:middle}
+.pn-ph{background:rgba(37,99,235,.12);color:#2563EB}
+.pn-sep{background:rgba(220,38,38,.12);color:#DC2626}
+.pn-opp{background:rgba(124,58,237,.12);color:#7C3AED}
+.pn-gps{background:rgba(5,150,105,.12);color:#059669}
+.view-from-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:.875rem 1rem;margin:.625rem 0}
+.vfb-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:.5rem}
+.vfb-row:last-child{margin-bottom:0}
+.vfb-ico{font-size:14px;flex-shrink:0;margin-top:1px}
+.vfb-txt{font-size:12px;color:var(--text2);line-height:1.6}
+.vfb-em{font-weight:600;color:var(--text)}
 /* ===== RESPONSIVE ===== */
 @media(max-width:640px){
+  .method-grid{grid-template-columns:1fr}
   .ctrl-grid{grid-template-columns:1fr}
   .ctrl-panel:first-child{border-right:none;border-bottom:1px solid var(--border)}
   .race-grid{grid-template-columns:1fr 1fr}
@@ -346,7 +388,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <button class="sb sb-worst" onclick="setScen('worst',this)">Worst <span style="opacity:.5;font-size:10px">25%</span></button>
     </div>
     <div class="live-count">
-      <div class="lc-label">PH Bloc</div>
+      <div class="lc-label">PH+BRSM</div>
       <div class="lc-num" id="lc-num">—</div>
       <div class="lc-sub">of 112 needed</div>
     </div>
@@ -409,6 +451,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   <button class="tn" onclick="switchTab('controls',this)"><span class="tn-ico">🎛</span>Adjust Model</button>
   <button class="tn" onclick="switchTab('states',this)"><span class="tn-ico">🗺</span>By State</button>
   <button class="tn" onclick="switchTab('seats',this)"><span class="tn-ico">📋</span>All 222 Seats</button>
+  <button class="tn" onclick="switchTab('method',this)"><span class="tn-ico">📖</span>Methodology</button>
 </nav>
 
 <div class="tab-content">
@@ -595,6 +638,234 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     </div>
   </div>
 
+  <!-- TAB: METHODOLOGY -->
+  <div class="vp" id="tab-method">
+    <div class="method-wrap">
+      <div class="method-intro">
+        This simulation estimates GE16 (Malaysia's 16th General Election) seat outcomes for all 222 parliamentary constituencies, using SPR-registered voter demographics, race-adjusted turnout models, and per-seat win probabilities calibrated against GE15 actual results. All model logic runs server-side — the browser receives only computed projections.
+      </div>
+
+      <!-- Parties & Coalitions -->
+      <div class="method-card full" style="margin-bottom:1rem">
+        <div class="method-card-hdr">
+          <span class="method-card-ico">🏛</span>
+          <span class="method-card-title">Coalitions &amp; Parties</span>
+        </div>
+        <div class="method-card-body">
+          <p class="method-p" style="margin-bottom:.875rem;font-size:11px;color:var(--text3)">Each seat is projected to a single winning party. Coalition totals are the sum of their member parties' seats.</p>
+          <!-- PH -->
+          <div style="margin-bottom:.875rem">
+            <div style="font-size:10px;font-weight:700;color:#2563EB;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">Pakatan Harapan (PH) — Current Federal Government</div>
+            <div class="party-block">
+              <div class="party-swatch" style="background:#2563EB"></div>
+              <div><div class="party-info-nm">PKR <span style="font-weight:400;color:var(--text3)">— Parti Keadilan Rakyat</span><span class="party-note pn-ph">PH</span></div><div class="party-info-sub">People's Justice Party. Multi-racial, centrist. Led by Anwar Ibrahim (Prime Minister).</div></div>
+            </div>
+            <div class="party-block">
+              <div class="party-swatch" style="background:#1D4ED8"></div>
+              <div><div class="party-info-nm">DAP <span style="font-weight:400;color:var(--text3)">— Democratic Action Party</span><span class="party-note pn-ph">PH</span></div><div class="party-info-sub">Centre-left, predominantly Chinese-supported. Strongest in urban and Chinese-majority seats.</div></div>
+            </div>
+            <div class="party-block">
+              <div class="party-swatch" style="background:#1E40AF"></div>
+              <div><div class="party-info-nm">AMANAH <span style="font-weight:400;color:var(--text3)">— Parti Amanah Negara</span><span class="party-note pn-ph">PH</span></div><div class="party-info-sub">Progressive Islamic party. Malay-Muslim voter base, moderate stance.</div></div>
+            </div>
+          </div>
+          <!-- BERSAMA -->
+          <div style="margin-bottom:.875rem">
+            <div style="font-size:10px;font-weight:700;color:#DC2626;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">BERSAMA — Separate New Party (PH-allied)</div>
+            <div class="party-block">
+              <div class="party-swatch" style="background:#DC2626"></div>
+              <div>
+                <div class="party-info-nm">BERSAMA<span class="party-note pn-sep">NOT part of PH</span></div>
+                <div class="party-info-sub">A new political party that contests under its own banner but cooperates with PH for government formation. BERSAMA seats count separately from PH in all projections and party tallies. In coalition math, PH + BERSAMA seats are combined to estimate government-formation potential, but they are always displayed as distinct.</div>
+              </div>
+            </div>
+          </div>
+          <!-- PN -->
+          <div style="margin-bottom:.875rem">
+            <div style="font-size:10px;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">Perikatan Nasional (PN) — Main Opposition</div>
+            <div class="party-block">
+              <div class="party-swatch" style="background:#7C3AED"></div>
+              <div><div class="party-info-nm">BERSATU <span style="font-weight:400;color:var(--text3)">— Parti Pribumi Bersatu Malaysia</span><span class="party-note pn-opp">PN</span></div><div class="party-info-sub">Malay nationalist party. Dominant in northern Peninsula states and rural Malay belts.</div></div>
+            </div>
+            <div class="party-block">
+              <div class="party-swatch" style="background:#8B5CF6"></div>
+              <div><div class="party-info-nm">PAS <span style="font-weight:400;color:var(--text3)">— Parti Islam Se-Malaysia</span><span class="party-note pn-opp">PN</span></div><div class="party-info-sub">Pan-Malaysian Islamic Party. Strongest in Kelantan, Terengganu, and Kedah. High rural Malay turnout advantage.</div></div>
+            </div>
+          </div>
+          <!-- BN -->
+          <div style="margin-bottom:.875rem">
+            <div style="font-size:10px;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">Barisan Nasional (BN)</div>
+            <div class="party-block">
+              <div class="party-swatch" style="background:#D97706"></div>
+              <div><div class="party-info-nm">UMNO <span style="font-weight:400;color:var(--text3)">— United Malays National Organisation</span><span class="party-note" style="background:rgba(217,119,6,.12);color:#D97706">BN</span></div><div class="party-info-sub">Historic ruling party. Recovering from GE14/GE15 losses. Malay-based, centrist-nationalist.</div></div>
+            </div>
+            <div class="party-block">
+              <div class="party-swatch" style="background:#B45309"></div>
+              <div><div class="party-info-nm">MCA <span style="font-weight:400;color:var(--text3)">— Malaysian Chinese Association</span><span class="party-note" style="background:rgba(217,119,6,.12);color:#D97706">BN</span></div><div class="party-info-sub">Chinese-based component of BN. Significantly weakened after GE14 and GE15; contests only a handful of seats.</div></div>
+            </div>
+          </div>
+          <!-- GPS & WARISAN -->
+          <div>
+            <div style="font-size:10px;font-weight:700;color:#059669;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">GPS &amp; WARISAN — East Malaysia Blocs</div>
+            <div class="party-block">
+              <div class="party-swatch" style="background:#059669"></div>
+              <div><div class="party-info-nm">GPS <span style="font-weight:400;color:var(--text3)">— Gabungan Parti Sarawak</span><span class="party-note pn-gps">GPS</span></div><div class="party-info-sub">Sarawak state coalition. Controls all 31 Sarawak federal seats. Acts as a kingmaker — typically allies with the federal government for cabinet access.</div></div>
+            </div>
+            <div class="party-block">
+              <div class="party-swatch" style="background:#4B5563"></div>
+              <div><div class="party-info-nm">WARISAN <span style="font-weight:400;color:var(--text3)">— Parti Warisan Sabah</span><span class="party-note" style="background:rgba(75,85,99,.12);color:#4B5563">Sabah</span></div><div class="party-info-sub">Sabah-based multiracial party. Contests Sabah seats. Currently government-allied.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="method-grid">
+
+        <!-- View from -->
+        <div class="method-card full">
+          <div class="method-card-hdr">
+            <span class="method-card-ico">👁</span>
+            <span class="method-card-title">"View from" — what it changes and what it doesn't</span>
+          </div>
+          <div class="method-card-body">
+            <p class="method-p">The <strong>"View from"</strong> selector (PH / PN / BN / GPS) in the bar below the header controls whose <em>win probability</em> is displayed in the Analysis tab and the All 222 Seats table. It does <strong>not</strong> change which party is projected to win any seat.</p>
+            <div class="view-from-box">
+              <div class="vfb-row">
+                <span class="vfb-ico">📊</span>
+                <span class="vfb-txt"><span class="vfb-em">Seat projections (GE16 Proj. column)</span> always show the most-likely winner based on the current slider settings — unchanged by "View from".</span>
+              </div>
+              <div class="vfb-row">
+                <span class="vfb-ico">📈</span>
+                <span class="vfb-txt"><span class="vfb-em">Win % column</span> changes based on your "View from" selection. Selecting PH shows the probability that PKR / DAP / AMANAH collectively win each seat. Selecting PN shows BERSATU / PAS win probability, and so on.</span>
+              </div>
+              <div class="vfb-row">
+                <span class="vfb-ico">🔍</span>
+                <span class="vfb-txt"><span class="vfb-em">Analysis tab tiers</span> (Stronghold, At-Risk, Flip Opportunities) are also from the selected coalition's perspective. "At-Risk" means seats that coalition currently holds but may lose. "Flip Opportunity" means seats it doesn't hold but could win.</span>
+              </div>
+              <div class="vfb-row">
+                <span class="vfb-ico">✦</span>
+                <span class="vfb-txt"><span class="vfb-em">AI Synthesis</span> narrative is generated from the selected coalition's perspective and changes when you switch "View from".</span>
+              </div>
+            </div>
+            <p class="method-p" style="margin-top:.5rem">Example: If P001 Padang Besar is projected to be won by PN, its PH win % might show 18% (unlikely for PH), but its PN win % would show ~85% (stronghold for PN).</p>
+          </div>
+        </div>
+
+        <!-- Probability tiers -->
+        <div class="method-card full">
+          <div class="method-card-hdr">
+            <span class="method-card-ico">🎯</span>
+            <span class="method-card-title">Win probability tiers</span>
+          </div>
+          <div class="method-card-body">
+            <p class="method-p" style="margin-bottom:.875rem">Every seat is categorised into one of six tiers based on the selected coalition's win probability for that seat.</p>
+            <table class="tier-table">
+              <thead><tr><th>Tier</th><th>Win probability</th><th>Meaning</th></tr></thead>
+              <tbody>
+                <tr><td><span class="tier-pill-sm" style="background:#15803D">Stronghold</span></td><td>≥ 80%</td><td>Coalition very likely retains or takes this seat</td></tr>
+                <tr><td><span class="tier-pill-sm" style="background:#4ADE80;color:#052E16">Safe</span></td><td>65 – 79%</td><td>Comfortable but not impregnable margin</td></tr>
+                <tr><td><span class="tier-pill-sm" style="background:#84CC16;color:#1A2E05">Leaning</span></td><td>50 – 64%</td><td>Coalition is favourite but the seat could flip</td></tr>
+                <tr><td><span class="tier-pill-sm" style="background:#F59E0B;color:#1C1917">Battleground</span></td><td>40 – 49%</td><td>Too close to call — result could go either way</td></tr>
+                <tr><td><span class="tier-pill-sm" style="background:#F87171;color:#1C1917">Lean Away</span></td><td>25 – 39%</td><td>Rival coalition is favoured; potential flip opportunity</td></tr>
+                <tr><td><span class="tier-pill-sm" style="background:#DC2626">Unlikely</span></td><td>&lt; 25%</td><td>Coalition very unlikely to win this seat</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Scenarios -->
+        <div class="method-card">
+          <div class="method-card-hdr">
+            <span class="method-card-ico">📊</span>
+            <span class="method-card-title">Scenarios</span>
+          </div>
+          <div class="method-card-body">
+            <div class="party-block">
+              <div><div class="party-info-nm">📊 Baseline <span class="party-note pn-ph">55% probability</span></div><div class="party-info-sub">Default sliders: Youth 72%, Senior 78%, Malay 48%, Chinese 78%, Indian 68%, Other 45%. Represents the most-likely GE16 outcome based on current polling trends.</div></div>
+            </div>
+            <div class="party-block">
+              <div><div class="party-info-nm">📈 Best case <span class="party-note pn-gps">20% probability</span></div><div class="party-info-sub">Higher PH-friendly turnout and stronger multi-racial support. Youth turnout rises, Malay swing toward PH widens. Corresponds to a wave election for the incumbent.</div></div>
+            </div>
+            <div class="party-block">
+              <div><div class="party-info-nm">📉 Worst case <span class="party-note pn-sep">25% probability</span></div><div class="party-info-sub">PH support erodes — lower youth turnout, reduced non-Malay support, stronger rural consolidation for PN. Reflects a mid-term backlash scenario.</div></div>
+            </div>
+            <p class="method-p" style="margin-top:.625rem;font-size:11px;color:var(--text3)">Probabilities are illustrative analyst estimates, not statistical forecasts. You can fine-tune every slider independently.</p>
+          </div>
+        </div>
+
+        <!-- Sliders -->
+        <div class="method-card">
+          <div class="method-card-hdr">
+            <span class="method-card-ico">🎛</span>
+            <span class="method-card-title">Slider parameters</span>
+          </div>
+          <div class="method-card-body">
+            <div class="party-block">
+              <div><div class="party-info-nm">Youth turnout 18–39 <span style="font-weight:400;color:var(--text3)">(40–95%)</span></div><div class="party-info-sub">Share of registered voters aged 18–39 who cast a ballot. Higher youth turnout disproportionately benefits urban and multi-racial seats, which lean PH.</div></div>
+            </div>
+            <div class="party-block">
+              <div><div class="party-info-nm">Senior turnout 40+ <span style="font-weight:400;color:var(--text3)">(50–95%)</span></div><div class="party-info-sub">Share of voters aged 40 and above. Older voters skew more rural and Malay-conservative, benefiting PN in many seats.</div></div>
+            </div>
+            <div class="party-block">
+              <div><div class="party-info-nm">Race sentiment sliders <span style="font-weight:400;color:var(--text3)">(0–100%)</span></div><div class="party-info-sub">Estimated share of each community (Melayu, Cina, India, Lain-lain) that votes for PH parties. The model converts these into per-seat swing values based on each seat's actual racial composition (SPR data).</div></div>
+            </div>
+            <div class="method-hl">The "Overall PH sentiment" master slider scales all four race sliders proportionally for quick exploration.</div>
+          </div>
+        </div>
+
+      </div><!-- /method-grid -->
+
+      <!-- Model methodology -->
+      <div class="method-card full" style="margin-bottom:1rem">
+        <div class="method-card-hdr">
+          <span class="method-card-ico">⚙️</span>
+          <span class="method-card-title">How the model works</span>
+        </div>
+        <div class="method-card-body">
+          <p class="method-p"><strong>Step 1 — Demographic swing.</strong> For each of the 222 seats the model computes a weighted-average PH support rate (<em>bPH</em>) using that seat's actual racial breakdown from SPR voter rolls. The difference from a 50% neutral baseline gives a net swing value (<em>tot</em>), adjusted for the relative turnout of youth vs. senior voters in that seat.</p>
+          <p class="method-p"><strong>Step 2 — Sigmoid win probability.</strong> The swing value is mapped to a win probability via a sigmoid (logistic) function. The inflection point (<em>center</em>) of the sigmoid is calibrated using GE15 actual vote-share margins for each seat, so historically safe seats require a larger swing to reach 50/50. The slope parameter <em>k = 18</em> controls how sharply probability changes around the inflection point.</p>
+          <p class="method-p"><strong>Step 3 — GE15 calibration.</strong> For PH-held seats, the GE15 majority percentage anchors the sigmoid center — a larger margin means PH needs a bigger negative swing before probability drops below 50%. For PN/BN-held seats the PH-to-incumbent vote gap sets how hard a flip would be. GPS seats in Sarawak use a fixed high-margin anchor reflecting their structural dominance.</p>
+          <p class="method-p"><strong>Step 4 — Projection.</strong> The party with the highest model win probability (across the realistic contenders for that seat) is assigned as the GE16 projected winner. Seat totals are aggregated nationally and by state.</p>
+          <div class="method-hl">This is a <strong>simulation model</strong>, not an opinion poll. It answers "what happens if these turnout and support assumptions hold?" — not "what will voters actually do?" Treat projections as scenario analysis, not predictions.</div>
+        </div>
+      </div>
+
+      <!-- Abbreviations -->
+      <div class="method-card full">
+        <div class="method-card-hdr">
+          <span class="method-card-ico">🔤</span>
+          <span class="method-card-title">Abbreviations &amp; terms</span>
+        </div>
+        <div class="method-card-body" style="padding:0">
+          <div class="abbr-grid">
+            <div class="abbr-row"><div class="abbr-code">GE15</div><div class="abbr-def">Malaysia's 15th General Election, held November 2022</div></div>
+            <div class="abbr-row"><div class="abbr-code">GE16</div><div class="abbr-def">Malaysia's upcoming 16th General Election (simulated in this platform)</div></div>
+            <div class="abbr-row"><div class="abbr-code">SPR</div><div class="abbr-def">Suruhanjaya Pilihan Raya — Election Commission of Malaysia</div></div>
+            <div class="abbr-row"><div class="abbr-code">PH</div><div class="abbr-def">Pakatan Harapan — Hope Coalition (PKR + DAP + AMANAH)</div></div>
+            <div class="abbr-row"><div class="abbr-code">PN</div><div class="abbr-def">Perikatan Nasional — National Alliance (BERSATU + PAS)</div></div>
+            <div class="abbr-row"><div class="abbr-code">BN</div><div class="abbr-def">Barisan Nasional — National Front (UMNO + MCA + others)</div></div>
+            <div class="abbr-row"><div class="abbr-code">GPS</div><div class="abbr-def">Gabungan Parti Sarawak — Sarawak Parties Alliance (Sarawak bloc)</div></div>
+            <div class="abbr-row"><div class="abbr-code">BSMA / BERSAMA</div><div class="abbr-def">New independent party. PH-allied for government formation but not a PH member party</div></div>
+            <div class="abbr-row"><div class="abbr-code">PKR</div><div class="abbr-def">Parti Keadilan Rakyat — People's Justice Party</div></div>
+            <div class="abbr-row"><div class="abbr-code">DAP</div><div class="abbr-def">Democratic Action Party</div></div>
+            <div class="abbr-row"><div class="abbr-code">AMN / AMANAH</div><div class="abbr-def">Parti Amanah Negara — National Trust Party</div></div>
+            <div class="abbr-row"><div class="abbr-code">BSTU / BERSATU</div><div class="abbr-def">Parti Pribumi Bersatu Malaysia — Malaysian United Indigenous Party</div></div>
+            <div class="abbr-row"><div class="abbr-code">PAS</div><div class="abbr-def">Parti Islam Se-Malaysia — Pan-Malaysian Islamic Party</div></div>
+            <div class="abbr-row"><div class="abbr-code">UMNO</div><div class="abbr-def">United Malays National Organisation</div></div>
+            <div class="abbr-row"><div class="abbr-code">MCA</div><div class="abbr-def">Malaysian Chinese Association</div></div>
+            <div class="abbr-row"><div class="abbr-code">WAR / WARISAN</div><div class="abbr-def">Parti Warisan Sabah — Heritage Party of Sabah</div></div>
+            <div class="abbr-row"><div class="abbr-code">Parlimen / P###</div><div class="abbr-def">Federal parliamentary constituency code (e.g. P001 = Padang Besar, Perlis)</div></div>
+            <div class="abbr-row"><div class="abbr-code">Majority %</div><div class="abbr-def">Winning margin as a percentage of valid votes cast in GE15</div></div>
+            <div class="abbr-row"><div class="abbr-code">Youth</div><div class="abbr-def">Voters registered aged 18–39 (includes Undi18 cohort registered from 2021)</div></div>
+            <div class="abbr-row"><div class="abbr-code">Lain-lain</div><div class="abbr-def">Other — non-Malay, non-Chinese, non-Indian voters (includes Orang Asli, Sabah/Sarawak indigenous communities, others)</div></div>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size:10px;color:var(--text4);text-align:center;margin-top:1.5rem">Data sources: SPR voter roll demographics · GE15 official results (Thevesh/paper-meco-results) · Analyst scenario estimates</p>
+    </div>
+  </div>
+
 </div><!-- /tab-content -->
 </div><!-- /app -->
 
@@ -629,10 +900,10 @@ var PS={
   'BN-UMNO':'UMNO','BN-MCA':'MCA',GPS:'GPS',WARISAN:'WAR'
 };
 var FOCUS_META={
-  PH:{col:'#2563EB',label:'Pakatan Harapan',hint:'Win % shows Pakatan Harapan · PKR · DAP · AMANAH'},
-  PN:{col:'#7C3AED',label:'Perikatan Nasional',hint:'Win % shows Perikatan Nasional · BERSATU · PAS'},
-  BN:{col:'#D97706',label:'Barisan Nasional',hint:'Win % shows Barisan Nasional · UMNO · MCA'},
-  GPS:{col:'#059669',label:'GPS',hint:'Win % shows Gabungan Parti Sarawak'}
+  PH:{col:'#2563EB',label:'Pakatan Harapan',hint:'Win % = probability PKR · DAP · AMANAH wins each seat — seat projections unchanged'},
+  PN:{col:'#7C3AED',label:'Perikatan Nasional',hint:'Win % = probability BERSATU · PAS wins each seat — seat projections unchanged'},
+  BN:{col:'#D97706',label:'Barisan Nasional',hint:'Win % = probability UMNO · MCA wins each seat — seat projections unchanged'},
+  GPS:{col:'#059669',label:'GPS',hint:'Win % = probability GPS (Sarawak) wins each seat — seat projections unchanged'}
 };
 
 function GC(g){return({PKR:'#2563EB',DAP:'#1D4ED8',AMANAH:'#1E40AF',BERSAMA:'#DC2626',PN:'#7C3AED',BN:'#D97706',GPS:'#059669',WARISAN:'#4B5563'})[g]||'#94A3B8';}
@@ -745,7 +1016,7 @@ function renderSummary(d){
   if(lcEl){lcEl.textContent=phB;lcEl.style.color=phB>=112?'#4ADE80':phB>=100?'#FCD34D':'#F87171';}
 
   var piEl=document.getElementById('parl-info');
-  if(piEl)piEl.textContent='PH '+phB+' · PN '+pn+' · BN '+bn+' · GPS '+gps;
+  if(piEl)piEl.textContent='PH '+ph+' · BRSM '+bm+' · PN '+pn+' · BN '+bn+' · GPS '+gps;
 
   document.getElementById('parl-arc').innerHTML=buildParliament({ph:ph,bm:bm,pn:pn,bn:bn,gps:gps,war:war});
 
@@ -754,17 +1025,26 @@ function renderSummary(d){
   document.getElementById('verdict').innerHTML='<div class="verdict '+vCls+'"><div class="v-icon">'+vIco+'</div><div>'+v.text+'</div></div>';
 
   var p=d.parties||{};
-  var REFS={base:{phb:99,pn:74,bn:32,gps:23,war:3},best:{phb:120,pn:67,bn:29,gps:23,war:3},worst:{phb:81,pn:82,bn:35,gps:23,war:3}};
+  // GE-15 actuals as reference baseline: PH=79, PN=74, BN=30, GPS=23, WAR=9
+  var REFS={
+    base: {ph:79, bm:0, pn:74, bn:30, gps:23, war:9},
+    best: {ph:95, bm:3, pn:63, bn:25, gps:23, war:7},
+    worst:{ph:62, bm:0, pn:86, bn:37, gps:23, war:10}
+  };
   var ref=REFS[scen]||REFS.base;
-  function delta(n,r){var dv=n-r;return dv>0?'<span class="cc-delta d-up">&#8593; +'+dv+'</span>':dv<0?'<span class="cc-delta d-dn">&#8595; '+dv+'</span>':'<span class="cc-delta d-eq">&#8212; &#8212;</span>';}
+  function delta(n,r,note){
+    if(note)return'<span class="cc-delta d-eq">'+note+'</span>';
+    var dv=n-r;return dv>0?'<span class="cc-delta d-up">&#8593; +'+dv+'</span>':dv<0?'<span class="cc-delta d-dn">&#8595; '+dv+'</span>':'<span class="cc-delta d-eq">&#8212; &#8212;</span>';
+  }
   document.getElementById('coal-row').innerHTML=[
-    {lbl:'PH Bloc',n:phB,sub:'PKR&nbsp;'+p.PKR+' &middot; DAP&nbsp;'+p.DAP+' &middot; AMN&nbsp;'+p.AMANAH+(bm?' &middot; BSMA&nbsp;'+p.BERSAMA:''),ref:ref.phb,col:'#2563EB'},
-    {lbl:'PN Bloc',n:pn,sub:'BSTU&nbsp;'+p['PN-BERSATU']+' &middot; PAS&nbsp;'+p['PN-PAS'],ref:ref.pn,col:'#7C3AED'},
-    {lbl:'BN',n:bn,sub:'UMNO&nbsp;'+p['BN-UMNO']+' &middot; MCA&nbsp;'+p['BN-MCA'],ref:ref.bn,col:'#D97706'},
-    {lbl:'GPS',n:gps,sub:'Sarawak&nbsp;('+gps+'&nbsp;seats)',ref:ref.gps,col:'#059669'},
-    {lbl:'Others',n:war,sub:'WAR&nbsp;'+(p.WARISAN||0),ref:ref.war,col:'#4B5563'}
+    {lbl:'Pakatan Harapan',n:ph, sub:'PKR&nbsp;'+p.PKR+' &middot; DAP&nbsp;'+p.DAP+' &middot; AMN&nbsp;'+p.AMANAH,                         ref:ref.ph,  col:'#2563EB', note:null},
+    {lbl:'BERSAMA',        n:bm, sub:'PH-allied &middot; <em>separate party</em>',                                                            ref:ref.bm,  col:'#DC2626', note:'new party'},
+    {lbl:'Perikatan Nasional',n:pn,sub:'BSTU&nbsp;'+p['PN-BERSATU']+' &middot; PAS&nbsp;'+p['PN-PAS'],                                      ref:ref.pn,  col:'#7C3AED', note:null},
+    {lbl:'Barisan Nasional',n:bn, sub:'UMNO&nbsp;'+p['BN-UMNO']+' &middot; MCA&nbsp;'+p['BN-MCA'],                                          ref:ref.bn,  col:'#D97706', note:null},
+    {lbl:'GPS',            n:gps,sub:'Gabungan Parti Sarawak',                                                                                ref:ref.gps, col:'#059669', note:null},
+    {lbl:'Others',         n:war,sub:'WARISAN&nbsp;'+(p.WARISAN||0),                                                                          ref:ref.war, col:'#4B5563', note:null}
   ].map(function(x){
-    return '<div class="cc" style="border-top-color:'+x.col+'"><div class="cc-lbl" style="color:'+x.col+'">'+x.lbl+'</div><div class="cc-n" style="color:'+x.col+'">'+x.n+'</div><div class="cc-sub">'+x.sub+'</div>'+delta(x.n,x.ref)+'</div>';
+    return '<div class="cc" style="border-top-color:'+x.col+'"><div class="cc-lbl" style="color:'+x.col+'">'+x.lbl+'</div><div class="cc-n" style="color:'+x.col+'">'+x.n+'</div><div class="cc-sub">'+x.sub+'</div>'+delta(x.n,x.ref,x.note)+'</div>';
   }).join('');
 
   // Individual-party scoreboard
@@ -782,17 +1062,19 @@ function renderSummary(d){
       +'<div class="sbc-d" style="color:var(--text3)">'+pm.grp+'</div></div>';
   }).join('');
 
-  var sbRef={base:{phb:99,pn:74,bn:32},best:{phb:120,pn:67,bn:29},worst:{phb:81,pn:82,bn:35}};
-  var sbR=sbRef[scen]||sbRef.base;
-  function dt(n,r){var dv=n-r;return dv>0?'<span class="du">+'+dv+'</span>':dv<0?'<span class="dd">'+dv+'</span>':'<span class="dn">&#8212;</span>';}
+  function dt(n,r,note){
+    if(note)return'<span class="dn">'+note+'</span>';
+    var dv=n-r;return dv>0?'<span class="du">+'+dv+'</span>':dv<0?'<span class="dd">'+dv+'</span>':'<span class="dn">&#8212;</span>';
+  }
   document.getElementById('scoreboard').innerHTML=[
-    {lbl:'PH Bloc',dot:'#2563EB',n:phB,r:sbR.phb},
-    {lbl:'PN Bloc',dot:'#7C3AED',n:pn,r:sbR.pn},
-    {lbl:'BN',dot:'#D97706',n:bn,r:sbR.bn},
-    {lbl:'GPS',dot:'#059669',n:gps,r:23},
-    {lbl:'Others',dot:'#4B5563',n:war,r:3}
+    {lbl:'Pakatan Harapan',   dot:'#2563EB',n:ph, r:ref.ph},
+    {lbl:'BERSAMA (ally)',    dot:'#DC2626',n:bm, r:ref.bm, note:'new party'},
+    {lbl:'Perikatan Nasional',dot:'#7C3AED',n:pn, r:ref.pn},
+    {lbl:'Barisan Nasional',  dot:'#D97706',n:bn, r:ref.bn},
+    {lbl:'GPS',               dot:'#059669',n:gps,r:ref.gps},
+    {lbl:'Others',            dot:'#4B5563',n:war,r:ref.war}
   ].map(function(x){
-    return '<div class="sbc"><div class="sbc-h"><span class="sbc-dot" style="background:'+x.dot+'"></span><div class="sbc-lbl">'+x.lbl+'</div></div><div class="sbc-n">'+x.n+'</div><div class="sbc-d">'+dt(x.n,x.r)+' vs base</div></div>';
+    return '<div class="sbc"><div class="sbc-h"><span class="sbc-dot" style="background:'+x.dot+'"></span><div class="sbc-lbl">'+x.lbl+'</div></div><div class="sbc-n">'+x.n+'</div><div class="sbc-d">'+dt(x.n,x.r,x.note)+' vs GE15</div></div>';
   }).join('');
 
   var ph65=Math.round(ph*0.65)||1,ph28=Math.round(ph*0.28)||1;
