@@ -406,6 +406,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .prn-cat-Likely{background:#CA8A04}
 .prn-cat-Lean{background:#B45309}
 .prn-cat-Tossup{background:#DC2626}
+.prn-intel-link{display:flex;align-items:center;gap:12px;padding:1rem 1.25rem;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.04));border:1px solid rgba(245,158,11,.25);border-radius:var(--r);text-decoration:none;color:inherit;transition:all .18s;margin-top:1rem}
+.prn-intel-link:hover{background:linear-gradient(135deg,rgba(245,158,11,.14),rgba(245,158,11,.07));border-color:rgba(245,158,11,.45);transform:translateY(-1px)}
+.prn-intel-ico{font-size:22px;flex-shrink:0}
+.prn-intel-ttl{display:block;font-size:13px;font-weight:700;color:var(--text)}
+.prn-intel-sub{display:block;font-size:10px;color:var(--text3);margin-top:2px}
+.prn-intel-arr{margin-left:auto;font-size:18px;color:var(--amber);flex-shrink:0;font-weight:300}
 .prn-pbar-wrap{display:flex;align-items:center;gap:5px}
 .prn-pbar-track{flex:1;height:3.5px;background:var(--border);border-radius:2px;overflow:hidden;min-width:22px}
 .prn-pbar-fill{height:100%;border-radius:2px}
@@ -853,6 +859,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
         </table>
       </div>
       <p style="font-size:10px;color:var(--text4);text-align:center;margin-top:.75rem">⚙ = manual adjustment &nbsp;·&nbsp; Probabilities derived from multi-scenario model · PRN Johor 2026 forecast FINAL 10 Jul</p>
+
+      <!-- Intelligence Brief Link -->
+      <a href="johor.html" class="prn-intel-link" target="_blank" rel="noopener">
+        <span class="prn-intel-ico">🔍</span>
+        <span>
+          <span class="prn-intel-ttl">Open Intelligence Brief</span>
+          <span class="prn-intel-sub">Sentiment analysis · scenario outlook · news tracker · volatile seats deep-dive</span>
+        </span>
+        <span class="prn-intel-arr">→</span>
+      </a>
 
     </div>
   </div>
