@@ -349,9 +349,71 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .vfb-ico{font-size:14px;flex-shrink:0;margin-top:1px}
 .vfb-txt{font-size:12px;color:var(--text2);line-height:1.6}
 .vfb-em{font-weight:600;color:var(--text)}
+/* ===== PRN STATE ELECTION ===== */
+.prn-wrap{padding:.875rem 1.25rem 2rem}
+.prn-banner{background:linear-gradient(135deg,#1a0533 0%,#2d0f55 40%,#0a1628 100%);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:1rem;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.08)}
+.prn-banner::after{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(212,175,55,.12) 0%,transparent 65%);pointer-events:none}
+.prn-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,.35);margin-bottom:5px}
+.prn-title{font-size:24px;font-weight:900;color:#fff;letter-spacing:-.05em;margin-bottom:4px}
+.prn-date{font-size:12px;font-weight:600;color:#FCD34D;display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.prn-note{font-size:9px;color:rgba(255,255,255,.28)}
+.prn-prob-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1rem}
+.prn-prob{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:.75rem .875rem;text-align:center}
+.prn-prob-n{font-size:20px;font-weight:800;line-height:1;letter-spacing:-1px}
+.prn-prob-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text3);margin-top:3px;line-height:1.3}
+.prn-prob-sub{font-size:9px;color:var(--text4);margin-top:2px}
+.prn-exp-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem}
+.prn-exp{background:var(--surface);border:1.5px solid var(--border);border-top-width:3px;border-radius:var(--r);padding:.875rem 1rem}
+.prn-exp-n{font-size:30px;font-weight:900;line-height:1;letter-spacing:-2px}
+.prn-exp-lbl{font-size:10px;color:var(--text3);margin-top:3px;font-weight:500}
+.prn-conf-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:1rem}
+.prn-conf-hdr{padding:.625rem 1rem;background:var(--surface2);border-bottom:1px solid var(--border);font-size:11px;font-weight:700;color:var(--text)}
+.prn-conf-tbl{width:100%;border-collapse:collapse;font-size:11px}
+.prn-conf-tbl th{padding:6px 10px;text-align:center;font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--border)}
+.prn-conf-tbl th:first-child{text-align:left}
+.prn-conf-tbl td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:center;font-size:12px}
+.prn-conf-tbl td:first-child{text-align:left;font-weight:600}
+.prn-conf-tbl tbody tr:last-child td{border-bottom:none;font-weight:700;background:var(--surface2)}
+.prn-vshare{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:.875rem 1rem;margin-bottom:1rem}
+.prn-vshare-hdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.625rem}
+.prn-vshare-title{font-size:12px;font-weight:700;color:var(--text)}
+.prn-vshare-sub{font-size:10px;color:var(--text3)}
+.prn-vbar{display:flex;height:24px;border-radius:var(--r-sm);overflow:hidden;margin-bottom:.625rem;border:1px solid var(--border)}
+.prn-vseg{height:100%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:rgba(255,255,255,.92);white-space:nowrap;overflow:hidden;min-width:0;padding:0 4px;transition:flex .4s}
+.prn-vleg{display:flex;flex-wrap:wrap;gap:3px 14px}
+.prn-vleg-item{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text2)}
+.prn-vleg-sq{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+.prn-turnout-bar{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:.625rem 1rem;margin-bottom:1rem;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+.prn-to-item{font-size:11px;color:var(--text2)}
+.prn-to-num{font-size:13px;font-weight:700;color:var(--text)}
+.prn-adj{background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:var(--r-sm);padding:.875rem 1rem;margin-bottom:1rem}
+.prn-adj-title{font-size:10px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.625rem;display:flex;align-items:center;gap:5px}
+.prn-adj-row{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:start;margin-bottom:.5rem;font-size:11px}
+.prn-adj-row:last-child{margin-bottom:0}
+.prn-adj-seat{font-weight:700;color:var(--text)}
+.prn-adj-txt{color:var(--text2);line-height:1.5}
+.prn-tbl-wrap{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;overflow-x:auto}
+.prn-tbl{width:100%;border-collapse:collapse;font-size:11px;min-width:680px}
+.prn-tbl thead tr{background:var(--surface2)}
+.prn-tbl th{padding:7px 8px;text-align:left;font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--border);white-space:nowrap}
+.prn-tbl th.r{text-align:right}
+.prn-tbl td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:middle}
+.prn-tbl tbody tr:last-child td{border-bottom:none}
+.prn-tbl tbody tr:hover td{background:var(--surface2)}
+.prn-tbl tbody tr.prn-manual td{background:rgba(245,158,11,.04)}
+.prn-cat{display:inline-block;padding:2px 7px;border-radius:20px;font-size:9px;font-weight:700;color:#fff;white-space:nowrap}
+.prn-cat-Safe{background:#15803D}
+.prn-cat-Likely{background:#CA8A04}
+.prn-cat-Lean{background:#B45309}
+.prn-cat-Tossup{background:#DC2626}
+.prn-pbar-wrap{display:flex;align-items:center;gap:5px}
+.prn-pbar-track{flex:1;height:3.5px;background:var(--border);border-radius:2px;overflow:hidden;min-width:22px}
+.prn-pbar-fill{height:100%;border-radius:2px}
 /* ===== RESPONSIVE ===== */
 @media(max-width:640px){
   .method-grid{grid-template-columns:1fr}
+  .prn-prob-strip{grid-template-columns:1fr 1fr}
+  .prn-exp-strip{grid-template-columns:1fr 1fr}
   .ctrl-grid{grid-template-columns:1fr}
   .ctrl-panel:first-child{border-right:none;border-bottom:1px solid var(--border)}
   .race-grid{grid-template-columns:1fr 1fr}
@@ -451,6 +513,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   <button class="tn" onclick="switchTab('controls',this)"><span class="tn-ico">🎛</span>Adjust Model</button>
   <button class="tn" onclick="switchTab('states',this)"><span class="tn-ico">🗺</span>By State</button>
   <button class="tn" onclick="switchTab('seats',this)"><span class="tn-ico">📋</span>All 222 Seats</button>
+  <button class="tn" onclick="switchTab('johor',this)"><span class="tn-ico">🗳</span>PRN Johor 2026</button>
   <button class="tn" onclick="switchTab('method',this)"><span class="tn-ico">📖</span>Methodology</button>
 </nav>
 
@@ -635,6 +698,162 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       </div>
       <div id="no-res" class="no-res" style="display:none">No constituencies match your filters.</div>
       <div class="pg-row" id="pg-row"></div>
+    </div>
+  </div>
+
+  <!-- TAB: PRN JOHOR 2026 -->
+  <div class="vp" id="tab-johor">
+    <div class="prn-wrap">
+
+      <!-- Banner -->
+      <div class="prn-banner">
+        <div class="prn-eye">Pilihanraya Negeri · State Election Series</div>
+        <div class="prn-title">PRN Johor 2026</div>
+        <div class="prn-date">📅 Polling Day: 11 July 2026 &nbsp;·&nbsp; 56 DUN seats</div>
+        <div class="prn-note">Seat forecast — FINAL (10 Jul) &nbsp;·&nbsp; Majority needed: 29 seats</div>
+      </div>
+
+      <!-- Key probabilities -->
+      <div class="sec-lbl" style="padding:.25rem 0 .5rem">Key probabilities</div>
+      <div class="prn-prob-strip">
+        <div class="prn-prob">
+          <div class="prn-prob-n" style="color:#D97706">67.7%</div>
+          <div class="prn-prob-lbl">P(BN majority ≥29)</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n" style="color:#D97706">79.9%</div>
+          <div class="prn-prob-lbl">P(BN most seats)</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n" style="color:var(--amber)">22.8%</div>
+          <div class="prn-prob-lbl">P(hung assembly)</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n">33.9<span style="font-size:15px;font-weight:600;opacity:.45">/35</span></div>
+          <div class="prn-prob-lbl">BN seats (mean/median)</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n">~64%</div>
+          <div class="prn-prob-lbl">Statewide turnout</div>
+          <div class="prn-prob-sub">likely 61–67%</div>
+        </div>
+      </div>
+
+      <!-- Expected seats -->
+      <div class="sec-lbl" style="padding:.25rem 0 .5rem">Expected seats</div>
+      <div class="prn-exp-strip">
+        <div class="prn-exp" style="border-color:#D97706">
+          <div class="prn-exp-n" style="color:#D97706">33.9</div>
+          <div class="prn-exp-lbl">BN — median 35</div>
+        </div>
+        <div class="prn-exp" style="border-color:#2563EB">
+          <div class="prn-exp-n" style="color:#2563EB">15.4</div>
+          <div class="prn-exp-lbl">PH seats</div>
+        </div>
+        <div class="prn-exp" style="border-color:#7C3AED">
+          <div class="prn-exp-n" style="color:#7C3AED">6.7</div>
+          <div class="prn-exp-lbl">PN seats</div>
+        </div>
+        <div class="prn-exp">
+          <div class="prn-exp-n" style="color:var(--text3)">~0</div>
+          <div class="prn-exp-lbl">Others</div>
+        </div>
+      </div>
+
+      <!-- Statewide vote share -->
+      <div class="prn-vshare">
+        <div class="prn-vshare-hdr">
+          <span class="prn-vshare-title">Statewide projected vote share</span>
+          <span class="prn-vshare-sub">3-corner baseline · 56 DUN</span>
+        </div>
+        <div class="prn-vbar">
+          <div class="prn-vseg" style="flex:45.4;background:#D97706">BN 45.4%</div>
+          <div class="prn-vseg" style="flex:34.5;background:#2563EB">PH 34.5%</div>
+          <div class="prn-vseg" style="flex:14.6;background:#7C3AED">PN 14.6%</div>
+          <div class="prn-vseg" style="flex:3.8;background:#DC2626">BSM 3.8%</div>
+          <div class="prn-vseg" style="flex:1.5;background:#4B5563">MUDA 1.5%</div>
+          <div class="prn-vseg" style="flex:0.7;background:#94A3B8">Oth 0.7%</div>
+        </div>
+        <div class="prn-vleg">
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#D97706"></div>BN 45.4%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#2563EB"></div>PH 34.5%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#7C3AED"></div>PN 14.6%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#DC2626"></div>BERSAMA 3.8%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#4B5563"></div>MUDA/PSM 1.5%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#94A3B8"></div>Others 0.7%</div>
+        </div>
+      </div>
+
+      <!-- Turnout by community -->
+      <div class="prn-turnout-bar">
+        <span style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3)">Projected turnout by community</span>
+        <span class="prn-to-item">Malay <span class="prn-to-num">72%</span></span>
+        <span class="prn-to-item">Chinese <span class="prn-to-num">56%</span></span>
+        <span class="prn-to-item">Indian <span class="prn-to-num">47%</span></span>
+        <span style="margin-left:auto;font-size:10px;color:var(--text3)">Battlegrounds (leader &lt;65%): <strong style="color:var(--text)">19 seats</strong></span>
+      </div>
+
+      <!-- Confidence by category -->
+      <div class="prn-conf-section">
+        <div class="prn-conf-hdr">Seats by projected winner &amp; confidence</div>
+        <table class="prn-conf-tbl">
+          <thead><tr>
+            <th>Winner</th>
+            <th><span class="prn-cat prn-cat-Safe">Safe</span></th>
+            <th><span class="prn-cat prn-cat-Likely">Likely</span></th>
+            <th><span class="prn-cat prn-cat-Lean">Lean</span></th>
+            <th><span class="prn-cat prn-cat-Tossup">Toss-up</span></th>
+            <th>Total</th>
+          </tr></thead>
+          <tbody>
+            <tr><td style="color:#D97706">BN</td><td>15</td><td>13</td><td>8</td><td>4</td><td>40</td></tr>
+            <tr><td style="color:#2563EB">PH</td><td>2</td><td>7</td><td>3</td><td>0</td><td>12</td></tr>
+            <tr><td style="color:#7C3AED">PN</td><td>0</td><td>0</td><td>1</td><td>3</td><td>4</td></tr>
+            <tr><td>Total</td><td>17</td><td>20</td><td>12</td><td>7</td><td>56</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Manual adjustment notes -->
+      <div class="prn-adj">
+        <div class="prn-adj-title">⚙ Manual analyst adjustments</div>
+        <div class="prn-adj-row">
+          <span class="prn-adj-seat">N41 Puteri Wangsa</span>
+          <span class="prn-adj-txt">MUDA bloc votes reassigned to PH in model. Without this adjustment: <strong>Lean-BN</strong>. With adjustment: <strong>PH-Likely</strong> (P(PH)=76%).</span>
+        </div>
+        <div class="prn-adj-row">
+          <span class="prn-adj-seat">N31 Kahang</span>
+          <span class="prn-adj-txt">Manual boost to PN candidate + penalty applied to BN. Outcome unchanged — seat remains <strong>Safe-BN</strong> (P(BN)=88%).</span>
+        </div>
+        <div class="prn-adj-row">
+          <span class="prn-adj-seat">N27 Layang-Layang</span>
+          <span class="prn-adj-txt">No adjustment applied. Swing to PN could not be quantified. Kept at model baseline: <strong>Lean-BN</strong> (P(BN)=52%).</span>
+        </div>
+      </div>
+
+      <!-- Seat table -->
+      <div class="sec-lbl" style="padding:.25rem 0 .5rem">All 56 DUN seats</div>
+      <div class="prn-tbl-wrap">
+        <table class="prn-tbl">
+          <thead><tr>
+            <th style="width:34px">N°</th>
+            <th>Seat · Parliament</th>
+            <th style="width:30px;text-align:center" title="Corners">♟</th>
+            <th style="width:46px">Win</th>
+            <th style="width:70px">Category</th>
+            <th style="width:100px">P(win)</th>
+            <th class="r" style="width:46px" title="BN vote share %">BN%</th>
+            <th class="r" style="width:46px" title="PH vote share %">PH%</th>
+            <th class="r" style="width:46px" title="PN vote share %">PN%</th>
+            <th class="r" style="width:46px" title="Bersama vote share %">BSM%</th>
+            <th class="r" style="width:50px" title="MUDA/PSM vote share %">MUDA%</th>
+            <th class="r" style="width:40px">Oth%</th>
+          </tr></thead>
+          <tbody id="prn-tbody"><tr><td colspan="12" style="text-align:center;padding:2rem;color:var(--text3)"><div class="spinner" style="margin:0 auto"></div></td></tr></tbody>
+        </table>
+      </div>
+      <p style="font-size:10px;color:var(--text4);text-align:center;margin-top:.75rem">⚙ = manual adjustment &nbsp;·&nbsp; Probabilities derived from multi-scenario model · PRN Johor 2026 forecast FINAL 10 Jul</p>
+
     </div>
   </div>
 
@@ -1385,6 +1604,7 @@ window.switchTab=function(id,el){
   if(id==='seats'){seatsPage=1;loadSeats();}
   if(id==='states')loadSummary();
   if(id==='analysis')loadAnalysis();
+  if(id==='johor')renderPrnJohor();
 };
 window.onSl=function(k,v){
   var n=parseInt(v);
@@ -1460,6 +1680,106 @@ window.generateInsight=async function(){
     btn.disabled=false;
   }
 };
+
+/* ══════════════════════════════════════════════════════════
+   PRN JOHOR 2026 — 56 DUN seat forecast (FINAL 10 Jul)
+   Fields: dun, seat, parl, cor, win, cat, pBN, pPH, pPN,
+           bn, ph, pn, bsm, mud, oth, adj (adjustment note)
+   ══════════════════════════════════════════════════════════ */
+var PRN_JOHOR=[
+  {dun:1, seat:'Buloh Kasap',   parl:'Segamat',         cor:2,win:'BN',cat:'Safe',   pBN:0.93,pPH:0.07,pPN:0,   bn:68.7,ph:31.3,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:2, seat:'Jementah',      parl:'Segamat',         cor:3,win:'PH',cat:'Likely', pBN:0.24,pPH:0.73,pPN:0.03,bn:33.3,ph:47.7,pn:19,  bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:3, seat:'Pemanis',       parl:'Sekijang',        cor:3,win:'BN',cat:'Likely', pBN:0.83,pPH:0.13,pPN:0.04,bn:51.2,ph:28.3,pn:20.4,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:4, seat:'Kemelah',       parl:'Sekijang',        cor:3,win:'BN',cat:'Toss-up',pBN:0.46,pPH:0.4, pPN:0.14,bn:37.9,ph:36.2,pn:25.9,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:5, seat:'Tenang',        parl:'Labis',           cor:4,win:'BN',cat:'Likely', pBN:0.67,pPH:0.13,pPN:0.2, bn:43.5,ph:26,  pn:28.6,bsm:0,  mud:0,  oth:1.9,adj:''},
+  {dun:6, seat:'Bekok',         parl:'Labis',           cor:2,win:'BN',cat:'Safe',   pBN:0.88,pPH:0.12,pPN:0,   bn:65.2,ph:34.8,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:7, seat:'Bukit Kepong',  parl:'Pagoh',           cor:3,win:'PN',cat:'Lean',   pBN:0.38,pPH:0,   pPN:0.62,bn:40.3,ph:10.6,pn:49,  bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:8, seat:'Bukit Pasir',   parl:'Pagoh',           cor:3,win:'BN',cat:'Toss-up',pBN:0.41,pPH:0.24,pPN:0.35,bn:35.9,ph:30.4,pn:33.7,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:9, seat:'Gambir',        parl:'Ledang',          cor:3,win:'BN',cat:'Likely', pBN:0.69,pPH:0.16,pPN:0.14,bn:45,  ph:28.8,pn:26.2,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:10,seat:'Tangkak',       parl:'Ledang',          cor:2,win:'PH',cat:'Lean',   pBN:0.38,pPH:0.62,pPN:0,   bn:45.9,ph:54.1,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:11,seat:'Serom',         parl:'Ledang',          cor:3,win:'PN',cat:'Toss-up',pBN:0.37,pPH:0.22,pPN:0.41,bn:34.5,ph:29.7,pn:35.8,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:12,seat:'Bentayan',      parl:'Bakri',           cor:2,win:'PH',cat:'Safe',   pBN:0.03,pPH:0.97,pPN:0,   bn:26.8,ph:73.2,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:13,seat:'Simpang Jeram', parl:'Bakri',           cor:4,win:'PH',cat:'Likely', pBN:0.11,pPH:0.74,pPN:0.15,bn:25.8,ph:46.4,pn:27.5,bsm:0,  mud:0.3,oth:0,  adj:''},
+  {dun:14,seat:'Bukit Naning',  parl:'Bakri',           cor:5,win:'BN',cat:'Toss-up',pBN:0.46,pPH:0.2, pPN:0.34,bn:30.6,ph:23.7,pn:27.6,bsm:8.2,mud:0,  oth:9.9,adj:''},
+  {dun:15,seat:'Maharani',      parl:'Muar',            cor:4,win:'PN',cat:'Toss-up',pBN:0.25,pPH:0.31,pPN:0.44,bn:28.2,ph:30.3,pn:33.5,bsm:0,  mud:8,  oth:0,  adj:''},
+  {dun:16,seat:'Sungai Balang', parl:'Muar',            cor:3,win:'BN',cat:'Likely', pBN:0.68,pPH:0.04,pPN:0.27,bn:45.8,ph:21.3,pn:32.9,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:17,seat:'Semerah',       parl:'Parit Sulong',    cor:3,win:'BN',cat:'Likely', pBN:0.71,pPH:0.09,pPN:0.2, bn:45.7,ph:24.6,pn:29.7,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:18,seat:'Sri Medan',     parl:'Parit Sulong',    cor:3,win:'BN',cat:'Safe',   pBN:0.87,pPH:0,   pPN:0.13,bn:60.1,ph:8.3, pn:31.5,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:19,seat:'Yong Peng',     parl:'Ayer Hitam',      cor:2,win:'BN',cat:'Likely', pBN:0.7, pPH:0.3, pPN:0,   bn:56.8,ph:43.2,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:20,seat:'Semarang',      parl:'Ayer Hitam',      cor:3,win:'BN',cat:'Safe',   pBN:0.88,pPH:0,   pPN:0.12,bn:59.6,ph:9.8, pn:30.6,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:21,seat:'Parit Yaani',   parl:'Sri Gading',      cor:2,win:'BN',cat:'Lean',   pBN:0.64,pPH:0.36,pPN:0,   bn:54.7,ph:45.3,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:22,seat:'Parit Raja',    parl:'Sri Gading',      cor:3,win:'BN',cat:'Likely', pBN:0.78,pPH:0.01,pPN:0.21,bn:51.9,ph:15.4,pn:32.7,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:23,seat:'Penggaram',     parl:'Batu Pahat',      cor:2,win:'PH',cat:'Likely', pBN:0.16,pPH:0.84,pPN:0,   bn:37,  ph:63,  pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:24,seat:'Senggarang',    parl:'Batu Pahat',      cor:3,win:'BN',cat:'Lean',   pBN:0.56,pPH:0.3, pPN:0.15,bn:40.5,ph:33.2,pn:26.4,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:25,seat:'Rengit',        parl:'Batu Pahat',      cor:3,win:'BN',cat:'Lean',   pBN:0.55,pPH:0.05,pPN:0.4, bn:41.7,ph:20.9,pn:37.4,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:26,seat:'Machap',        parl:'Simpang Renggam', cor:2,win:'BN',cat:'Safe',   pBN:1,   pPH:0,   pPN:0,   bn:83.7,ph:16.3,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:27,seat:'Layang-Layang', parl:'Simpang Renggam', cor:3,win:'BN',cat:'Lean',   pBN:0.52,pPH:0.42,pPN:0.06,bn:41.5,ph:38.5,pn:20,  bsm:0,  mud:0,  oth:0,  adj:'No adjust — swing ke PN tidak dapat dikuantifikasi'},
+  {dun:28,seat:'Mengkibol',     parl:'Kluang',          cor:2,win:'PH',cat:'Likely', pBN:0.15,pPH:0.85,pPN:0,   bn:36.7,ph:63.3,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:29,seat:'Mahkota',       parl:'Kluang',          cor:3,win:'BN',cat:'Likely', pBN:0.79,pPH:0.21,pPN:0,   bn:55.9,ph:36.2,pn:0,   bsm:0,  mud:7.9,oth:0,  adj:''},
+  {dun:30,seat:'Paloh',         parl:'Sembrong',        cor:4,win:'BN',cat:'Likely', pBN:0.78,pPH:0.22,pPN:0,   bn:54.4,ph:35.9,pn:8.6, bsm:0,  mud:0,  oth:1.1,adj:''},
+  {dun:31,seat:'Kahang',        parl:'Sembrong',        cor:3,win:'BN',cat:'Safe',   pBN:0.88,pPH:0.01,pPN:0.11,bn:55.8,ph:16.5,pn:27.7,bsm:0,  mud:0,  oth:0,  adj:'Boost calon PN + penalty BN. Tetap Safe-BN'},
+  {dun:32,seat:'Endau',         parl:'Mersing',         cor:4,win:'BN',cat:'Lean',   pBN:0.61,pPH:0,   pPN:0.39,bn:48.1,ph:10,  pn:40.5,bsm:0,  mud:0,  oth:1.5,adj:''},
+  {dun:33,seat:'Tenggaroh',     parl:'Mersing',         cor:3,win:'BN',cat:'Lean',   pBN:0.65,pPH:0,   pPN:0.35,bn:50.7,ph:8.9, pn:40.5,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:34,seat:'Panti',         parl:'Tenggara',        cor:3,win:'BN',cat:'Likely', pBN:0.77,pPH:0,   pPN:0.23,bn:52.1,ph:14.4,pn:33.5,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:35,seat:'Pasir Raja',    parl:'Tenggara',        cor:3,win:'BN',cat:'Safe',   pBN:0.86,pPH:0.01,pPN:0.13,bn:55.3,ph:15.9,pn:28.8,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:36,seat:'Sedili',        parl:'Kota Tinggi',     cor:3,win:'BN',cat:'Safe',   pBN:0.88,pPH:0,   pPN:0.12,bn:64.8,ph:2.2, pn:33,  bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:37,seat:'Johor Lama',    parl:'Kota Tinggi',     cor:3,win:'BN',cat:'Safe',   pBN:0.89,pPH:0,   pPN:0.11,bn:60.6,ph:9.5, pn:29.9,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:38,seat:'Penawar',       parl:'Pengerang',       cor:3,win:'BN',cat:'Safe',   pBN:0.93,pPH:0,   pPN:0.07,bn:67,  ph:4.1, pn:28.9,bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:39,seat:'Tanjung Surat', parl:'Pengerang',       cor:2,win:'BN',cat:'Safe',   pBN:1,   pPH:0,   pPN:0,   bn:88.9,ph:11.1,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:40,seat:'Tiram',         parl:'Tebrau',          cor:4,win:'PN',cat:'Toss-up',pBN:0.33,pPH:0.21,pPN:0.45,bn:30.5,ph:26.9,pn:33.8,bsm:8.9,mud:0,  oth:0,  adj:''},
+  {dun:41,seat:'Puteri Wangsa', parl:'Tebrau',          cor:5,win:'PH',cat:'Likely', pBN:0.24,pPH:0.76,pPN:0,   bn:31.7,ph:46.6,pn:0,   bsm:7.7,mud:8.2,oth:5.8,adj:'MUDA votes dialihkan ke PH. Tanpa pelarasan: Lean-BN'},
+  {dun:42,seat:'Johor Jaya',    parl:'Pasir Gudang',    cor:4,win:'BN',cat:'Lean',   pBN:0.52,pPH:0.48,pPN:0,   bn:44.8,ph:44.1,pn:0,   bsm:8.5,mud:0,  oth:2.7,adj:''},
+  {dun:43,seat:'Permas',        parl:'Pasir Gudang',    cor:4,win:'BN',cat:'Lean',   pBN:0.57,pPH:0.25,pPN:0.18,bn:37.2,ph:28.9,pn:25.5,bsm:8.3,mud:0,  oth:0,  adj:''},
+  {dun:44,seat:'Larkin',        parl:'Johor Bahru',     cor:3,win:'BN',cat:'Likely', pBN:0.76,pPH:0.24,pPN:0,   bn:55,  ph:37.6,pn:0,   bsm:7.4,mud:0,  oth:0,  adj:''},
+  {dun:45,seat:'Stulang',       parl:'Johor Bahru',     cor:4,win:'PH',cat:'Likely', pBN:0.19,pPH:0.8, pPN:0.01,bn:29.8,ph:47.7,pn:14.4,bsm:8,  mud:0,  oth:0,  adj:''},
+  {dun:46,seat:'Perling',       parl:'Pulai',           cor:3,win:'PH',cat:'Lean',   pBN:0.45,pPH:0.55,pPN:0,   bn:44,  ph:47.6,pn:0,   bsm:8.4,mud:0,  oth:0,  adj:''},
+  {dun:47,seat:'Kempas',        parl:'Pulai',           cor:3,win:'BN',cat:'Likely', pBN:0.71,pPH:0.29,pPN:0,   bn:52.6,ph:39.3,pn:0,   bsm:8,  mud:0,  oth:0,  adj:''},
+  {dun:48,seat:'Skudai',        parl:'Iskandar Puteri', cor:4,win:'PH',cat:'Safe',   pBN:0.14,pPH:0.86,pPN:0,   bn:32.9,ph:58.4,pn:0,   bsm:8.4,mud:0.3,oth:0,  adj:''},
+  {dun:49,seat:'Kota Iskandar', parl:'Iskandar Puteri', cor:4,win:'BN',cat:'Toss-up',pBN:0.47,pPH:0.46,pPN:0.06,bn:36.2,ph:35.9,pn:19.8,bsm:8.2,mud:0,  oth:0,  adj:''},
+  {dun:50,seat:'Bukit Permai',  parl:'Kulai',           cor:4,win:'BN',cat:'Likely', pBN:0.84,pPH:0.04,pPN:0.12,bn:47.6,ph:19.4,pn:24.8,bsm:8.2,mud:0,  oth:0,  adj:''},
+  {dun:51,seat:'Bukit Batu',    parl:'Kulai',           cor:5,win:'PH',cat:'Lean',   pBN:0.42,pPH:0.58,pPN:0,   bn:41.3,ph:46.2,pn:0,   bsm:7.6,mud:0.3,oth:4.6,adj:''},
+  {dun:52,seat:'Senai',         parl:'Kulai',           cor:3,win:'PH',cat:'Likely', pBN:0.19,pPH:0.81,pPN:0,   bn:35.8,ph:56.6,pn:0,   bsm:7.6,mud:0,  oth:0,  adj:''},
+  {dun:53,seat:'Benut',         parl:'Pontian',         cor:2,win:'BN',cat:'Safe',   pBN:0.99,pPH:0.01,pPN:0,   bn:79.6,ph:20.4,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:54,seat:'Pulai Sebatang',parl:'Pontian',         cor:2,win:'BN',cat:'Safe',   pBN:0.9, pPH:0.1, pPN:0,   bn:66.8,ph:33.2,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:55,seat:'Pekan Nanas',   parl:'Tanjung Piai',    cor:2,win:'BN',cat:'Safe',   pBN:0.88,pPH:0.12,pPN:0,   bn:65.1,ph:34.9,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''},
+  {dun:56,seat:'Kukup',         parl:'Tanjung Piai',    cor:2,win:'BN',cat:'Safe',   pBN:0.96,pPH:0.04,pPN:0,   bn:71.7,ph:28.3,pn:0,   bsm:0,  mud:0,  oth:0,  adj:''}
+];
+
+var _prnRendered=false;
+function renderPrnJohor(){
+  if(_prnRendered)return;
+  _prnRendered=true;
+  var tb=document.getElementById('prn-tbody');
+  if(!tb)return;
+  var winCol={BN:'#D97706',PH:'#2563EB',PN:'#7C3AED'};
+  var catCls={Safe:'prn-cat-Safe',Likely:'prn-cat-Likely',Lean:'prn-cat-Lean','Toss-up':'prn-cat-Tossup'};
+  function fmt(v){return v>0?v.toFixed(v===Math.round(v)?0:1)+'%':'<span style="color:var(--text4)">—</span>';}
+  var html=PRN_JOHOR.map(function(s){
+    var pWin=s.win==='BN'?s.pBN:(s.win==='PH'?s.pPH:s.pPN);
+    var wc=winCol[s.win]||'#888';
+    var cc=catCls[s.cat]||'';
+    var adjMark=s.adj?'<span title="'+s.adj.replace(/"/g,"'")+'" style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--amber);margin-left:5px;vertical-align:middle"></span>':'';
+    return '<tr class="'+(s.adj?'prn-manual':'')+'">'
+      +'<td style="color:var(--text3);font-size:10px;text-align:center">N'+s.dun+'</td>'
+      +'<td><div style="font-weight:600;font-size:11px;display:flex;align-items:center">'+s.seat+adjMark+'</div>'
+          +'<div style="font-size:9px;color:var(--text3)">'+s.parl+'</div></td>'
+      +'<td style="text-align:center;font-size:10px;color:var(--text3)">'+s.cor+'</td>'
+      +'<td><span style="display:inline-block;padding:2px 7px;border-radius:20px;font-size:9px;font-weight:700;color:#fff;background:'+wc+'">'+s.win+'</span></td>'
+      +'<td><span class="prn-cat '+cc+'">'+s.cat+'</span></td>'
+      +'<td><div class="prn-pbar-wrap">'
+          +'<span style="font-size:10px;font-weight:700;width:28px;text-align:right;flex-shrink:0;color:'+wc+'">'+Math.round(pWin*100)+'%</span>'
+          +'<div class="prn-pbar-track"><div class="prn-pbar-fill" style="width:'+(pWin*100)+'%;background:'+wc+'"></div></div>'
+        +'</div></td>'
+      +'<td style="text-align:right;font-size:10px;font-weight:600;color:#D97706">'+s.bn+'%</td>'
+      +'<td style="text-align:right;font-size:10px;font-weight:600;color:#2563EB">'+fmt(s.ph)+'</td>'
+      +'<td style="text-align:right;font-size:10px;font-weight:600;color:#7C3AED">'+fmt(s.pn)+'</td>'
+      +'<td style="text-align:right;font-size:10px;color:var(--text3)">'+fmt(s.bsm)+'</td>'
+      +'<td style="text-align:right;font-size:10px;color:var(--text3)">'+fmt(s.mud)+'</td>'
+      +'<td style="text-align:right;font-size:10px;color:var(--text3)">'+fmt(s.oth)+'</td>'
+      +'</tr>';
+  }).join('');
+  tb.innerHTML=html;
+}
 
 loadSummary();
 })();
