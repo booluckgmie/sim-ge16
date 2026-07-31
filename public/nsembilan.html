@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>PRN Negeri Sembilan 2026 — Political Intelligence Brief</title>
+<meta name="description" content="Polling-day intelligence dashboard for PRN Negeri Sembilan ke-16 · 36 DUN seats · 1 August 2026 · scenario analysis, sentiment, news tracker.">
+<meta name="robots" content="noindex,nofollow">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#020C1B;--surf:#081526;--surf2:#0C1E38;--surf3:#112448;
+  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);
+  --text:#DCE8F8;--text2:#8A9BBF;--text3:#4A5E80;--text4:#2A3D5E;
+  --bn:#F59E0B;--ph:#3B82F6;--pn:#8B5CF6;
+  --green:#22C55E;--red:#EF4444;--gold:#FCD34D;--amber:#D97706;
+  --r:10px;--r-sm:6px;
+}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased}
+
+/* ─── HEADER ─── */
+.phdr{background:linear-gradient(180deg,#030F24 0%,#040E1E 100%);border-bottom:1px solid var(--border2);padding:2rem 1.5rem 0;position:relative;overflow:hidden}
+.phdr::before{content:'';position:absolute;top:-80px;right:-80px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.08) 0%,transparent 65%);pointer-events:none}
+.phdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(59,130,246,.35),transparent)}
+.phdr-inner{max-width:1140px;margin:0 auto}
+.phdr-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:1.25rem;flex-wrap:wrap}
+.back-link{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);text-decoration:none;padding:5px 11px;border:1px solid var(--border);border-radius:20px;transition:all .15s;white-space:nowrap}
+.back-link:hover{color:var(--text);border-color:var(--border2)}
+.live-pill{display:flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);border-radius:20px;font-size:10px;font-weight:700;color:#22C55E;letter-spacing:.5px;text-transform:uppercase}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#22C55E;animation:pdot 1.4s infinite}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+.phdr-eye{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:6px}
+.phdr-title{font-size:34px;font-weight:900;color:#fff;letter-spacing:-.06em;margin-bottom:5px;line-height:1}
+.phdr-sub{font-size:13px;color:var(--text2);margin-bottom:14px}
+.phdr-meta{display:flex;gap:18px;flex-wrap:wrap;padding-bottom:1.25rem;border-bottom:1px solid var(--border);font-size:11px;color:var(--text3)}
+.pm-item{display:flex;align-items:center;gap:5px}
+.pm-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+
+/* ─── FORECAST STRIP ─── */
+.fstrip{display:flex;overflow-x:auto;scrollbar-width:none;background:rgba(255,255,255,.02);border-top:1px solid var(--border);max-width:1140px;margin:0 auto}
+.fstrip::-webkit-scrollbar{display:none}
+.fs-it{display:flex;flex-direction:column;align-items:center;padding:.875rem 1.25rem;border-right:1px solid var(--border);white-space:nowrap;flex-shrink:0}
+.fs-n{font-size:19px;font-weight:800;line-height:1;letter-spacing:-.03em}
+.fs-l{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text3);margin-top:3px}
+.fs-sub{font-size:8px;color:var(--text4);margin-top:1px}
+
+/* ─── MAIN ─── */
+.main{max-width:1140px;margin:0 auto;padding:1.5rem}
+
+.sec-hdr{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text3);padding:.5rem 0 .75rem;border-bottom:1px solid var(--border);margin-bottom:1rem}
+.sec-spacer{height:1.75rem}
+
+/* ─── SCENARIO CARDS ─── */
+.scen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.875rem;margin-bottom:1.75rem}
+@media(max-width:700px){.scen-grid{grid-template-columns:1fr}}
+.scen-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:1.125rem}
+.scen-card.base{border-color:rgba(34,197,94,.25);background:linear-gradient(135deg,rgba(34,197,94,.04),var(--surf))}
+.scen-prob-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:.625rem}
+.scen-prob{font-size:26px;font-weight:900;letter-spacing:-.04em}
+.scen-badge{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:20px}
+.base-badge{background:rgba(34,197,94,.15);color:#22C55E;border:1px solid rgba(34,197,94,.3)}
+.bull-badge{background:rgba(59,130,246,.15);color:#60A5FA;border:1px solid rgba(59,130,246,.3)}
+.bear-badge{background:rgba(239,68,68,.15);color:#EF4444;border:1px solid rgba(239,68,68,.3)}
+.scen-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:.375rem}
+.scen-desc{font-size:11px;color:var(--text2);line-height:1.55;margin-bottom:.75rem}
+.scen-seat-row{display:flex;gap:6px;flex-wrap:wrap}
+.scen-seat{display:flex;flex-direction:column;align-items:center;padding:6px 10px;background:var(--surf2);border-radius:var(--r-sm);min-width:58px}
+.scen-seat-n{font-size:16px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.scen-seat-lbl{font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text3);margin-top:2px}
+
+/* ─── VOTE SHARE ─── */
+.vshare-wrap{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:1.75rem}
+.vshare-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;flex-wrap:wrap;gap:6px}
+.vshare-title{font-size:12px;font-weight:700;color:var(--text)}
+.vshare-sub{font-size:10px;color:var(--text3)}
+.vbar{display:flex;border-radius:6px;overflow:hidden;height:28px;margin-bottom:.625rem}
+.vseg{display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:rgba(255,255,255,.9);white-space:nowrap;overflow:hidden;min-width:4px}
+.vleg{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:.625rem}
+.vleg-item{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text2)}
+.vleg-sq{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+
+/* ─── CONTEST BREAKDOWN ─── */
+.contest-wrap{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.125rem;margin-bottom:1.75rem}
+.contest-intro{font-size:11px;color:var(--text2);line-height:1.6;margin-bottom:.875rem}
+.contest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
+@media(max-width:600px){.contest-grid{grid-template-columns:1fr 1fr}}
+.contest-card{background:var(--surf2);border-radius:var(--r-sm);padding:.875rem;text-align:center;border:1px solid var(--border)}
+.contest-n{font-size:30px;font-weight:900;letter-spacing:-.04em;margin-bottom:4px;line-height:1}
+.contest-type{font-size:10px;font-weight:700;color:var(--text);margin-bottom:4px}
+.contest-sub{font-size:9px;color:var(--text3);line-height:1.45}
+
+/* ─── EARLY VOTER SIGNAL ─── */
+.ev-box{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.25);border-radius:var(--r);padding:1.125rem 1.25rem;margin-bottom:1.75rem;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;align-items:center}
+@media(max-width:520px){.ev-box{grid-template-columns:1fr}}
+.ev-stat{text-align:center}
+.ev-num{font-size:52px;font-weight:900;color:var(--amber);letter-spacing:-.06em;line-height:1}
+.ev-unit{font-size:14px;font-weight:700;color:var(--amber);opacity:.7}
+.ev-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-top:4px}
+.ev-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:.4rem}
+.ev-body{font-size:11px;color:var(--text2);line-height:1.65}
+.ev-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:.75rem}
+.ev-tag{font-size:9px;font-weight:600;padding:2px 8px;border-radius:20px;background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
+
+/* ─── SENTIMENT ─── */
+.sent-grid{display:grid;grid-template-columns:1fr 1fr;gap:.875rem;margin-bottom:1.75rem}
+@media(max-width:600px){.sent-grid{grid-template-columns:1fr}}
+.sent-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:1rem}
+.sent-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.625rem}
+.sent-party{font-size:11px;font-weight:700}
+.sent-score{font-size:24px;font-weight:900;letter-spacing:-.04em}
+.sent-bar{height:6px;background:var(--surf2);border-radius:3px;overflow:hidden;margin-bottom:.5rem}
+.sent-fill{height:100%;border-radius:3px}
+.sent-tags{display:flex;gap:5px;flex-wrap:wrap}
+.sent-tag{font-size:9px;color:var(--text3);background:var(--surf2);padding:2px 7px;border-radius:20px}
+
+/* ─── TENSION / NARRATIVE CARDS ─── */
+.tension-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.875rem;margin-bottom:1.75rem}
+@media(max-width:700px){.tension-grid{grid-template-columns:1fr}}
+.ten-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:1rem}
+.ten-ico{font-size:20px;margin-bottom:.5rem}
+.ten-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:.375rem}
+.ten-body{font-size:11px;color:var(--text2);line-height:1.55}
+
+.narr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.875rem;margin-bottom:1.75rem}
+@media(max-width:660px){.narr-grid{grid-template-columns:1fr}}
+.narr-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:1.125rem}
+.narr-tag{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:20px;margin-bottom:.625rem;display:inline-block}
+.narr-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:.5rem}
+.narr-body{font-size:11px;color:var(--text2);line-height:1.6}
+
+/* ─── KEY SEATS ─── */
+.seats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1.75rem}
+@media(max-width:580px){.seats-grid{grid-template-columns:1fr}}
+.seat-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r-sm);padding:.875rem}
+.seat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem}
+.seat-name{font-size:12px;font-weight:700;color:var(--text)}
+.seat-tag{font-size:8px;font-weight:700;padding:2px 8px;border-radius:20px}
+.seat-parl{font-size:9px;color:var(--text3);margin-bottom:.375rem}
+.seat-body{font-size:10px;color:var(--text2);line-height:1.5}
+
+/* ─── NEWS TRACKER ─── */
+.news-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.75rem}
+a.news-item{display:grid;grid-template-columns:auto 1fr auto;gap:.75rem;align-items:start;background:var(--surf);border:1px solid var(--border);border-radius:var(--r-sm);padding:.75rem 1rem;text-decoration:none;color:inherit;transition:background .15s}
+a.news-item:hover{background:var(--surf2)}
+.news-dt{font-size:9px;color:var(--text3);white-space:nowrap;padding-top:2px}
+.news-hl{font-size:11px;font-weight:600;color:var(--text);line-height:1.45;margin-bottom:.25rem}
+.news-tk{font-size:10px;color:var(--text3);line-height:1.45}
+.news-src-badge{font-size:8px;font-weight:700;padding:2px 7px;border-radius:20px;white-space:nowrap}
+.src-mg{background:rgba(239,68,68,.12);color:#F87171;border:1px solid rgba(239,68,68,.2)}
+.src-fmt{background:rgba(20,184,166,.12);color:#2DD4BF;border:1px solid rgba(20,184,166,.2)}
+.src-mm{background:rgba(59,130,246,.12);color:#93C5FD;border:1px solid rgba(59,130,246,.2)}
+.src-rtm{background:rgba(34,197,94,.12);color:#86EFAC;border:1px solid rgba(34,197,94,.2)}
+.src-bh{background:rgba(99,102,241,.12);color:#A5B4FC;border:1px solid rgba(99,102,241,.2)}
+.src-ig{background:rgba(236,72,153,.12);color:#F9A8D4;border:1px solid rgba(236,72,153,.2)}
+.src-prn{background:rgba(245,158,11,.12);color:#FCD34D;border:1px solid rgba(245,158,11,.2)}
+
+/* ─── STRATEGIC OUTLOOK ─── */
+.outlook-list{display:flex;flex-direction:column;gap:.625rem;margin-bottom:1.75rem}
+.outlook-item{background:var(--surf);border:1px solid var(--border);border-left:3px solid var(--border2);border-radius:var(--r-sm);padding:.875rem 1rem}
+.outlook-item.spec{border-left-color:var(--amber)}
+.outlook-head{display:flex;align-items:center;gap:.625rem;margin-bottom:.375rem;flex-wrap:wrap}
+.outlook-ico{font-size:16px}
+.outlook-title{font-size:12px;font-weight:700;color:var(--text)}
+.spec-tag{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 7px;border-radius:20px;background:rgba(217,119,6,.15);color:var(--amber);border:1px solid rgba(217,119,6,.3)}
+.outlook-body{font-size:11px;color:var(--text2);line-height:1.6}
+
+/* ─── SOURCES ─── */
+.src-list{display:flex;flex-direction:column;gap:.375rem;margin-bottom:2rem}
+.src-row{font-size:10px;color:var(--text3);display:flex;align-items:start;gap:.5rem;line-height:1.5}
+.src-num{flex-shrink:0;color:var(--text4)}
+.src-row a{color:var(--text3);text-decoration:none}
+.src-row a:hover{color:var(--text2)}
+
+@media(max-width:480px){
+  .phdr-title{font-size:26px}
+  .fs-it{padding:.625rem .875rem}
+  .fs-n{font-size:15px}
+  .main{padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<div class="phdr">
+  <div class="phdr-inner">
+    <div class="phdr-top">
+      <a href="index.html" class="back-link">← GE16 Simulation</a>
+      <div class="live-pill"><div class="live-dot"></div>POLLING DAY LIVE</div>
+    </div>
+    <div class="phdr-eye">Pilihanraya Negeri ke-16 · State Election Series</div>
+    <div class="phdr-title">PRN Negeri Sembilan 2026</div>
+    <div class="phdr-sub">Political Intelligence Brief · Hari Mengundi 1 Ogos 2026</div>
+    <div class="phdr-meta">
+      <div class="pm-item"><div class="pm-dot" style="background:var(--ph)"></div>36 DUN seats contested</div>
+      <div class="pm-item"><div class="pm-dot" style="background:var(--green)"></div>Majority: 19 seats · ⅔: 24</div>
+      <div class="pm-item"><div class="pm-dot" style="background:var(--bn)"></div>103 candidates</div>
+      <div class="pm-item"><div class="pm-dot" style="background:var(--ph)"></div>Incumbent: PH</div>
+      <div class="pm-item"><div class="pm-dot" style="background:var(--red)"></div>Early voter: 86.4% at 2pm</div>
+    </div>
+  </div>
+  <div class="fstrip" style="max-width:1140px;margin:0 auto">
+    <div class="fs-it">
+      <div class="fs-n" style="color:var(--ph)">42%</div>
+      <div class="fs-l">P(PH majority ≥19)</div>
+    </div>
+    <div class="fs-it">
+      <div class="fs-n" style="color:var(--amber)">30%</div>
+      <div class="fs-l">P(Hung assembly)</div>
+    </div>
+    <div class="fs-it">
+      <div class="fs-n" style="color:var(--bn)">28%</div>
+      <div class="fs-l">P(BN+PN coalition govt)</div>
+    </div>
+    <div class="fs-it">
+      <div class="fs-n">18.5<span style="font-size:13px;font-weight:600;opacity:.45">/19</span></div>
+      <div class="fs-l">PH seats (mean/median)</div>
+    </div>
+    <div class="fs-it">
+      <div class="fs-n" style="color:var(--amber)">86.4%</div>
+      <div class="fs-l">Early voter turnout</div>
+      <div class="fs-sub">at 2pm · 28 Jul</div>
+    </div>
+    <div class="fs-it">
+      <div class="fs-n">~72%</div>
+      <div class="fs-l">Statewide turnout est.</div>
+      <div class="fs-sub">likely 68–76%</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── MAIN ─── -->
+<div class="main">
+
+  <!-- SCENARIO ANALYSIS -->
+  <div class="sec-hdr">Scenario analysis · Base 45% / PH Strong 27% / BN-PN Surge 28%</div>
+  <div class="scen-grid">
+
+    <div class="scen-card">
+      <div class="scen-prob-row">
+        <div class="scen-prob" style="color:var(--ph)">~27%</div>
+        <div class="scen-badge bull-badge">PH STRONG</div>
+      </div>
+      <div class="scen-title">PH Comfortable Majority</div>
+      <div class="scen-desc">Incumbent advantage holds. Chinese voters turn out strongly in urban Seremban and Nilai. Malay vote splits between BN and PN prevents an anti-PH sweep. PM Anwar's personal campaign delivers swing seats.</div>
+      <div class="scen-seat-row">
+        <div class="scen-seat"><div class="scen-seat-n" style="color:var(--ph)">21–23</div><div class="scen-seat-lbl">PH</div></div>
+        <div class="scen-seat"><div class="scen-seat-n" style="color:var(--bn)">10–12</div><div class="scen-seat-lbl">BN</div></div>
+        <div class="scen-seat"><div class="scen-seat-n" style="color:var(--pn)">3–4</div><div class="scen-seat-lbl">PN</div></div>
+      </div>
+    </div>
+
+    <div class="scen-card base">
+      <div class="scen-prob-row">
+        <div class="scen-prob" style="color:var(--green)">~45%</div>
+        <div class="scen-badge base-badge">BASE</div>
+      </div>
+      <div class="scen-title">PH Slim Majority — Just Defended</div>
+      <div class="scen-desc">PH wins 19–20 seats on a knife-edge. BN captures most of its 25 Malay-majority contests. High early-voter Malay enthusiasm is partially offset by solid urban PH turnout. No single swing is decisive.</div>
+      <div class="scen-seat-row">
+        <div class="scen-seat"><div class="scen-seat-n" style="color:var(--ph)">18–20</div><div class="scen-seat-lbl">PH</div></div>
+        <div class="scen-seat"><div class="scen-seat-n" style="color:var(--bn)">12–14</div><div class="scen-seat-lbl">BN</div></div>
+        <div class="scen-seat"><div class="scen-seat-n" style="color:var(--pn)">4–5</div><div class="scen-seat-lbl">PN</div></div>
+      </div>
+    </div>
+
+    <div class="scen-card">
+      <div class="scen-prob-row">
+        <div class="scen-prob" style="color:var(--red)">~28%</div>
+        <div class="scen-badge bear-badge">BN-PN SURGE</div>
+      </div>
+      <div class="scen-title">Hung Assembly / Opposition Governs</div>
+      <div class="scen-desc">Post-Johor BN momentum carries over. BN+PN's complementary seat arrangement eliminates anti-PH vote splitting — every opposition vote counts. PH falls below 19 and BN+PN form government via coalition (21+ seats).</div>
+      <div class="scen-seat-row">
+        <div class="scen-seat"><div class="scen-seat-n" style="color:var(--ph)">14–17</div><div class="scen-seat-lbl">PH</div></div>
+        <div class="scen-seat"><div class="scen-seat-n" style="color:var(--bn)">15–17</div><div class="scen-seat-lbl">BN</div></div>
+        <div class="scen-seat"><div class="scen-seat-n" style="color:var(--pn)">4–5</div><div class="scen-seat-lbl">PN</div></div>
+      </div>
+    </div>
+
+  </div><!-- /scen-grid -->
+
+  <!-- VOTE SHARE -->
+  <div class="sec-hdr">Statewide projected vote share</div>
+  <div class="vshare-wrap">
+    <div class="vshare-hdr">
+      <span class="vshare-title">36 DUN aggregate · 3-corner + independents</span>
+      <span class="vshare-sub">scenario-weighted estimate</span>
+    </div>
+    <div class="vbar">
+      <div class="vseg" style="flex:44.2;background:#3B82F6">PH 44.2%</div>
+      <div class="vseg" style="flex:35.8;background:#F59E0B">BN 35.8%</div>
+      <div class="vseg" style="flex:13.6;background:#8B5CF6">PN 13.6%</div>
+      <div class="vseg" style="flex:6.4;background:#4B5563">Oth 6.4%</div>
+    </div>
+    <div class="vleg">
+      <div class="vleg-item"><div class="vleg-sq" style="background:#3B82F6"></div>PH (PKR · DAP · Amanah) — 44.2%</div>
+      <div class="vleg-item"><div class="vleg-sq" style="background:#F59E0B"></div>BN (UMNO · MCA · MIC) — 35.8%</div>
+      <div class="vleg-item"><div class="vleg-sq" style="background:#8B5CF6"></div>PN (Bersatu · PAS) — 13.6%</div>
+      <div class="vleg-item"><div class="vleg-sq" style="background:#4B5563"></div>Independents &amp; others — 6.4%</div>
+    </div>
+  </div>
+
+  <!-- CONTEST BREAKDOWN -->
+  <div class="sec-hdr">Seat contestation structure · 36 DUN</div>
+  <div class="contest-wrap">
+    <div class="contest-intro">
+      BN (25 seats) and PN (11 seats) appear to contest <em>complementary</em> seats — 25+11=36, exactly covering the full assembly without overlap. If intentional, this eliminates anti-PH vote splitting in every single constituency. PH, contesting all 36, faces a 1-vs-1 opposition challenge in each seat — PH's seat arrangement advantage is neutralised.
+    </div>
+    <div class="contest-grid">
+      <div class="contest-card">
+        <div class="contest-n" style="color:var(--bn)">~25</div>
+        <div class="contest-type">PH vs BN</div>
+        <div class="contest-sub">Urban-fringe and Malay-majority battlegrounds across Seremban, Rembau, Tampin, and Port Dickson districts. BN's core fighting terrain.</div>
+      </div>
+      <div class="contest-card">
+        <div class="contest-n" style="color:var(--pn)">~11</div>
+        <div class="contest-type">PH vs PN</div>
+        <div class="contest-sub">Rural conservative Malay seats in Jempol, Jelebu, and interior N9. PAS and Bersatu base — PN's natural territory.</div>
+      </div>
+      <div class="contest-card">
+        <div class="contest-n" style="color:var(--green)">36</div>
+        <div class="contest-type">PH contests all</div>
+        <div class="contest-sub">PH is the only party present in every seat. But this also means PH gets no relief: every seat is a fight.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EARLY VOTER SIGNAL -->
+  <div class="sec-hdr">Early voter signal · 28 July 2026 (Hari Mengundi Awal)</div>
+  <div class="ev-box">
+    <div class="ev-stat">
+      <div class="ev-num">86.4<span class="ev-unit">%</span></div>
+      <div class="ev-label">Turnout at 2pm</div>
+    </div>
+    <div>
+      <div class="ev-title">Military &amp; Police Early Vote: Strongest Signal of the Cycle</div>
+      <div class="ev-body">
+        Early voters — predominantly military, police, and certain eligible categories — returned a staggering <strong>86.4%</strong> turnout by 2pm on 28 July, up from 80.79% at 1pm (+5.6pp in a single hour). This cohort disproportionately skews Malay and has historically favoured BN and security-establishment-aligned parties. Such intensity suggests an exceptionally energized Malay voter base heading into polling day. In past state elections, high early-voter turnout correlates with above-average general voter enthusiasm among Malay electorates — raising a red flag for PH's incumbent defence.
+      </div>
+      <div class="ev-tags">
+        <div class="ev-tag">Malay-heavy cohort</div>
+        <div class="ev-tag">BN-leaning historical pattern</div>
+        <div class="ev-tag">86.4% at 2pm · 28 Jul</div>
+        <div class="ev-tag">+5.6pp from 1pm to 2pm</div>
+        <div class="ev-tag">High voter engagement signal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SENTIMENT -->
+  <div class="sec-hdr">Sentiment snapshot · polling-day reading</div>
+  <div class="sent-grid">
+    <div class="sent-card">
+      <div class="sent-head">
+        <span class="sent-party" style="color:var(--ph)">PH — Pakatan Harapan</span>
+        <span class="sent-score" style="color:var(--ph)">62</span>
+      </div>
+      <div class="sent-bar"><div class="sent-fill" style="width:62%;background:var(--ph)"></div></div>
+      <div class="sent-tags">
+        <span class="sent-tag">Incumbent &amp; federal govt resource advantage</span>
+        <span class="sent-tag">PM Anwar personally active</span>
+        <span class="sent-tag">Chinese bloc anchors floor</span>
+      </div>
+    </div>
+    <div class="sent-card">
+      <div class="sent-head">
+        <span class="sent-party" style="color:var(--bn)">BN — Barisan Nasional</span>
+        <span class="sent-score" style="color:var(--bn)">68</span>
+      </div>
+      <div class="sent-bar"><div class="sent-fill" style="width:68%;background:var(--bn)"></div></div>
+      <div class="sent-tags">
+        <span class="sent-tag">Post-Johor momentum</span>
+        <span class="sent-tag">UMNO machinery active</span>
+        <span class="sent-tag">Security-voter early signal</span>
+      </div>
+    </div>
+    <div class="sent-card">
+      <div class="sent-head">
+        <span class="sent-party" style="color:var(--pn)">PN — Perikatan Nasional</span>
+        <span class="sent-score" style="color:var(--pn)">38</span>
+      </div>
+      <div class="sent-bar"><div class="sent-fill" style="width:38%;background:var(--pn)"></div></div>
+      <div class="sent-tags">
+        <span class="sent-tag">Limited 11-seat footprint</span>
+        <span class="sent-tag">Rural conservative base energized</span>
+        <span class="sent-tag">Kingmaker if hung</span>
+      </div>
+    </div>
+    <div class="sent-card">
+      <div class="sent-head">
+        <span class="sent-party" style="color:var(--green)">Voter Engagement</span>
+        <span class="sent-score" style="color:var(--green)">88</span>
+      </div>
+      <div class="sent-bar"><div class="sent-fill" style="width:88%;background:var(--green)"></div></div>
+      <div class="sent-tags">
+        <span class="sent-tag">86.4% early voter signal</span>
+        <span class="sent-tag">High campaign intensity</span>
+        <span class="sent-tag">Vote-buying allegations amplify attention</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEY TENSIONS -->
+  <div class="sec-hdr">Key political tensions</div>
+  <div class="tension-grid">
+    <div class="ten-card">
+      <div class="ten-ico">🤝</div>
+      <div class="ten-title">Federal Ally vs State Rival</div>
+      <div class="ten-body">PH and BN co-govern Malaysia under PM Anwar's unity government. In N9 they contest head-to-head in ~25 seats. This frenemy dynamic is at its most acute here — federal ministers campaign against each other's parties at state level.</div>
+    </div>
+    <div class="ten-card">
+      <div class="ten-ico">💸</div>
+      <div class="ten-title">Vote-Buying Shadow</div>
+      <div class="ten-body">BN chairman Zahid filed police reports backed by witness statements on 30 July alleging systematic vote-buying across N9. SPR put on alert. This creates a potential post-election legal flashpoint — especially if margins are narrow.</div>
+    </div>
+    <div class="ten-card">
+      <div class="ten-ico">♟</div>
+      <div class="ten-title">The BN–PN Complementary Seat Deal</div>
+      <div class="ten-body">BN (25) + PN (11) = exactly 36 seats — the full assembly, with apparent zero overlap. No anti-PH vote is wasted on a 3-corner split in any constituency. If coordinated, this is the most efficient opposition arrangement mathematically possible.</div>
+    </div>
+  </div>
+
+  <!-- CAMPAIGN NARRATIVES -->
+  <div class="sec-hdr">Campaign narratives</div>
+  <div class="narr-grid">
+    <div class="narr-card">
+      <span class="narr-tag" style="background:rgba(239,68,68,.12);color:#F87171;border:1px solid rgba(239,68,68,.2)">Controversy</span>
+      <div class="narr-title">Vote-Buying Allegations Rock Campaign's Final Days</div>
+      <div class="narr-body">With two days to polling day, BN chairman Zahid lodged police reports alleging systematic vote-buying in multiple N9 constituencies. Witness statements were cited. SPR was called on to investigate. Regardless of who wins, this narrative dominates the post-election story if margins are tight — both sides will use it as ammunition.</div>
+    </div>
+    <div class="narr-card">
+      <span class="narr-tag" style="background:rgba(59,130,246,.12);color:#93C5FD;border:1px solid rgba(59,130,246,.2)">PH Strategy</span>
+      <div class="narr-title">PM Anwar's Personal Gamble in N9</div>
+      <div class="narr-body">Anwar led a four-event campaign blitz from 22 July — unusually intensive prime ministerial involvement. A final-day push on 31 July aimed to close the momentum gap. The bet: personal charisma and PM-level resource access outweigh the early-voter Malay enthusiasm signals that pointed toward BN-leaning turnout.</div>
+    </div>
+    <div class="narr-card">
+      <span class="narr-tag" style="background:rgba(245,158,11,.12);color:#FCD34D;border:1px solid rgba(245,158,11,.2)">Signal Watch</span>
+      <div class="narr-title">The 86.4% Early-Voter Alarm Bell</div>
+      <div class="narr-body">Military and police early voters hit 86.4% by 2pm on 28 July — among the highest in N9 state election history. This cohort skews Malay and BN-leaning. In past elections, this has correlated with broader Malay voter enthusiasm on polling day. PH requires exceptional Chinese and urban turnout to neutralise this structural headwind.</div>
+    </div>
+    <div class="narr-card">
+      <span class="narr-tag" style="background:rgba(139,92,246,.12);color:#C4B5FD;border:1px solid rgba(139,92,246,.2)">Macro Context</span>
+      <div class="narr-title">Riding the Johor Wave — or Facing the N9 Wall?</div>
+      <div class="narr-body">BN's strong majority in PRN Johor 2026 created a visible momentum narrative. N9 tests whether that carries into a mixed-demography state where PH holds incumbency. Unlike Johor (BN-majority state), N9 has a significant Chinese electorate in the Seremban corridor — structurally anchoring PH's floor even in adverse scenarios.</div>
+    </div>
+  </div>
+
+  <!-- KEY SEATS TO WATCH -->
+  <div class="sec-hdr">Key seats to watch</div>
+  <div class="seats-grid">
+    <div class="seat-card">
+      <div class="seat-top">
+        <span class="seat-name">Bagan Pinang</span>
+        <span class="seat-tag" style="background:rgba(245,158,11,.12);color:#FCD34D;border:1px solid rgba(245,158,11,.2)">BN Stronghold</span>
+      </div>
+      <div class="seat-parl">P123 Port Dickson</div>
+      <div class="seat-body">Historically BN's safest seat in N9 — won with landslide margins. An important bellwether: if BN loses or narrows here, it signals a dramatic PH wave. If BN holds comfortably, it confirms momentum.</div>
+    </div>
+    <div class="seat-card">
+      <div class="seat-top">
+        <span class="seat-name">Rantau</span>
+        <span class="seat-tag" style="background:rgba(245,158,11,.12);color:#FCD34D;border:1px solid rgba(245,158,11,.2)">BN Won 2019</span>
+      </div>
+      <div class="seat-parl">P124 Rembau</div>
+      <div class="seat-body">Site of the famous 2019 state by-election where BN held. Mixed rural-suburban demographics with Malay majority. Now a key swing indicator: can BN repeat in a less favourable climate, or does PH flip it?</div>
+    </div>
+    <div class="seat-card">
+      <div class="seat-top">
+        <span class="seat-name">Temiang / Seremban Jaya</span>
+        <span class="seat-tag" style="background:rgba(59,130,246,.12);color:#93C5FD;border:1px solid rgba(59,130,246,.2)">Urban Swing</span>
+      </div>
+      <div class="seat-parl">P120 Rasah</div>
+      <div class="seat-body">Urban Seremban-area seats with mixed Chinese-Malay electorate. DAP-PKR cooperation is critical here. Chinese voter turnout gap vs. Malay enthusiasm is most visible in these constituencies.</div>
+    </div>
+    <div class="seat-card">
+      <div class="seat-top">
+        <span class="seat-name">Nilai</span>
+        <span class="seat-tag" style="background:rgba(59,130,246,.12);color:#93C5FD;border:1px solid rgba(59,130,246,.2)">Growth Seat</span>
+      </div>
+      <div class="seat-parl">P119 Kuala Pilah</div>
+      <div class="seat-body">High-growth suburban township with significant young and first-time voter population. New voters registered post-UNDI18 are more numerous here. Their turnout and preference could swing an otherwise narrow result.</div>
+    </div>
+    <div class="seat-card">
+      <div class="seat-top">
+        <span class="seat-name">Jempol / Palong area</span>
+        <span class="seat-tag" style="background:rgba(139,92,246,.12);color:#C4B5FD;border:1px solid rgba(139,92,246,.2)">PN Territory</span>
+      </div>
+      <div class="seat-parl">P117 Jempol</div>
+      <div class="seat-body">PN's most defensible terrain in N9 — rural Malay interior seats with Islamic-conservative voting patterns. PAS-Bersatu ticket here. If PN underperforms its 11-seat base, the BN-PN coalition math collapses.</div>
+    </div>
+    <div class="seat-card">
+      <div class="seat-top">
+        <span class="seat-name">Jelebu area</span>
+        <span class="seat-tag" style="background:rgba(139,92,246,.12);color:#C4B5FD;border:1px solid rgba(139,92,246,.2)">PN-BN Boundary</span>
+      </div>
+      <div class="seat-parl">P118 Jelebu</div>
+      <div class="seat-body">Seat(s) on the boundary of BN and PN contestation zones. Any seat arrangement confusion or late-breaking independents here could cause unintended vote splits — potentially benefiting PH.</div>
+    </div>
+  </div>
+
+  <!-- NEWS TRACKER -->
+  <div class="sec-hdr">News tracker</div>
+  <div class="news-list" id="news-list"></div>
+
+  <!-- STRATEGIC OUTLOOK -->
+  <div class="sec-hdr">Strategic outlook · 4 watch points</div>
+  <div class="outlook-list">
+    <div class="outlook-item">
+      <div class="outlook-head"><span class="outlook-ico">🗳</span><span class="outlook-title">Chinese voter turnout is PH's firewall</span></div>
+      <div class="outlook-body">N9's Chinese electorate — concentrated in Seremban, Nilai, and Senawang — is PH's structural floor. If Chinese turnout matches or exceeds the early-voter Malay enthusiasm already observed, PH holds 18–20 seats. A turnout differential where Malay voters significantly outperform Chinese voters is the single largest risk factor for PH. Watch results from DAP-held Seremban-area seats early — they will set the tone.</div>
+    </div>
+    <div class="outlook-item">
+      <div class="outlook-head"><span class="outlook-ico">🔢</span><span class="outlook-title">BN's 25-seat ceiling makes solo majority impossible</span></div>
+      <div class="outlook-body">Even a perfect BN sweep of all 25 contested seats falls short of the 19-seat majority (BN 25 alone does form a majority — 25 &gt; 19 ✓). But BN cannot reach this in practice: winning 25/25 is unprecedented. BN realistically needs 19+ wins from 25 attempts. If BN wins 18, PN must deliver 1+ for a coalition majority. This creates a structural dependency that binds BN and PN regardless of whether they formalised any seat arrangement.</div>
+    </div>
+    <div class="outlook-item">
+      <div class="outlook-head"><span class="outlook-ico">⚖</span><span class="outlook-title">Vote-buying allegations define the post-election narrative</span></div>
+      <div class="outlook-body">If BN+PN wins by a narrow margin amid Zahid's vote-buying police reports, PH will likely initiate election petitions. If PH wins, the "clean win despite sabotage" narrative consolidates their mandate. The SPR's enforcement posture during polling day — and whether any immediate action follows the reports — will define the legitimacy optics of the result before counting even finishes.</div>
+    </div>
+    <div class="outlook-item spec">
+      <div class="outlook-head"><span class="outlook-ico">🔭</span><span class="outlook-title">Selangor PRK: the chain reaction after N9</span><span class="spec-tag">Speculative</span></div>
+      <div class="outlook-body">Reports suggest Selangor may face a state by-election (PRK) following this election. If BN+PN momentum flips N9, a Selangor PRK becomes the next referendum on whether the opposition wave can reach PH's fortress. Speculative — but political circles are already mapping this chain. An N9 PH win, conversely, likely stalls the narrative and reduces urgency around any Selangor PRK.</div>
+    </div>
+  </div>
+
+  <!-- SOURCES -->
+  <div class="sec-hdr">Sources</div>
+  <div class="src-list">
+    <div class="src-row"><span class="src-num">[1]</span><span>PRN Negeri Sembilan 2026 — Official events portal · <a href="https://prnn9.com/events/" target="_blank" rel="noopener">prnn9.com/events</a></span></div>
+    <div class="src-row"><span class="src-num">[2]</span><span>undi.eCentral.my — Semakan calon &amp; keputusan terkini · <a href="https://undi.ecentral.my/negeri-sembilan/" target="_blank" rel="noopener">undi.ecentral.my/negeri-sembilan</a></span></div>
+    <div class="src-row"><span class="src-num">[3]</span><span>Free Malaysia Today — Vote-buying probe (30 Jul 2026) · <a href="https://www.freemalaysiatoday.com/category/nation/2026/07/30/probe-claims-of-vote-buying-in-negeri-sembilan-urges-zahid" target="_blank" rel="noopener">freemalaysiatoday.com</a></span></div>
+    <div class="src-row"><span class="src-num">[4]</span><span>Malay Mail — Anwar campaign four events (22 Jul 2026) · <a href="https://www.malaymail.com/news/malaysia/2026/07/22/anwar-to-kick-off-first-negeri-sembilan-campaign-tour-with-four-events-today/228503" target="_blank" rel="noopener">malaymail.com</a></span></div>
+    <div class="src-row"><span class="src-num">[5]</span><span>RTM Berita — PM kempen terakhir · <a href="https://berita.rtm.gov.my/mandat/berita/senarai-berita-mandat/berita/senarai-artikel/prn-n-sembilan-pm-turun-kempen-petang-ini-perhebat-momentum-ph/" target="_blank" rel="noopener">berita.rtm.gov.my</a></span></div>
+    <div class="src-row"><span class="src-num">[6]</span><span>Malaysia Gazette — Early voter 80.79% at 1pm (28 Jul) · <a href="https://www.facebook.com/MalaysiaGazette/photos/peratus-pengundi-keluar-mengundi-bagi-hari-mengundi-awal-prn-dun-negeri-sembilan/1548340410670658/" target="_blank" rel="noopener">facebook.com/MalaysiaGazette</a></span></div>
+    <div class="src-row"><span class="src-num">[7]</span><span>Malaysia Gazette — Early voter 86.40% at 2pm (28 Jul) · <a href="https://www.facebook.com/MalaysiaGazette/photos/peratus-pengundi-keluar-mengundi-bagi-hari-mengundi-awal-prn-dun-negeri-sembilan/1548392680665431/" target="_blank" rel="noopener">facebook.com/MalaysiaGazette</a></span></div>
+    <div class="src-row"><span class="src-num">[8]</span><span>Berita Harian — 'Durian runtuh' peniaga N9 · <a href="https://www.beritaharian.sg/malaysia/musim-prn-jadi-durian-runtuh-buat-peniaga-di-negeri-sembilan" target="_blank" rel="noopener">beritaharian.sg</a></span></div>
+    <div class="src-row"><span class="src-num">[9]</span><span>Malaysia Gazette — PRK Selangor mungkin berikutnya · <a href="https://www.facebook.com/MalaysiaGazette/photos/bahang-politik-negara-dijangka-belum-berakhir-selepas-pilihan-raya-negeri-prn-ne/1550561543781878/" target="_blank" rel="noopener">facebook.com/MalaysiaGazette</a></span></div>
+    <div class="src-row"><span class="src-num">[10]</span><span>PN — Pengisytiharan calon PRN N9 (11 kerusi) · <a href="https://www.instagram.com/p/Daz4UGGBFux/" target="_blank" rel="noopener">instagram.com/p/Daz4UGGBFux</a></span></div>
+    <div class="src-row"><span class="src-num">[11]</span><span>Astro Awani — Keputusan Terkini PRN N9 · <a href="https://pru.astroawani.com/" target="_blank" rel="noopener">pru.astroawani.com</a></span></div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+var NEWS=[
+  {dt:'28 Jul',hl:'Peratus pengundi 86.4% sehingga 2pm — early voter surge dalam sejarah N9',
+   src:'MG',cls:'src-mg',
+   url:'https://www.facebook.com/MalaysiaGazette/photos/peratus-pengundi-keluar-mengundi-bagi-hari-mengundi-awal-prn-dun-negeri-sembilan/1548392680665431/',
+   tk:'Staggering 86.4% early-voter turnout by 2pm. Military and police cohort signals intense Malay voter enthusiasm — a structural headwind for PH going into polling day.'},
+  {dt:'28 Jul',hl:'Early voter 80.79% at 1pm — N9 on track for record state election engagement',
+   src:'MG',cls:'src-mg',
+   url:'https://www.facebook.com/MalaysiaGazette/photos/peratus-pengundi-keluar-mengundi-bagi-hari-mengundi-awal-prn-dun-negeri-sembilan/1548340410670658/',
+   tk:'Already at 80.79% by 1pm, rising sharply to 86.4% an hour later. Final early-vote total likely above 90%, pointing to an unusually energized BN-leaning cohort.'},
+  {dt:'30 Jul',hl:'Probe claims of vote-buying in Negeri Sembilan, urges Zahid',
+   src:'FMT',cls:'src-fmt',
+   url:'https://www.freemalaysiatoday.com/category/nation/2026/07/30/probe-claims-of-vote-buying-in-negeri-sembilan-urges-zahid',
+   tk:'BN chairman Ahmad Zahid Hamidi urges probe into vote-buying across multiple N9 constituencies; police reports with witness statements lodged 30 July.'},
+  {dt:'22 Jul',hl:'Anwar kicks off first Negeri Sembilan campaign tour — four events in one day',
+   src:'MM',cls:'src-mm',
+   url:'https://www.malaymail.com/news/malaysia/2026/07/22/anwar-to-kick-off-first-negeri-sembilan-campaign-tour-with-four-events-today/228503',
+   tk:"PM's intensive four-event day launch signals PH treats N9 as a must-hold state. Personal PM presence is PH's strongest campaign card."},
+  {dt:'31 Jul',hl:'PM turun kempen petang ini — perhebat momentum PH menjelang hari mengundi',
+   src:'RTM',cls:'src-rtm',
+   url:'https://berita.rtm.gov.my/mandat/berita/senarai-berita-mandat/berita/senarai-artikel/prn-n-sembilan-pm-turun-kempen-petang-ini-perhebat-momentum-ph/',
+   tk:'Final pre-polling-day push. PM Anwar leads last-minute campaign stops. RTM amplifying PH narrative — incumbent media advantage on display.'},
+  {dt:'Jul',hl:"Musim PRN jadi 'durian runtuh' buat peniaga di Negeri Sembilan",
+   src:'BH',cls:'src-bh',
+   url:'https://www.beritaharian.sg/malaysia/musim-prn-jadi-durian-runtuh-buat-peniaga-di-negeri-sembilan',
+   tk:'High campaign activity drives catering, merchandise, and hospitality demand across N9. Indirect indicator of exceptional voter mobilisation volume.'},
+  {dt:'31 Jul',hl:'Bahang politik dijangka belum berakhir — PRK Selangor mungkin berikutnya',
+   src:'MG',cls:'src-mg',
+   url:'https://www.facebook.com/MalaysiaGazette/photos/bahang-politik-negara-dijangka-belum-berakhir-selepas-pilihan-raya-negeri-prn-ne/1550561543781878/',
+   tk:'N9 is not the last political battleground. Selangor by-election speculation already circulating. Malaysia entering a high-frequency election cycle — political attention will not dissipate after tonight.'},
+  {dt:'~15 Jul',hl:'PN pengisytiharan calon PRN Negeri Sembilan — 11 kerusi',
+   src:'IG',cls:'src-ig',
+   url:'https://www.instagram.com/p/Daz4UGGBFux/',
+   tk:'PN announces 11-seat contestation. No visible overlap with BN-contested seats — strongly suggests an informal seat-arrangement deal that eliminates anti-PH vote splits across all 36 constituencies.'},
+];
+(function(){
+  var list=document.getElementById('news-list');
+  if(!list)return;
+  list.innerHTML=NEWS.map(function(n){
+    return '<a class="news-item" href="'+n.url+'" target="_blank" rel="noopener">'
+      +'<div class="news-dt">'+n.dt+'</div>'
+      +'<div class="news-content">'
+      +'<div class="news-hl">'+n.hl+'</div>'
+      +'<div class="news-tk">'+n.tk+'</div>'
+      +'</div>'
+      +'<div><span class="news-src-badge '+n.cls+'">'+n.src+'</span></div>'
+      +'</a>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

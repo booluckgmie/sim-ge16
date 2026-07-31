@@ -520,6 +520,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   <button class="tn" onclick="switchTab('states',this)"><span class="tn-ico">🗺</span>By State</button>
   <button class="tn" onclick="switchTab('seats',this)"><span class="tn-ico">📋</span>All 222 Seats</button>
   <button class="tn" onclick="switchTab('johor',this)"><span class="tn-ico">🗳</span>PRN Johor 2026</button>
+  <button class="tn" onclick="switchTab('ns9',this)"><span class="tn-ico">🗳</span>PRN N9 2026</button>
   <button class="tn" onclick="switchTab('method',this)"><span class="tn-ico">📖</span>Methodology</button>
 </nav>
 
@@ -866,6 +867,115 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
         <span>
           <span class="prn-intel-ttl">Open Intelligence Brief</span>
           <span class="prn-intel-sub">Sentiment analysis · scenario outlook · news tracker · volatile seats deep-dive</span>
+        </span>
+        <span class="prn-intel-arr">→</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- TAB: PRN NEGERI SEMBILAN 2026 -->
+  <div class="vp" id="tab-ns9">
+    <div class="prn-wrap">
+
+      <!-- Banner -->
+      <div class="prn-banner" style="background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(37,99,235,.03))">
+        <div class="prn-eye">Pilihanraya Negeri ke-16 · State Election Series</div>
+        <div class="prn-title">PRN Negeri Sembilan 2026</div>
+        <div class="prn-date">📅 Polling Day: 1 August 2026 &nbsp;·&nbsp; 36 DUN seats</div>
+        <div class="prn-note">Majority needed: 19 seats &nbsp;·&nbsp; 103 candidates &nbsp;·&nbsp; Incumbent: PH</div>
+      </div>
+
+      <!-- Key probabilities -->
+      <div class="sec-lbl" style="padding:.25rem 0 .5rem">Key probabilities</div>
+      <div class="prn-prob-strip">
+        <div class="prn-prob">
+          <div class="prn-prob-n" style="color:#2563EB">42%</div>
+          <div class="prn-prob-lbl">P(PH majority ≥19)</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n" style="color:var(--amber)">30%</div>
+          <div class="prn-prob-lbl">P(Hung assembly)</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n" style="color:#D97706">28%</div>
+          <div class="prn-prob-lbl">P(BN+PN coalition)</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n">18.5<span style="font-size:15px;font-weight:600;opacity:.45">/19</span></div>
+          <div class="prn-prob-lbl">PH seats (mean/median)</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n" style="color:#D97706">86.4%</div>
+          <div class="prn-prob-lbl">Early voter turnout</div>
+          <div class="prn-prob-sub">at 2pm · 28 Jul — BN-lean signal</div>
+        </div>
+      </div>
+
+      <!-- Expected seats -->
+      <div class="sec-lbl" style="padding:.25rem 0 .5rem">Expected seats</div>
+      <div class="prn-exp-strip">
+        <div class="prn-exp" style="border-color:#2563EB">
+          <div class="prn-exp-n" style="color:#2563EB">18.5</div>
+          <div class="prn-exp-lbl">PH — median 19</div>
+        </div>
+        <div class="prn-exp" style="border-color:#D97706">
+          <div class="prn-exp-n" style="color:#D97706">13.2</div>
+          <div class="prn-exp-lbl">BN seats · 25 contested</div>
+        </div>
+        <div class="prn-exp" style="border-color:#7C3AED">
+          <div class="prn-exp-n" style="color:#7C3AED">4.3</div>
+          <div class="prn-exp-lbl">PN seats · 11 contested</div>
+        </div>
+        <div class="prn-exp">
+          <div class="prn-exp-n" style="color:var(--text3)">~19</div>
+          <div class="prn-exp-lbl">Majority needed</div>
+        </div>
+      </div>
+
+      <!-- Statewide vote share -->
+      <div class="prn-vshare">
+        <div class="prn-vshare-hdr">
+          <span class="prn-vshare-title">Statewide projected vote share</span>
+          <span class="prn-vshare-sub">scenario-weighted · 36 DUN</span>
+        </div>
+        <div class="prn-vbar">
+          <div class="prn-vseg" style="flex:44.2;background:#2563EB">PH 44.2%</div>
+          <div class="prn-vseg" style="flex:35.8;background:#D97706">BN 35.8%</div>
+          <div class="prn-vseg" style="flex:13.6;background:#7C3AED">PN 13.6%</div>
+          <div class="prn-vseg" style="flex:6.4;background:#4B5563">Oth 6.4%</div>
+        </div>
+        <div class="prn-vleg">
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#2563EB"></div>PH 44.2%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#D97706"></div>BN 35.8%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#7C3AED"></div>PN 13.6%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#4B5563"></div>Others 6.4%</div>
+        </div>
+      </div>
+
+      <!-- Contestation note -->
+      <div class="prn-adj" style="border-color:rgba(37,99,235,.25);background:rgba(37,99,235,.04)">
+        <div class="prn-adj-title" style="color:#3B82F6">ℹ Seat contestation structure</div>
+        <div class="prn-adj-row">
+          <span class="prn-adj-seat">~25 seats</span>
+          <span class="prn-adj-txt">PH vs BN direct fight — urban-fringe and Malay-majority battlegrounds across Seremban, Rembau, Tampin, and Port Dickson.</span>
+        </div>
+        <div class="prn-adj-row">
+          <span class="prn-adj-seat">~11 seats</span>
+          <span class="prn-adj-txt">PH vs PN — rural conservative interior: Jempol, Jelebu. BN appears to cede these to PN, creating a no-split opposition strategy.</span>
+        </div>
+        <div class="prn-adj-row">
+          <span class="prn-adj-seat">Key signal</span>
+          <span class="prn-adj-txt">Early voter turnout: <strong>86.4%</strong> by 2pm on 28 Jul — military &amp; police cohort. Historically BN-leaning. Significant PH headwind if Malay polling-day enthusiasm matches this level.</span>
+        </div>
+      </div>
+
+      <!-- Intelligence Brief Link -->
+      <a href="nsembilan.html" class="prn-intel-link" target="_blank" rel="noopener">
+        <span class="prn-intel-ico">🔍</span>
+        <span>
+          <span class="prn-intel-ttl">Open Intelligence Brief</span>
+          <span class="prn-intel-sub">Sentiment · scenario analysis · vote-buying tracker · early voter signals · key seats · news tracker</span>
         </span>
         <span class="prn-intel-arr">→</span>
       </a>
@@ -1621,6 +1731,7 @@ window.switchTab=function(id,el){
   if(id==='states')loadSummary();
   if(id==='analysis')loadAnalysis();
   if(id==='johor')renderPrnJohor();
+  if(id==='ns9'){}
 };
 window.onSl=function(k,v){
   var n=parseInt(v);
