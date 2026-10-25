@@ -5,7 +5,10 @@ const path = require('path');
 const publicDir = path.join(__dirname, '..', 'public');
 if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
 
-const src = path.join(__dirname, '..', 'src', 'template', 'index.html');
-const dest = path.join(publicDir, 'index.html');
-fs.copyFileSync(src, dest);
-console.log('✓ Build complete → public/index.html');
+const templates = ['index.html', 'johor.html', 'nsembilan.html', 'melaka.html'];
+templates.forEach(name => {
+  const src = path.join(__dirname, '..', 'src', 'template', name);
+  const dest = path.join(publicDir, name);
+  fs.copyFileSync(src, dest);
+  console.log(`✓ Build complete → public/${name}`);
+});

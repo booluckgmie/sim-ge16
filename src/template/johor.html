@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>PRN Johor 2026 — Political Intelligence Brief</title>
+<meta name="description" content="Polling-eve intelligence dashboard for the 2026 Johor State Election — sentiment, narratives, news tracker, scenario analysis, and 56-seat forecast.">
+<meta name="robots" content="noindex,nofollow">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#020C1B;--surf:#081526;--surf2:#0C1E38;--surf3:#112448;
+  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);
+  --text:#DCE8F8;--text2:#8A9BBF;--text3:#4A5E80;--text4:#2A3D5E;
+  --bn:#F59E0B;--ph:#3B82F6;--pn:#8B5CF6;
+  --green:#22C55E;--red:#EF4444;--gold:#FCD34D;--amber:#D97706;
+  --r:10px;--r-sm:6px;
+}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased}
+
+/* ─── HEADER ─────────────────────────────────── */
+.phdr{background:linear-gradient(180deg,#030F24 0%,#040E1E 100%);border-bottom:1px solid var(--border2);padding:2rem 1.5rem 0;position:relative;overflow:hidden}
+.phdr::before{content:'';position:absolute;top:-80px;right:-80px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(245,158,11,.07) 0%,transparent 65%);pointer-events:none}
+.phdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,158,11,.3),transparent)}
+.phdr-inner{max-width:1140px;margin:0 auto}
+.phdr-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:1.25rem;flex-wrap:wrap}
+.back-link{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);text-decoration:none;padding:5px 11px;border:1px solid var(--border);border-radius:20px;transition:all .15s;white-space:nowrap}
+.back-link:hover{color:var(--text);border-color:var(--border2)}
+.live-pill{display:flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:20px;font-size:10px;font-weight:700;color:#EF4444;letter-spacing:.5px;text-transform:uppercase}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#EF4444;animation:pdot 1.4s infinite}
+@keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+.phdr-eye{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);margin-bottom:6px}
+.phdr-title{font-size:34px;font-weight:900;color:#fff;letter-spacing:-.06em;margin-bottom:5px;line-height:1}
+.phdr-sub{font-size:13px;color:var(--text2);margin-bottom:14px}
+.phdr-meta{display:flex;gap:18px;flex-wrap:wrap;padding-bottom:1.25rem;border-bottom:1px solid var(--border);font-size:11px;color:var(--text3)}
+.pm-item{display:flex;align-items:center;gap:5px}
+.pm-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+
+/* Forecast strip */
+.fstrip{display:flex;overflow-x:auto;scrollbar-width:none;background:rgba(255,255,255,.02);border-top:1px solid var(--border);max-width:1140px;margin:0 auto}
+.fstrip::-webkit-scrollbar{display:none}
+.fs-it{display:flex;flex-direction:column;align-items:center;padding:.875rem 1.25rem;border-right:1px solid var(--border);white-space:nowrap;flex-shrink:0}
+.fs-n{font-size:19px;font-weight:800;line-height:1;letter-spacing:-.03em}
+.fs-l{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text3);margin-top:3px}
+.fs-div{width:1px;background:var(--border);margin:.5rem 0;flex-shrink:0}
+
+/* ─── MAIN ─────────────────────────────────── */
+.main{max-width:1140px;margin:0 auto;padding:1.5rem}
+
+/* Sections */
+.sec{margin-bottom:1.5rem}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin-bottom:.875rem;flex-wrap:wrap}
+.sec-n{font-size:9px;font-weight:700;color:var(--text3);padding:2px 7px;border:1px solid var(--border);border-radius:20px;font-family:monospace;letter-spacing:.5px}
+.sec-title{font-size:14px;font-weight:800;color:var(--text);letter-spacing:-.02em}
+.sec-badge{font-size:10px;font-weight:600;color:var(--text3);padding:2px 8px;background:var(--surf2);border:1px solid var(--border);border-radius:20px;margin-left:auto;white-space:nowrap}
+
+/* Card */
+.card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.card-hdr{padding:.625rem 1rem;background:var(--surf2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--text)}
+.card-body{padding:1rem}
+
+/* ─── SCENARIOS ─────────────────────────────── */
+.scen-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.scen-card{background:var(--surf);border:1.5px solid var(--border);border-radius:var(--r);padding:1rem;border-top-width:3px;position:relative}
+.scen-card.active{background:rgba(245,158,11,.04);border-color:rgba(245,158,11,.3)}
+.scen-eye{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:5px}
+.scen-title{font-size:15px;font-weight:800;color:var(--text);margin-bottom:3px}
+.scen-prob{font-size:11px;color:var(--text3);margin-bottom:.75rem}
+.scen-seats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:.75rem}
+.scen-seat-chip{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;color:#fff}
+.scen-desc{font-size:11px;color:var(--text2);line-height:1.6}
+.scen-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;gap:1px;margin-bottom:.5rem}
+.base-badge{position:absolute;top:8px;right:8px;font-size:8px;font-weight:700;padding:2px 6px;background:rgba(245,158,11,.2);color:var(--gold);border-radius:10px;text-transform:uppercase;letter-spacing:.4px}
+
+/* ─── VOTE SHARE ─────────────────────────────── */
+.vbar{display:flex;height:26px;border-radius:var(--r-sm);overflow:hidden}
+.vseg{height:100%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:rgba(255,255,255,.9);overflow:hidden;min-width:0;padding:0 4px;white-space:nowrap}
+.vleg{display:flex;flex-wrap:wrap;gap:3px 14px;margin-top:.5rem}
+.vleg-it{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text2)}
+.vleg-sq{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+
+/* ─── SENTIMENT ─────────────────────────────── */
+.sent-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.sent-mood{background:var(--surf);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:var(--r);padding:1rem}
+.sm-tag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--green);margin-bottom:5px}
+.sm-head{font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px}
+.sm-body{font-size:11px;color:var(--text2);line-height:1.7}
+.sent-bars{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:1rem;display:flex;flex-direction:column;gap:.875rem}
+.sb-hdr{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3)}
+.sb-row{display:flex;align-items:center;gap:8px}
+.sb-nm{font-size:11px;font-weight:700;width:30px;flex-shrink:0}
+.sb-track{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.sb-fill{height:100%;border-radius:3px}
+.sb-pct{font-size:11px;font-weight:700;width:24px;text-align:right;color:var(--text)}
+.sb-sub{font-size:9px;color:var(--text3);margin-top:1px;padding-left:38px}
+.tensions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tc{background:var(--surf);border:1px solid var(--border);border-radius:var(--r-sm);padding:.875rem}
+.tc-ico{font-size:18px;margin-bottom:6px}
+.tc-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px}
+.tc-body{font-size:11px;color:var(--text2);line-height:1.6}
+
+/* ─── TWO COLUMN ─────────────────────────────── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+
+/* ─── NARRATIVES ─────────────────────────────── */
+.narr-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.nc{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:.875rem;display:flex;flex-direction:column;gap:5px}
+.nc-ico{font-size:20px}
+.nc-title{font-size:12px;font-weight:700;color:var(--text)}
+.nc-body{font-size:11px;color:var(--text2);line-height:1.65;flex:1}
+.nc-tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;align-self:flex-start}
+.t-bn{background:rgba(245,158,11,.15);color:var(--bn)}
+.t-ph{background:rgba(59,130,246,.15);color:var(--ph)}
+.t-pn{background:rgba(139,92,246,.15);color:var(--pn)}
+.t-n{background:rgba(255,255,255,.06);color:var(--text3)}
+
+/* ─── NEWS ─────────────────────────────────── */
+.news-it{padding:.75rem 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:52px 1fr;gap:8px 10px;align-items:start}
+.news-it:last-child{border-bottom:none}
+.news-date{font-size:9px;font-weight:700;color:var(--text3);padding-top:2px;line-height:1.3}
+.news-hl{font-size:12px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:4px}
+.news-hl a{color:inherit;text-decoration:none}
+.news-hl a:hover{color:var(--ph);text-decoration:underline}
+.news-meta{display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap}
+.src-badge{font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;color:#fff;white-space:nowrap;flex-shrink:0}
+.src-nst{background:#1a47d6}.src-star{background:#cc0000}.src-mm{background:#005599}
+.src-st{background:#003366}.src-fulcrum{background:#44475a}.src-sinar{background:#c84600}.src-nwv{background:#0088aa}
+.news-tk{font-size:11px;color:var(--text2);line-height:1.5}
+
+/* ─── WATCH LIST ─────────────────────────────── */
+.wl-it{display:grid;grid-template-columns:30px 1fr;gap:8px;padding:.75rem 0;border-bottom:1px solid var(--border);align-items:start}
+.wl-it:last-child{border-bottom:none}
+.wl-n{font-size:12px;font-weight:800;color:var(--text3);font-family:monospace}
+.wl-title{font-size:12px;font-weight:700;color:var(--text);margin-bottom:3px}
+.wl-desc{font-size:11px;color:var(--text2);line-height:1.6}
+.spec-tag{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;padding:1px 6px;border-radius:10px;background:rgba(245,158,11,.15);color:var(--bn);margin-top:4px}
+.wl-spec .wl-title{color:var(--text2)}
+.wl-spec .wl-n{color:rgba(245,158,11,.4)}
+
+/* ─── VOLATILE SEATS ─────────────────────────── */
+.vol-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.vc{background:var(--surf);border:1px solid var(--border);border-left:3px solid;border-radius:var(--r-sm);padding:.75rem .875rem}
+.vc-top{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.vc-dun{font-size:9px;font-weight:700;color:var(--text3)}
+.vc-nm{font-size:12px;font-weight:700;color:var(--text);flex:1}
+.vc-cat{font-size:8px;font-weight:700;padding:1px 6px;border-radius:10px;text-transform:uppercase;letter-spacing:.3px;color:#fff}
+.cat-S{background:#166534}.cat-L{background:#854d0e}.cat-Ln{background:#9a3412}.cat-T{background:#991b1b}
+.vc-parl{font-size:9px;color:var(--text3);margin-bottom:.5rem}
+.vc-br{display:flex;align-items:center;gap:4px;margin-top:4px}
+.vc-bl{font-size:9px;font-weight:700;width:22px;flex-shrink:0}
+.vc-bt{flex:1;height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.vc-bf{height:100%;border-radius:3px}
+.vc-bp{font-size:9px;font-weight:700;width:28px;text-align:right}
+
+/* ─── FULL TABLE ─────────────────────────────── */
+.stbl-wrap{border:1px solid var(--border);border-radius:var(--r);overflow:hidden;overflow-x:auto}
+.stbl{width:100%;border-collapse:collapse;font-size:11px;min-width:640px}
+.stbl thead tr{background:var(--surf2)}
+.stbl th{padding:7px 8px;text-align:left;font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--border);white-space:nowrap}
+.stbl th.r{text-align:right}
+.stbl td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:middle}
+.stbl tbody tr:last-child td{border-bottom:none}
+.stbl tbody tr:hover td{background:var(--surf2)}
+.stbl tr.t-adj td{background:rgba(245,158,11,.04)}
+.stbl tr.t-vol td{background:rgba(239,68,68,.04)}
+.cpill{display:inline-block;padding:1px 7px;border-radius:20px;font-size:9px;font-weight:700;color:#fff;white-space:nowrap}
+.pbar-r{display:flex;align-items:center;gap:4px}
+.pbar-t{flex:1;height:3.5px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;min-width:20px}
+.pbar-f{height:100%;border-radius:2px}
+
+/* ─── SOURCES ─────────────────────────────────── */
+.src-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px}
+.src-it{background:var(--surf);border:1px solid var(--border);border-radius:var(--r-sm);padding:.75rem;display:flex;gap:8px}
+.src-idx{font-size:11px;font-weight:700;color:var(--text3);flex-shrink:0}
+.src-hl{font-size:11px;font-weight:600;color:var(--text);text-decoration:none;display:block;line-height:1.4;margin-bottom:3px}
+.src-hl:hover{color:var(--ph)}
+.src-pub{font-size:10px;color:var(--text3)}
+
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media(max-width:900px){.two-col{grid-template-columns:1fr}}
+@media(max-width:720px){
+  .scen-row{grid-template-columns:1fr}
+  .sent-grid{grid-template-columns:1fr}
+  .tensions{grid-template-columns:1fr 1fr}
+  .narr-grid{grid-template-columns:1fr}
+  .phdr-title{font-size:26px}
+}
+@media(max-width:480px){
+  .tensions{grid-template-columns:1fr}
+  .vol-grid{grid-template-columns:1fr}
+  .main{padding:1rem}
+  .scen-seats{flex-direction:column;gap:4px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="phdr">
+  <div class="phdr-inner">
+    <div class="phdr-top">
+      <a href="index.html" class="back-link">← GE16 Simulation</a>
+      <div class="live-pill"><span class="live-dot"></span>POLLING EVE · 10 JUL 2026</div>
+    </div>
+    <div class="phdr-eye">🇲🇾 Pilihanraya Negeri · State Election Intelligence Dashboard</div>
+    <h1 class="phdr-title">PRN Johor 2026</h1>
+    <div class="phdr-sub">Political Intelligence Brief — Comprehensive Polling-Eve Analysis</div>
+    <div class="phdr-meta">
+      <span class="pm-item"><span class="pm-dot" style="background:#EF4444"></span>Polling Day: 11 July 2026</span>
+      <span class="pm-item"><span class="pm-dot" style="background:var(--text4)"></span>56 DUN seats · Majority: 29</span>
+      <span class="pm-item"><span class="pm-dot" style="background:var(--green)"></span>Early vote: 94.49% (EC, Jul 7)</span>
+      <span class="pm-item"><span class="pm-dot" style="background:var(--text4)"></span>Forecast FINAL 10 Jul</span>
+    </div>
+  </div>
+  <div class="fstrip phdr-inner">
+    <div class="fs-it"><div class="fs-n" style="color:var(--bn)">67.7%</div><div class="fs-l">P(BN majority ≥29)</div></div>
+    <div class="fs-it"><div class="fs-n" style="color:var(--bn)">79.9%</div><div class="fs-l">P(BN most seats)</div></div>
+    <div class="fs-it"><div class="fs-n" style="color:var(--amber)">22.8%</div><div class="fs-l">P(hung assembly)</div></div>
+    <div class="fs-div"></div>
+    <div class="fs-it"><div class="fs-n" style="color:var(--bn)">33.9</div><div class="fs-l">BN exp. seats (median 35)</div></div>
+    <div class="fs-it"><div class="fs-n" style="color:var(--ph)">15.4</div><div class="fs-l">PH exp. seats</div></div>
+    <div class="fs-it"><div class="fs-n" style="color:var(--pn)">6.7</div><div class="fs-l">PN exp. seats</div></div>
+    <div class="fs-div"></div>
+    <div class="fs-it"><div class="fs-n" style="color:var(--green)">94.5%</div><div class="fs-l">Early vote turnout</div></div>
+    <div class="fs-it"><div class="fs-n">~64%</div><div class="fs-l">Proj. overall turnout</div></div>
+    <div class="fs-it"><div class="fs-n" style="color:var(--red)">19</div><div class="fs-l">Battleground seats</div></div>
+  </div>
+</div>
+
+<main class="main">
+
+<!-- VOTE SHARE -->
+<div class="sec">
+  <div class="card">
+    <div class="card-hdr">Statewide projected vote share <span style="font-size:10px;color:var(--text3);margin-left:auto;font-weight:400">56 DUN · 3-corner model</span></div>
+    <div class="card-body">
+      <div class="vbar">
+        <div class="vseg" style="flex:45.4;background:var(--bn)">BN 45.4%</div>
+        <div class="vseg" style="flex:34.5;background:var(--ph)">PH 34.5%</div>
+        <div class="vseg" style="flex:14.6;background:var(--pn)">PN 14.6%</div>
+        <div class="vseg" style="flex:3.8;background:#DC2626">BSM 3.8%</div>
+        <div class="vseg" style="flex:1.5;background:#4B5563">MDA 1.5%</div>
+        <div class="vseg" style="flex:0.7;background:#374151">0.7%</div>
+      </div>
+      <div class="vleg">
+        <div class="vleg-it"><div class="vleg-sq" style="background:var(--bn)"></div>BN 45.4%</div>
+        <div class="vleg-it"><div class="vleg-sq" style="background:var(--ph)"></div>PH 34.5%</div>
+        <div class="vleg-it"><div class="vleg-sq" style="background:var(--pn)"></div>PN 14.6%</div>
+        <div class="vleg-it"><div class="vleg-sq" style="background:#DC2626"></div>BERSAMA 3.8%</div>
+        <div class="vleg-it"><div class="vleg-sq" style="background:#4B5563"></div>MUDA/PSM 1.5%</div>
+        <div class="vleg-it"><div class="vleg-sq" style="background:#374151"></div>Others 0.7%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCENARIO ANALYSIS -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-n">01</span>
+    <h2 class="sec-title">Scenario Analysis</h2>
+    <span class="sec-badge">Based on toss-up seat distribution · Jul 10 FINAL</span>
+  </div>
+  <div class="scen-row">
+
+    <div class="scen-card" style="border-top-color:var(--bn)">
+      <div class="scen-eye" style="color:var(--bn)">BN Strong — Best Case</div>
+      <div class="scen-title">Commanding Majority</div>
+      <div class="scen-prob" style="color:var(--text3)">~20% probability · mirrors forecast P(BN most seats) 79.9%</div>
+      <div class="scen-bar">
+        <div style="flex:40;background:var(--bn);border-radius:4px 0 0 4px"></div>
+        <div style="flex:12;background:var(--ph);margin-left:1px"></div>
+        <div style="flex:4;background:var(--pn);margin-left:1px;border-radius:0 4px 4px 0"></div>
+      </div>
+      <div class="scen-seats">
+        <span class="scen-seat-chip" style="background:var(--bn)">BN ~39–40</span>
+        <span class="scen-seat-chip" style="background:var(--ph)">PH ~12</span>
+        <span class="scen-seat-chip" style="background:var(--pn)">PN ~4</span>
+      </div>
+      <div class="scen-desc">All 4 BN Toss-up seats hold (N4 Kemelah, N8 Bukit Pasir, N14 Bukit Naning, N49 Kota Iskandar). BN also gains PN Toss-up seats in Muar/JB corridor (N11 Serom, N40 Tiram). PAS/Bersatu vote transfers to BN materialise cleanly. Low youth turnout in urban seats. MB Onn Hafiz's mandate clearly renewed.</div>
+    </div>
+
+    <div class="scen-card active" style="border-top-color:var(--gold)">
+      <div class="base-badge">BASE</div>
+      <div class="scen-eye" style="color:var(--gold)">Base Case — Most Likely</div>
+      <div class="scen-title">Working Majority</div>
+      <div class="scen-prob" style="color:var(--text3)">~55% probability · current FINAL forecast</div>
+      <div class="scen-bar">
+        <div style="flex:34;background:var(--bn);border-radius:4px 0 0 4px"></div>
+        <div style="flex:15;background:var(--ph);margin-left:1px"></div>
+        <div style="flex:7;background:var(--pn);margin-left:1px;border-radius:0 4px 4px 0"></div>
+      </div>
+      <div class="scen-seats">
+        <span class="scen-seat-chip" style="background:var(--bn)">BN 33–35</span>
+        <span class="scen-seat-chip" style="background:var(--ph)">PH 15</span>
+        <span class="scen-seat-chip" style="background:var(--pn)">PN 7</span>
+      </div>
+      <div class="scen-desc">Mixed Toss-up results — BN wins some, loses some. Projected seat mean 33.9, median 35. BN secures a majority (≥29) but not a commanding one. Battleground seats (N4, N8, N49) split 2-2. PN retains its 4 projected seats including N40 Tiram and N11 Serom. Broad alignment with current polling models.</div>
+    </div>
+
+    <div class="scen-card" style="border-top-color:var(--ph)">
+      <div class="scen-eye" style="color:var(--ph)">BN Weak — Contested Result</div>
+      <div class="scen-title">Thin or Hung Assembly</div>
+      <div class="scen-prob" style="color:var(--text3)">~25% probability · mirrors forecast P(hung) 22.8%</div>
+      <div class="scen-bar">
+        <div style="flex:30;background:var(--bn);border-radius:4px 0 0 4px"></div>
+        <div style="flex:19;background:var(--ph);margin-left:1px"></div>
+        <div style="flex:7;background:var(--pn);margin-left:1px;border-radius:0 4px 4px 0"></div>
+      </div>
+      <div class="scen-seats">
+        <span class="scen-seat-chip" style="background:var(--bn)">BN ~29–31</span>
+        <span class="scen-seat-chip" style="background:var(--ph)">PH ~19</span>
+        <span class="scen-seat-chip" style="background:var(--pn)">PN ~6</span>
+      </div>
+      <div class="scen-desc">BN loses all 4 of its Toss-up seats. PH's mobilisation drive pays off — high urban youth turnout in Johor Bahru corridor flips N42 Johor Jaya, N46 Perling, N49 Kota Iskandar. Layang-Layang (N27) swings to PH. BN at or below 29 → hung assembly, requiring coalition negotiations. "Dear You" ad boosts Chinese turnout in mixed seats.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SENTIMENT SNAPSHOT -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-n">02</span>
+    <h2 class="sec-title">Sentiment Snapshot</h2>
+    <span class="sec-badge">Ground mood · Polling Eve</span>
+  </div>
+
+  <div class="sent-grid">
+    <div class="sent-mood">
+      <div class="sm-tag">Overall Mood</div>
+      <div class="sm-head">Engaged but not overheated</div>
+      <div class="sm-body">Reporting keeps pointing to bread-and-butter concerns — jobs, housing, cost of living, flood mitigation, congestion, and the Johor–Singapore Special Economic Zone (JSJ SEZ). BN has a visible edge as voters view the state government as stable and functional. PH is still building a statewide counter-narrative.
+      <br><br>The BN–PH federal-state split is real but not yet producing a big backlash — creating a <em>"same national coalition, different state fight"</em> dynamic that confuses some voters but has not clearly broken toward either side. The race feels less like a wave election and more like a seat-by-seat calculation.</div>
+    </div>
+
+    <div class="sent-bars">
+      <div class="sb-hdr">Party sentiment indicators (qualitative, 0–100)</div>
+      <div>
+        <div class="sb-row"><span class="sb-nm" style="color:var(--bn)">BN</span><div class="sb-track"><div class="sb-fill" style="width:72%;background:var(--bn)"></div></div><span class="sb-pct">72</span></div>
+        <div class="sb-sub">Cautious confidence · machine advantage intact · stable MB narrative</div>
+      </div>
+      <div>
+        <div class="sb-row"><span class="sb-nm" style="color:var(--ph)">PH</span><div class="sb-track"><div class="sb-fill" style="width:48%;background:var(--ph)"></div></div><span class="sb-pct">48</span></div>
+        <div class="sb-sub">Defensive but competitive · top leadership making direct late appeals</div>
+      </div>
+      <div>
+        <div class="sb-row"><span class="sb-nm" style="color:var(--pn)">PN</span><div class="sb-track"><div class="sb-fill" style="width:28%;background:var(--pn)"></div></div><span class="sb-pct">28</span></div>
+        <div class="sb-sub">Fragmented · PAS/Bersatu split damaging · 4 seats only</div>
+      </div>
+      <div>
+        <div class="sb-row"><span class="sb-nm" style="color:var(--green)">VOT</span><div class="sb-track"><div class="sb-fill" style="width:80%;background:var(--green)"></div></div><span class="sb-pct">80</span></div>
+        <div class="sb-sub">Voter engagement high · 94.5% early vote turnout (EC confirmed)</div>
+      </div>
+      <div style="font-size:9px;color:var(--text3);padding-top:8px;border-top:1px solid var(--border)">Analyst qualitative read from latest 48-hr reporting. Not statistical poll data.</div>
+    </div>
+  </div>
+
+  <div class="tensions">
+    <div class="tc">
+      <div class="tc-ico">⚡</div>
+      <div class="tc-title">Frenemy Dynamic</div>
+      <div class="tc-body">PH &amp; BN are federal Unity Government partners yet fierce state rivals — "same national coalition, different state fight." Creates voter confusion and base skepticism on both sides.</div>
+    </div>
+    <div class="tc">
+      <div class="tc-ico">🔀</div>
+      <div class="tc-title">PAS / Bersatu Rupture</div>
+      <div class="tc-body">Public split between PAS &amp; Bersatu despite both using the PN banner. PAS supporters reportedly leaning toward BN in uncontested seats. Creates unpredictable split-vote patterns in 3-corner fights.</div>
+    </div>
+    <div class="tc">
+      <div class="tc-ico">😤</div>
+      <div class="tc-title">Rebel Fatigue</div>
+      <div class="tc-body">Puad Zarkashi (UMNO/BN) and Marina Ibrahim (DAP/PH) exits dominated social media. Voters express frustration that internal party drama is overshadowing local policy debates such as JSJ SEZ and flood mitigation.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TWO COLUMN -->
+<div class="two-col">
+
+  <!-- LEFT: Narratives + Watch -->
+  <div>
+    <div class="sec">
+      <div class="sec-hdr">
+        <span class="sec-n">03</span>
+        <h2 class="sec-title">Key Campaign Narratives</h2>
+        <span class="sec-badge">Top 4 trending</span>
+      </div>
+      <div class="narr-grid">
+        <div class="nc">
+          <div class="nc-ico">🎲</div>
+          <div class="nc-title">BN's All-Seat Gamble</div>
+          <div class="nc-body">BN contested all 56 seats alone — the primary focus of the campaign. Falling short of a commanding majority will be viewed as a massive strategic failure for Menteri Besar Onn Hafiz Ghazi. Success = validated dominance; underperformance = costly miscalculation.</div>
+          <span class="nc-tag t-bn">BN Risk Factor</span>
+        </div>
+        <div class="nc">
+          <div class="nc-ico">📊</div>
+          <div class="nc-title">The Turnout War</div>
+          <div class="nc-body">PH ministers Saifuddin Nasution and Anthony Loke aggressively campaigning for high voter turnout, working on the assumption that lower turnout favours BN's established machinery. Low turnout = BN advantage. High turnout = PH's mobilisation push becomes dangerous.</div>
+          <span class="nc-tag t-n">Key Variable</span>
+        </div>
+        <div class="nc">
+          <div class="nc-ico">🔀</div>
+          <div class="nc-title">PAS/Bersatu Vote Split</div>
+          <div class="nc-body">If PAS-instructed vote transfer to BN materialises in seats where PN is not contesting, it could significantly impact outcomes in close 3-corner fights. N11 Serom, N15 Maharani, and N40 Tiram are the clearest test cases for this split-vote dynamic.</div>
+          <span class="nc-tag t-pn">PN Factor</span>
+        </div>
+        <div class="nc">
+          <div class="nc-ico">📺</div>
+          <div class="nc-title">"Dear You" Ad Controversy</div>
+          <div class="nc-body">Chinese-language advertisement — featuring a grandmother writing to her granddaughter — labelled "moral blackmail" by some Johor Bahru residents. Heated debate on whether it alienates or successfully mobilises Chinese voters in mixed seats such as N42 Johor Jaya and N49 Kota Iskandar.</div>
+          <span class="nc-tag t-ph">Sentiment Play</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hdr">
+        <span class="sec-n">05</span>
+        <h2 class="sec-title">Strategic Outlook</h2>
+        <span class="sec-badge">What to watch as results come in</span>
+      </div>
+      <div class="card"><div class="card-body" style="padding:0">
+        <div class="wl-it" style="padding:.875rem 1rem">
+          <div class="wl-n">01</div>
+          <div>
+            <div class="wl-title">Early voting → polling-day translation</div>
+            <div class="wl-desc">94.49% early vote participation was very strong. Watch whether high early numbers translate into comparable polling-day turnout — that gap determines how much room PH has to close in battleground seats.</div>
+          </div>
+        </div>
+        <div class="wl-it" style="padding:.875rem 1rem">
+          <div class="wl-n">02</div>
+          <div>
+            <div class="wl-title">8 volatile seats signal the true swing direction</div>
+            <div class="wl-desc">Seats with winning probability below 55% (N4, N8, N11, N14, N15, N40, N42, N49) will show whether this is a BN landslide or a hung assembly. The first marginal results on count night will tell the story.</div>
+          </div>
+        </div>
+        <div class="wl-it" style="padding:.875rem 1rem">
+          <div class="wl-n">03</div>
+          <div>
+            <div class="wl-title">PAS vote transfer verification</div>
+            <div class="wl-desc">In PN-contested vs non-contested seats, watch if PAS voters actually follow party guidance toward BN. Tiram (N40), Serom (N11), and Maharani (N15) are the clearest real-time tests. If transfer does not materialise, PN's projected 4 seats could shrink or shift.</div>
+          </div>
+        </div>
+        <div class="wl-it wl-spec" style="padding:.875rem 1rem;border-bottom:none">
+          <div class="wl-n">◇</div>
+          <div>
+            <div class="wl-title">Turnout threshold</div>
+            <div class="wl-desc">Statewide turnout near 60–70% → BN's ground operation has the cleaner path to a working majority. Spikes above 75% → PH's mobilisation push becomes more dangerous for BN, especially in the Johor Bahru urban corridor and Kulai.</div>
+            <div class="spec-tag">Speculative</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: News + Volatile -->
+  <div>
+    <div class="sec">
+      <div class="sec-hdr">
+        <span class="sec-n">04</span>
+        <h2 class="sec-title">News &amp; Source Tracker</h2>
+        <span class="sec-badge">48-hour reporting · Jul 7–10</span>
+      </div>
+      <div class="card"><div class="card-body" style="padding:.5rem 1rem" id="news-list"></div></div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-hdr">
+        <span class="sec-n">06</span>
+        <h2 class="sec-title">8 Volatile Seats</h2>
+        <span class="sec-badge">Winner probability &lt;55% · results-night watch</span>
+      </div>
+      <div class="vol-grid" id="vol-grid"></div>
+    </div>
+  </div>
+
+</div><!-- /two-col -->
+
+<!-- FULL 56-SEAT TABLE -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-n">07</span>
+    <h2 class="sec-title">All 56 DUN — Seat Forecast</h2>
+    <span class="sec-badge">FINAL 10 Jul · <span style="color:var(--bn)">●</span> adj. · <span style="color:var(--red)">●</span> volatile</span>
+  </div>
+  <div class="stbl-wrap">
+    <table class="stbl">
+      <thead><tr>
+        <th style="width:34px">N°</th>
+        <th>Seat</th>
+        <th>Parliament</th>
+        <th style="width:28px;text-align:center">♟</th>
+        <th style="width:44px">Win</th>
+        <th style="width:66px">Category</th>
+        <th style="width:100px">P(win)</th>
+        <th class="r" style="width:44px">BN%</th>
+        <th class="r" style="width:44px">PH%</th>
+        <th class="r" style="width:44px">PN%</th>
+        <th class="r" style="width:44px">BSM%</th>
+        <th class="r" style="width:46px">MUDA%</th>
+      </tr></thead>
+      <tbody id="full-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SOURCES -->
+<div class="sec">
+  <div class="sec-hdr">
+    <span class="sec-n">08</span>
+    <h2 class="sec-title">Sources</h2>
+    <span class="sec-badge">Primary reporting · PRN Johor 2026</span>
+  </div>
+  <div class="src-grid" id="src-grid"></div>
+</div>
+
+</main>
+
+<footer style="border-top:1px solid var(--border);padding:1.5rem;text-align:center;font-size:10px;color:var(--text3);max-width:1140px;margin:0 auto">
+  PRN Johor 2026 Intelligence Brief · Forecast FINAL 10 Jul 2026 · Part of <a href="index.html" style="color:var(--text2);text-decoration:none">GE16 Simulation Platform</a>
+  <br>Probabilities are model outputs, not guarantees. Sentiment indicators are qualitative analyst reads from latest reporting.
+</footer>
+
+<script>
+var PRN=[
+  {dun:1, seat:'Buloh Kasap',   parl:'Segamat',         cor:2,win:'BN',cat:'Safe',   pBN:0.93,pPH:0.07,pPN:0,   bn:68.7,ph:31.3,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:2, seat:'Jementah',      parl:'Segamat',         cor:3,win:'PH',cat:'Likely', pBN:0.24,pPH:0.73,pPN:0.03,bn:33.3,ph:47.7,pn:19,  bsm:0,  mud:0,  adj:''},
+  {dun:3, seat:'Pemanis',       parl:'Sekijang',        cor:3,win:'BN',cat:'Likely', pBN:0.83,pPH:0.13,pPN:0.04,bn:51.2,ph:28.3,pn:20.4,bsm:0,  mud:0,  adj:''},
+  {dun:4, seat:'Kemelah',       parl:'Sekijang',        cor:3,win:'BN',cat:'Toss-up',pBN:0.46,pPH:0.4, pPN:0.14,bn:37.9,ph:36.2,pn:25.9,bsm:0,  mud:0,  adj:''},
+  {dun:5, seat:'Tenang',        parl:'Labis',           cor:4,win:'BN',cat:'Likely', pBN:0.67,pPH:0.13,pPN:0.2, bn:43.5,ph:26,  pn:28.6,bsm:0,  mud:0,  adj:''},
+  {dun:6, seat:'Bekok',         parl:'Labis',           cor:2,win:'BN',cat:'Safe',   pBN:0.88,pPH:0.12,pPN:0,   bn:65.2,ph:34.8,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:7, seat:'Bukit Kepong',  parl:'Pagoh',           cor:3,win:'PN',cat:'Lean',   pBN:0.38,pPH:0,   pPN:0.62,bn:40.3,ph:10.6,pn:49,  bsm:0,  mud:0,  adj:''},
+  {dun:8, seat:'Bukit Pasir',   parl:'Pagoh',           cor:3,win:'BN',cat:'Toss-up',pBN:0.41,pPH:0.24,pPN:0.35,bn:35.9,ph:30.4,pn:33.7,bsm:0,  mud:0,  adj:''},
+  {dun:9, seat:'Gambir',        parl:'Ledang',          cor:3,win:'BN',cat:'Likely', pBN:0.69,pPH:0.16,pPN:0.14,bn:45,  ph:28.8,pn:26.2,bsm:0,  mud:0,  adj:''},
+  {dun:10,seat:'Tangkak',       parl:'Ledang',          cor:2,win:'PH',cat:'Lean',   pBN:0.38,pPH:0.62,pPN:0,   bn:45.9,ph:54.1,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:11,seat:'Serom',         parl:'Ledang',          cor:3,win:'PN',cat:'Toss-up',pBN:0.37,pPH:0.22,pPN:0.41,bn:34.5,ph:29.7,pn:35.8,bsm:0,  mud:0,  adj:''},
+  {dun:12,seat:'Bentayan',      parl:'Bakri',           cor:2,win:'PH',cat:'Safe',   pBN:0.03,pPH:0.97,pPN:0,   bn:26.8,ph:73.2,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:13,seat:'Simpang Jeram', parl:'Bakri',           cor:4,win:'PH',cat:'Likely', pBN:0.11,pPH:0.74,pPN:0.15,bn:25.8,ph:46.4,pn:27.5,bsm:0,  mud:0.3,adj:''},
+  {dun:14,seat:'Bukit Naning',  parl:'Bakri',           cor:5,win:'BN',cat:'Toss-up',pBN:0.46,pPH:0.2, pPN:0.34,bn:30.6,ph:23.7,pn:27.6,bsm:8.2,mud:0,  adj:''},
+  {dun:15,seat:'Maharani',      parl:'Muar',            cor:4,win:'PN',cat:'Toss-up',pBN:0.25,pPH:0.31,pPN:0.44,bn:28.2,ph:30.3,pn:33.5,bsm:0,  mud:8,  adj:''},
+  {dun:16,seat:'Sungai Balang', parl:'Muar',            cor:3,win:'BN',cat:'Likely', pBN:0.68,pPH:0.04,pPN:0.27,bn:45.8,ph:21.3,pn:32.9,bsm:0,  mud:0,  adj:''},
+  {dun:17,seat:'Semerah',       parl:'Parit Sulong',    cor:3,win:'BN',cat:'Likely', pBN:0.71,pPH:0.09,pPN:0.2, bn:45.7,ph:24.6,pn:29.7,bsm:0,  mud:0,  adj:''},
+  {dun:18,seat:'Sri Medan',     parl:'Parit Sulong',    cor:3,win:'BN',cat:'Safe',   pBN:0.87,pPH:0,   pPN:0.13,bn:60.1,ph:8.3, pn:31.5,bsm:0,  mud:0,  adj:''},
+  {dun:19,seat:'Yong Peng',     parl:'Ayer Hitam',      cor:2,win:'BN',cat:'Likely', pBN:0.7, pPH:0.3, pPN:0,   bn:56.8,ph:43.2,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:20,seat:'Semarang',      parl:'Ayer Hitam',      cor:3,win:'BN',cat:'Safe',   pBN:0.88,pPH:0,   pPN:0.12,bn:59.6,ph:9.8, pn:30.6,bsm:0,  mud:0,  adj:''},
+  {dun:21,seat:'Parit Yaani',   parl:'Sri Gading',      cor:2,win:'BN',cat:'Lean',   pBN:0.64,pPH:0.36,pPN:0,   bn:54.7,ph:45.3,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:22,seat:'Parit Raja',    parl:'Sri Gading',      cor:3,win:'BN',cat:'Likely', pBN:0.78,pPH:0.01,pPN:0.21,bn:51.9,ph:15.4,pn:32.7,bsm:0,  mud:0,  adj:''},
+  {dun:23,seat:'Penggaram',     parl:'Batu Pahat',      cor:2,win:'PH',cat:'Likely', pBN:0.16,pPH:0.84,pPN:0,   bn:37,  ph:63,  pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:24,seat:'Senggarang',    parl:'Batu Pahat',      cor:3,win:'BN',cat:'Lean',   pBN:0.56,pPH:0.3, pPN:0.15,bn:40.5,ph:33.2,pn:26.4,bsm:0,  mud:0,  adj:''},
+  {dun:25,seat:'Rengit',        parl:'Batu Pahat',      cor:3,win:'BN',cat:'Lean',   pBN:0.55,pPH:0.05,pPN:0.4, bn:41.7,ph:20.9,pn:37.4,bsm:0,  mud:0,  adj:''},
+  {dun:26,seat:'Machap',        parl:'Simpang Renggam', cor:2,win:'BN',cat:'Safe',   pBN:1,   pPH:0,   pPN:0,   bn:83.7,ph:16.3,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:27,seat:'Layang-Layang', parl:'Simpang Renggam', cor:3,win:'BN',cat:'Lean',   pBN:0.52,pPH:0.42,pPN:0.06,bn:41.5,ph:38.5,pn:20,  bsm:0,  mud:0,  adj:'No adjust — swing ke PN tidak dapat dikuantifikasi'},
+  {dun:28,seat:'Mengkibol',     parl:'Kluang',          cor:2,win:'PH',cat:'Likely', pBN:0.15,pPH:0.85,pPN:0,   bn:36.7,ph:63.3,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:29,seat:'Mahkota',       parl:'Kluang',          cor:3,win:'BN',cat:'Likely', pBN:0.79,pPH:0.21,pPN:0,   bn:55.9,ph:36.2,pn:0,   bsm:0,  mud:7.9,adj:''},
+  {dun:30,seat:'Paloh',         parl:'Sembrong',        cor:4,win:'BN',cat:'Likely', pBN:0.78,pPH:0.22,pPN:0,   bn:54.4,ph:35.9,pn:8.6, bsm:0,  mud:0,  adj:''},
+  {dun:31,seat:'Kahang',        parl:'Sembrong',        cor:3,win:'BN',cat:'Safe',   pBN:0.88,pPH:0.01,pPN:0.11,bn:55.8,ph:16.5,pn:27.7,bsm:0,  mud:0,  adj:'Boost calon PN + penalty BN. Tetap Safe-BN'},
+  {dun:32,seat:'Endau',         parl:'Mersing',         cor:4,win:'BN',cat:'Lean',   pBN:0.61,pPH:0,   pPN:0.39,bn:48.1,ph:10,  pn:40.5,bsm:0,  mud:0,  adj:''},
+  {dun:33,seat:'Tenggaroh',     parl:'Mersing',         cor:3,win:'BN',cat:'Lean',   pBN:0.65,pPH:0,   pPN:0.35,bn:50.7,ph:8.9, pn:40.5,bsm:0,  mud:0,  adj:''},
+  {dun:34,seat:'Panti',         parl:'Tenggara',        cor:3,win:'BN',cat:'Likely', pBN:0.77,pPH:0,   pPN:0.23,bn:52.1,ph:14.4,pn:33.5,bsm:0,  mud:0,  adj:''},
+  {dun:35,seat:'Pasir Raja',    parl:'Tenggara',        cor:3,win:'BN',cat:'Safe',   pBN:0.86,pPH:0.01,pPN:0.13,bn:55.3,ph:15.9,pn:28.8,bsm:0,  mud:0,  adj:''},
+  {dun:36,seat:'Sedili',        parl:'Kota Tinggi',     cor:3,win:'BN',cat:'Safe',   pBN:0.88,pPH:0,   pPN:0.12,bn:64.8,ph:2.2, pn:33,  bsm:0,  mud:0,  adj:''},
+  {dun:37,seat:'Johor Lama',    parl:'Kota Tinggi',     cor:3,win:'BN',cat:'Safe',   pBN:0.89,pPH:0,   pPN:0.11,bn:60.6,ph:9.5, pn:29.9,bsm:0,  mud:0,  adj:''},
+  {dun:38,seat:'Penawar',       parl:'Pengerang',       cor:3,win:'BN',cat:'Safe',   pBN:0.93,pPH:0,   pPN:0.07,bn:67,  ph:4.1, pn:28.9,bsm:0,  mud:0,  adj:''},
+  {dun:39,seat:'Tanjung Surat', parl:'Pengerang',       cor:2,win:'BN',cat:'Safe',   pBN:1,   pPH:0,   pPN:0,   bn:88.9,ph:11.1,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:40,seat:'Tiram',         parl:'Tebrau',          cor:4,win:'PN',cat:'Toss-up',pBN:0.33,pPH:0.21,pPN:0.45,bn:30.5,ph:26.9,pn:33.8,bsm:8.9,mud:0,  adj:''},
+  {dun:41,seat:'Puteri Wangsa', parl:'Tebrau',          cor:5,win:'PH',cat:'Likely', pBN:0.24,pPH:0.76,pPN:0,   bn:31.7,ph:46.6,pn:0,   bsm:7.7,mud:8.2,adj:'MUDA votes dialihkan ke PH. Tanpa pelarasan: Lean-BN'},
+  {dun:42,seat:'Johor Jaya',    parl:'Pasir Gudang',    cor:4,win:'BN',cat:'Lean',   pBN:0.52,pPH:0.48,pPN:0,   bn:44.8,ph:44.1,pn:0,   bsm:8.5,mud:0,  adj:''},
+  {dun:43,seat:'Permas',        parl:'Pasir Gudang',    cor:4,win:'BN',cat:'Lean',   pBN:0.57,pPH:0.25,pPN:0.18,bn:37.2,ph:28.9,pn:25.5,bsm:8.3,mud:0,  adj:''},
+  {dun:44,seat:'Larkin',        parl:'Johor Bahru',     cor:3,win:'BN',cat:'Likely', pBN:0.76,pPH:0.24,pPN:0,   bn:55,  ph:37.6,pn:0,   bsm:7.4,mud:0,  adj:''},
+  {dun:45,seat:'Stulang',       parl:'Johor Bahru',     cor:4,win:'PH',cat:'Likely', pBN:0.19,pPH:0.8, pPN:0.01,bn:29.8,ph:47.7,pn:14.4,bsm:8,  mud:0,  adj:''},
+  {dun:46,seat:'Perling',       parl:'Pulai',           cor:3,win:'PH',cat:'Lean',   pBN:0.45,pPH:0.55,pPN:0,   bn:44,  ph:47.6,pn:0,   bsm:8.4,mud:0,  adj:''},
+  {dun:47,seat:'Kempas',        parl:'Pulai',           cor:3,win:'BN',cat:'Likely', pBN:0.71,pPH:0.29,pPN:0,   bn:52.6,ph:39.3,pn:0,   bsm:8,  mud:0,  adj:''},
+  {dun:48,seat:'Skudai',        parl:'Iskandar Puteri', cor:4,win:'PH',cat:'Safe',   pBN:0.14,pPH:0.86,pPN:0,   bn:32.9,ph:58.4,pn:0,   bsm:8.4,mud:0.3,adj:''},
+  {dun:49,seat:'Kota Iskandar', parl:'Iskandar Puteri', cor:4,win:'BN',cat:'Toss-up',pBN:0.47,pPH:0.46,pPN:0.06,bn:36.2,ph:35.9,pn:19.8,bsm:8.2,mud:0,  adj:''},
+  {dun:50,seat:'Bukit Permai',  parl:'Kulai',           cor:4,win:'BN',cat:'Likely', pBN:0.84,pPH:0.04,pPN:0.12,bn:47.6,ph:19.4,pn:24.8,bsm:8.2,mud:0,  adj:''},
+  {dun:51,seat:'Bukit Batu',    parl:'Kulai',           cor:5,win:'PH',cat:'Lean',   pBN:0.42,pPH:0.58,pPN:0,   bn:41.3,ph:46.2,pn:0,   bsm:7.6,mud:0.3,adj:''},
+  {dun:52,seat:'Senai',         parl:'Kulai',           cor:3,win:'PH',cat:'Likely', pBN:0.19,pPH:0.81,pPN:0,   bn:35.8,ph:56.6,pn:0,   bsm:7.6,mud:0,  adj:''},
+  {dun:53,seat:'Benut',         parl:'Pontian',         cor:2,win:'BN',cat:'Safe',   pBN:0.99,pPH:0.01,pPN:0,   bn:79.6,ph:20.4,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:54,seat:'Pulai Sebatang',parl:'Pontian',         cor:2,win:'BN',cat:'Safe',   pBN:0.9, pPH:0.1, pPN:0,   bn:66.8,ph:33.2,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:55,seat:'Pekan Nanas',   parl:'Tanjung Piai',    cor:2,win:'BN',cat:'Safe',   pBN:0.88,pPH:0.12,pPN:0,   bn:65.1,ph:34.9,pn:0,   bsm:0,  mud:0,  adj:''},
+  {dun:56,seat:'Kukup',         parl:'Tanjung Piai',    cor:2,win:'BN',cat:'Safe',   pBN:0.96,pPH:0.04,pPN:0,   bn:71.7,ph:28.3,pn:0,   bsm:0,  mud:0,  adj:''}
+];
+
+var NEWS=[
+  {dt:'10 Jul',hl:'Too close to call: The eight volatile seats holding the key to Johor\'s next government',src:'NST',cls:'src-nst',url:'https://www.nst.com.my/news/nation/2026/07/1485387/too-close-call-eight-volatile-seats-holding-key-johors-next-government',tk:'Eight marginal seats may decide the result — turnout and late swing matter most.'},
+  {dt:'10 Jul',hl:'Who will claim victory in the Johor state election?',src:'Sinar Daily',cls:'src-sinar',url:'https://www.sinardaily.my/article/738107/opinions/commentary/who-will-claim-victory-in-the-johor-state-election',tk:'Commentary frames the race as a close call — both BN and PH have grounds for optimism.'},
+  {dt:'10 Jul',hl:'Anwar makes final appeal for Johoreans to choose capable leadership',src:'NST',cls:'src-nst',url:'https://www.nst.com.my/amp/news/nation/2026/07/1485370/anwar-makes-final-appeal-johoreans-choose-capable-leadership',tk:'PH using a final leadership-and-competence appeal on polling eve.'},
+  {dt:'9 Jul', hl:'BN candidates upbeat despite contesting in PH strongholds in Stulang, Perling',src:'NST',cls:'src-nst',url:'https://www.nst.com.my/amp/news/nation/2026/07/1484586/bn-candidates-upbeat-despite-contesting-ph-strongholds-stulang-perling',tk:'BN projecting confidence even in tougher PH-leaning urban terrain.'},
+  {dt:'8 Jul', hl:'Parties chase crucial votes',src:'The Star',cls:'src-star',url:'',tk:'Turnout is the main battlefield — both camps converting enthusiasm into ballots.'},
+  {dt:'7 Jul', hl:'Johor polls: Early voter turnout at 94.49%, says EC',src:'The Star',cls:'src-star',url:'',tk:'Very strong early voting signals real ground-level engagement ahead of polling day.'},
+  {dt:'7 Jul', hl:'Johor polls: 24,751 early voters set to cast ballots',src:'Newswav',cls:'src-nwv',url:'https://newswav.com/article/johor-polls-24-751-early-voters-set-to-cast-ballots-today-A2607_3SLY5L',tk:'Early voting started briskly — mobilisation active on both sides.'},
+  {dt:'7 Jul', hl:'Early voter turnout reaches 38.64% as of 10am',src:'Malay Mail',cls:'src-mm',url:'',tk:'Strong early-morning start confirmed high advance participation.'},
+  {dt:'6 Jul', hl:'Rebels shake up Malaysian politics',src:'Straits Times',cls:'src-st',url:'',tk:'Internal disunity in BN, PH, and PN muddying voter loyalty across the board.'},
+  {dt:'5 Jul', hl:'Johor election won\'t hurt property market',src:'The Star',cls:'src-star',url:'',tk:'Analysts believe market stability will remain regardless of result.'},
+  {dt:'4 Jul', hl:'Johor polls: The choice between continuity and change',src:'NST',cls:'src-nst',url:'',tk:'BN holding the lead narrative; local issues dominating over political controversy.'},
+  {dt:'30 Jun',hl:'The 2026 Johor Election: Advantage BN?',src:'Fulcrum',cls:'src-fulcrum',url:'',tk:'BN enjoys strong tailwinds but faces high-stakes pressure to perform well.'}
+];
+
+var SRCS=[
+  {hl:'Too close to call: Eight volatile seats — the key to Johor\'s next government',url:'https://www.nst.com.my/news/nation/2026/07/1485387/too-close-call-eight-volatile-seats-holding-key-johors-next-government',pub:'NST · 10 Jul 2026'},
+  {hl:'Anwar makes final appeal for Johoreans to choose capable leadership',url:'https://www.nst.com.my/amp/news/nation/2026/07/1485370/anwar-makes-final-appeal-johoreans-choose-capable-leadership',pub:'NST · 10 Jul 2026'},
+  {hl:'BN candidates upbeat in Stulang, Perling PH strongholds',url:'https://www.nst.com.my/amp/news/nation/2026/07/1484586/bn-candidates-upbeat-despite-contesting-ph-strongholds-stulang-perling',pub:'NST · 9 Jul 2026'},
+  {hl:'Johor polls: 24,751 early voters set to cast ballots',url:'https://newswav.com/article/johor-polls-24-751-early-voters-set-to-cast-ballots-today-A2607_3SLY5L',pub:'Newswav · 7 Jul 2026'},
+  {hl:'Who will claim victory in the Johor state election?',url:'https://www.sinardaily.my/article/738107/opinions/commentary/who-will-claim-victory-in-the-johor-state-election',pub:'Sinar Daily · 10 Jul 2026'}
+];
+
+var VOL_DUNS=[4,8,11,14,15,40,42,49];
+var WC={BN:'#F59E0B',PH:'#3B82F6',PN:'#8B5CF6'};
+var CC={Safe:'cat-S',Likely:'cat-L',Lean:'cat-Ln','Toss-up':'cat-T'};
+var CPB={Safe:'#166534',Likely:'#854d0e',Lean:'#9a3412','Toss-up':'#991b1b'};
+
+function fv(v){return v>0?v.toFixed(v===Math.round(v)?0:1)+'%':'—';}
+
+// News
+(function(){
+  var el=document.getElementById('news-list');
+  if(!el)return;
+  el.innerHTML=NEWS.map(function(n){
+    var hl=n.url?'<a href="'+n.url+'" target="_blank" rel="noopener">'+n.hl+'</a>':n.hl;
+    return '<div class="news-it">'
+      +'<div class="news-date">'+n.dt+'</div>'
+      +'<div>'
+        +'<div class="news-hl">'+hl+'</div>'
+        +'<div class="news-meta"><span class="src-badge '+n.cls+'">'+n.src+'</span><span class="news-tk">'+n.tk+'</span></div>'
+      +'</div>'
+    +'</div>';
+  }).join('');
+})();
+
+// Volatile seats
+(function(){
+  var el=document.getElementById('vol-grid');
+  if(!el)return;
+  el.innerHTML=PRN.filter(function(s){return VOL_DUNS.indexOf(s.dun)>-1;}).map(function(s){
+    var pW=s.win==='BN'?s.pBN:(s.win==='PH'?s.pPH:s.pPN);
+    var wc=WC[s.win]||'#888';
+    var pbn=Math.round(s.pBN*100),pph=Math.round(s.pPH*100),ppn=Math.round(s.pPN*100);
+    return '<div class="vc" style="border-left-color:'+wc+'">'
+      +'<div class="vc-top"><span class="vc-dun">N'+s.dun+'</span><span class="vc-nm">'+s.seat+'</span><span class="vc-cat '+CC[s.cat]+'">'+s.cat+'</span></div>'
+      +'<div class="vc-parl">'+s.parl+' · '+s.cor+' corners</div>'
+      +(pbn>0?'<div class="vc-br"><span class="vc-bl" style="color:var(--bn)">BN</span><div class="vc-bt"><div class="vc-bf" style="width:'+pbn+'%;background:var(--bn)"></div></div><span class="vc-bp" style="color:var(--bn)">'+pbn+'%</span></div>':'')
+      +(pph>0?'<div class="vc-br"><span class="vc-bl" style="color:var(--ph)">PH</span><div class="vc-bt"><div class="vc-bf" style="width:'+pph+'%;background:var(--ph)"></div></div><span class="vc-bp" style="color:var(--ph)">'+pph+'%</span></div>':'')
+      +(ppn>0?'<div class="vc-br"><span class="vc-bl" style="color:var(--pn)">PN</span><div class="vc-bt"><div class="vc-bf" style="width:'+ppn+'%;background:var(--pn)"></div></div><span class="vc-bp" style="color:var(--pn)">'+ppn+'%</span></div>':'')
+    +'</div>';
+  }).join('');
+})();
+
+// Full table
+(function(){
+  var tb=document.getElementById('full-tbody');
+  if(!tb)return;
+  tb.innerHTML=PRN.map(function(s){
+    var pW=s.win==='BN'?s.pBN:(s.win==='PH'?s.pPH:s.pPN);
+    var wc=WC[s.win]||'#888';
+    var isV=VOL_DUNS.indexOf(s.dun)>-1;
+    var aM=s.adj?'<span title="'+s.adj.replace(/"/g,"'")+'" style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--bn);margin-left:4px;vertical-align:middle"></span>':'';
+    var vM=isV?'<span title="Volatile seat — winner prob <55%" style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--red);margin-left:3px;vertical-align:middle"></span>':'';
+    return '<tr class="'+(s.adj?'t-adj':'')+(isV?' t-vol':'')+'">'
+      +'<td style="color:var(--text3);font-size:10px;text-align:center">N'+s.dun+'</td>'
+      +'<td style="font-weight:600;font-size:11px">'+s.seat+aM+vM+'</td>'
+      +'<td style="font-size:10px;color:var(--text3)">'+s.parl+'</td>'
+      +'<td style="text-align:center;font-size:10px;color:var(--text3)">'+s.cor+'</td>'
+      +'<td><span style="display:inline-block;padding:1px 7px;border-radius:20px;font-size:9px;font-weight:700;color:#fff;background:'+wc+'">'+s.win+'</span></td>'
+      +'<td><span class="cpill" style="background:'+CPB[s.cat]+'">'+s.cat+'</span></td>'
+      +'<td><div class="pbar-r"><span style="font-size:10px;font-weight:700;width:26px;text-align:right;flex-shrink:0;color:'+wc+'">'+Math.round(pW*100)+'%</span>'
+          +'<div class="pbar-t"><div class="pbar-f" style="width:'+(pW*100)+'%;background:'+wc+'"></div></div></div></td>'
+      +'<td class="r" style="font-size:10px;font-weight:600;color:var(--bn)">'+s.bn+'%</td>'
+      +'<td class="r" style="font-size:10px;color:var(--ph)">'+fv(s.ph)+'</td>'
+      +'<td class="r" style="font-size:10px;color:var(--pn)">'+fv(s.pn)+'</td>'
+      +'<td class="r" style="font-size:10px;color:var(--text3)">'+fv(s.bsm)+'</td>'
+      +'<td class="r" style="font-size:10px;color:var(--text3)">'+fv(s.mud)+'</td>'
+    +'</tr>';
+  }).join('');
+})();
+
+// Sources
+(function(){
+  var el=document.getElementById('src-grid');
+  if(!el)return;
+  el.innerHTML=SRCS.map(function(s,i){
+    return '<div class="src-it"><span class="src-idx">['+(i+1)+']</span><div>'
+      +'<a class="src-hl" href="'+s.url+'" target="_blank" rel="noopener">'+s.hl+'</a>'
+      +'<div class="src-pub">'+s.pub+'</div>'
+    +'</div></div>';
+  }).join('');
+})();
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
