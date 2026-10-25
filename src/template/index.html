@@ -135,7 +135,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .pb-seg{height:100%;display:flex;align-items:center;justify-content:center;min-width:0;overflow:hidden;transition:flex .55s cubic-bezier(.4,0,.2,1)}
 .pb-seg span{font-size:10px;font-weight:600;color:rgba(255,255,255,.95);padding:0 4px;white-space:nowrap;overflow:hidden}
 .parl-maj{position:absolute;top:0;bottom:0;width:2px;background:#EF4444;opacity:.65}
-.parl-maj-lbl{position:absolute;top:-17px;transform:translateX(-50%);font-size:9px;color:#EAB308;font-weight:700;white-space:nowrap}
+.parl-maj-lbl{position:absolute;top:-17px;transform:translateX(-50%);font-size:9px;color:#DC2626;font-weight:700;white-space:nowrap}
 .parl-leg{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:.625rem}
 .pleg{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text2)}
 .pleg-sq{width:10px;height:10px;border-radius:3px}
@@ -159,7 +159,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .cbar-fill{height:100%;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;min-width:28px;transition:width .55s cubic-bezier(.4,0,.2,1)}
 .cbar-fill span{font-size:10px;font-weight:700;color:rgba(255,255,255,.95)}
 .cbar-mk{position:absolute;top:-3px;bottom:-3px;width:2px;background:#EF4444;opacity:.5;border-radius:1px}
-.cbar-mk-lbl{position:absolute;top:-17px;transform:translateX(-50%);font-size:9px;color:#EAB308;font-weight:700;white-space:nowrap}
+.cbar-mk-lbl{position:absolute;top:-17px;transform:translateX(-50%);font-size:9px;color:#DC2626;font-weight:700;white-space:nowrap}
 
 /* ===== CONTROLS ===== */
 .ctrl-wrap{padding:.875rem 1.25rem 1.25rem}
@@ -223,7 +223,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .seat-st{font-size:10px;color:var(--text3);margin-top:1px}
 .pill{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;color:#fff;white-space:nowrap}
 .rbar-sm{display:flex;height:5px;border-radius:3px;overflow:hidden;gap:1px;width:52px;margin-bottom:2px}
-.flip-lbl{font-size:9px;color:#EAB308;font-weight:700;margin-left:5px}
+.flip-lbl{font-size:9px;color:#DC2626;font-weight:700;margin-left:5px}
 .pg-row{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:.875rem;flex-wrap:wrap}
 .pgb{padding:5px 11px;font-size:11px;font-weight:500;border-radius:var(--r-sm);border:1px solid var(--border2);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .15s}
 .pgb:hover:not(:disabled):not(.on){background:var(--surface2)}
@@ -340,8 +340,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .party-info-nm{font-size:12px;font-weight:600;color:var(--text)}
 .party-info-sub{font-size:11px;color:var(--text2);line-height:1.5;margin-top:1px}
 .party-note{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;padding:1px 6px;border-radius:10px;margin-left:5px;vertical-align:middle}
-.pn-ph{background:rgba(37,99,235,.12);color:#EF4444}
-.pn-sep{background:rgba(220,38,38,.12);color:#EAB308}
+.pn-ph{background:rgba(239,68,68,.12);color:#EF4444}
+.pn-sep{background:rgba(234,179,8,.15);color:#92400E}
 .pn-opp{background:rgba(124,58,237,.12);color:#7C3AED}
 .pn-gps{background:rgba(5,150,105,.12);color:#059669}
 .view-from-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:.875rem 1rem;margin:.625rem 0}
@@ -439,6 +439,26 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   .race-grid{grid-template-columns:1fr}
   .preset-row{grid-template-columns:1fr}
 }
+/* ===== PARTY BADGES ===== */
+.pbadge{display:inline-flex;align-items:center;justify-content:center;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.03em;color:#fff;white-space:nowrap;flex-shrink:0;line-height:1.4;font-family:'Inter',system-ui,sans-serif}
+.pb-ph{background:#EF4444}.pb-bsm{background:#EAB308;color:#78350F}.pb-pn{background:#7C3AED}.pb-bn{background:#2563EB}.pb-gps{background:#059669}.pb-war{background:#4B5563}.pb-pas{background:#16A34A}.pb-pkr{background:#EF4444}.pb-dap{background:#DC2626}.pb-amn{background:#B91C1C}
+/* ===== MOBILE BOTTOM NAV ===== */
+.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--surface);border-top:1px solid var(--border);padding:4px 0 max(4px,env(safe-area-inset-bottom,0px));box-shadow:0 -4px 20px rgba(0,0,0,.12)}
+.mob-nav-inner{display:flex;justify-content:space-around;align-items:stretch;max-width:980px;margin:0 auto}
+.mn-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 2px;border:none;background:none;cursor:pointer;color:var(--text3);transition:color .15s;-webkit-tap-highlight-color:transparent;min-height:50px}
+.mn-btn.on{color:var(--focus-col)}
+.mn-ico{font-size:20px;line-height:1}
+.mn-lbl{font-size:9px;font-weight:600;line-height:1}
+.prn-sub{display:none;position:fixed;bottom:calc(62px + env(safe-area-inset-bottom,0px));left:0;right:0;z-index:195;background:var(--surface);border-top:1px solid var(--border);padding:.5rem .75rem;box-shadow:0 -4px 20px rgba(0,0,0,.12)}
+.prn-sub.open{display:block}
+.prn-sub-inner{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.prn-sub-btn{padding:8px 16px;border-radius:var(--r-sm);border:1px solid var(--border2);background:var(--surface2);color:var(--text2);font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.prn-sub-btn:hover,.prn-sub-btn:active{background:var(--surface3)}
+@media(max-width:768px){
+  .mob-nav{display:block}
+  .tab-nav{display:none}
+  body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
+}
 </style>
 </head>
 <body>
@@ -469,16 +489,16 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   <span class="focus-lbl">View from</span>
   <div class="focus-grp">
     <button class="fb on" data-focus="PH" onclick="setFocus('PH',this)">
-      <span class="fb-dot" style="background:#EF4444"></span>PH
+      <span class="pbadge pb-ph">PH</span>
     </button>
     <button class="fb" data-focus="PN" onclick="setFocus('PN',this)">
-      <span class="fb-dot" style="background:#7C3AED"></span>PN
+      <span class="pbadge pb-pn">PN</span>
     </button>
     <button class="fb" data-focus="BN" onclick="setFocus('BN',this)">
-      <span class="fb-dot" style="background:#2563EB"></span>BN
+      <span class="pbadge pb-bn">BN</span>
     </button>
     <button class="fb" data-focus="GPS" onclick="setFocus('GPS',this)">
-      <span class="fb-dot" style="background:#059669"></span>GPS
+      <span class="pbadge pb-gps">GPS</span>
     </button>
   </div>
   <span class="focus-hint" id="focus-hint">Win % shows Pakatan Harapan · PKR · DAP · AMANAH</span>
@@ -496,12 +516,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     <div class="loading"><div class="spinner"></div>Building hemicycle…</div>
   </div>
   <div class="parl-legend">
-    <div class="pl-item"><div class="pl-dot" style="background:#EF4444"></div>PH</div>
-    <div class="pl-item"><div class="pl-dot" style="background:#EAB308"></div>BERSAMA</div>
-    <div class="pl-item"><div class="pl-dot" style="background:#059669"></div>GPS</div>
-    <div class="pl-item"><div class="pl-dot" style="background:#4B5563"></div>WARISAN</div>
-    <div class="pl-item"><div class="pl-dot" style="background:#2563EB"></div>BN</div>
-    <div class="pl-item"><div class="pl-dot" style="background:#7C3AED"></div>PN</div>
+    <div class="pl-item"><span class="pbadge pb-ph">PH</span></div>
+    <div class="pl-item"><span class="pbadge pb-bsm">BRSM</span></div>
+    <div class="pl-item"><span class="pbadge pb-gps">GPS</span></div>
+    <div class="pl-item"><span class="pbadge pb-war">WAR</span></div>
+    <div class="pl-item"><span class="pbadge pb-bn">BN</span></div>
+    <div class="pl-item"><span class="pbadge pb-pn">PN</span></div>
   </div>
 </div>
 
@@ -1566,15 +1586,15 @@ function renderSummary(d){
 
   // Individual-party scoreboard
   var PARTY_ORDER=[
-    {key:'PKR',col:'#EF4444',grp:'PH'},{key:'DAP',col:'#DC2626',grp:'PH'},
-    {key:'AMANAH',col:'#B91C1C',grp:'PH'},{key:'BERSAMA',col:'#EAB308',grp:'PH+'},
-    {key:'PN-BERSATU',col:'#7C3AED',grp:'PN'},{key:'PN-PAS',col:'#16A34A',grp:'PN'},
-    {key:'BN-UMNO',col:'#2563EB',grp:'BN'},{key:'BN-MCA',col:'#1D4ED8',grp:'BN'},
-    {key:'GPS',col:'#059669',grp:'GPS'},{key:'WARISAN',col:'#4B5563',grp:'Other'}
+    {key:'PKR',col:'#EF4444',grp:'PH',bc:'pb-pkr',ba:'PKR'},{key:'DAP',col:'#DC2626',grp:'PH',bc:'pb-dap',ba:'DAP'},
+    {key:'AMANAH',col:'#B91C1C',grp:'PH',bc:'pb-amn',ba:'AMN'},{key:'BERSAMA',col:'#EAB308',grp:'PH+',bc:'pb-bsm',ba:'BRSM'},
+    {key:'PN-BERSATU',col:'#7C3AED',grp:'PN',bc:'pb-pn',ba:'BRSATU'},{key:'PN-PAS',col:'#16A34A',grp:'PN',bc:'pb-pas',ba:'PAS'},
+    {key:'BN-UMNO',col:'#2563EB',grp:'BN',bc:'pb-bn',ba:'UMNO'},{key:'BN-MCA',col:'#1D4ED8',grp:'BN',bc:'pb-bn',ba:'MCA'},
+    {key:'GPS',col:'#059669',grp:'GPS',bc:'pb-gps',ba:'GPS'},{key:'WARISAN',col:'#4B5563',grp:'Other',bc:'pb-war',ba:'WAR'}
   ];
   var psbEl=document.getElementById('party-sb');
   if(psbEl)psbEl.innerHTML=PARTY_ORDER.filter(function(pm){return(p[pm.key]||0)>0;}).map(function(pm){
-    return '<div class="sbc"><div class="sbc-h"><span class="sbc-dot" style="background:'+pm.col+'"></span><div class="sbc-lbl">'+(PS[pm.key]||pm.key)+'</div></div>'
+    return '<div class="sbc"><div class="sbc-h"><span class="pbadge '+pm.bc+'">'+pm.ba+'</span><div class="sbc-lbl">'+(PS[pm.key]||pm.key)+'</div></div>'
       +'<div class="sbc-n" style="color:'+pm.col+'">'+(p[pm.key]||0)+'</div>'
       +'<div class="sbc-d" style="color:var(--text3)">'+pm.grp+'</div></div>';
   }).join('');
@@ -1584,14 +1604,14 @@ function renderSummary(d){
     var dv=n-r;return dv>0?'<span class="du">+'+dv+'</span>':dv<0?'<span class="dd">'+dv+'</span>':'<span class="dn">&#8212;</span>';
   }
   document.getElementById('scoreboard').innerHTML=[
-    {lbl:'Pakatan Harapan',   dot:'#EF4444',n:ph, r:ref.ph},
-    {lbl:'BERSAMA',          dot:'#EAB308',n:bm, r:ref.bm, note:'new party · independent'},
-    {lbl:'Perikatan Nasional',dot:'#7C3AED',n:pn, r:ref.pn},
-    {lbl:'Barisan Nasional',  dot:'#2563EB',n:bn, r:ref.bn},
-    {lbl:'GPS',               dot:'#059669',n:gps,r:ref.gps},
-    {lbl:'Others',            dot:'#4B5563',n:war,r:ref.war}
+    {lbl:'Pakatan Harapan',   bc:'pb-ph', ba:'PH',  n:ph, r:ref.ph},
+    {lbl:'BERSAMA',          bc:'pb-bsm',ba:'BRSM',n:bm, r:ref.bm, note:'new party · independent'},
+    {lbl:'Perikatan Nasional',bc:'pb-pn', ba:'PN',  n:pn, r:ref.pn},
+    {lbl:'Barisan Nasional',  bc:'pb-bn', ba:'BN',  n:bn, r:ref.bn},
+    {lbl:'GPS',               bc:'pb-gps',ba:'GPS', n:gps,r:ref.gps},
+    {lbl:'Others',            bc:'pb-war',ba:'OTH', n:war,r:ref.war}
   ].map(function(x){
-    return '<div class="sbc"><div class="sbc-h"><span class="sbc-dot" style="background:'+x.dot+'"></span><div class="sbc-lbl">'+x.lbl+'</div></div><div class="sbc-n">'+x.n+'</div><div class="sbc-d">'+dt(x.n,x.r,x.note)+' vs GE15</div></div>';
+    return '<div class="sbc"><div class="sbc-h"><span class="pbadge '+x.bc+'">'+x.ba+'</span><div class="sbc-lbl">'+x.lbl+'</div></div><div class="sbc-n">'+x.n+'</div><div class="sbc-d">'+dt(x.n,x.r,x.note)+' vs GE15</div></div>';
   }).join('');
 
   var ph65=Math.round(ph*0.65)||1,ph28=Math.round(ph*0.28)||1;
@@ -1897,14 +1917,42 @@ window.switchTab=function(id,el){
   curView=id;
   document.querySelectorAll('.tn').forEach(function(b){b.classList.remove('on');});
   document.querySelectorAll('.vp').forEach(function(p){p.classList.remove('on');});
-  el.classList.add('on');
+  if(el&&el.classList&&el.classList.contains('tn'))el.classList.add('on');
   document.getElementById('tab-'+id).classList.add('on');
+  // mobile nav active state
+  var mobMap={overview:'mn-overview',analysis:'mn-analysis',seats:'mn-seats',
+    johor:'mn-prn',ns9:'mn-prn',melaka:'mn-prn',
+    controls:'mn-more',states:'mn-more',method:'mn-more'};
+  document.querySelectorAll('.mn-btn').forEach(function(b){b.classList.remove('on');});
+  var mbId=mobMap[id];if(mbId){var mb=document.getElementById(mbId);if(mb)mb.classList.add('on');}
+  // close submenus
+  var ps=document.getElementById('prn-sub');if(ps)ps.classList.remove('open');
+  var ms=document.getElementById('more-sub');if(ms)ms.classList.remove('open');
   if(id==='seats'){seatsPage=1;loadSeats();}
   if(id==='states')loadSummary();
   if(id==='analysis')loadAnalysis();
   if(id==='johor')renderPrnJohor();
   if(id==='ns9'){}
   if(id==='melaka'){}
+};
+window.mnavSwitch=function(id){
+  var matchEl=null;
+  document.querySelectorAll('.tn').forEach(function(b){
+    if((b.getAttribute('onclick')||'').indexOf("'"+id+"'")>=0)matchEl=b;
+  });
+  window.switchTab(id,matchEl);
+};
+window.togglePrnSub=function(){
+  var ps=document.getElementById('prn-sub');
+  var ms=document.getElementById('more-sub');
+  if(ms)ms.classList.remove('open');
+  if(ps)ps.classList.toggle('open');
+};
+window.toggleMoreSub=function(){
+  var ms=document.getElementById('more-sub');
+  var ps=document.getElementById('prn-sub');
+  if(ps)ps.classList.remove('open');
+  if(ms)ms.classList.toggle('open');
 };
 window.onSl=function(k,v){
   var n=parseInt(v);
@@ -2084,6 +2132,34 @@ function renderPrnJohor(){
 loadSummary();
 })();
 </script>
+
+<!-- PRN SUBMENU (mobile) -->
+<div class="prn-sub" id="prn-sub">
+  <div class="prn-sub-inner">
+    <button class="prn-sub-btn" onclick="mnavSwitch('johor')">🗳 Johor 2026</button>
+    <button class="prn-sub-btn" onclick="mnavSwitch('ns9')">🗳 N9 2026</button>
+    <button class="prn-sub-btn" onclick="mnavSwitch('melaka')">🗳 Melaka 2026</button>
+  </div>
+</div>
+<!-- MORE SUBMENU (mobile) -->
+<div class="prn-sub" id="more-sub">
+  <div class="prn-sub-inner">
+    <button class="prn-sub-btn" onclick="mnavSwitch('controls')">🎛 Adjust Model</button>
+    <button class="prn-sub-btn" onclick="mnavSwitch('states')">🗺 By State</button>
+    <button class="prn-sub-btn" onclick="mnavSwitch('method')">📖 Methodology</button>
+  </div>
+</div>
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mob-nav" id="mob-nav">
+  <div class="mob-nav-inner">
+    <button class="mn-btn on" id="mn-overview" onclick="mnavSwitch('overview')"><span class="mn-ico">📊</span><span class="mn-lbl">Overview</span></button>
+    <button class="mn-btn" id="mn-analysis" onclick="mnavSwitch('analysis')"><span class="mn-ico">📈</span><span class="mn-lbl">Analysis</span></button>
+    <button class="mn-btn" id="mn-seats" onclick="mnavSwitch('seats')"><span class="mn-ico">📋</span><span class="mn-lbl">Seats</span></button>
+    <button class="mn-btn" id="mn-prn" onclick="togglePrnSub()"><span class="mn-ico">🗳</span><span class="mn-lbl">PRN</span></button>
+    <button class="mn-btn" id="mn-more" onclick="toggleMoreSub()"><span class="mn-ico">☰</span><span class="mn-lbl">More</span></button>
+  </div>
+</nav>
+
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
