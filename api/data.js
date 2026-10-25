@@ -14,7 +14,10 @@ const VALID_COALITIONS = ['PH', 'PN', 'BN', 'GPS'];
 
 function setCors(req, res) {
   const origin = req.headers.origin || '';
-  const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : (ALLOWED_ORIGINS[0] || '*');
+  // If no ALLOWED_ORIGIN env var is configured, open to all origins
+  const allowed = process.env.ALLOWED_ORIGIN
+    ? (ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0])
+    : '*';
   res.setHeader('Access-Control-Allow-Origin', allowed);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-API-Key');
