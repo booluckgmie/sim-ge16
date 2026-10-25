@@ -340,8 +340,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .party-info-nm{font-size:12px;font-weight:600;color:var(--text)}
 .party-info-sub{font-size:11px;color:var(--text2);line-height:1.5;margin-top:1px}
 .party-note{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.3px;padding:1px 6px;border-radius:10px;margin-left:5px;vertical-align:middle}
-.pn-ph{background:rgba(37,99,235,.12);color:#2563EB}
-.pn-sep{background:rgba(220,38,38,.12);color:#DC2626}
+.pn-ph{background:rgba(239,68,68,.12);color:#EF4444}
+.pn-sep{background:rgba(234,179,8,.15);color:#92400E}
 .pn-opp{background:rgba(124,58,237,.12);color:#7C3AED}
 .pn-gps{background:rgba(5,150,105,.12);color:#059669}
 .view-from-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r-sm);padding:.875rem 1rem;margin:.625rem 0}
@@ -405,7 +405,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 .prn-cat{display:inline-block;padding:2px 7px;border-radius:20px;font-size:9px;font-weight:700;color:#fff;white-space:nowrap}
 .prn-cat-Safe{background:#15803D}
 .prn-cat-Likely{background:#CA8A04}
-.prn-cat-Lean{background:#B45309}
+.prn-cat-Lean{background:#1D4ED8}
 .prn-cat-Tossup{background:#DC2626}
 .prn-intel-link{display:flex;align-items:center;gap:12px;padding:1rem 1.25rem;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.04));border:1px solid rgba(245,158,11,.25);border-radius:var(--r);text-decoration:none;color:inherit;transition:all .18s;margin-top:1rem}
 .prn-intel-link:hover{background:linear-gradient(135deg,rgba(245,158,11,.14),rgba(245,158,11,.07));border-color:rgba(245,158,11,.45);transform:translateY(-1px)}
@@ -439,6 +439,75 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   .race-grid{grid-template-columns:1fr}
   .preset-row{grid-template-columns:1fr}
 }
+/* ===== PARTY BADGES ===== */
+.pbadge{display:inline-flex;align-items:center;justify-content:center;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.03em;color:#fff;white-space:nowrap;flex-shrink:0;line-height:1.4;font-family:'Inter',system-ui,sans-serif}
+.pb-ph{background:#EF4444}.pb-bsm{background:#EAB308;color:#78350F}.pb-pn{background:#7C3AED}.pb-bn{background:#2563EB}.pb-gps{background:#059669}.pb-war{background:#4B5563}.pb-pas{background:#16A34A}.pb-pkr{background:#EF4444}.pb-dap{background:#DC2626}.pb-amn{background:#B91C1C}
+/* ===== MOBILE HAMBURGER NAV DRAWER ===== */
+.ham-btn{display:none;width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);cursor:pointer;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.ham-btn:hover{background:rgba(255,255,255,.14)}
+.nav-drawer{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.55);backdrop-filter:blur(3px)}
+.nav-drawer.open{display:block}
+.nav-drawer-panel{position:absolute;top:0;left:0;bottom:0;width:270px;max-width:82vw;background:var(--navy);overflow-y:auto;transform:translateX(-100%);transition:transform .22s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.nav-drawer.open .nav-drawer-panel{transform:translateX(0)}
+.nav-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:.875rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0}
+.nav-drawer-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.02em}
+.nav-drawer-close{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1;transition:all .15s}
+.nav-drawer-close:hover{background:rgba(255,255,255,.14);color:#fff}
+.nav-drawer-body{flex:1;padding:.375rem 0 1rem}
+@media(max-width:768px){
+  .ham-btn{display:flex}
+  .cmd-sidebar{display:none!important}
+  .tab-nav{display:none}
+  body{padding-bottom:env(safe-area-inset-bottom,0px)}
+}
+/* ===== THEME OVERRIDES ===== */
+:root[data-theme="dark"]{
+  --navy:#060D1C;--navy2:#0A1426;--navy3:#111E38;
+  --bg:#060D1C;--surface:#0F1A30;--surface2:#152040;--surface3:#1A2848;
+  --border:#1E2E4A;--border2:#2A3D5E;
+  --text:#E8EFF8;--text2:#8A9BBF;--text3:#4A5E80;--text4:#2A3D5E;
+  --green:#22C55E;--green-bg:#052E16;--green-bd:#166534;
+  --red:#F87171;--red-bg:#2D0A0A;--red-bd:#7F1D1D;
+  --amber:#FCD34D;--amber-bg:#2D1B00;--amber-bd:#78350F;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --navy:#0B1629;--navy2:#152040;--navy3:#1E2F5A;
+  --bg:#F0F4FA;--surface:#FFFFFF;--surface2:#F1F5F9;--surface3:#E8EEF8;
+  --border:#DDE5F0;--border2:#C8D5E8;
+  --text:#0D1B34;--text2:#455570;--text3:#8A9BBF;--text4:#C8D5E8;
+  --green:#15803D;--green-bg:#F0FDF4;--green-bd:#86EFAC;
+  --red:#DC2626;--red-bg:#FEF2F2;--red-bd:#FECACA;
+  --amber:#B45309;--amber-bg:#FFFBEB;--amber-bd:#FCD34D;
+  color-scheme:light;
+}
+/* ===== THEME TOGGLE BUTTON (header) ===== */
+.theme-toggle-hdr{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.theme-toggle-hdr:hover{background:rgba(255,255,255,.14);color:#fff}
+/* ===== COMMAND CENTER LAYOUT ===== */
+.cmd-layout{display:flex}
+.cmd-sidebar{width:210px;flex-shrink:0;background:var(--navy);border-right:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column}
+.cmd-main{flex:1;min-width:0}
+/* ===== SIDEBAR NAV ===== */
+.snav-section{padding:.875rem 1rem .25rem;font-size:9px;font-weight:700;color:rgba(255,255,255,.22);text-transform:uppercase;letter-spacing:.7px;white-space:nowrap}
+.snav-btn{display:flex;align-items:center;gap:9px;width:100%;padding:9px 1rem;border:none;background:none;color:rgba(255,255,255,.45);cursor:pointer;font-size:11px;font-weight:500;transition:all .12s;text-align:left;-webkit-tap-highlight-color:transparent}
+.snav-btn:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)}
+.snav-btn.on{background:rgba(37,99,235,.18);color:#fff;font-weight:700;box-shadow:inset 3px 0 0 var(--blue)}
+.snav-ico{font-size:15px;width:18px;text-align:center;flex-shrink:0}
+.snav-lbl{line-height:1.3}
+.snav-div{margin:.5rem 1rem;border-top:1px solid rgba(255,255,255,.07)}
+/* Desktop command center */
+@media(min-width:769px){
+  #app{max-width:none;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+  .hdr{flex-shrink:0;position:static}
+  .cmd-layout{flex:1;overflow:hidden;min-height:0}
+  .cmd-sidebar{overflow-y:auto;scrollbar-width:thin;height:100%}
+  .cmd-sidebar::-webkit-scrollbar{width:3px}
+  .cmd-sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:2px}
+  .cmd-main{overflow-y:auto;scrollbar-width:thin;height:100%}
+  .tab-nav{display:none}
+  .tab-nav{position:static}
+}
 </style>
 </head>
 <body>
@@ -461,24 +530,47 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <div class="lc-num" id="lc-num">—</div>
       <div class="lc-sub">of 112 needed</div>
     </div>
+    <button class="ham-btn" id="hamBtn" title="Menu" onclick="openNavDrawer()">☰</button>
+    <button class="theme-toggle-hdr" id="themeBtn" title="Toggle light/dark">🌙</button>
   </div>
 </header>
 
+<div class="cmd-layout">
+
+<!-- SIDEBAR NAV (desktop) -->
+<aside class="cmd-sidebar" id="cmd-sidebar">
+  <div class="snav-section">Main</div>
+  <button class="snav-btn on" id="snav-overview" onclick="mnavSwitch('overview')"><span class="snav-ico">📊</span><span class="snav-lbl">Overview</span></button>
+  <button class="snav-btn" id="snav-analysis" onclick="mnavSwitch('analysis')"><span class="snav-ico">📈</span><span class="snav-lbl">Analysis</span></button>
+  <button class="snav-btn" id="snav-seats" onclick="mnavSwitch('seats')"><span class="snav-ico">📋</span><span class="snav-lbl">All 222 Seats</span></button>
+  <button class="snav-btn" id="snav-states" onclick="mnavSwitch('states')"><span class="snav-ico">🗺</span><span class="snav-lbl">By State</span></button>
+  <button class="snav-btn" id="snav-controls" onclick="mnavSwitch('controls')"><span class="snav-ico">🎛</span><span class="snav-lbl">Adjust Model</span></button>
+  <div class="snav-div"></div>
+  <div class="snav-section">PRN 2026</div>
+  <button class="snav-btn" id="snav-johor" onclick="mnavSwitch('johor')"><span class="snav-ico">🗳</span><span class="snav-lbl">Johor</span></button>
+  <button class="snav-btn" id="snav-ns9" onclick="mnavSwitch('ns9')"><span class="snav-ico">🗳</span><span class="snav-lbl">Negeri Sembilan</span></button>
+  <button class="snav-btn" id="snav-melaka" onclick="mnavSwitch('melaka')"><span class="snav-ico">🗳</span><span class="snav-lbl">Melaka</span></button>
+  <div class="snav-div"></div>
+  <div class="snav-section">Info</div>
+  <button class="snav-btn" id="snav-method" onclick="mnavSwitch('method')"><span class="snav-ico">📖</span><span class="snav-lbl">Methodology</span></button>
+</aside>
+
+<div class="cmd-main">
 <!-- FOCUS / SIDE PICKER -->
 <div class="focus-bar">
   <span class="focus-lbl">View from</span>
   <div class="focus-grp">
     <button class="fb on" data-focus="PH" onclick="setFocus('PH',this)">
-      <span class="fb-dot" style="background:#2563EB"></span>PH
+      <span class="pbadge pb-ph">PH</span>
     </button>
     <button class="fb" data-focus="PN" onclick="setFocus('PN',this)">
-      <span class="fb-dot" style="background:#7C3AED"></span>PN
+      <span class="pbadge pb-pn">PN</span>
     </button>
     <button class="fb" data-focus="BN" onclick="setFocus('BN',this)">
-      <span class="fb-dot" style="background:#D97706"></span>BN
+      <span class="pbadge pb-bn">BN</span>
     </button>
     <button class="fb" data-focus="GPS" onclick="setFocus('GPS',this)">
-      <span class="fb-dot" style="background:#059669"></span>GPS
+      <span class="pbadge pb-gps">GPS</span>
     </button>
   </div>
   <span class="focus-hint" id="focus-hint">Win % shows Pakatan Harapan · PKR · DAP · AMANAH</span>
@@ -496,12 +588,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
     <div class="loading"><div class="spinner"></div>Building hemicycle…</div>
   </div>
   <div class="parl-legend">
-    <div class="pl-item"><div class="pl-dot" style="background:#2563EB"></div>PH</div>
-    <div class="pl-item"><div class="pl-dot" style="background:#DC2626"></div>BERSAMA</div>
-    <div class="pl-item"><div class="pl-dot" style="background:#059669"></div>GPS</div>
-    <div class="pl-item"><div class="pl-dot" style="background:#4B5563"></div>WARISAN</div>
-    <div class="pl-item"><div class="pl-dot" style="background:#D97706"></div>BN</div>
-    <div class="pl-item"><div class="pl-dot" style="background:#7C3AED"></div>PN</div>
+    <div class="pl-item"><span class="pbadge pb-ph">PH</span></div>
+    <div class="pl-item"><span class="pbadge pb-bsm">BRSM</span></div>
+    <div class="pl-item"><span class="pbadge pb-gps">GPS</span></div>
+    <div class="pl-item"><span class="pbadge pb-war">WAR</span></div>
+    <div class="pl-item"><span class="pbadge pb-bn">BN</span></div>
+    <div class="pl-item"><span class="pbadge pb-pn">PN</span></div>
   </div>
 </div>
 
@@ -628,17 +720,17 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
         <div class="ctrl-panel">
           <div class="ctrl-title">Race sentiment → PH</div>
           <div class="sl-row">
-            <div class="sl-name" style="color:#2563EB">Melayu</div>
+            <div class="sl-name" style="color:#EF4444">Melayu</div>
             <input type="range" id="sl-m" min="0" max="100" step="1" value="48" oninput="onSl('m',this.value)">
             <div class="sl-val" id="vl-m">48%</div>
           </div>
           <div class="sl-row">
-            <div class="sl-name" style="color:#DC2626">Cina</div>
+            <div class="sl-name" style="color:#EAB308">Cina</div>
             <input type="range" id="sl-c" min="0" max="100" step="1" value="78" oninput="onSl('c',this.value)">
             <div class="sl-val" id="vl-c">78%</div>
           </div>
           <div class="sl-row">
-            <div class="sl-name" style="color:#D97706">India</div>
+            <div class="sl-name" style="color:#2563EB">India</div>
             <input type="range" id="sl-i" min="0" max="100" step="1" value="68" oninput="onSl('i',this.value)">
             <div class="sl-val" id="vl-i">68%</div>
           </div>
@@ -726,11 +818,11 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <div class="sec-lbl" style="padding:.25rem 0 .5rem">Key probabilities</div>
       <div class="prn-prob-strip">
         <div class="prn-prob">
-          <div class="prn-prob-n" style="color:#D97706">67.7%</div>
+          <div class="prn-prob-n" style="color:#2563EB">67.7%</div>
           <div class="prn-prob-lbl">P(BN majority ≥29)</div>
         </div>
         <div class="prn-prob">
-          <div class="prn-prob-n" style="color:#D97706">79.9%</div>
+          <div class="prn-prob-n" style="color:#2563EB">79.9%</div>
           <div class="prn-prob-lbl">P(BN most seats)</div>
         </div>
         <div class="prn-prob">
@@ -751,12 +843,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <!-- Expected seats -->
       <div class="sec-lbl" style="padding:.25rem 0 .5rem">Expected seats</div>
       <div class="prn-exp-strip">
-        <div class="prn-exp" style="border-color:#D97706">
-          <div class="prn-exp-n" style="color:#D97706">33.9</div>
+        <div class="prn-exp" style="border-color:#2563EB">
+          <div class="prn-exp-n" style="color:#2563EB">33.9</div>
           <div class="prn-exp-lbl">BN — median 35</div>
         </div>
-        <div class="prn-exp" style="border-color:#2563EB">
-          <div class="prn-exp-n" style="color:#2563EB">15.4</div>
+        <div class="prn-exp" style="border-color:#EF4444">
+          <div class="prn-exp-n" style="color:#EF4444">15.4</div>
           <div class="prn-exp-lbl">PH seats</div>
         </div>
         <div class="prn-exp" style="border-color:#7C3AED">
@@ -776,18 +868,18 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           <span class="prn-vshare-sub">3-corner baseline · 56 DUN</span>
         </div>
         <div class="prn-vbar">
-          <div class="prn-vseg" style="flex:45.4;background:#D97706">BN 45.4%</div>
-          <div class="prn-vseg" style="flex:34.5;background:#2563EB">PH 34.5%</div>
+          <div class="prn-vseg" style="flex:45.4;background:#2563EB">BN 45.4%</div>
+          <div class="prn-vseg" style="flex:34.5;background:#EF4444">PH 34.5%</div>
           <div class="prn-vseg" style="flex:14.6;background:#7C3AED">PN 14.6%</div>
-          <div class="prn-vseg" style="flex:3.8;background:#DC2626">BSM 3.8%</div>
+          <div class="prn-vseg" style="flex:3.8;background:#EAB308">BSM 3.8%</div>
           <div class="prn-vseg" style="flex:1.5;background:#4B5563">MUDA 1.5%</div>
           <div class="prn-vseg" style="flex:0.7;background:#94A3B8">Oth 0.7%</div>
         </div>
         <div class="prn-vleg">
-          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#D97706"></div>BN 45.4%</div>
-          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#2563EB"></div>PH 34.5%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#2563EB"></div>BN 45.4%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#EF4444"></div>PH 34.5%</div>
           <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#7C3AED"></div>PN 14.6%</div>
-          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#DC2626"></div>BERSAMA 3.8%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#EAB308"></div>BERSAMA 3.8%</div>
           <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#4B5563"></div>MUDA/PSM 1.5%</div>
           <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#94A3B8"></div>Others 0.7%</div>
         </div>
@@ -815,8 +907,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
             <th>Total</th>
           </tr></thead>
           <tbody>
-            <tr><td style="color:#D97706">BN</td><td>15</td><td>13</td><td>8</td><td>4</td><td>40</td></tr>
-            <tr><td style="color:#2563EB">PH</td><td>2</td><td>7</td><td>3</td><td>0</td><td>12</td></tr>
+            <tr><td style="color:#2563EB">BN</td><td>15</td><td>13</td><td>8</td><td>4</td><td>40</td></tr>
+            <tr><td style="color:#EF4444">PH</td><td>2</td><td>7</td><td>3</td><td>0</td><td>12</td></tr>
             <tr><td style="color:#7C3AED">PN</td><td>0</td><td>0</td><td>1</td><td>3</td><td>4</td></tr>
             <tr><td>Total</td><td>17</td><td>20</td><td>12</td><td>7</td><td>56</td></tr>
           </tbody>
@@ -892,7 +984,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <div class="sec-lbl" style="padding:.25rem 0 .5rem">Key probabilities</div>
       <div class="prn-prob-strip">
         <div class="prn-prob">
-          <div class="prn-prob-n" style="color:#2563EB">42%</div>
+          <div class="prn-prob-n" style="color:#EF4444">42%</div>
           <div class="prn-prob-lbl">P(PH majority ≥19)</div>
         </div>
         <div class="prn-prob">
@@ -900,7 +992,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           <div class="prn-prob-lbl">P(Hung assembly)</div>
         </div>
         <div class="prn-prob">
-          <div class="prn-prob-n" style="color:#D97706">28%</div>
+          <div class="prn-prob-n" style="color:#2563EB">28%</div>
           <div class="prn-prob-lbl">P(BN+PN coalition)</div>
         </div>
         <div class="prn-prob">
@@ -908,7 +1000,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           <div class="prn-prob-lbl">PH seats (mean/median)</div>
         </div>
         <div class="prn-prob">
-          <div class="prn-prob-n" style="color:#D97706">86.4%</div>
+          <div class="prn-prob-n" style="color:#2563EB">86.4%</div>
           <div class="prn-prob-lbl">Early voter turnout</div>
           <div class="prn-prob-sub">at 2pm · 28 Jul — BN-lean signal</div>
         </div>
@@ -917,12 +1009,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <!-- Expected seats -->
       <div class="sec-lbl" style="padding:.25rem 0 .5rem">Expected seats</div>
       <div class="prn-exp-strip">
-        <div class="prn-exp" style="border-color:#2563EB">
-          <div class="prn-exp-n" style="color:#2563EB">18.5</div>
+        <div class="prn-exp" style="border-color:#EF4444">
+          <div class="prn-exp-n" style="color:#EF4444">18.5</div>
           <div class="prn-exp-lbl">PH — median 19</div>
         </div>
-        <div class="prn-exp" style="border-color:#D97706">
-          <div class="prn-exp-n" style="color:#D97706">13.2</div>
+        <div class="prn-exp" style="border-color:#2563EB">
+          <div class="prn-exp-n" style="color:#2563EB">13.2</div>
           <div class="prn-exp-lbl">BN seats · 25 contested</div>
         </div>
         <div class="prn-exp" style="border-color:#7C3AED">
@@ -942,14 +1034,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           <span class="prn-vshare-sub">scenario-weighted · 36 DUN</span>
         </div>
         <div class="prn-vbar">
-          <div class="prn-vseg" style="flex:44.2;background:#2563EB">PH 44.2%</div>
-          <div class="prn-vseg" style="flex:35.8;background:#D97706">BN 35.8%</div>
+          <div class="prn-vseg" style="flex:44.2;background:#EF4444">PH 44.2%</div>
+          <div class="prn-vseg" style="flex:35.8;background:#2563EB">BN 35.8%</div>
           <div class="prn-vseg" style="flex:13.6;background:#7C3AED">PN 13.6%</div>
           <div class="prn-vseg" style="flex:6.4;background:#4B5563">Oth 6.4%</div>
         </div>
         <div class="prn-vleg">
-          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#2563EB"></div>PH 44.2%</div>
-          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#D97706"></div>BN 35.8%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#EF4444"></div>PH 44.2%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#2563EB"></div>BN 35.8%</div>
           <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#7C3AED"></div>PN 13.6%</div>
           <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#4B5563"></div>Others 6.4%</div>
         </div>
@@ -975,22 +1067,22 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <!-- Final Prediction -->
       <div class="sec-lbl" style="padding:.25rem 0 .5rem">Final prediction</div>
       <div style="background:var(--surface);border:1px solid rgba(37,99,235,.25);border-radius:var(--r);padding:1rem;margin-bottom:1rem;position:relative;overflow:hidden">
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#2563EB,rgba(37,99,235,.15),transparent)"></div>
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#EF4444,rgba(37,99,235,.15),transparent)"></div>
         <div style="display:flex;align-items:start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem">
           <div>
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#2563EB;margin-bottom:4px">Model output (scenario-weighted)</div>
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#EF4444;margin-bottom:4px">Model output (scenario-weighted)</div>
             <div style="font-size:17px;font-weight:900;color:var(--text);letter-spacing:-.03em;margin-bottom:3px">PH retains — slim majority</div>
             <div style="font-size:10px;color:var(--text2)">Predicted: PH <strong>19</strong> · BN <strong>13</strong> · PN <strong>4</strong> &nbsp;·&nbsp; Majority = 19 seats</div>
           </div>
           <div style="text-align:center;background:rgba(37,99,235,.07);border:1px solid rgba(37,99,235,.2);border-radius:var(--r-sm);padding:.5rem .875rem;flex-shrink:0">
-            <div style="font-size:22px;font-weight:900;color:#2563EB;line-height:1">42%</div>
+            <div style="font-size:22px;font-weight:900;color:#EF4444;line-height:1">42%</div>
             <div style="font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text3);margin-top:2px">Confidence</div>
           </div>
         </div>
         <!-- Seat bar -->
         <div style="height:20px;border-radius:4px;overflow:hidden;display:flex;margin-bottom:5px;position:relative">
-          <div style="flex:19;background:#2563EB;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">PH 19</div>
-          <div style="flex:13;background:#D97706;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">BN 13</div>
+          <div style="flex:19;background:#EF4444;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">PH 19</div>
+          <div style="flex:13;background:#2563EB;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">BN 13</div>
           <div style="flex:4;background:#7C3AED;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">4</div>
         </div>
         <div style="font-size:9px;color:var(--text3);margin-bottom:.625rem">← majority line at 19 seats (PH at exact threshold)</div>
@@ -1028,7 +1120,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <div class="sec-lbl" style="padding:.25rem 0 .5rem">Key probabilities</div>
       <div class="prn-prob-strip">
         <div class="prn-prob">
-          <div class="prn-prob-n" style="color:#D97706">52%</div>
+          <div class="prn-prob-n" style="color:#2563EB">52%</div>
           <div class="prn-prob-lbl">P(BN majority solo ≥15)</div>
         </div>
         <div class="prn-prob">
@@ -1036,7 +1128,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           <div class="prn-prob-lbl">P(BN+PN combined ≥15)</div>
         </div>
         <div class="prn-prob">
-          <div class="prn-prob-n" style="color:#2563EB">6%</div>
+          <div class="prn-prob-n" style="color:#EF4444">6%</div>
           <div class="prn-prob-lbl">P(PH majority)</div>
         </div>
         <div class="prn-prob">
@@ -1044,7 +1136,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           <div class="prn-prob-lbl">BN projected seats</div>
         </div>
         <div class="prn-prob">
-          <div class="prn-prob-n" style="color:#D97706">55%</div>
+          <div class="prn-prob-n" style="color:#2563EB">55%</div>
           <div class="prn-prob-lbl">Model confidence</div>
           <div class="prn-prob-sub">pre-nomination · 25 Oct 2026</div>
         </div>
@@ -1053,12 +1145,12 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <!-- Expected seats -->
       <div class="sec-lbl" style="padding:.25rem 0 .5rem">Expected seats</div>
       <div class="prn-exp-strip">
-        <div class="prn-exp" style="border-color:#D97706">
-          <div class="prn-exp-n" style="color:#D97706">17</div>
+        <div class="prn-exp" style="border-color:#2563EB">
+          <div class="prn-exp-n" style="color:#2563EB">17</div>
           <div class="prn-exp-lbl">BN · 21 contested</div>
         </div>
-        <div class="prn-exp" style="border-color:#2563EB">
-          <div class="prn-exp-n" style="color:#2563EB">8</div>
+        <div class="prn-exp" style="border-color:#EF4444">
+          <div class="prn-exp-n" style="color:#EF4444">8</div>
           <div class="prn-exp-lbl">PH · 21 contested</div>
         </div>
         <div class="prn-exp" style="border-color:#7C3AED">
@@ -1078,14 +1170,14 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           <span class="prn-vshare-sub">scenario-weighted · 28 DUN</span>
         </div>
         <div class="prn-vbar">
-          <div class="prn-vseg" style="flex:45;background:#D97706">BN 45%</div>
-          <div class="prn-vseg" style="flex:38;background:#2563EB">PH 38%</div>
+          <div class="prn-vseg" style="flex:45;background:#2563EB">BN 45%</div>
+          <div class="prn-vseg" style="flex:38;background:#EF4444">PH 38%</div>
           <div class="prn-vseg" style="flex:14;background:#7C3AED">PN 14%</div>
           <div class="prn-vseg" style="flex:3;background:#4B5563">Oth 3%</div>
         </div>
         <div class="prn-vleg">
-          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#D97706"></div>BN (UMNO/MCA/MIC) 45%</div>
-          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#2563EB"></div>PH (PKR/DAP/Amanah) 38%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#2563EB"></div>BN (UMNO/MCA/MIC) 45%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#EF4444"></div>PH (PKR/DAP/Amanah) 38%</div>
           <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#7C3AED"></div>PN (PAS/Wawasan) 14%</div>
           <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#4B5563"></div>Others 3%</div>
         </div>
@@ -1093,7 +1185,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 
       <!-- Contestation note -->
       <div class="prn-adj" style="border-color:rgba(245,158,11,.25);background:rgba(245,158,11,.04)">
-        <div class="prn-adj-title" style="color:#D97706">ℹ Seat contestation structure — BN+PN full-coverage pact</div>
+        <div class="prn-adj-title" style="color:#2563EB">ℹ Seat contestation structure — BN+PN full-coverage pact</div>
         <div class="prn-adj-row">
           <span class="prn-adj-seat">15 seats</span>
           <span class="prn-adj-txt">BN vs PH head-to-head — mixed urban fringe, Malay-majority semi-rural across Masjid Tanah, Alor Gajah, Jasin, and Hang Tuah Jaya.</span>
@@ -1119,21 +1211,21 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <!-- Final Prediction -->
       <div class="sec-lbl" style="padding:.25rem 0 .5rem">Final prediction</div>
       <div style="background:var(--surface);border:1px solid rgba(245,158,11,.25);border-radius:var(--r);padding:1rem;margin-bottom:1rem;position:relative;overflow:hidden">
-        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#D97706,rgba(245,158,11,.15),transparent)"></div>
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#2563EB,rgba(245,158,11,.15),transparent)"></div>
         <div style="display:flex;align-items:start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem">
           <div>
-            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#D97706;margin-bottom:4px">Model output (scenario-weighted) · Pre-nomination</div>
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#2563EB;margin-bottom:4px">Model output (scenario-weighted) · Pre-nomination</div>
             <div style="font-size:17px;font-weight:900;color:var(--text);letter-spacing:-.03em;margin-bottom:3px">BN retains — clear majority</div>
             <div style="font-size:10px;color:var(--text2)">Predicted: BN <strong>17</strong> · PH <strong>8</strong> · PN <strong>3</strong> &nbsp;·&nbsp; Majority = 15 seats</div>
           </div>
           <div style="text-align:center;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:var(--r-sm);padding:.5rem .875rem;flex-shrink:0">
-            <div style="font-size:22px;font-weight:900;color:#D97706;line-height:1">55%</div>
+            <div style="font-size:22px;font-weight:900;color:#2563EB;line-height:1">55%</div>
             <div style="font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text3);margin-top:2px">Confidence</div>
           </div>
         </div>
         <div style="height:20px;border-radius:4px;overflow:hidden;display:flex;margin-bottom:5px">
-          <div style="flex:17;background:#D97706;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">BN 17</div>
-          <div style="flex:8;background:#2563EB;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">PH 8</div>
+          <div style="flex:17;background:#2563EB;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">BN 17</div>
+          <div style="flex:8;background:#EF4444;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">PH 8</div>
           <div style="flex:3;background:#7C3AED;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">3</div>
         </div>
         <div style="font-size:9px;color:var(--text3);margin-bottom:.625rem">← majority line at 15 seats · BN solo at 17, well above threshold</div>
@@ -1172,25 +1264,25 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
           <p class="method-p" style="margin-bottom:.875rem;font-size:11px;color:var(--text3)">Each seat is projected to a single winning party. Coalition totals are the sum of their member parties' seats.</p>
           <!-- PH -->
           <div style="margin-bottom:.875rem">
-            <div style="font-size:10px;font-weight:700;color:#2563EB;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">Pakatan Harapan (PH) — Current Federal Government</div>
+            <div style="font-size:10px;font-weight:700;color:#EF4444;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">Pakatan Harapan (PH) — Current Federal Government</div>
             <div class="party-block">
-              <div class="party-swatch" style="background:#2563EB"></div>
+              <div class="party-swatch" style="background:#EF4444"></div>
               <div><div class="party-info-nm">PKR <span style="font-weight:400;color:var(--text3)">— Parti Keadilan Rakyat</span><span class="party-note pn-ph">PH</span></div><div class="party-info-sub">People's Justice Party. Multi-racial, centrist. Led by Anwar Ibrahim (Prime Minister).</div></div>
             </div>
             <div class="party-block">
-              <div class="party-swatch" style="background:#1D4ED8"></div>
+              <div class="party-swatch" style="background:#DC2626"></div>
               <div><div class="party-info-nm">DAP <span style="font-weight:400;color:var(--text3)">— Democratic Action Party</span><span class="party-note pn-ph">PH</span></div><div class="party-info-sub">Centre-left, predominantly Chinese-supported. Strongest in urban and Chinese-majority seats.</div></div>
             </div>
             <div class="party-block">
-              <div class="party-swatch" style="background:#1E40AF"></div>
+              <div class="party-swatch" style="background:#B91C1C"></div>
               <div><div class="party-info-nm">AMANAH <span style="font-weight:400;color:var(--text3)">— Parti Amanah Negara</span><span class="party-note pn-ph">PH</span></div><div class="party-info-sub">Progressive Islamic party. Malay-Muslim voter base, moderate stance.</div></div>
             </div>
           </div>
           <!-- BERSAMA -->
           <div style="margin-bottom:.875rem">
-            <div style="font-size:10px;font-weight:700;color:#DC2626;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">BERSAMA — New Party (est. May 2026)</div>
+            <div style="font-size:10px;font-weight:700;color:#EAB308;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">BERSAMA — New Party (est. May 2026)</div>
             <div class="party-block">
-              <div class="party-swatch" style="background:#DC2626"></div>
+              <div class="party-swatch" style="background:#EAB308"></div>
               <div>
                 <div class="party-info-nm">BERSAMA<span class="party-note pn-sep">New · Independent</span></div>
                 <div class="party-info-sub">A newly established Malaysian political party, announced May 2026. BERSAMA is an independent party — it is not a member of PH, PN, BN, or GPS. Its seats are counted separately in all projections and party tallies. Coalition alignment and government-formation stance are yet to be formally declared.</div>
@@ -1205,20 +1297,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
               <div><div class="party-info-nm">BERSATU <span style="font-weight:400;color:var(--text3)">— Parti Pribumi Bersatu Malaysia</span><span class="party-note pn-opp">PN</span></div><div class="party-info-sub">Malay nationalist party. Dominant in northern Peninsula states and rural Malay belts.</div></div>
             </div>
             <div class="party-block">
-              <div class="party-swatch" style="background:#8B5CF6"></div>
+              <div class="party-swatch" style="background:#16A34A"></div>
               <div><div class="party-info-nm">PAS <span style="font-weight:400;color:var(--text3)">— Parti Islam Se-Malaysia</span><span class="party-note pn-opp">PN</span></div><div class="party-info-sub">Pan-Malaysian Islamic Party. Strongest in Kelantan, Terengganu, and Kedah. High rural Malay turnout advantage.</div></div>
             </div>
           </div>
           <!-- BN -->
           <div style="margin-bottom:.875rem">
-            <div style="font-size:10px;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">Barisan Nasional (BN)</div>
+            <div style="font-size:10px;font-weight:700;color:#2563EB;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)">Barisan Nasional (BN)</div>
             <div class="party-block">
-              <div class="party-swatch" style="background:#D97706"></div>
-              <div><div class="party-info-nm">UMNO <span style="font-weight:400;color:var(--text3)">— United Malays National Organisation</span><span class="party-note" style="background:rgba(217,119,6,.12);color:#D97706">BN</span></div><div class="party-info-sub">Historic ruling party. Recovering from GE14/GE15 losses. Malay-based, centrist-nationalist.</div></div>
+              <div class="party-swatch" style="background:#2563EB"></div>
+              <div><div class="party-info-nm">UMNO <span style="font-weight:400;color:var(--text3)">— United Malays National Organisation</span><span class="party-note" style="background:rgba(217,119,6,.12);color:#2563EB">BN</span></div><div class="party-info-sub">Historic ruling party. Recovering from GE14/GE15 losses. Malay-based, centrist-nationalist.</div></div>
             </div>
             <div class="party-block">
-              <div class="party-swatch" style="background:#B45309"></div>
-              <div><div class="party-info-nm">MCA <span style="font-weight:400;color:var(--text3)">— Malaysian Chinese Association</span><span class="party-note" style="background:rgba(217,119,6,.12);color:#D97706">BN</span></div><div class="party-info-sub">Chinese-based component of BN. Significantly weakened after GE14 and GE15; contests only a handful of seats.</div></div>
+              <div class="party-swatch" style="background:#1D4ED8"></div>
+              <div><div class="party-info-nm">MCA <span style="font-weight:400;color:var(--text3)">— Malaysian Chinese Association</span><span class="party-note" style="background:rgba(217,119,6,.12);color:#2563EB">BN</span></div><div class="party-info-sub">Chinese-based component of BN. Significantly weakened after GE14 and GE15; contests only a handful of seats.</div></div>
             </div>
           </div>
           <!-- GPS & WARISAN -->
@@ -1284,7 +1376,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
                 <tr><td><span class="tier-pill-sm" style="background:#84CC16;color:#1A2E05">Leaning</span></td><td>50 – 64%</td><td>Coalition is favourite but the seat could flip</td></tr>
                 <tr><td><span class="tier-pill-sm" style="background:#F59E0B;color:#1C1917">Battleground</span></td><td>40 – 49%</td><td>Too close to call — result could go either way</td></tr>
                 <tr><td><span class="tier-pill-sm" style="background:#F87171;color:#1C1917">Lean Away</span></td><td>25 – 39%</td><td>Rival coalition is favoured; potential flip opportunity</td></tr>
-                <tr><td><span class="tier-pill-sm" style="background:#DC2626">Unlikely</span></td><td>&lt; 25%</td><td>Coalition very unlikely to win this seat</td></tr>
+                <tr><td><span class="tier-pill-sm" style="background:#EAB308">Unlikely</span></td><td>&lt; 25%</td><td>Coalition very unlikely to win this seat</td></tr>
               </tbody>
             </table>
           </div>
@@ -1384,6 +1476,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   </div>
 
 </div><!-- /tab-content -->
+</div><!-- /cmd-main -->
+</div><!-- /cmd-layout -->
 </div><!-- /app -->
 
 <!-- MODAL -->
@@ -1405,10 +1499,10 @@ var API='/api/data';
 var API_KEY='';
 
 var COL={
-  PKR:'#2563EB',DAP:'#1D4ED8',AMANAH:'#1E40AF',
-  BERSAMA:'#DC2626',
-  'PN-PAS':'#8B5CF6','PN-BERSATU':'#7C3AED',
-  'BN-UMNO':'#D97706','BN-MCA':'#B45309',
+  PKR:'#EF4444',DAP:'#DC2626',AMANAH:'#B91C1C',
+  BERSAMA:'#EAB308',
+  'PN-PAS':'#16A34A','PN-BERSATU':'#7C3AED',
+  'BN-UMNO':'#2563EB','BN-MCA':'#1D4ED8',
   GPS:'#059669',WARISAN:'#4B5563'
 };
 var PS={
@@ -1417,13 +1511,13 @@ var PS={
   'BN-UMNO':'UMNO','BN-MCA':'MCA',GPS:'GPS',WARISAN:'WAR'
 };
 var FOCUS_META={
-  PH:{col:'#2563EB',label:'Pakatan Harapan',hint:'Win % = probability PKR · DAP · AMANAH wins each seat — seat projections unchanged'},
+  PH:{col:'#EF4444',label:'Pakatan Harapan',hint:'Win % = probability PKR · DAP · AMANAH wins each seat — seat projections unchanged'},
   PN:{col:'#7C3AED',label:'Perikatan Nasional',hint:'Win % = probability BERSATU · PAS wins each seat — seat projections unchanged'},
-  BN:{col:'#D97706',label:'Barisan Nasional',hint:'Win % = probability UMNO · MCA wins each seat — seat projections unchanged'},
+  BN:{col:'#2563EB',label:'Barisan Nasional',hint:'Win % = probability UMNO · MCA wins each seat — seat projections unchanged'},
   GPS:{col:'#059669',label:'GPS',hint:'Win % = probability GPS (Sarawak) wins each seat — seat projections unchanged'}
 };
 
-function GC(g){return({PKR:'#2563EB',DAP:'#1D4ED8',AMANAH:'#1E40AF',BERSAMA:'#DC2626',PN:'#7C3AED',BN:'#D97706',GPS:'#059669',WARISAN:'#4B5563'})[g]||'#94A3B8';}
+function GC(g){return({PKR:'#EF4444',DAP:'#DC2626',AMANAH:'#B91C1C',BERSAMA:'#EAB308',PN:'#7C3AED',BN:'#2563EB',GPS:'#059669',WARISAN:'#4B5563'})[g]||'#94A3B8';}
 
 var scen='base',yT=72,sT=78,mS=48,cS=78,iS=68,lS=45;
 var seatsPage=1,seatsTotal=0,seatsPages=1,selState='',curView='overview',curSort='',curFocus='PH';
@@ -1504,9 +1598,9 @@ var POSITIONS=(function(){
 
 function buildParliament(c){
   var palette=[
-    {k:'ph',col:'#2563EB'},{k:'bm',col:'#DC2626'},
+    {k:'ph',col:'#EF4444'},{k:'bm',col:'#EAB308'},
     {k:'gps',col:'#059669'},{k:'war',col:'#4B5563'},
-    {k:'bn',col:'#D97706'},{k:'pn',col:'#7C3AED'}
+    {k:'bn',col:'#2563EB'},{k:'pn',col:'#7C3AED'}
   ];
   var cols=[];
   palette.forEach(function(p){for(var i=0;i<(c[p.k]||0);i++)cols.push(p.col);});
@@ -1554,10 +1648,10 @@ function renderSummary(d){
     var dv=n-r;return dv>0?'<span class="cc-delta d-up">&#8593; +'+dv+'</span>':dv<0?'<span class="cc-delta d-dn">&#8595; '+dv+'</span>':'<span class="cc-delta d-eq">&#8212; &#8212;</span>';
   }
   document.getElementById('coal-row').innerHTML=[
-    {lbl:'Pakatan Harapan',n:ph, sub:'PKR&nbsp;'+p.PKR+' &middot; DAP&nbsp;'+p.DAP+' &middot; AMN&nbsp;'+p.AMANAH,                         ref:ref.ph,  col:'#2563EB', note:null},
-    {lbl:'BERSAMA',        n:bm, sub:'New party (est. May 2026) &middot; <em>independent</em>',                                               ref:ref.bm,  col:'#DC2626', note:'new party'},
+    {lbl:'Pakatan Harapan',n:ph, sub:'PKR&nbsp;'+p.PKR+' &middot; DAP&nbsp;'+p.DAP+' &middot; AMN&nbsp;'+p.AMANAH,                         ref:ref.ph,  col:'#EF4444', note:null},
+    {lbl:'BERSAMA',        n:bm, sub:'New party (est. May 2026) &middot; <em>independent</em>',                                               ref:ref.bm,  col:'#EAB308', note:'new party'},
     {lbl:'Perikatan Nasional',n:pn,sub:'BSTU&nbsp;'+p['PN-BERSATU']+' &middot; PAS&nbsp;'+p['PN-PAS'],                                      ref:ref.pn,  col:'#7C3AED', note:null},
-    {lbl:'Barisan Nasional',n:bn, sub:'UMNO&nbsp;'+p['BN-UMNO']+' &middot; MCA&nbsp;'+p['BN-MCA'],                                          ref:ref.bn,  col:'#D97706', note:null},
+    {lbl:'Barisan Nasional',n:bn, sub:'UMNO&nbsp;'+p['BN-UMNO']+' &middot; MCA&nbsp;'+p['BN-MCA'],                                          ref:ref.bn,  col:'#2563EB', note:null},
     {lbl:'GPS',            n:gps,sub:'Gabungan Parti Sarawak',                                                                                ref:ref.gps, col:'#059669', note:null},
     {lbl:'Others',         n:war,sub:'WARISAN&nbsp;'+(p.WARISAN||0),                                                                          ref:ref.war, col:'#4B5563', note:null}
   ].map(function(x){
@@ -1566,15 +1660,15 @@ function renderSummary(d){
 
   // Individual-party scoreboard
   var PARTY_ORDER=[
-    {key:'PKR',col:'#2563EB',grp:'PH'},{key:'DAP',col:'#1D4ED8',grp:'PH'},
-    {key:'AMANAH',col:'#1E40AF',grp:'PH'},{key:'BERSAMA',col:'#DC2626',grp:'PH+'},
-    {key:'PN-BERSATU',col:'#7C3AED',grp:'PN'},{key:'PN-PAS',col:'#8B5CF6',grp:'PN'},
-    {key:'BN-UMNO',col:'#D97706',grp:'BN'},{key:'BN-MCA',col:'#B45309',grp:'BN'},
-    {key:'GPS',col:'#059669',grp:'GPS'},{key:'WARISAN',col:'#4B5563',grp:'Other'}
+    {key:'PKR',col:'#EF4444',grp:'PH',bc:'pb-pkr',ba:'PKR'},{key:'DAP',col:'#DC2626',grp:'PH',bc:'pb-dap',ba:'DAP'},
+    {key:'AMANAH',col:'#B91C1C',grp:'PH',bc:'pb-amn',ba:'AMN'},{key:'BERSAMA',col:'#EAB308',grp:'PH+',bc:'pb-bsm',ba:'BRSM'},
+    {key:'PN-BERSATU',col:'#7C3AED',grp:'PN',bc:'pb-pn',ba:'BRSATU'},{key:'PN-PAS',col:'#16A34A',grp:'PN',bc:'pb-pas',ba:'PAS'},
+    {key:'BN-UMNO',col:'#2563EB',grp:'BN',bc:'pb-bn',ba:'UMNO'},{key:'BN-MCA',col:'#1D4ED8',grp:'BN',bc:'pb-bn',ba:'MCA'},
+    {key:'GPS',col:'#059669',grp:'GPS',bc:'pb-gps',ba:'GPS'},{key:'WARISAN',col:'#4B5563',grp:'Other',bc:'pb-war',ba:'WAR'}
   ];
   var psbEl=document.getElementById('party-sb');
   if(psbEl)psbEl.innerHTML=PARTY_ORDER.filter(function(pm){return(p[pm.key]||0)>0;}).map(function(pm){
-    return '<div class="sbc"><div class="sbc-h"><span class="sbc-dot" style="background:'+pm.col+'"></span><div class="sbc-lbl">'+(PS[pm.key]||pm.key)+'</div></div>'
+    return '<div class="sbc"><div class="sbc-h"><span class="pbadge '+pm.bc+'">'+pm.ba+'</span><div class="sbc-lbl">'+(PS[pm.key]||pm.key)+'</div></div>'
       +'<div class="sbc-n" style="color:'+pm.col+'">'+(p[pm.key]||0)+'</div>'
       +'<div class="sbc-d" style="color:var(--text3)">'+pm.grp+'</div></div>';
   }).join('');
@@ -1584,22 +1678,22 @@ function renderSummary(d){
     var dv=n-r;return dv>0?'<span class="du">+'+dv+'</span>':dv<0?'<span class="dd">'+dv+'</span>':'<span class="dn">&#8212;</span>';
   }
   document.getElementById('scoreboard').innerHTML=[
-    {lbl:'Pakatan Harapan',   dot:'#2563EB',n:ph, r:ref.ph},
-    {lbl:'BERSAMA',          dot:'#DC2626',n:bm, r:ref.bm, note:'new party · independent'},
-    {lbl:'Perikatan Nasional',dot:'#7C3AED',n:pn, r:ref.pn},
-    {lbl:'Barisan Nasional',  dot:'#D97706',n:bn, r:ref.bn},
-    {lbl:'GPS',               dot:'#059669',n:gps,r:ref.gps},
-    {lbl:'Others',            dot:'#4B5563',n:war,r:ref.war}
+    {lbl:'Pakatan Harapan',   bc:'pb-ph', ba:'PH',  n:ph, r:ref.ph},
+    {lbl:'BERSAMA',          bc:'pb-bsm',ba:'BRSM',n:bm, r:ref.bm, note:'new party · independent'},
+    {lbl:'Perikatan Nasional',bc:'pb-pn', ba:'PN',  n:pn, r:ref.pn},
+    {lbl:'Barisan Nasional',  bc:'pb-bn', ba:'BN',  n:bn, r:ref.bn},
+    {lbl:'GPS',               bc:'pb-gps',ba:'GPS', n:gps,r:ref.gps},
+    {lbl:'Others',            bc:'pb-war',ba:'OTH', n:war,r:ref.war}
   ].map(function(x){
-    return '<div class="sbc"><div class="sbc-h"><span class="sbc-dot" style="background:'+x.dot+'"></span><div class="sbc-lbl">'+x.lbl+'</div></div><div class="sbc-n">'+x.n+'</div><div class="sbc-d">'+dt(x.n,x.r,x.note)+' vs GE15</div></div>';
+    return '<div class="sbc"><div class="sbc-h"><span class="pbadge '+x.bc+'">'+x.ba+'</span><div class="sbc-lbl">'+x.lbl+'</div></div><div class="sbc-n">'+x.n+'</div><div class="sbc-d">'+dt(x.n,x.r,x.note)+' vs GE15</div></div>';
   }).join('');
 
   var ph65=Math.round(ph*0.65)||1,ph28=Math.round(ph*0.28)||1;
   var pb=[
-    {k:'PKR',s:ph65,cl:'#2563EB'},{k:'DAP',s:ph28,cl:'#1D4ED8'},
-    {k:'AMN',s:Math.max(0,ph-ph65-ph28),cl:'#1E40AF'},
-    {k:'BSMA',s:bm,cl:'#DC2626'},{k:'GPS',s:gps,cl:'#059669'},
-    {k:'BN',s:bn,cl:'#D97706'},{k:'PN',s:pn,cl:'#7C3AED'},
+    {k:'PKR',s:ph65,cl:'#EF4444'},{k:'DAP',s:ph28,cl:'#DC2626'},
+    {k:'AMN',s:Math.max(0,ph-ph65-ph28),cl:'#B91C1C'},
+    {k:'BSMA',s:bm,cl:'#EAB308'},{k:'GPS',s:gps,cl:'#059669'},
+    {k:'BN',s:bn,cl:'#2563EB'},{k:'PN',s:pn,cl:'#7C3AED'},
     {k:'WAR',s:war,cl:'#4B5563'}
   ].filter(function(g){return g.s>0;});
   var majPct=(112/222*100).toFixed(2);
@@ -1612,13 +1706,13 @@ function renderSummary(d){
   }).join('');
 
   var insights=[
-    {key:'m',comm:'Melayu',pct:mS,dot:'#2563EB',bc:'#2563EB',
+    {key:'m',comm:'Melayu',pct:mS,dot:'#EF4444',bc:'#EF4444',
      tag:mS>58?{t:'Boosting PH',bg:'#F0FDF4',tc:'#15803D'}:mS<42?{t:'Risk to PH',bg:'#FEF2F2',tc:'#DC2626'}:{t:'Neutral',bg:'#F1F5F9',tc:'#64748B'},
      body:mS>58?'High Melayu support — PKR marginals in Kedah, Perak, Selangor &amp; Johor secured.':mS<42?'Low Melayu support — 15–20 PKR marginals at flip risk.':'Baseline Melayu split holds; competitive marginals.'},
-    {key:'c',comm:'Cina',pct:cS,dot:'#DC2626',bc:'#DC2626',
+    {key:'c',comm:'Cina',pct:cS,dot:'#EAB308',bc:'#EAB308',
      tag:cS>82?{t:'Boosting PH',bg:'#F0FDF4',tc:'#15803D'}:cS<65?{t:'Risk to PH',bg:'#FEF2F2',tc:'#DC2626'}:{t:'Stable',bg:'#F1F5F9',tc:'#64748B'},
      body:cS>82?'Strong Chinese bloc — DAP seats &amp; PKR urban marginals reinforced.':cS<65?'Chinese pullback — 10+ mixed urban seats at risk.':'DAP base steady; mixed seats competitive.'},
-    {key:'i',comm:'India',pct:iS,dot:'#D97706',bc:'#D97706',
+    {key:'i',comm:'India',pct:iS,dot:'#2563EB',bc:'#2563EB',
      tag:iS>72?{t:'Boosting PH',bg:'#F0FDF4',tc:'#15803D'}:iS<55?{t:'Swing risk',bg:'#FFFBEB',tc:'#92400E'}:{t:'Stable',bg:'#F1F5F9',tc:'#64748B'},
      body:iS>72?'Indian vote firms PKR — Kapar, Kota Raja, Sungai Siput secure.':iS<55?'Indian swing risks 5–8 Klang Valley losses.':'Indian vote tracking with PH norms.'},
     {key:'l',comm:'Lain-lain',pct:lS,dot:'#4B5563',bc:'#4B5563',
@@ -1630,10 +1724,10 @@ function renderSummary(d){
   }).join('');
 
   document.getElementById('cbar-rows').innerHTML=[
-    {l:'PH (PKR + DAP + AMN)',s:ph,cl:'#2563EB'},
-    {l:'BERSAMA',s:bm,cl:'#DC2626'},
+    {l:'PH (PKR + DAP + AMN)',s:ph,cl:'#EF4444'},
+    {l:'BERSAMA',s:bm,cl:'#EAB308'},
     {l:'PN (BERSATU + PAS)',s:pn,cl:'#7C3AED'},
-    {l:'BN (UMNO + MCA)',s:bn,cl:'#D97706'},
+    {l:'BN (UMNO + MCA)',s:bn,cl:'#2563EB'},
     {l:'GPS (Sarawak)',s:gps,cl:'#059669'},
     {l:'Others (WARISAN)',s:war,cl:'#4B5563'}
   ].map(function(r){
@@ -1642,8 +1736,8 @@ function renderSummary(d){
   }).join('');
 
   document.getElementById('ctrl-preview').innerHTML=[
-    {l:'PH',v:ph,cl:'#2563EB'},{l:'BERSAMA',v:bm,cl:'#DC2626'},
-    {l:'PN',v:pn,cl:'#7C3AED'},{l:'BN',v:bn,cl:'#D97706'},
+    {l:'PH',v:ph,cl:'#EF4444'},{l:'BERSAMA',v:bm,cl:'#EAB308'},
+    {l:'PN',v:pn,cl:'#7C3AED'},{l:'BN',v:bn,cl:'#2563EB'},
     {l:'GPS',v:gps,cl:'#059669'},{l:'Others',v:war,cl:'#4B5563'}
   ].map(function(x){return '<div class="cp-card"><div class="cp-lbl">'+x.l+'</div><div class="cp-n" style="color:'+x.cl+'">'+x.v+'</div></div>';}).join('');
 
@@ -1769,7 +1863,7 @@ function showStateDetail(st,d,t){
   }).join('');
   var fm=FOCUS_META[curFocus]||FOCUS_META.PH;
   document.getElementById('sd-body').innerHTML=d.seats.map(function(s){
-    var rb='<div class="rbar-sm"><div style="flex:'+s.melayu+';background:#2563EB;height:100%"></div><div style="flex:'+s.cina+';background:#DC2626;height:100%"></div><div style="flex:'+s.india+';background:#D97706;height:100%"></div><div style="flex:'+s.lain+';background:#4B5563;height:100%"></div></div>';
+    var rb='<div class="rbar-sm"><div style="flex:'+s.melayu+';background:#EF4444;height:100%"></div><div style="flex:'+s.cina+';background:#EAB308;height:100%"></div><div style="flex:'+s.india+';background:#2563EB;height:100%"></div><div style="flex:'+s.lain+';background:#4B5563;height:100%"></div></div>';
     var flip=s.ge15!==s.projected;
     var pc=Math.round((s.winProb||0)*100);
     var pcol=probColor(s.winProb||0);
@@ -1827,7 +1921,7 @@ async function loadSeats(){
       nr.style.display='none';
       var fcol=FOCUS_META[curFocus].col;
       tb.innerHTML=d.seats.map(function(s){
-        var rb='<div class="rbar-sm"><div style="flex:'+s.melayu+';background:#2563EB;height:100%"></div><div style="flex:'+s.cina+';background:#DC2626;height:100%"></div><div style="flex:'+s.india+';background:#D97706;height:100%"></div><div style="flex:'+s.lain+';background:#4B5563;height:100%"></div></div><div style="font-size:9px;color:'+s.raceCol+';margin-top:1px">'+s.raceLabel+'</div>';
+        var rb='<div class="rbar-sm"><div style="flex:'+s.melayu+';background:#EF4444;height:100%"></div><div style="flex:'+s.cina+';background:#EAB308;height:100%"></div><div style="flex:'+s.india+';background:#2563EB;height:100%"></div><div style="flex:'+s.lain+';background:#4B5563;height:100%"></div></div><div style="font-size:9px;color:'+s.raceCol+';margin-top:1px">'+s.raceLabel+'</div>';
         var yc=s.youth>=55?'#DC2626':s.youth>=48?'#D97706':'#16A34A';
         var flip=s.ge15!==s.projected;
         var pc=Math.round((s.winProb||0)*100);
@@ -1897,14 +1991,33 @@ window.switchTab=function(id,el){
   curView=id;
   document.querySelectorAll('.tn').forEach(function(b){b.classList.remove('on');});
   document.querySelectorAll('.vp').forEach(function(p){p.classList.remove('on');});
-  el.classList.add('on');
+  if(el&&el.classList&&el.classList.contains('tn'))el.classList.add('on');
   document.getElementById('tab-'+id).classList.add('on');
+  // sidebar + drawer nav active state
+  document.querySelectorAll('.snav-btn').forEach(function(b){b.classList.remove('on');});
+  var sb=document.getElementById('snav-'+id);if(sb)sb.classList.add('on');
+  var ds=document.getElementById('dsnav-'+id);if(ds)ds.classList.add('on');
   if(id==='seats'){seatsPage=1;loadSeats();}
   if(id==='states')loadSummary();
   if(id==='analysis')loadAnalysis();
   if(id==='johor')renderPrnJohor();
   if(id==='ns9'){}
   if(id==='melaka'){}
+};
+window.mnavSwitch=function(id){
+  var matchEl=null;
+  document.querySelectorAll('.tn').forEach(function(b){
+    if((b.getAttribute('onclick')||'').indexOf("'"+id+"'")>=0)matchEl=b;
+  });
+  window.switchTab(id,matchEl);
+};
+window.openNavDrawer=function(){
+  var d=document.getElementById('navDrawer');if(d)d.classList.add('open');
+  document.body.style.overflow='hidden';
+};
+window.closeNavDrawer=function(){
+  var d=document.getElementById('navDrawer');if(d)d.classList.remove('open');
+  document.body.style.overflow='';
 };
 window.onSl=function(k,v){
   var n=parseInt(v);
@@ -2051,7 +2164,7 @@ function renderPrnJohor(){
   _prnRendered=true;
   var tb=document.getElementById('prn-tbody');
   if(!tb)return;
-  var winCol={BN:'#D97706',PH:'#2563EB',PN:'#7C3AED'};
+  var winCol={BN:'#2563EB',PH:'#EF4444',PN:'#7C3AED'};
   var catCls={Safe:'prn-cat-Safe',Likely:'prn-cat-Likely',Lean:'prn-cat-Lean','Toss-up':'prn-cat-Tossup'};
   function fmt(v){return v>0?v.toFixed(v===Math.round(v)?0:1)+'%':'<span style="color:var(--text4)">—</span>';}
   var html=PRN_JOHOR.map(function(s){
@@ -2070,8 +2183,8 @@ function renderPrnJohor(){
           +'<span style="font-size:10px;font-weight:700;width:28px;text-align:right;flex-shrink:0;color:'+wc+'">'+Math.round(pWin*100)+'%</span>'
           +'<div class="prn-pbar-track"><div class="prn-pbar-fill" style="width:'+(pWin*100)+'%;background:'+wc+'"></div></div>'
         +'</div></td>'
-      +'<td style="text-align:right;font-size:10px;font-weight:600;color:#D97706">'+s.bn+'%</td>'
-      +'<td style="text-align:right;font-size:10px;font-weight:600;color:#2563EB">'+fmt(s.ph)+'</td>'
+      +'<td style="text-align:right;font-size:10px;font-weight:600;color:#2563EB">'+s.bn+'%</td>'
+      +'<td style="text-align:right;font-size:10px;font-weight:600;color:#EF4444">'+fmt(s.ph)+'</td>'
       +'<td style="text-align:right;font-size:10px;font-weight:600;color:#7C3AED">'+fmt(s.pn)+'</td>'
       +'<td style="text-align:right;font-size:10px;color:var(--text3)">'+fmt(s.bsm)+'</td>'
       +'<td style="text-align:right;font-size:10px;color:var(--text3)">'+fmt(s.mud)+'</td>'
@@ -2082,6 +2195,49 @@ function renderPrnJohor(){
 }
 
 loadSummary();
+})();
+</script>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="navDrawer" onclick="if(event.target===this)closeNavDrawer()">
+  <div class="nav-drawer-panel">
+    <div class="nav-drawer-head">
+      <span class="nav-drawer-title">GE16 Simulation</span>
+      <button class="nav-drawer-close" onclick="closeNavDrawer()">✕</button>
+    </div>
+    <div class="nav-drawer-body">
+      <div class="snav-section">Main</div>
+      <button class="snav-btn on" id="dsnav-overview" onclick="mnavSwitch('overview');closeNavDrawer()"><span class="snav-ico">📊</span><span class="snav-lbl">Overview</span></button>
+      <button class="snav-btn" id="dsnav-analysis" onclick="mnavSwitch('analysis');closeNavDrawer()"><span class="snav-ico">📈</span><span class="snav-lbl">Analysis</span></button>
+      <button class="snav-btn" id="dsnav-seats" onclick="mnavSwitch('seats');closeNavDrawer()"><span class="snav-ico">📋</span><span class="snav-lbl">All 222 Seats</span></button>
+      <button class="snav-btn" id="dsnav-states" onclick="mnavSwitch('states');closeNavDrawer()"><span class="snav-ico">🗺</span><span class="snav-lbl">By State</span></button>
+      <button class="snav-btn" id="dsnav-controls" onclick="mnavSwitch('controls');closeNavDrawer()"><span class="snav-ico">🎛</span><span class="snav-lbl">Adjust Model</span></button>
+      <div class="snav-div"></div>
+      <div class="snav-section">PRN 2026</div>
+      <button class="snav-btn" id="dsnav-johor" onclick="mnavSwitch('johor');closeNavDrawer()"><span class="snav-ico">🗳</span><span class="snav-lbl">Johor</span></button>
+      <button class="snav-btn" id="dsnav-ns9" onclick="mnavSwitch('ns9');closeNavDrawer()"><span class="snav-ico">🗳</span><span class="snav-lbl">Negeri Sembilan</span></button>
+      <button class="snav-btn" id="dsnav-melaka" onclick="mnavSwitch('melaka');closeNavDrawer()"><span class="snav-ico">🗳</span><span class="snav-lbl">Melaka</span></button>
+      <div class="snav-div"></div>
+      <div class="snav-section">Info</div>
+      <button class="snav-btn" id="dsnav-method" onclick="mnavSwitch('method');closeNavDrawer()"><span class="snav-ico">📖</span><span class="snav-lbl">Methodology</span></button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var btn=document.getElementById('themeBtn');
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme',t);
+    if(btn)btn.textContent=t==='dark'?'☀️':'🌙';
+    try{localStorage.setItem('sim16-theme',t);}catch(e){}
+  }
+  function detectTheme(){
+    try{var s=localStorage.getItem('sim16-theme');if(s)return s;}catch(e){}
+    return window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  }
+  var t=detectTheme();applyTheme(t);
+  if(btn)btn.addEventListener('click',function(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');});
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
