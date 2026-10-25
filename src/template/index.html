@@ -442,22 +442,23 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
 /* ===== PARTY BADGES ===== */
 .pbadge{display:inline-flex;align-items:center;justify-content:center;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700;letter-spacing:.03em;color:#fff;white-space:nowrap;flex-shrink:0;line-height:1.4;font-family:'Inter',system-ui,sans-serif}
 .pb-ph{background:#EF4444}.pb-bsm{background:#EAB308;color:#78350F}.pb-pn{background:#7C3AED}.pb-bn{background:#2563EB}.pb-gps{background:#059669}.pb-war{background:#4B5563}.pb-pas{background:#16A34A}.pb-pkr{background:#EF4444}.pb-dap{background:#DC2626}.pb-amn{background:#B91C1C}
-/* ===== MOBILE BOTTOM NAV ===== */
-.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--surface);border-top:1px solid var(--border);padding:4px 0 max(4px,env(safe-area-inset-bottom,0px));box-shadow:0 -4px 20px rgba(0,0,0,.12)}
-.mob-nav-inner{display:flex;justify-content:space-around;align-items:stretch;max-width:980px;margin:0 auto}
-.mn-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 2px;border:none;background:none;cursor:pointer;color:var(--text3);transition:color .15s;-webkit-tap-highlight-color:transparent;min-height:50px}
-.mn-btn.on{color:var(--focus-col)}
-.mn-ico{font-size:20px;line-height:1}
-.mn-lbl{font-size:9px;font-weight:600;line-height:1}
-.prn-sub{display:none;position:fixed;bottom:calc(62px + env(safe-area-inset-bottom,0px));left:0;right:0;z-index:195;background:var(--surface);border-top:1px solid var(--border);padding:.5rem .75rem;box-shadow:0 -4px 20px rgba(0,0,0,.12)}
-.prn-sub.open{display:block}
-.prn-sub-inner{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.prn-sub-btn{padding:8px 16px;border-radius:var(--r-sm);border:1px solid var(--border2);background:var(--surface2);color:var(--text2);font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
-.prn-sub-btn:hover,.prn-sub-btn:active{background:var(--surface3)}
+/* ===== MOBILE HAMBURGER NAV DRAWER ===== */
+.ham-btn{display:none;width:36px;height:36px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);cursor:pointer;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.ham-btn:hover{background:rgba(255,255,255,.14)}
+.nav-drawer{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.55);backdrop-filter:blur(3px)}
+.nav-drawer.open{display:block}
+.nav-drawer-panel{position:absolute;top:0;left:0;bottom:0;width:270px;max-width:82vw;background:var(--navy);overflow-y:auto;transform:translateX(-100%);transition:transform .22s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.nav-drawer.open .nav-drawer-panel{transform:translateX(0)}
+.nav-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:.875rem 1.25rem;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0}
+.nav-drawer-title{font-size:13px;font-weight:700;color:rgba(255,255,255,.85);letter-spacing:.02em}
+.nav-drawer-close{width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1;transition:all .15s}
+.nav-drawer-close:hover{background:rgba(255,255,255,.14);color:#fff}
+.nav-drawer-body{flex:1;padding:.375rem 0 1rem}
 @media(max-width:768px){
-  .mob-nav{display:block}
+  .ham-btn{display:flex}
+  .cmd-sidebar{display:none!important}
   .tab-nav{display:none}
-  body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
+  body{padding-bottom:env(safe-area-inset-bottom,0px)}
 }
 /* ===== THEME OVERRIDES ===== */
 :root[data-theme="dark"]{
@@ -529,6 +530,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <div class="lc-num" id="lc-num">—</div>
       <div class="lc-sub">of 112 needed</div>
     </div>
+    <button class="ham-btn" id="hamBtn" title="Menu" onclick="openNavDrawer()">☰</button>
     <button class="theme-toggle-hdr" id="themeBtn" title="Toggle light/dark">🌙</button>
   </div>
 </header>
@@ -1991,18 +1993,10 @@ window.switchTab=function(id,el){
   document.querySelectorAll('.vp').forEach(function(p){p.classList.remove('on');});
   if(el&&el.classList&&el.classList.contains('tn'))el.classList.add('on');
   document.getElementById('tab-'+id).classList.add('on');
-  // sidebar nav active state
+  // sidebar + drawer nav active state
   document.querySelectorAll('.snav-btn').forEach(function(b){b.classList.remove('on');});
   var sb=document.getElementById('snav-'+id);if(sb)sb.classList.add('on');
-  // mobile nav active state
-  var mobMap={overview:'mn-overview',analysis:'mn-analysis',seats:'mn-seats',
-    johor:'mn-prn',ns9:'mn-prn',melaka:'mn-prn',
-    controls:'mn-more',states:'mn-more',method:'mn-more'};
-  document.querySelectorAll('.mn-btn').forEach(function(b){b.classList.remove('on');});
-  var mbId=mobMap[id];if(mbId){var mb=document.getElementById(mbId);if(mb)mb.classList.add('on');}
-  // close submenus
-  var ps=document.getElementById('prn-sub');if(ps)ps.classList.remove('open');
-  var ms=document.getElementById('more-sub');if(ms)ms.classList.remove('open');
+  var ds=document.getElementById('dsnav-'+id);if(ds)ds.classList.add('on');
   if(id==='seats'){seatsPage=1;loadSeats();}
   if(id==='states')loadSummary();
   if(id==='analysis')loadAnalysis();
@@ -2017,17 +2011,13 @@ window.mnavSwitch=function(id){
   });
   window.switchTab(id,matchEl);
 };
-window.togglePrnSub=function(){
-  var ps=document.getElementById('prn-sub');
-  var ms=document.getElementById('more-sub');
-  if(ms)ms.classList.remove('open');
-  if(ps)ps.classList.toggle('open');
+window.openNavDrawer=function(){
+  var d=document.getElementById('navDrawer');if(d)d.classList.add('open');
+  document.body.style.overflow='hidden';
 };
-window.toggleMoreSub=function(){
-  var ms=document.getElementById('more-sub');
-  var ps=document.getElementById('prn-sub');
-  if(ps)ps.classList.remove('open');
-  if(ms)ms.classList.toggle('open');
+window.closeNavDrawer=function(){
+  var d=document.getElementById('navDrawer');if(d)d.classList.remove('open');
+  document.body.style.overflow='';
 };
 window.onSl=function(k,v){
   var n=parseInt(v);
@@ -2208,32 +2198,31 @@ loadSummary();
 })();
 </script>
 
-<!-- PRN SUBMENU (mobile) -->
-<div class="prn-sub" id="prn-sub">
-  <div class="prn-sub-inner">
-    <button class="prn-sub-btn" onclick="mnavSwitch('johor')">🗳 Johor 2026</button>
-    <button class="prn-sub-btn" onclick="mnavSwitch('ns9')">🗳 N9 2026</button>
-    <button class="prn-sub-btn" onclick="mnavSwitch('melaka')">🗳 Melaka 2026</button>
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="navDrawer" onclick="if(event.target===this)closeNavDrawer()">
+  <div class="nav-drawer-panel">
+    <div class="nav-drawer-head">
+      <span class="nav-drawer-title">GE16 Simulation</span>
+      <button class="nav-drawer-close" onclick="closeNavDrawer()">✕</button>
+    </div>
+    <div class="nav-drawer-body">
+      <div class="snav-section">Main</div>
+      <button class="snav-btn on" id="dsnav-overview" onclick="mnavSwitch('overview');closeNavDrawer()"><span class="snav-ico">📊</span><span class="snav-lbl">Overview</span></button>
+      <button class="snav-btn" id="dsnav-analysis" onclick="mnavSwitch('analysis');closeNavDrawer()"><span class="snav-ico">📈</span><span class="snav-lbl">Analysis</span></button>
+      <button class="snav-btn" id="dsnav-seats" onclick="mnavSwitch('seats');closeNavDrawer()"><span class="snav-ico">📋</span><span class="snav-lbl">All 222 Seats</span></button>
+      <button class="snav-btn" id="dsnav-states" onclick="mnavSwitch('states');closeNavDrawer()"><span class="snav-ico">🗺</span><span class="snav-lbl">By State</span></button>
+      <button class="snav-btn" id="dsnav-controls" onclick="mnavSwitch('controls');closeNavDrawer()"><span class="snav-ico">🎛</span><span class="snav-lbl">Adjust Model</span></button>
+      <div class="snav-div"></div>
+      <div class="snav-section">PRN 2026</div>
+      <button class="snav-btn" id="dsnav-johor" onclick="mnavSwitch('johor');closeNavDrawer()"><span class="snav-ico">🗳</span><span class="snav-lbl">Johor</span></button>
+      <button class="snav-btn" id="dsnav-ns9" onclick="mnavSwitch('ns9');closeNavDrawer()"><span class="snav-ico">🗳</span><span class="snav-lbl">Negeri Sembilan</span></button>
+      <button class="snav-btn" id="dsnav-melaka" onclick="mnavSwitch('melaka');closeNavDrawer()"><span class="snav-ico">🗳</span><span class="snav-lbl">Melaka</span></button>
+      <div class="snav-div"></div>
+      <div class="snav-section">Info</div>
+      <button class="snav-btn" id="dsnav-method" onclick="mnavSwitch('method');closeNavDrawer()"><span class="snav-ico">📖</span><span class="snav-lbl">Methodology</span></button>
+    </div>
   </div>
 </div>
-<!-- MORE SUBMENU (mobile) -->
-<div class="prn-sub" id="more-sub">
-  <div class="prn-sub-inner">
-    <button class="prn-sub-btn" onclick="mnavSwitch('controls')">🎛 Adjust Model</button>
-    <button class="prn-sub-btn" onclick="mnavSwitch('states')">🗺 By State</button>
-    <button class="prn-sub-btn" onclick="mnavSwitch('method')">📖 Methodology</button>
-  </div>
-</div>
-<!-- MOBILE BOTTOM NAV -->
-<nav class="mob-nav" id="mob-nav">
-  <div class="mob-nav-inner">
-    <button class="mn-btn on" id="mn-overview" onclick="mnavSwitch('overview')"><span class="mn-ico">📊</span><span class="mn-lbl">Overview</span></button>
-    <button class="mn-btn" id="mn-analysis" onclick="mnavSwitch('analysis')"><span class="mn-ico">📈</span><span class="mn-lbl">Analysis</span></button>
-    <button class="mn-btn" id="mn-seats" onclick="mnavSwitch('seats')"><span class="mn-ico">📋</span><span class="mn-lbl">Seats</span></button>
-    <button class="mn-btn" id="mn-prn" onclick="togglePrnSub()"><span class="mn-ico">🗳</span><span class="mn-lbl">PRN</span></button>
-    <button class="mn-btn" id="mn-more" onclick="toggleMoreSub()"><span class="mn-ico">☰</span><span class="mn-lbl">More</span></button>
-  </div>
-</nav>
 
 <script>
 (function(){
