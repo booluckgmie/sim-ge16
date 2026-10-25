@@ -459,6 +459,54 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   .tab-nav{display:none}
   body{padding-bottom:calc(66px + env(safe-area-inset-bottom,0px))}
 }
+/* ===== THEME OVERRIDES ===== */
+:root[data-theme="dark"]{
+  --navy:#060D1C;--navy2:#0A1426;--navy3:#111E38;
+  --bg:#060D1C;--surface:#0F1A30;--surface2:#152040;--surface3:#1A2848;
+  --border:#1E2E4A;--border2:#2A3D5E;
+  --text:#E8EFF8;--text2:#8A9BBF;--text3:#4A5E80;--text4:#2A3D5E;
+  --green:#22C55E;--green-bg:#052E16;--green-bd:#166534;
+  --red:#F87171;--red-bg:#2D0A0A;--red-bd:#7F1D1D;
+  --amber:#FCD34D;--amber-bg:#2D1B00;--amber-bd:#78350F;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --navy:#0B1629;--navy2:#152040;--navy3:#1E2F5A;
+  --bg:#F0F4FA;--surface:#FFFFFF;--surface2:#F1F5F9;--surface3:#E8EEF8;
+  --border:#DDE5F0;--border2:#C8D5E8;
+  --text:#0D1B34;--text2:#455570;--text3:#8A9BBF;--text4:#C8D5E8;
+  --green:#15803D;--green-bg:#F0FDF4;--green-bd:#86EFAC;
+  --red:#DC2626;--red-bg:#FEF2F2;--red-bd:#FECACA;
+  --amber:#B45309;--amber-bg:#FFFBEB;--amber-bd:#FCD34D;
+  color-scheme:light;
+}
+/* ===== THEME TOGGLE BUTTON (header) ===== */
+.theme-toggle-hdr{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:rgba(255,255,255,.7);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.theme-toggle-hdr:hover{background:rgba(255,255,255,.14);color:#fff}
+/* ===== COMMAND CENTER LAYOUT ===== */
+.cmd-layout{display:flex}
+.cmd-sidebar{width:210px;flex-shrink:0;background:var(--navy);border-right:1px solid rgba(255,255,255,.07);display:flex;flex-direction:column}
+.cmd-main{flex:1;min-width:0}
+/* ===== SIDEBAR NAV ===== */
+.snav-section{padding:.875rem 1rem .25rem;font-size:9px;font-weight:700;color:rgba(255,255,255,.22);text-transform:uppercase;letter-spacing:.7px;white-space:nowrap}
+.snav-btn{display:flex;align-items:center;gap:9px;width:100%;padding:9px 1rem;border:none;background:none;color:rgba(255,255,255,.45);cursor:pointer;font-size:11px;font-weight:500;transition:all .12s;text-align:left;-webkit-tap-highlight-color:transparent}
+.snav-btn:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.85)}
+.snav-btn.on{background:rgba(37,99,235,.18);color:#fff;font-weight:700;box-shadow:inset 3px 0 0 var(--blue)}
+.snav-ico{font-size:15px;width:18px;text-align:center;flex-shrink:0}
+.snav-lbl{line-height:1.3}
+.snav-div{margin:.5rem 1rem;border-top:1px solid rgba(255,255,255,.07)}
+/* Desktop command center */
+@media(min-width:769px){
+  #app{max-width:none;display:flex;flex-direction:column;height:100vh;overflow:hidden}
+  .hdr{flex-shrink:0;position:static}
+  .cmd-layout{flex:1;overflow:hidden;min-height:0}
+  .cmd-sidebar{overflow-y:auto;scrollbar-width:thin;height:100%}
+  .cmd-sidebar::-webkit-scrollbar{width:3px}
+  .cmd-sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:2px}
+  .cmd-main{overflow-y:auto;scrollbar-width:thin;height:100%}
+  .tab-nav{display:none}
+  .tab-nav{position:static}
+}
 </style>
 </head>
 <body>
@@ -481,9 +529,31 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <div class="lc-num" id="lc-num">—</div>
       <div class="lc-sub">of 112 needed</div>
     </div>
+    <button class="theme-toggle-hdr" id="themeBtn" title="Toggle light/dark">🌙</button>
   </div>
 </header>
 
+<div class="cmd-layout">
+
+<!-- SIDEBAR NAV (desktop) -->
+<aside class="cmd-sidebar" id="cmd-sidebar">
+  <div class="snav-section">Main</div>
+  <button class="snav-btn on" id="snav-overview" onclick="mnavSwitch('overview')"><span class="snav-ico">📊</span><span class="snav-lbl">Overview</span></button>
+  <button class="snav-btn" id="snav-analysis" onclick="mnavSwitch('analysis')"><span class="snav-ico">📈</span><span class="snav-lbl">Analysis</span></button>
+  <button class="snav-btn" id="snav-seats" onclick="mnavSwitch('seats')"><span class="snav-ico">📋</span><span class="snav-lbl">All 222 Seats</span></button>
+  <button class="snav-btn" id="snav-states" onclick="mnavSwitch('states')"><span class="snav-ico">🗺</span><span class="snav-lbl">By State</span></button>
+  <button class="snav-btn" id="snav-controls" onclick="mnavSwitch('controls')"><span class="snav-ico">🎛</span><span class="snav-lbl">Adjust Model</span></button>
+  <div class="snav-div"></div>
+  <div class="snav-section">PRN 2026</div>
+  <button class="snav-btn" id="snav-johor" onclick="mnavSwitch('johor')"><span class="snav-ico">🗳</span><span class="snav-lbl">Johor</span></button>
+  <button class="snav-btn" id="snav-ns9" onclick="mnavSwitch('ns9')"><span class="snav-ico">🗳</span><span class="snav-lbl">Negeri Sembilan</span></button>
+  <button class="snav-btn" id="snav-melaka" onclick="mnavSwitch('melaka')"><span class="snav-ico">🗳</span><span class="snav-lbl">Melaka</span></button>
+  <div class="snav-div"></div>
+  <div class="snav-section">Info</div>
+  <button class="snav-btn" id="snav-method" onclick="mnavSwitch('method')"><span class="snav-ico">📖</span><span class="snav-lbl">Methodology</span></button>
+</aside>
+
+<div class="cmd-main">
 <!-- FOCUS / SIDE PICKER -->
 <div class="focus-bar">
   <span class="focus-lbl">View from</span>
@@ -1404,6 +1474,8 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   </div>
 
 </div><!-- /tab-content -->
+</div><!-- /cmd-main -->
+</div><!-- /cmd-layout -->
 </div><!-- /app -->
 
 <!-- MODAL -->
@@ -1919,6 +1991,9 @@ window.switchTab=function(id,el){
   document.querySelectorAll('.vp').forEach(function(p){p.classList.remove('on');});
   if(el&&el.classList&&el.classList.contains('tn'))el.classList.add('on');
   document.getElementById('tab-'+id).classList.add('on');
+  // sidebar nav active state
+  document.querySelectorAll('.snav-btn').forEach(function(b){b.classList.remove('on');});
+  var sb=document.getElementById('snav-'+id);if(sb)sb.classList.add('on');
   // mobile nav active state
   var mobMap={overview:'mn-overview',analysis:'mn-analysis',seats:'mn-seats',
     johor:'mn-prn',ns9:'mn-prn',melaka:'mn-prn',
@@ -2160,6 +2235,22 @@ loadSummary();
   </div>
 </nav>
 
+<script>
+(function(){
+  var btn=document.getElementById('themeBtn');
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme',t);
+    if(btn)btn.textContent=t==='dark'?'☀️':'🌙';
+    try{localStorage.setItem('sim16-theme',t);}catch(e){}
+  }
+  function detectTheme(){
+    try{var s=localStorage.getItem('sim16-theme');if(s)return s;}catch(e){}
+    return window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  }
+  var t=detectTheme();applyTheme(t);
+  if(btn)btn.addEventListener('click',function(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');});
+})();
+</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
