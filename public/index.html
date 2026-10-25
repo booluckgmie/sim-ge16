@@ -521,6 +521,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
   <button class="tn" onclick="switchTab('seats',this)"><span class="tn-ico">📋</span>All 222 Seats</button>
   <button class="tn" onclick="switchTab('johor',this)"><span class="tn-ico">🗳</span>PRN Johor 2026</button>
   <button class="tn" onclick="switchTab('ns9',this)"><span class="tn-ico">🗳</span>PRN N9 2026</button>
+  <button class="tn" onclick="switchTab('melaka',this)"><span class="tn-ico">🗳</span>PRN Melaka 2026</button>
   <button class="tn" onclick="switchTab('method',this)"><span class="tn-ico">📖</span>Methodology</button>
 </nav>
 
@@ -1003,6 +1004,149 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
         <span>
           <span class="prn-intel-ttl">Open Intelligence Brief</span>
           <span class="prn-intel-sub">Sentiment · scenario analysis · vote-buying tracker · early voter signals · key seats · news tracker</span>
+        </span>
+        <span class="prn-intel-arr">→</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- TAB: PRN MELAKA 2026 -->
+  <div class="vp" id="tab-melaka">
+    <div class="prn-wrap">
+
+      <!-- Banner -->
+      <div class="prn-banner" style="background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.03))">
+        <div class="prn-eye">Pilihanraya Negeri ke-16 · State Election Series</div>
+        <div class="prn-title">PRN Melaka 2026</div>
+        <div class="prn-date">📅 Hari Mengundi: 14 November 2026 &nbsp;·&nbsp; 28 DUN seats</div>
+        <div class="prn-note">Penamaan Calon: 31 Oktober &nbsp;·&nbsp; Majoriti: 15 kerusi &nbsp;·&nbsp; Caretaker: BN (Ab Rauf Yusoh)</div>
+      </div>
+
+      <!-- Key probabilities -->
+      <div class="sec-lbl" style="padding:.25rem 0 .5rem">Key probabilities</div>
+      <div class="prn-prob-strip">
+        <div class="prn-prob">
+          <div class="prn-prob-n" style="color:#D97706">52%</div>
+          <div class="prn-prob-lbl">P(BN majority solo ≥15)</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n" style="color:var(--green)">88%</div>
+          <div class="prn-prob-lbl">P(BN+PN combined ≥15)</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n" style="color:#2563EB">6%</div>
+          <div class="prn-prob-lbl">P(PH majority)</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n">17<span style="font-size:15px;font-weight:600;opacity:.45">/28</span></div>
+          <div class="prn-prob-lbl">BN projected seats</div>
+        </div>
+        <div class="prn-prob">
+          <div class="prn-prob-n" style="color:#D97706">55%</div>
+          <div class="prn-prob-lbl">Model confidence</div>
+          <div class="prn-prob-sub">pre-nomination · 25 Oct 2026</div>
+        </div>
+      </div>
+
+      <!-- Expected seats -->
+      <div class="sec-lbl" style="padding:.25rem 0 .5rem">Expected seats</div>
+      <div class="prn-exp-strip">
+        <div class="prn-exp" style="border-color:#D97706">
+          <div class="prn-exp-n" style="color:#D97706">17</div>
+          <div class="prn-exp-lbl">BN · 21 contested</div>
+        </div>
+        <div class="prn-exp" style="border-color:#2563EB">
+          <div class="prn-exp-n" style="color:#2563EB">8</div>
+          <div class="prn-exp-lbl">PH · 21 contested</div>
+        </div>
+        <div class="prn-exp" style="border-color:#7C3AED">
+          <div class="prn-exp-n" style="color:#7C3AED">3</div>
+          <div class="prn-exp-lbl">PN · 7 contested</div>
+        </div>
+        <div class="prn-exp">
+          <div class="prn-exp-n" style="color:var(--text3)">~15</div>
+          <div class="prn-exp-lbl">Majority needed</div>
+        </div>
+      </div>
+
+      <!-- Statewide vote share -->
+      <div class="prn-vshare">
+        <div class="prn-vshare-hdr">
+          <span class="prn-vshare-title">Statewide projected vote share</span>
+          <span class="prn-vshare-sub">scenario-weighted · 28 DUN</span>
+        </div>
+        <div class="prn-vbar">
+          <div class="prn-vseg" style="flex:45;background:#D97706">BN 45%</div>
+          <div class="prn-vseg" style="flex:38;background:#2563EB">PH 38%</div>
+          <div class="prn-vseg" style="flex:14;background:#7C3AED">PN 14%</div>
+          <div class="prn-vseg" style="flex:3;background:#4B5563">Oth 3%</div>
+        </div>
+        <div class="prn-vleg">
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#D97706"></div>BN (UMNO/MCA/MIC) 45%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#2563EB"></div>PH (PKR/DAP/Amanah) 38%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#7C3AED"></div>PN (PAS/Wawasan) 14%</div>
+          <div class="prn-vleg-item"><div class="prn-vleg-sq" style="background:#4B5563"></div>Others 3%</div>
+        </div>
+      </div>
+
+      <!-- Contestation note -->
+      <div class="prn-adj" style="border-color:rgba(245,158,11,.25);background:rgba(245,158,11,.04)">
+        <div class="prn-adj-title" style="color:#D97706">ℹ Seat contestation structure — BN+PN full-coverage pact</div>
+        <div class="prn-adj-row">
+          <span class="prn-adj-seat">15 seats</span>
+          <span class="prn-adj-txt">BN vs PH head-to-head — mixed urban fringe, Malay-majority semi-rural across Masjid Tanah, Alor Gajah, Jasin, and Hang Tuah Jaya.</span>
+        </div>
+        <div class="prn-adj-row">
+          <span class="prn-adj-seat">6 seats</span>
+          <span class="prn-adj-txt">BN uncontested by PH (N03, N04, N05, N11, N12, N28) — PH cedes rural Malay strongholds; BN virtual walkovers vs independents only.</span>
+        </div>
+        <div class="prn-adj-row">
+          <span class="prn-adj-seat">6 seats</span>
+          <span class="prn-adj-txt">PH vs PN head-to-head — urban Kota Melaka &amp; Hang Tuah Jaya (N13, N16, N17, N19, N20, N22). BN cedes these to PN. PH favoured in all 6 (Chinese-majority).</span>
+        </div>
+        <div class="prn-adj-row">
+          <span class="prn-adj-seat">1 seat</span>
+          <span class="prn-adj-txt">N24 Bemban — PN uncontested. PH does not contest. PN near-certain win.</span>
+        </div>
+        <div class="prn-adj-row">
+          <span class="prn-adj-seat">Key dynamic</span>
+          <span class="prn-adj-txt">PH-Bersatu cooperation still <strong>undecided</strong> (Malaysiakini, 24 Oct). If Bersatu (in PN) cooperates with PH for the 7 PN seats, PH's prospects in PH-vs-PN contests improve significantly. Watch nomination day (31 Oct) for clarity.</span>
+        </div>
+      </div>
+
+      <!-- Final Prediction -->
+      <div class="sec-lbl" style="padding:.25rem 0 .5rem">Final prediction</div>
+      <div style="background:var(--surface);border:1px solid rgba(245,158,11,.25);border-radius:var(--r);padding:1rem;margin-bottom:1rem;position:relative;overflow:hidden">
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#D97706,rgba(245,158,11,.15),transparent)"></div>
+        <div style="display:flex;align-items:start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem">
+          <div>
+            <div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#D97706;margin-bottom:4px">Model output (scenario-weighted) · Pre-nomination</div>
+            <div style="font-size:17px;font-weight:900;color:var(--text);letter-spacing:-.03em;margin-bottom:3px">BN retains — clear majority</div>
+            <div style="font-size:10px;color:var(--text2)">Predicted: BN <strong>17</strong> · PH <strong>8</strong> · PN <strong>3</strong> &nbsp;·&nbsp; Majority = 15 seats</div>
+          </div>
+          <div style="text-align:center;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:var(--r-sm);padding:.5rem .875rem;flex-shrink:0">
+            <div style="font-size:22px;font-weight:900;color:#D97706;line-height:1">55%</div>
+            <div style="font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--text3);margin-top:2px">Confidence</div>
+          </div>
+        </div>
+        <div style="height:20px;border-radius:4px;overflow:hidden;display:flex;margin-bottom:5px">
+          <div style="flex:17;background:#D97706;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">BN 17</div>
+          <div style="flex:8;background:#2563EB;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">PH 8</div>
+          <div style="flex:3;background:#7C3AED;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff">3</div>
+        </div>
+        <div style="font-size:9px;color:var(--text3);margin-bottom:.625rem">← majority line at 15 seats · BN solo at 17, well above threshold</div>
+        <div style="background:var(--amber-bg);border:1px solid var(--amber-bd);border-radius:var(--r-sm);padding:.5rem .75rem;font-size:10px;color:var(--text2)">
+          ⚠ <strong style="color:var(--amber)">Moderate confidence (55%)</strong> — BN+PN combined probability ≥88%. PH would need 15/21 contested seats (71.4%) to win majority — very high bar against an incumbent that won 21/21 in 2021. Model updates after nomination day (31 Oct).
+        </div>
+      </div>
+
+      <!-- Intelligence Brief Link -->
+      <a href="melaka.html" class="prn-intel-link" target="_blank" rel="noopener">
+        <span class="prn-intel-ico">🔍</span>
+        <span>
+          <span class="prn-intel-ttl">Open Intelligence Brief →</span>
+          <span class="prn-intel-sub">28-seat candidate table · scenario analysis · tensions · narratives · news tracker · strategic outlook</span>
         </span>
         <span class="prn-intel-arr">→</span>
       </a>
@@ -1759,6 +1903,7 @@ window.switchTab=function(id,el){
   if(id==='analysis')loadAnalysis();
   if(id==='johor')renderPrnJohor();
   if(id==='ns9'){}
+  if(id==='melaka'){}
 };
 window.onSl=function(k,v){
   var n=parseInt(v);
