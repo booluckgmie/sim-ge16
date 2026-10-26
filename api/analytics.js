@@ -13,7 +13,7 @@ function vercelGet(path, params) {
 
     const parts = [];
     for (const [k, v] of Object.entries(params)) {
-      if (Array.isArray(v)) v.forEach(item => parts.push(k + '[]=' + encodeURIComponent(item)));
+      if (Array.isArray(v)) v.forEach(item => parts.push(encodeURIComponent(k) + '=' + encodeURIComponent(item)));
       else parts.push(encodeURIComponent(k) + '=' + encodeURIComponent(v));
     }
     const fullPath = path + '?' + parts.join('&');
