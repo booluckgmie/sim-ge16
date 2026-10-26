@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Analytics — GE16 Simulation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
+<style>
+:root{
+  --navy:#0B1629;--navy2:#152040;--navy3:#1E2F5A;
+  --bg:#060D1C;--surface:#0F1A30;--surface2:#152040;--surface3:#1A2848;
+  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);
+  --text:#DCE8F8;--text2:#8A9BBF;--text3:#4A5E80;--text4:#2A3D5E;
+  --blue:#2563EB;--green:#22C55E;--amber:#FCD34D;--red:#EF4444;
+  --r:10px;--r-sm:6px;
+  color-scheme:dark;
+}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){
+  --bg:#F0F4FA;--surface:#FFFFFF;--surface2:#F1F5F9;--surface3:#E8EEF8;
+  --border:rgba(0,0,0,.08);--border2:rgba(0,0,0,.14);
+  --text:#0D1B34;--text2:#455570;--text3:#8A9BBF;--text4:#C8D5E8;
+  color-scheme:light;
+}}
+:root[data-theme="dark"]{
+  --bg:#060D1C;--surface:#0F1A30;--surface2:#152040;--surface3:#1A2848;
+  --border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);
+  --text:#DCE8F8;--text2:#8A9BBF;--text3:#4A5E80;--text4:#2A3D5E;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#F0F4FA;--surface:#FFFFFF;--surface2:#F1F5F9;--surface3:#E8EEF8;
+  --border:rgba(0,0,0,.08);--border2:rgba(0,0,0,.14);
+  --text:#0D1B34;--text2:#455570;--text3:#8A9BBF;--text4:#C8D5E8;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:14px;line-height:1.5}
+
+/* ── Top bar ── */
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:.875rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:50}
+.back-link{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);text-decoration:none;padding:5px 11px;border:1px solid var(--border);border-radius:20px;transition:all .15s;white-space:nowrap}
+.back-link:hover{color:var(--text);border-color:var(--border2)}
+.topbar-title{font-size:13px;font-weight:700;color:var(--text);letter-spacing:.02em}
+.theme-toggle-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:var(--surface2);color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;transition:all .15s}
+.theme-toggle-btn:hover{background:var(--surface3);color:var(--text)}
+
+/* ── Page body ── */
+.page{max-width:960px;margin:0 auto;padding:1.5rem 1.25rem 3rem}
+
+/* ── Section header ── */
+.sect-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:8px}
+.sect-title{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text3)}
+.live-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:var(--green);letter-spacing:.04em}
+.live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.data-note{font-size:11px;color:var(--text3)}
+
+/* ── Stat tiles ── */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:10px}
+@media(max-width:640px){.tiles{grid-template-columns:repeat(2,1fr)}}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px 14px}
+.tile-label{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.tile-num{font-size:32px;font-weight:800;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums;color:var(--text)}
+.tile-num.sm{font-size:20px;letter-spacing:-.02em;color:var(--blue)}
+.tile-sub{font-size:11px;color:var(--text3);margin-top:4px}
+
+/* ── Charts row ── */
+.charts-row{display:grid;grid-template-columns:1fr 250px;gap:10px;margin-bottom:10px}
+@media(max-width:640px){.charts-row{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 20px 16px}
+.card-label{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.chart-wrap{position:relative}
+
+/* ── Country list ── */
+.country-list{display:flex;flex-direction:column;gap:11px}
+.c-row{display:grid;grid-template-columns:24px 140px 1fr auto;gap:10px;align-items:center}
+@media(max-width:500px){.c-row{grid-template-columns:24px 1fr auto}.c-name{display:none}}
+.c-flag{font-size:17px;text-align:center}
+.c-name{font-size:12px;color:var(--text2);white-space:nowrap}
+.bar-track{height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;transition:width .4s ease}
+.c-count{font-size:12px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums;text-align:right;min-width:24px}
+
+/* ── Page table ── */
+.page-table{width:100%;border-collapse:collapse;font-size:12px}
+.page-table th{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);padding:0 0 10px;text-align:left;border-bottom:1px solid var(--border)}
+.page-table th:last-child,.page-table td:last-child{text-align:right}
+.page-table td{padding:10px 0;border-bottom:1px solid var(--border);color:var(--text2)}
+.page-table td:first-child{color:var(--text);font-weight:500;font-family:monospace;font-size:11px}
+.page-table tr:last-child td{border-bottom:none}
+
+/* ── Footer ── */
+.footer{margin-top:20px;font-size:11px;color:var(--text3);text-align:center}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a class="back-link" href="/">← Dashboard</a>
+  <span class="topbar-title">Analytics</span>
+  <button class="theme-toggle-btn" id="themeBtn" title="Toggle light/dark">🌙</button>
+</div>
+
+<div class="page">
+
+  <!-- Stat tiles -->
+  <div class="sect-hdr">
+    <span class="sect-title">Site Overview</span>
+    <span class="live-badge"><span class="live-dot"></span>Vercel Web Analytics</span>
+  </div>
+  <div class="tiles">
+    <div class="tile">
+      <div class="tile-label">Pageviews</div>
+      <div class="tile-num" id="stat-views">—</div>
+      <div class="tile-sub">All time</div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">Visitors</div>
+      <div class="tile-num" id="stat-visitors">—</div>
+      <div class="tile-sub">Unique</div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">Top Page</div>
+      <div class="tile-num sm" id="stat-toppage">—</div>
+      <div class="tile-sub" id="stat-toppage-sub">—</div>
+    </div>
+    <div class="tile">
+      <div class="tile-label">Mobile Share</div>
+      <div class="tile-num" id="stat-mobile">—</div>
+      <div class="tile-sub" id="stat-mobile-sub">—</div>
+    </div>
+  </div>
+
+  <!-- Charts row -->
+  <div class="charts-row">
+    <div class="card">
+      <div class="card-label">Pageviews by Page</div>
+      <div class="chart-wrap" style="height:148px"><canvas id="pagesChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-label">Device Type</div>
+      <div class="chart-wrap" style="height:148px"><canvas id="deviceChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Pages table -->
+  <div class="card" style="margin-bottom:10px">
+    <div class="card-label">Top Pages</div>
+    <table class="page-table">
+      <thead><tr><th>Page</th><th>Views</th><th>% Share</th></tr></thead>
+      <tbody id="pages-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- Country card -->
+  <div class="card">
+    <div class="card-label">Visitors by Country</div>
+    <div class="country-list" id="countryList"></div>
+  </div>
+
+  <div class="footer">Data from Vercel Web Analytics · sim-ge16.vercel.app</div>
+</div>
+
+<script>
+/* ── Static data (from Vercel Analytics snapshot) ── */
+var PAGES=[
+  {label:'/melaka.html',views:34},
+  {label:'/ (home)',views:9},
+  {label:'/index.html',views:1},
+];
+var DEVICES={Mobile:35,Desktop:8,Tablet:1};
+var COUNTRIES=[
+  {name:'Malaysia',flag:'🇲🇾',visitors:30,color:'#2563EB'},
+  {name:'United States',flag:'🇺🇸',visitors:6,color:'#059669'},
+  {name:'Australia',flag:'🇦🇺',visitors:1,color:'#D97706'},
+  {name:'Canada',flag:'🇨🇦',visitors:1,color:'#7C3AED'},
+  {name:'Switzerland',flag:'🇨🇭',visitors:1,color:'#DC2626'},
+  {name:'Sweden',flag:'🇸🇪',visitors:1,color:'#0891B2'},
+  {name:'Singapore',flag:'🇸🇬',visitors:1,color:'#BE185D'},
+];
+var TOTAL_VIEWS=44,TOTAL_VISITORS=41;
+
+/* ── Populate stat tiles ── */
+document.getElementById('stat-views').textContent=TOTAL_VIEWS;
+document.getElementById('stat-visitors').textContent=TOTAL_VISITORS;
+var top=PAGES[0];
+document.getElementById('stat-toppage').textContent=top.label.replace('/','').replace('.html','').replace('index','Home')||'Home';
+document.getElementById('stat-toppage-sub').textContent=top.views+' views · '+Math.round(top.views/TOTAL_VIEWS*100)+'%';
+var mob=DEVICES.Mobile;
+document.getElementById('stat-mobile').textContent=Math.round(mob/TOTAL_VIEWS*100)+'%';
+document.getElementById('stat-mobile-sub').textContent=mob+' of '+TOTAL_VIEWS+' pageviews';
+
+/* ── Pages table ── */
+var tbody=document.getElementById('pages-tbody');
+PAGES.forEach(function(p){
+  var tr=document.createElement('tr');
+  tr.innerHTML='<td>'+p.label+'</td><td>'+p.views+'</td><td>'+Math.round(p.views/TOTAL_VIEWS*100)+'%</td>';
+  tbody.appendChild(tr);
+});
+
+/* ── Country bars ── */
+var list=document.getElementById('countryList');
+var maxV=COUNTRIES[0].visitors;
+COUNTRIES.forEach(function(c){
+  var pct=(c.visitors/maxV*100).toFixed(1);
+  var row=document.createElement('div');
+  row.className='c-row';
+  row.innerHTML='<div class="c-flag">'+c.flag+'</div>'
+    +'<div class="c-name">'+c.name+'</div>'
+    +'<div class="bar-track"><div class="bar-fill" style="width:'+pct+'%;background:'+c.color+'"></div></div>'
+    +'<div class="c-count">'+c.visitors+'</div>';
+  list.appendChild(row);
+});
+
+/* ── Charts ── */
+Chart.defaults.font.family="'Inter',system-ui,sans-serif";
+Chart.defaults.font.size=12;
+var pagesChart,deviceChart;
+
+function tok(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+function buildCharts(){
+  var fg=tok('--text'),fgM=tok('--text3'),bd=tok('--surface2');
+  var c=['#2563EB','#059669','#D97706','#7C3AED'];
+  if(pagesChart)pagesChart.destroy();
+  if(deviceChart)deviceChart.destroy();
+
+  pagesChart=new Chart(document.getElementById('pagesChart'),{
+    type:'bar',
+    data:{
+      labels:PAGES.map(function(p){return p.label;}),
+      datasets:[{data:PAGES.map(function(p){return p.views;}),backgroundColor:c,borderRadius:4,barThickness:28}]
+    },
+    options:{
+      indexAxis:'y',responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:function(ctx){return' '+ctx.raw+' views';}}}},
+      scales:{
+        x:{grid:{color:bd},ticks:{color:fgM,font:{size:11}},border:{display:false}},
+        y:{grid:{display:false},ticks:{color:fg,font:{size:11}},border:{display:false}}
+      }
+    }
+  });
+
+  deviceChart=new Chart(document.getElementById('deviceChart'),{
+    type:'doughnut',
+    data:{
+      labels:Object.keys(DEVICES),
+      datasets:[{data:Object.values(DEVICES),backgroundColor:c,borderColor:tok('--surface'),borderWidth:2,hoverOffset:4}]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,cutout:'66%',
+      plugins:{
+        legend:{position:'bottom',labels:{color:fg,font:{size:11},padding:12,usePointStyle:true,pointStyleWidth:8}},
+        tooltip:{callbacks:{label:function(ctx){return' '+ctx.label+': '+ctx.raw+' ('+Math.round(ctx.raw/TOTAL_VIEWS*100)+'%)'}}}
+      }
+    }
+  });
+}
+buildCharts();
+new MutationObserver(function(){setTimeout(buildCharts,60);}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+
+/* ── Theme toggle ── */
+var btn=document.getElementById('themeBtn');
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  if(btn)btn.textContent=t==='dark'?'☀️':'🌙';
+  try{localStorage.setItem('sim16-theme',t);}catch(e){}
+}
+function detectTheme(){
+  try{var s=localStorage.getItem('sim16-theme');if(s)return s;}catch(e){}
+  return window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+}
+applyTheme(detectTheme());
+if(btn)btn.addEventListener('click',function(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');});
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
