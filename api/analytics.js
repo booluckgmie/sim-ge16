@@ -11,12 +11,12 @@ function vercelGet(path, params) {
     const token = process.env.ANALYTICS_TOKEN;
     if (!token) return reject(new Error('ANALYTICS_TOKEN not set'));
 
-    const qs = new URLSearchParams();
+    const parts = [];
     for (const [k, v] of Object.entries(params)) {
-      if (Array.isArray(v)) v.forEach(item => qs.append(k + '[]', item));
-      else qs.append(k, v);
+      if (Array.isArray(v)) v.forEach(item => parts.push(k + '[]=' + encodeURIComponent(item)));
+      else parts.push(encodeURIComponent(k) + '=' + encodeURIComponent(v));
     }
-    const fullPath = path + '?' + qs.toString();
+    const fullPath = path + '?' + parts.join('&');
 
 
     const options = {
