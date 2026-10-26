@@ -6,19 +6,24 @@ const https = require('https');
 const PROJECT_ID = 'prj_Dmdw8qvR8V2DeaVmp01jAe2ERTuS';
 const TEAM_ID = 'team_YWXoh9J5uvtJSnOIlBq2H8Rl';
 
-function vercelGet(path) {
+function vercelGet(path, params) {
   return new Promise((resolve, reject) => {
     const token = process.env.ANALYTICS_TOKEN;
     if (!token) return reject(new Error('ANALYTICS_TOKEN not set'));
-    const url = new URL('https://vercel.com' + path);
+
+    const qs = new URLSearchParams();
+    for (const [k, v] of Object.entries(params)) {
+      if (Array.isArray(v)) v.forEach(item => qs.append(k + '[]', item));
+      else qs.append(k, v);
+    }
+    const fullPath = path + '?' + qs.toString();
+
+
     const options = {
-      hostname: url.hostname,
-      path: url.pathname + url.search,
+      hostname: 'api.vercel.com',
+      path: fullPath,
       method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
+      headers: { Authorization: `Bearer ${token}` },
     };
     const req = https.request(options, res => {
       let body = '';
@@ -33,10 +38,6 @@ function vercelGet(path) {
   });
 }
 
-function qs(params) {
-  return '?' + Object.entries(params).filter(([,v]) => v != null).map(([k,v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`).join('&');
-}
-
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=60');
@@ -45,35 +46,30 @@ module.exports = async function handler(req, res) {
 
   const since = '2026-10-01T00:00:00.000Z';
   const until = new Date().toISOString();
-
-  const base = {
-    projectId: PROJECT_ID,
-    teamId: TEAM_ID,
-    since,
-    until,
-  };
+  const base = { projectId: PROJECT_ID, teamId: TEAM_ID, since, until };
 
   try {
-    const [totalViews, totalVisitors, pageAgg, deviceAgg, countryAgg] = await Promise.all([
-      vercelGet('/api/v1/query/web-analytics/visits/count' + qs(base)),
-      vercelGet('/api/v1/query/web-analytics/visits/count' + qs({ ...base, uniqueVisitors: 'true' })),
-      vercelGet('/api/v1/query/web-analytics/visits/aggregate' + qs({ ...base, groupBy: 'requestPath', limit: 10 })),
-      vercelGet('/api/v1/query/web-analytics/visits/aggregate' + qs({ ...base, groupBy: 'deviceType', limit: 10 })),
-      vercelGet('/api/v1/query/web-analytics/visits/aggregate' + qs({ ...base, groupBy: 'country', limit: 15 })),
+    const [countRes, pageRes, deviceRes, countryRes] = await Promise.all([
+      vercelGet('/v1/query/web-analytics/visits/count', base),
+      vercelGet('/v1/query/web-analytics/visits/aggregate', { ...base, by: ['requestPath'], limit: 10 }),
+      vercelGet('/v1/query/web-analytics/visits/aggregate', { ...base, by: ['deviceType'] }),
+      vercelGet('/v1/query/web-analytics/visits/aggregate', { ...base, by: ['country'], limit: 15 }),
     ]);
 
-    const views = totalViews.data?.data ?? totalViews.data?.total ?? totalViews.data ?? 0;
-    const visitors = totalVisitors.data?.data ?? totalVisitors.data?.total ?? totalVisitors.data ?? 0;
+    const countData = countRes.data?.data ?? {};
+    const views = countData.pageviews ?? 0;
+    const visitors = countData.visitors ?? 0;
 
-    const pages = (pageAgg.data?.data ?? pageAgg.data?.rows ?? []).map(r => ({
-      label: r.key ?? r.requestPath ?? r[0] ?? '/',
-      views: r.value ?? r.count ?? r[1] ?? 0,
+    const pages = (pageRes.data?.data ?? []).map(r => ({
+      label: r.requestPath ?? '/',
+      views: r.pageviews ?? 0,
     })).sort((a, b) => b.views - a.views);
 
     const devices = {};
-    (deviceAgg.data?.data ?? deviceAgg.data?.rows ?? []).forEach(r => {
-      const key = r.key ?? r.deviceType ?? r[0] ?? 'Unknown';
-      devices[key] = r.value ?? r.count ?? r[1] ?? 0;
+    (deviceRes.data?.data ?? []).forEach(r => {
+      const key = (r.deviceType ?? 'unknown');
+      const label = key.charAt(0).toUpperCase() + key.slice(1);
+      devices[label] = r.pageviews ?? 0;
     });
 
     const COUNTRY_FLAGS = {
@@ -92,13 +88,13 @@ module.exports = async function handler(req, res) {
     };
     const COLORS = ['#2563EB','#059669','#D97706','#7C3AED','#DC2626','#0891B2','#BE185D','#65A30D','#B45309','#6366F1'];
 
-    const countries = (countryAgg.data?.data ?? countryAgg.data?.rows ?? []).map((r, i) => {
-      const code = (r.key ?? r.country ?? r[0] ?? '').toUpperCase();
+    const countries = (countryRes.data?.data ?? []).map((r, i) => {
+      const code = (r.country ?? '').toUpperCase();
       return {
         code,
         name: COUNTRY_NAMES[code] ?? code,
         flag: COUNTRY_FLAGS[code] ?? '🌍',
-        visitors: r.value ?? r.count ?? r[1] ?? 0,
+        visitors: r.visitors ?? 0,
         color: COLORS[i % COLORS.length],
       };
     }).sort((a, b) => b.visitors - a.visitors);
