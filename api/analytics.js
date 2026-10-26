@@ -8,8 +8,8 @@ const TEAM_ID = 'team_YWXoh9J5uvtJSnOIlBq2H8Rl';
 
 function vercelGet(path) {
   return new Promise((resolve, reject) => {
-    const token = process.env.VERCEL_TOKEN;
-    if (!token) return reject(new Error('VERCEL_TOKEN not set'));
+    const token = process.env.ANALYTICS_TOKEN;
+    if (!token) return reject(new Error('ANALYTICS_TOKEN not set'));
     const url = new URL('https://vercel.com' + path);
     const options = {
       hostname: url.hostname,
