@@ -318,22 +318,28 @@ function getSummary(params) {
   const bn  = t.BN || 0;
   const gps = t.GPS || 0;
   const war = t.WARISAN || 0;
-  const phBloc = ph + bm;
+  const phBloc = ph;
   const opp    = pn + bn;
 
   let verdictType, verdictText;
-  if (phBloc + gps >= 112) {
+  if (ph >= 112) {
     verdictType = 'ok';
-    verdictText = `PH ${ph} + BERSAMA ${bm} + GPS ${gps} = ${phBloc + gps} seats — government majority secured (112 needed)`;
-  } else if (phBloc >= 112) {
+    verdictText = `PH ${ph} seats — outright majority, no support parties needed (112 needed)`;
+  } else if (ph + gps >= 112) {
     verdictType = 'ok';
-    verdictText = `PH ${ph} + BERSAMA ${bm} = ${phBloc} — bloc majority without GPS. GPS adds stability.`;
+    verdictText = `PH ${ph} + GPS ${gps} = ${ph + gps} seats — PH-led government with GPS backing`;
+  } else if (ph + bm + gps >= 112) {
+    verdictType = 'ok';
+    verdictText = `PH ${ph} + BERSAMA ${bm} (ind) + GPS ${gps} = ${ph + bm + gps} — majority needs BERSAMA + GPS support`;
+  } else if (ph + bm >= 112) {
+    verdictType = 'ok';
+    verdictText = `PH ${ph} + BERSAMA ${bm} (ind) = ${ph + bm} — PH can form government with BERSAMA support`;
   } else if (opp + gps >= 112) {
     verdictType = 'no';
     verdictText = `PN+BN ${opp} + GPS ${gps} = ${opp + gps} — opposition bloc can form government`;
   } else {
     verdictType = 'warn';
-    verdictText = `Hung parliament — PH+BERSAMA ${phBloc} · PN+BN ${opp} · GPS (${gps}) is kingmaker`;
+    verdictText = `Hung parliament — PH ${ph} · BERSAMA ${bm} (ind) · PN+BN ${opp} · GPS ${gps} · WARISAN ${war} — kingmakers decide`;
   }
 
   // Per-state projected winner breakdown — party-level, returned with summary (no extra API call)
