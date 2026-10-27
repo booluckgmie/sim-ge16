@@ -58,6 +58,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 .sb-base.on{background:var(--blue)}
 .sb-best.on{background:#15803D}
 .sb-worst.on{background:#DC2626}
+.sb-trend.on{background:#0891B2}
 
 /* ===== FOCUS BAR ===== */
 .focus-bar{display:flex;align-items:center;gap:10px;padding:.5rem 1.25rem;background:var(--navy2);border-bottom:1px solid rgba(255,255,255,.06);flex-wrap:wrap}
@@ -524,6 +525,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <button class="sb sb-base on" onclick="setScen('base',this)">Base <span style="opacity:.5;font-size:10px">55%</span></button>
       <button class="sb sb-best" onclick="setScen('best',this)">Best <span style="opacity:.5;font-size:10px">20%</span></button>
       <button class="sb sb-worst" onclick="setScen('worst',this)">Worst <span style="opacity:.5;font-size:10px">25%</span></button>
+      <button class="sb sb-trend" onclick="setScen('trend',this)">Trend <span style="opacity:.5;font-size:10px">2026</span></button>
     </div>
     <div class="live-count">
       <div class="lc-label">PH+BRSM</div>
@@ -691,6 +693,9 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
         </div>
         <div class="pcard" data-scen="worst" onclick="clickPreset('worst')">
           <div class="pcard-ico">📉</div><div class="pcard-lbl">Worst case</div><div class="pcard-prob">25% prob.</div>
+        </div>
+        <div class="pcard" data-scen="trend" onclick="clickPreset('trend')">
+          <div class="pcard-ico">🌊</div><div class="pcard-lbl">Trend 2026</div><div class="pcard-prob">PRN-calibrated</div>
         </div>
       </div>
       <div class="ctrl-grid">
@@ -1399,7 +1404,10 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
             <div class="party-block">
               <div><div class="party-info-nm">📉 Worst case <span class="party-note pn-sep">25% probability</span></div><div class="party-info-sub">PH support erodes — lower youth turnout, reduced non-Malay support, stronger rural consolidation for PN. Reflects a mid-term backlash scenario.</div></div>
             </div>
-            <p class="method-p" style="margin-top:.625rem;font-size:11px;color:var(--text3)">Probabilities are illustrative analyst estimates, not statistical forecasts. You can fine-tune every slider independently.</p>
+            <div class="party-block">
+              <div><div class="party-info-nm">🌊 Trend 2026 <span class="party-note" style="background:rgba(8,145,178,.12);color:#0891B2;border:1px solid rgba(8,145,178,.3)">PRN-calibrated</span></div><div class="party-info-sub">Extrapolated from actual PRN Johor 2026 (BN 48/56) and PRN N9 2026 (BN 18/36) results. Applies: Malay PH support 36%, youth turnout 67%, Chinese support 72%, Indian 62%. Activates BN-wave absorption of moderate PN-BERSATU seats. Represents the current electoral trajectory if trends continue to GE16.</div></div>
+            </div>
+            <p class="method-p" style="margin-top:.625rem;font-size:11px;color:var(--text3)">Probabilities are illustrative analyst estimates, not statistical forecasts. Trend 2026 auto-applies PRN-calibrated sliders when selected. You can fine-tune every slider independently.</p>
           </div>
         </div>
 
@@ -1641,7 +1649,8 @@ function renderSummary(d){
   var REFS={
     base: {ph:79, bm:0, pn:74, bn:30, gps:23, war:9},
     best: {ph:95, bm:3, pn:63, bn:25, gps:23, war:7},
-    worst:{ph:62, bm:0, pn:86, bn:37, gps:23, war:10}
+    worst:{ph:62, bm:0, pn:86, bn:37, gps:23, war:10},
+    trend:{ph:79, bm:0, pn:74, bn:30, gps:23, war:9}
   };
   var ref=REFS[scen]||REFS.base;
   function delta(n,r,note){
@@ -1985,6 +1994,15 @@ window.setScen=function(s,el){
   if(curView==='analysis')loadAnalysis();
 };
 window.clickPreset=function(s){
+  if(s==='trend'){
+    yT=67;sT=80;mS=36;cS=72;iS=62;lS=38;
+    [['y',yT],['s',sT],['m',mS],['c',cS],['i',iS],['l',lS]].forEach(function(kv){
+      var sl=document.getElementById('sl-'+kv[0]);if(sl)sl.value=kv[1];
+      var vl=document.getElementById('vl-'+kv[0]);if(vl)vl.textContent=kv[1]+'%';
+    });
+    var slPh=document.getElementById('sl-ph');if(slPh)slPh.value=20;
+    var vlPh=document.getElementById('vl-ph');if(vlPh)vlPh.textContent='20%';
+  }
   var el=document.querySelector('.sb-'+s);
   if(el)window.setScen(s,el);
 };

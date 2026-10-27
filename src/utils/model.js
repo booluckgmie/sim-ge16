@@ -24,7 +24,8 @@ function calcSwing(seat, params) {
 function getWinner(seat, params) {
   const { scen = 'base' } = params;
   const [,,,,,,best,base,worst,bF,pnF] = seat;
-  let w = scen === 'best' ? best : scen === 'worst' ? worst : base;
+  const useWorst = scen === 'worst' || scen === 'trend';
+  let w = scen === 'best' ? best : useWorst ? worst : base;
   const tot = calcSwing(seat, params);
   const F = 0.12;
 
@@ -34,6 +35,8 @@ function getWinner(seat, params) {
   const { mS = 48 } = params;
   if ((w==='PN-PAS'||w==='PN-BERSATU') && mS > 60 && tot > F && pnF <= 2) return 'PKR';
   if (w==='BN-UMNO' && tot < -F && pnF >= 2 && (RACE[seat[0]]?.[0] || 50) > 70) return 'PN-BERSATU';
+  // Trend: PRN 2026 BN wave — moderate PN-BERSATU seats absorbed by BN where Malay support tilts BN-ward
+  if (scen === 'trend' && w === 'PN-BERSATU' && pnF <= 2 && mS < 42 && (RACE[seat[0]]?.[0] || 50) > 55) return 'BN-UMNO';
   return w;
 }
 
@@ -41,7 +44,7 @@ function getWinner(seat, params) {
 function getPHWinProb(seat, params) {
   const { scen = 'base' } = params;
   const [,,,,,,best,base,worst,bF,pnF] = seat;
-  const bw = scen === 'best' ? best : scen === 'worst' ? worst : base;
+  const bw = scen === 'best' ? best : (scen === 'worst' || scen === 'trend') ? worst : base;
   const tot = calcSwing(seat, params);
   const F = 0.12;
 
@@ -85,7 +88,7 @@ function getCoalitionWinProb(seat, params, coalition) {
 
   const { scen = 'base' } = params;
   const [,,,,,,best,base,worst,bF,pnF] = seat;
-  const bw = scen === 'best' ? best : scen === 'worst' ? worst : base;
+  const bw = scen === 'best' ? best : (scen === 'worst' || scen === 'trend') ? worst : base;
   const tot = calcSwing(seat, params);
   const F = 0.12;
 
@@ -142,6 +145,10 @@ function getCoalitionWinProb(seat, params, coalition) {
     // BERSAMA: BN has moderate shot in mixed seats
     if (bw === 'BERSAMA') {
       return +(Math.max(0.08, Math.min(0.42, 0.22 - tot * 0.5)).toFixed(3));
+    }
+    // Trend: BN can flip moderate PN-BERSATU seats (calibrated from PRN Johor/N9 2026)
+    if (scen === 'trend' && bw === 'PN-BERSATU' && pnF <= 2) {
+      return +(Math.max(0.18, Math.min(0.55, 0.30 + tot * 0.15)).toFixed(3));
     }
     // PN seats: BN very unlikely to flip PN fortresses
     if (bw === 'PN-PAS' || bw === 'PN-BERSATU') {
