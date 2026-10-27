@@ -63,7 +63,8 @@ Scenario: ${scenLabel} | Youth turnout: ${params.yT}% | Senior turnout: ${params
 PH support — Malay: ${params.mS}%, Chinese: ${params.cS}%, Indian: ${params.iS}%, Other: ${params.lS}%
 
 PROJECTED SEAT TOTALS (222 seats, majority = 112)
-PH Bloc: ${summary.phBloc} (PKR ${p.PKR||0} · DAP ${p.DAP||0} · AMANAH ${p.AMANAH||0} · BERSAMA ${p.BERSAMA||0})
+PH: ${c.ph||0} (PKR ${p.PKR||0} · DAP ${p.DAP||0} · AMANAH ${p.AMANAH||0})
+BERSAMA: ${c.bm||0} (independent — not in PH coalition)
 PN: ${c.pn||0} (BERSATU ${p['PN-BERSATU']||0} · PAS ${p['PN-PAS']||0})
 BN: ${c.bn||0} (UMNO ${p['BN-UMNO']||0} · MCA ${p['BN-MCA']||0})
 GPS (Sarawak): ${c.gps||0}
