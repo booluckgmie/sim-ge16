@@ -25,7 +25,7 @@ function setCors(req, res) {
 }
 
 function validateParams(body) {
-  const scen = ['base', 'best', 'worst'].includes(body.scen) ? body.scen : 'base';
+  const scen = ['base', 'best', 'worst', 'trend'].includes(body.scen) ? body.scen : 'base';
   const clamp = (v, min, max, def) => {
     const n = parseInt(v);
     return isNaN(n) ? def : Math.max(min, Math.min(max, n));
