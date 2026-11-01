@@ -8,6 +8,7 @@
 :root{
   --bg:#020C1B;--surf:#081526;--surf2:#0C1E35;
   --ph:#EF4444;--bn:#3B82F6;--pn:#8B5CF6;
+  --bsm:#CA8A04;--bst:#991B1B;
   --txt:#E2E8F0;--muted:#64748B;--brd:#1E3A5F;
   --green:#10B981;--red:#EF4444;--orange:#F97316;
 }
@@ -152,11 +153,11 @@ a:hover{text-decoration:underline}
 <div class="hdr">
   <a class="intel-back" href="index.html" style="margin:0 0 .75rem;display:inline-flex">← Kembali ke GE16 Dashboard</a>
   <div class="hdr-top">
-    <div class="hdr-badge">KEMPEN AKTIF · PENAMAAN 6 HARI LAGI</div>
+    <div class="hdr-badge">SELEPAS PENAMAAN · KEMPEN 13 HARI</div>
     <div class="hdr-dates">
-      <span>DUN dibubar <strong>23 Sept 2026</strong></span>
-      <span>Penamaan Calon: <strong>31 Okt 2026</strong></span>
+      <span>Penamaan Calon: <strong>31 Okt 2026 ✓</strong></span>
       <span>Hari Mengundi: <strong>14 Nov 2026</strong></span>
+      <span>Dikemas kini: <strong>1 Nov 2026</strong></span>
     </div>
   </div>
   <h1>PRN Melaka ke-16 · <span>2026</span></h1>
@@ -164,21 +165,21 @@ a:hover{text-decoration:underline}
   <div class="hdr-tags">
     <span class="tag">28 DUN</span>
     <span class="tag">BN Caretaker</span>
-    <span class="tag">BN 21 + PN 7 = 28 (pakat)</span>
-    <span class="tag">PH 21 kerusi</span>
-    <span class="tag">Ab Rauf vs Adly</span>
-    <span class="tag">Penamaan 31 Okt · Undi 14 Nov</span>
+    <span class="tag" style="color:var(--bsm);border-color:var(--bsm)">⚡ BERSAMA 16 kerusi (bebas)</span>
+    <span class="tag" style="color:var(--bst);border-color:var(--bst)">⚡ BERSATU 8 kerusi (bebas)</span>
+    <span class="tag">Pakat BN+PN retak</span>
+    <span class="tag">Undi 14 Nov 2026</span>
   </div>
 </div>
 
 <!-- FORECAST STRIP -->
 <div class="fcast">
-  <div class="fc-item"><div class="fc-val" style="color:var(--bn)">52%</div><div class="fc-lbl">P(BN Majoriti Solo ≥15)</div></div>
-  <div class="fc-item"><div class="fc-val" style="color:var(--ph)">6%</div><div class="fc-lbl">P(PH Majoriti)</div></div>
-  <div class="fc-item"><div class="fc-val" style="color:var(--green)">88%</div><div class="fc-lbl">P(BN+PN Gabungan ≥15)</div></div>
-  <div class="fc-item"><div class="fc-val" style="color:var(--bn)">BN 17</div><div class="fc-lbl">Kerusi BN (jangkaan)</div></div>
-  <div class="fc-item"><div class="fc-val" style="color:var(--ph)">PH 8</div><div class="fc-lbl">Kerusi PH (jangkaan)</div></div>
-  <div class="fc-item"><div class="fc-val" style="color:var(--pn)">PN 3</div><div class="fc-lbl">Kerusi PN (jangkaan)</div></div>
+  <div class="fc-item"><div class="fc-val" style="color:var(--bn)">32%</div><div class="fc-lbl">P(BN Majoriti Solo ≥15)</div></div>
+  <div class="fc-item"><div class="fc-val" style="color:var(--orange)">42%</div><div class="fc-lbl">P(Dewan Tergantung)</div></div>
+  <div class="fc-item"><div class="fc-val" style="color:var(--green)">58%</div><div class="fc-lbl">P(BN kerajaan dgn sokongan)</div></div>
+  <div class="fc-item"><div class="fc-val" style="color:var(--bn)">BN 13</div><div class="fc-lbl">Kerusi BN (jangkaan)</div></div>
+  <div class="fc-item"><div class="fc-val" style="color:var(--ph)">PH 9</div><div class="fc-lbl">Kerusi PH (jangkaan)</div></div>
+  <div class="fc-item"><div class="fc-val" style="color:var(--bsm)">BSM 3</div><div class="fc-lbl">BERSAMA (jangkaan)</div></div>
 </div>
 
 <!-- PREDICTION CARD -->
@@ -187,38 +188,48 @@ a:hover{text-decoration:underline}
   <div class="pred-card">
     <div class="pred-top">
       <div>
-        <div class="pred-lbl">PRN Melaka 2026 · Model Prediction</div>
-        <div class="pred-winner">BN kekal majoriti — pertahanan teguh</div>
-        <div class="pred-sub">Senario Asas (40% kebarangkalian) · BN menang 16–18 kerusi. BN+PN gabungan ~20 kerusi. Majoriti 15/28 kerusi.</div>
+        <div class="pred-lbl">PRN Melaka 2026 · Model Terkini (Selepas Penamaan)</div>
+        <div class="pred-winner">BN paling kuat — tetapi BERSAMA & BERSATU ubah kiraan</div>
+        <div class="pred-sub">Senario Asas (38% kebarangkalian) · BN menang 12–15 kerusi. Dewan tergantung amat mungkin — BN perlu sokongan BERSAMA atau BERSATU untuk majoriti.</div>
       </div>
       <div class="pred-conf-box">
-        <div class="pred-conf-n">55%</div>
+        <div class="pred-conf-n">42%</div>
         <div class="pred-conf-lbl">Model<br>confidence</div>
       </div>
     </div>
     <div class="pred-seats">
       <div class="pred-seat-blk">
-        <div class="pred-seat-n win-bn">17</div>
-        <div class="pred-seat-lbl">BN<br><span style="font-size:.6rem;color:var(--muted)">Majoriti solo ✓</span></div>
+        <div class="pred-seat-n win-bn">13</div>
+        <div class="pred-seat-lbl">BN<br><span style="font-size:.6rem;color:var(--muted)">Di bawah majoriti</span></div>
       </div>
       <div class="pred-seat-blk">
-        <div class="pred-seat-n win-ph">8</div>
+        <div class="pred-seat-n win-ph">9</div>
         <div class="pred-seat-lbl">PH<br><span style="font-size:.6rem;color:var(--muted)">Oposisi</span></div>
       </div>
       <div class="pred-seat-blk">
-        <div class="pred-seat-n win-pn">3</div>
-        <div class="pred-seat-lbl">PN<br><span style="font-size:.6rem;color:var(--muted)">Rakan BN</span></div>
+        <div class="pred-seat-n" style="color:var(--bsm)">3</div>
+        <div class="pred-seat-lbl">BERSAMA<br><span style="font-size:.6rem;color:var(--muted)">Bebas</span></div>
+      </div>
+      <div class="pred-seat-blk">
+        <div class="pred-seat-n" style="color:var(--bst)">2</div>
+        <div class="pred-seat-lbl">BERSATU<br><span style="font-size:.6rem;color:var(--muted)">Bebas</span></div>
+      </div>
+      <div class="pred-seat-blk">
+        <div class="pred-seat-n win-pn">1</div>
+        <div class="pred-seat-lbl">PN<br><span style="font-size:.6rem;color:var(--muted)">Minimum</span></div>
       </div>
     </div>
     <div class="pred-bar-track">
-      <div class="pred-bar-seg" style="width:60.7%;background:var(--bn)"></div>
-      <div class="pred-bar-seg" style="width:28.6%;background:var(--ph)"></div>
-      <div class="pred-bar-seg" style="width:10.7%;background:var(--pn)"></div>
+      <div class="pred-bar-seg" style="width:46.4%;background:var(--bn)"></div>
+      <div class="pred-bar-seg" style="width:32.1%;background:var(--ph)"></div>
+      <div class="pred-bar-seg" style="width:10.7%;background:var(--bsm)"></div>
+      <div class="pred-bar-seg" style="width:7.1%;background:var(--bst)"></div>
+      <div class="pred-bar-seg" style="width:3.6%;background:var(--pn)"></div>
       <div class="pred-maj-line" style="left:53.57%"></div>
     </div>
     <div style="display:flex;justify-content:flex-end;font-size:.62rem;color:var(--muted);margin-top:.2rem">↑ Garis majoriti 15/28</div>
     <div class="pred-warn">
-      ⚠️ <span>Keyakinan sederhana (55%). Penjajaran BN+PN (21+7=28 kerusi) menutup sepenuhnya DUN — tiada kerusi "kosong" untuk PH. PH perlu menang 15/21 kerusi yang ditandingi (71%) untuk mencapai majoriti — ambang yang sangat tinggi berbanding caretaker BN yang memenangi 21/21 dalam PRN 2021. Model belum ambil kira kerjasama PH-Bersatu yang masih belum diputuskan.</span>
+      ⚠️ <span>Keyakinan merosot (42%). BERSAMA (16 kerusi) dan BERSATU bebas (8 kerusi) memecah undi Melayu dalam pertandingan 4–5 penjuru. Pakat BN+PN lama (21+7=28) kini retak — BN 23 kerusi & PN 5 kerusi sahaja. Dewan tergantung berkemungkinan 42% — BN perlukan BERSAMA (3) atau BERSATU (2) untuk capai 15. Jika BN+BERSAMA bergabung: 16 kerusi, majoriti tipis.</span>
     </div>
   </div>
 </div>
@@ -228,54 +239,60 @@ a:hover{text-decoration:underline}
   <div class="sec-title">Analisis Senario</div>
   <div class="scen-grid">
     <div class="scen-card">
-      <div class="scen-name" style="color:var(--bn)">BN Dominan</div>
-      <div class="scen-prob">Kebarangkalian: 45%</div>
-      <div class="scen-seats"><span style="color:var(--bn)">BN 19–21</span> · <span style="color:var(--ph)">PH 5–7</span> · <span style="color:var(--pn)">PN 2–3</span></div>
-      <div class="scen-txt">Jentera UMNO bergerak penuh, caretaker advantage kuat. Undi Melayu luar bandar tekal, MCA tahan kerusi bercampur. BN sweeps 6 walkover + 13–15 kerusi vs PH. PN menang N24 + 1–2 lagi.</div>
+      <div class="scen-name" style="color:var(--bn)">BN Tahan Majoriti</div>
+      <div class="scen-prob">Kebarangkalian: 30%</div>
+      <div class="scen-seats"><span style="color:var(--bn)">BN 15–17</span> · <span style="color:var(--ph)">PH 8–9</span> · <span style="color:var(--bsm)">BSM 2–3</span> · <span style="color:var(--bst)">BST 1–2</span></div>
+      <div class="scen-txt">BERSAMA & BERSATU memecah undi anti-BN lebih banyak dari undi BN. Jentera UMNO kuat di luar bandar; BN sweeps kawasan Melayu tegar. BN capai 15+ sendiri — kerajaan BN tanpa syarat.</div>
     </div>
     <div class="scen-card base">
-      <div class="scen-name" style="color:var(--bn)">Senario Asas ★</div>
-      <div class="scen-prob">Kebarangkalian: 40%</div>
-      <div class="scen-seats"><span style="color:var(--bn)">BN 15–18</span> · <span style="color:var(--ph)">PH 8–10</span> · <span style="color:var(--pn)">PN 2–4</span></div>
-      <div class="scen-txt">BN menang majoriti solo. PH kuasai Kota Melaka bandar (N19–N22) + kerusi MCA-DAP (N08 Machap Jaya). PN tahan hanya kerusi pedalaman. BN+PN gabungan: ~21 kerusi.</div>
+      <div class="scen-name" style="color:var(--orange)">Dewan Tergantung ★</div>
+      <div class="scen-prob">Kebarangkalian: 42%</div>
+      <div class="scen-seats"><span style="color:var(--bn)">BN 12–14</span> · <span style="color:var(--ph)">PH 8–10</span> · <span style="color:var(--bsm)">BSM 2–4</span> · <span style="color:var(--bst)">BST 1–3</span> · <span style="color:var(--pn)">PN 1</span></div>
+      <div class="scen-txt">Multi-penjuru memecah undi luar bandar Melayu. BN gagal 15 sendiri. BERSAMA &amp; BERSATU jadi king-maker — kerajaan BN+BERSAMA (13+3=16) paling mungkin. Negosiasi selepas hari mengundi.</div>
     </div>
     <div class="scen-card">
-      <div class="scen-name" style="color:var(--ph)">Gelombang PH</div>
-      <div class="scen-prob">Kebarangkalian: 15%</div>
-      <div class="scen-seats"><span style="color:var(--bn)">BN 12–14</span> · <span style="color:var(--ph)">PH 11–13</span> · <span style="color:var(--pn)">PN 2–3</span></div>
-      <div class="scen-txt">Undi protes Melayu bandar lonjak tinggi, gelombang Cina kukuh. BN hilang kerusi semi-bandar. Dewan tergantung — tetapi BN+PN (min 14+2=16) masih pegang majoriti gabungan.</div>
+      <div class="scen-name" style="color:var(--ph)">Gelombang PH + Tergantung</div>
+      <div class="scen-prob">Kebarangkalian: 28%</div>
+      <div class="scen-seats"><span style="color:var(--bn)">BN 10–12</span> · <span style="color:var(--ph)">PH 11–13</span> · <span style="color:var(--bsm)">BSM 3–5</span> · <span style="color:var(--bst)">BST 1–2</span></div>
+      <div class="scen-txt">Undi protes Melayu tinggi, split Melayu BERSATU+BERSAMA + undi Cina kukuh bagi PH. PH menang Kota Melaka + beberapa kerusi semi-bandar. BERSAMA jadi kingmaker paling penting — tentukan siapa bentuk kerajaan.</div>
     </div>
   </div>
 </div>
 
 <!-- VOTE SHARE -->
 <div class="sec">
-  <div class="sec-title">Unjuran Bahagian Undi</div>
+  <div class="sec-title">Unjuran Bahagian Undi (Selepas Penamaan)</div>
   <div class="vshare-bar">
-    <div class="vs-seg" style="width:45%;background:var(--bn)">BN 45%</div>
-    <div class="vs-seg" style="width:38%;background:var(--ph)">PH 38%</div>
-    <div class="vs-seg" style="width:14%;background:var(--pn)">PN 14%</div>
-    <div class="vs-seg" style="width:3%;background:#374151"></div>
+    <div class="vs-seg" style="width:36%;background:var(--bn)">BN 36%</div>
+    <div class="vs-seg" style="width:30%;background:var(--ph)">PH 30%</div>
+    <div class="vs-seg" style="width:18%;background:var(--bsm)">BSM 18%</div>
+    <div class="vs-seg" style="width:10%;background:var(--bst)">BST 10%</div>
+    <div class="vs-seg" style="width:6%;background:var(--pn)">PN 6%</div>
   </div>
   <div class="vshare-legend">
-    <div class="vs-lbl"><div class="vs-dot" style="background:var(--bn)"></div>BN (UMNO/MCA/MIC) 45%</div>
-    <div class="vs-lbl"><div class="vs-dot" style="background:var(--ph)"></div>PH (PKR/DAP/Amanah) 38%</div>
-    <div class="vs-lbl"><div class="vs-dot" style="background:var(--pn)"></div>PN (PAS/Wawasan) 14%</div>
-    <div class="vs-lbl"><div class="vs-dot" style="background:#374151"></div>Lain-lain 3%</div>
+    <div class="vs-lbl"><div class="vs-dot" style="background:var(--bn)"></div>BN (UMNO 18 · MCA 4 · MIC 1) 36%</div>
+    <div class="vs-lbl"><div class="vs-dot" style="background:var(--ph)"></div>PH (PKR 10 · Amanah 7 · DAP 7) 30%</div>
+    <div class="vs-lbl"><div class="vs-dot" style="background:var(--bsm)"></div>BERSAMA (16 kerusi · bebas) 18%</div>
+    <div class="vs-lbl"><div class="vs-dot" style="background:var(--bst)"></div>BERSATU bebas (8 kerusi) 10%</div>
+    <div class="vs-lbl"><div class="vs-dot" style="background:var(--pn)"></div>PN (PAS 2 · Wawasan 2 · Gerakan 1) 6%</div>
   </div>
-  <p style="font-size:.7rem;color:var(--muted);margin-top:.6rem">*Unjuran berdasarkan PRN 2021 + GE15 2022 semula analisis + tinjauan semasa. BN mempunyai kelebihan kecekapan kerusi luar bandar Melayu. PH mengumpul undi Cina dan bandar secara cekap. PN dikunci dalam 7 kerusi yang diberikan BN.</p>
+  <p style="font-size:.7rem;color:var(--muted);margin-top:.6rem">*Unjuran dikemas kini selepas penamaan 31 Okt. BERSAMA (18%) dan BERSATU bebas (10%) memecah undi Melayu secara signifikan — khususnya di luar bandar di mana BN tradisi kuat. Multi-penjuru 4–5 calon dalam kebanyakan kerusi bermakna ambang menang serendah 28–35% undi sahaja.</p>
 </div>
 
 <!-- CONTEST BREAKDOWN -->
 <div class="sec">
-  <div class="sec-title">Struktur Pertandingan · 28 Kerusi</div>
+  <div class="sec-title">Jumlah Kerusi Ditandingi · Setakat 30 Oktober 2026</div>
   <div class="ctype-grid">
-    <div class="ctype-card"><div class="ctype-n" style="color:var(--bn)">15</div><div class="ctype-lbl">BN lwn PH</div><div class="ctype-sub">Bertembung langsung</div></div>
-    <div class="ctype-card"><div class="ctype-n" style="color:var(--ph)">6</div><div class="ctype-lbl">PH lwn PN</div><div class="ctype-sub">Bandar Kota Melaka</div></div>
-    <div class="ctype-card"><div class="ctype-n" style="color:var(--bn)">6</div><div class="ctype-lbl">BN Sahaja</div><div class="ctype-sub">PH tidak bertanding</div></div>
-    <div class="ctype-card"><div class="ctype-n" style="color:var(--pn)">1</div><div class="ctype-lbl">PN Sahaja</div><div class="ctype-sub">N24 Bemban</div></div>
+    <div class="ctype-card"><div class="ctype-n" style="color:var(--ph)">24</div><div class="ctype-lbl">Pakatan Harapan</div><div class="ctype-sub">PKR 10 · Amanah 7 · DAP 7</div></div>
+    <div class="ctype-card"><div class="ctype-n" style="color:var(--bn)">23</div><div class="ctype-lbl">Barisan Nasional</div><div class="ctype-sub">UMNO 18 · MCA 4 · MIC 1</div></div>
+    <div class="ctype-card"><div class="ctype-n" style="color:var(--bsm)">16</div><div class="ctype-lbl">BERSAMA</div><div class="ctype-sub">Bebas · bukan ahli mana-mana pakatan</div></div>
+    <div class="ctype-card"><div class="ctype-n" style="color:var(--bst)">8</div><div class="ctype-lbl">BERSATU Bebas</div><div class="ctype-sub">Berpisah dari PN · tiket sendiri</div></div>
+    <div class="ctype-card"><div class="ctype-n" style="color:var(--pn)">5</div><div class="ctype-lbl">Perikatan Nasional</div><div class="ctype-sub">PAS 2 · Wawasan 2 · Gerakan 1</div></div>
+    <div class="ctype-card"><div class="ctype-n" style="color:var(--orange)">76</div><div class="ctype-lbl">Jumlah Calon</div><div class="ctype-sub">28 kerusi · rata-rata 2.7 calon/kerusi</div></div>
   </div>
-  <p style="font-size:.7rem;color:var(--muted);margin-top:.75rem">BN dan PN membahagikan 28 kerusi secara lengkap tanpa bertindih. PH bertanding 21/28 kerusi — 15 kerusi vs BN dan 6 kerusi vs PN (bandar Kota Melaka). Untuk mencapai majoriti, PH mesti menang 15 daripada 21 kerusi yang ditandingi (71.4%), sasaran yang tinggi berbanding caretaker BN yang memegang 21/21 dalam PRN 2021.</p>
+  <div style="margin-top:.875rem;background:rgba(202,138,4,.07);border:1px solid rgba(202,138,4,.25);border-radius:8px;padding:.75rem;font-size:.73rem;color:#FDE68A">
+    ⚡ <strong>Pakat BN+PN retak:</strong> Penjajaran asal BN(21)+PN(7)=28 kini berubah — BN naik ke 23 kerusi manakala PN susut ke 5 kerusi sahaja. BERSATU berpisah dari PN dan bertanding 8 kerusi secara bebas, manakala BERSAMA terjun dengan 16 kerusi. Kebanyakan kerusi kini 4–5 penjuru, menjadikan ambang menang serendah 28–32% undi.
+  </div>
 </div>
 
 <!-- SENTIMENT -->
@@ -301,10 +318,26 @@ a:hover{text-decoration:underline}
     <div class="sent-row">
       <div class="sent-party" style="color:var(--pn)">PN</div>
       <div class="sent-bar-wrap">
-        <div class="sent-bar-bg"><div class="sent-bar-fill" style="width:40%;background:var(--pn)"></div></div>
-        <div class="sent-lbl">PN lemah di bandar Cina; sederhana di luar bandar Melayu; dilabel "rakan BN"</div>
+        <div class="sent-bar-bg"><div class="sent-bar-fill" style="width:28%;background:var(--pn)"></div></div>
+        <div class="sent-lbl">PN semakin kecil — hanya 5 kerusi (PAS/Wawasan/Gerakan). BERSATU keluar, PN lemah tanpa Bersatu</div>
       </div>
-      <div class="sent-val">40%</div>
+      <div class="sent-val">28%</div>
+    </div>
+    <div class="sent-row">
+      <div class="sent-party" style="color:var(--bsm)">BSM</div>
+      <div class="sent-bar-wrap">
+        <div class="sent-bar-bg"><div class="sent-bar-fill" style="width:52%;background:var(--bsm)"></div></div>
+        <div class="sent-lbl">BERSAMA (16 kerusi) — parti bebas, daya tarikan Melayu sederhana, ancam undi BN luar bandar</div>
+      </div>
+      <div class="sent-val">52%</div>
+    </div>
+    <div class="sent-row">
+      <div class="sent-party" style="color:var(--bst)">BST</div>
+      <div class="sent-bar-wrap">
+        <div class="sent-bar-bg"><div class="sent-bar-fill" style="width:38%;background:var(--bst)"></div></div>
+        <div class="sent-lbl">BERSATU bebas (8 kerusi) — bekas jentera PN, sentimen sederhana selepas berpisah dari pakatan</div>
+      </div>
+      <div class="sent-val">38%</div>
     </div>
   </div>
 </div>
@@ -327,12 +360,19 @@ a:hover{text-decoration:underline}
       </div>
       <div class="tension-txt">BN menyerahkan 7 kerusi bandar Kota Melaka kepada PN — kawasan di mana PH/DAP tradisionalnya kuat. Strategi ini memaksa PH berperang di dua medan: vs BN (15 kerusi) DAN vs PN (6 kerusi). Namun PN (PAS/Wawasan) amat lemah di kawasan Cina bandar — kemungkinan PH menang mudah di 5–6 kerusi PN tersebut, menjadikan penyerahan itu "sia-sia" bagi BN-PN.</div>
     </div>
-    <div class="tension-card med">
+    <div class="tension-card high">
       <div class="tension-head">
-        <div class="tension-title">Kerjasama PH-Bersatu: Belum Diputuskan</div>
-        <span class="tension-pill pill-med">SEDERHANA</span>
+        <div class="tension-title">BERSATU Keluar PN — Bertanding 8 Kerusi Secara Bebas</div>
+        <span class="tension-pill pill-high">TINGGI</span>
       </div>
-      <div class="tension-txt">Malaysiakini (24 Okt 2026): "Harapan yet to decide on form of cooperation with Bersatu in Malacca." Jika Bersatu (dalam PN) bekerjasama dengan PH di 7 kerusi PN, dinamik PH-vs-PN berubah — mungkin PH dapat 6–7 daripada 6 kerusi tersebut. Penamaan calon rasmi pada 31 Okt akan menjelaskan situasi ini.</div>
+      <div class="tension-txt">BERSATU tidak bekerjasama dengan PH dan berpisah dari PN untuk PRN Melaka — bertanding 8 kerusi secara bebas dengan tiket sendiri. Ini bermakna banyak kerusi Melayu kini 4 penjuru (BN + PH + BERSAMA + BERSATU). Split undi Melayu antara BN, BERSAMA dan BERSATU boleh beri kelebihan kepada PH di beberapa kerusi semi-bandar Melayu.</div>
+    </div>
+    <div class="tension-card high">
+      <div class="tension-head">
+        <div class="tension-title">BERSAMA 16 Kerusi — Ancaman Terbesar kepada BN Luar Bandar</div>
+        <span class="tension-pill pill-high">TINGGI</span>
+      </div>
+      <div class="tension-txt">BERSAMA (parti bebas) bertanding 16 daripada 28 kerusi — majoriti di kawasan luar bandar dan semi-bandar Melayu yang selama ini kubu kuat BN. Jika BERSAMA mendapat 15–20% undi Melayu di kawasan ini, BN berisiko kehilangan majoriti dalam pertandingan 4-penjuru. BERSAMA berpotensi menang 2–4 kerusi dan menjadi kingmaker selepas hari mengundi.</div>
     </div>
     <div class="tension-card med">
       <div class="tension-head">
@@ -359,14 +399,14 @@ a:hover{text-decoration:underline}
       <div class="narr-txt">PH membawa naratif kerajaan Madani, pelan ekonomi inklusif, dan isu kos sara hidup. Adly mendakwa rakyat Melaka, khususnya generasi muda dan bandar, layak mendapat alternatif yang lebih baik. Cabaran: membuktikan mampu atasi kelemahan PRN 2021.</div>
     </div>
     <div class="narr-card">
-      <div class="narr-icon">⚔️</div>
-      <div class="narr-title">PN: "Benteng Melayu" di 7 Kerusi Bandar</div>
-      <div class="narr-txt">PAS dan Wawasan membawa agenda Islam dan hak bumiputera ke 7 kerusi yang diberikan BN. Kemungkinan besar gagal menawan kerusi majoriti Cina bandar Kota Melaka — menang paling banyak N24 Bemban. Identiti "rakan BN" melemahkan kredibiliti sebagai pihak bangkang.</div>
+      <div class="narr-icon">⚡</div>
+      <div class="narr-title">BERSAMA: "Suara Rakyat" — 16 Kerusi Bebas</div>
+      <div class="narr-txt">BERSAMA, parti bebas yang menjadi pemain mengejut dalam PRN Melaka, bertanding 16 kerusi dengan naratif "bebas dari pakatan" — cuba menarik undi Melayu yang kecewa dengan BN tetapi tidak mahu PH. Jika berjaya memecah undi BN secara efektif, BERSAMA boleh menentukan siapa bentuk kerajaan.</div>
     </div>
     <div class="narr-card">
-      <div class="narr-icon">📊</div>
-      <div class="narr-title">Kecekapan Kerusi: BN Menang Lebih dengan Kurang Undi</div>
-      <div class="narr-txt">Struktur kawasan pilihan raya Melaka yang mempunyai majoriti besar kawasan luar bandar Melayu memberi kelebihan kecekapan kerusi kepada BN. BN boleh menang 16–17 kerusi dengan hanya 45% undi keseluruhan, manakala PH memerlukan hampir 38% undi tetapi mendapat hanya 8 kerusi — tidak adil secara geometri tetapi menguntungkan caretaker.</div>
+      <div class="narr-icon">💔</div>
+      <div class="narr-title">BERSATU Berpisah — PN Tinggal 5 Kerusi Sahaja</div>
+      <div class="narr-txt">Keputusan BERSATU bertanding 8 kerusi secara bebas (bukan dalam PN) melemahkan PN dengan teruk — PN kini hanya ada 5 kerusi (PAS 2, Wawasan 2, Gerakan 1). Sebelumnya BN+PN sekat 28/28 kerusi tanpa celah; kini BERSATU+BERSAMA terjun bebas, mencipta pertandingan multi-penjuru di seluruh Melaka.</div>
     </div>
   </div>
 </div>
@@ -374,7 +414,7 @@ a:hover{text-decoration:underline}
 <!-- 28-SEAT TABLE -->
 <div class="sec">
   <div class="sec-title">Senarai 28 Kerusi DUN Melaka — Calon &amp; Ramalan</div>
-  <p style="font-size:.7rem;color:var(--muted);margin-bottom:.75rem">Calon BN (V5 final, pra-penamaan). Calon PH (diumumkan 24 Okt 2026). Calon PN belum diumumkan (penamaan 31 Okt). Kerusi BN & PN ditetapkan dalam pakat — tiada pertindihan.</p>
+  <p style="font-size:.7rem;color:var(--muted);margin-bottom:.75rem">Selepas penamaan 31 Okt 2026. BERSAMA bertanding 16 kerusi & BERSATU bebas 8 kerusi — calon-calon spesifik masih disahkan. Kebanyakan kerusi kini 4–5 penjuru. Jangkaan dikemas kini untuk merefleksi split undi.</p>
   <div style="overflow-x:auto">
     <table class="seat-table">
       <thead>
@@ -397,12 +437,36 @@ a:hover{text-decoration:underline}
 <div class="sec">
   <div class="sec-title">Penjejak Berita Terkini</div>
   <div class="news-grid">
+    <div class="news-item" style="border-color:rgba(202,138,4,.35)">
+      <div class="news-date">31 Okt<br>2026</div>
+      <div>
+        <div class="news-src" style="color:var(--bsm)">Astro Awani · FMT</div>
+        <div class="news-hl">BERSAMA sahkan 16 calon — mengejutkan semua pihak dengan liputan luas</div>
+        <div class="news-txt">Selepas penamaan rasmi di SPR, BERSAMA mengesahkan 16 calon merentasi kawasan Melayu luar bandar dan semi-bandar seluruh Melaka. Para analis pilihanraya mengakui ini mengubah secara fundamental kiraan kemenangan — kebanyakan kerusi kini 4-penjuru.</div>
+      </div>
+    </div>
+    <div class="news-item" style="border-color:rgba(153,27,27,.35)">
+      <div class="news-date">31 Okt<br>2026</div>
+      <div>
+        <div class="news-src" style="color:var(--bst)">Malaysiakini · Bernama</div>
+        <div class="news-hl">BERSATU rasmi bertanding 8 kerusi — berpisah dari PN Melaka</div>
+        <div class="news-txt">Setelah rundingan dengan PN gagal, BERSATU memfailkan calon sendiri di 8 kerusi DUN Melaka tanpa berpakatan dengan mana-mana gabungan. Ini menamatkan spekulasi kerjasama PH-Bersatu dan mencipta pertandingan 4–5 penjuru di kebanyakan kawasan Melayu.</div>
+      </div>
+    </div>
+    <div class="news-item" style="border-color:rgba(249,115,22,.3)">
+      <div class="news-date">31 Okt<br>2026</div>
+      <div>
+        <div class="news-src" style="color:var(--orange)">The Star · NST</div>
+        <div class="news-hl">Pakat BN-PN berubah: BN 23 kerusi, PN hanya 5 — jurang dari pelan asal</div>
+        <div class="news-txt">Berbeza daripada pengumuman asal Zahid (BN 21 + PN 7 = 28), penamaan rasmi menunjukkan BN sebenarnya bertanding 23 kerusi manakala PN hanya 5. Laporan menunjukkan BN mengambil balik beberapa kerusi yang awalnya dijanjikan kepada PN, menyebabkan ketegangan dalam pakatan.</div>
+      </div>
+    </div>
     <div class="news-item">
       <div class="news-date">25 Okt<br>2026</div>
       <div>
         <div class="news-src">Astro Awani</div>
-        <div class="news-hl">PH umum 21 calon PRN Melaka, 7 kerusi belum diputuskan</div>
-        <div class="news-txt">Pengerusi PH Melaka Adly Zahari mendedahkan senarai 21 calon rasmi merangkumi PKR, DAP dan Amanah. Tujuh kerusi yang diperuntukkan PN tidak ditandingi PH bagi tempoh ini.</div>
+        <div class="news-hl">PH umum 24 calon PRN Melaka — naik dari 21 yang dirancang</div>
+        <div class="news-txt">Pengerusi PH Melaka Adly Zahari mendedahkan senarai akhir 24 calon rasmi merangkumi PKR (10), DAP (7) dan Amanah (7) — lebih dari perancangan asal 21 kerusi apabila PH mula menyasar beberapa kerusi yang awalnya dikhaskan PN.</div>
       </div>
     </div>
     <div class="news-item">
@@ -477,8 +541,16 @@ a:hover{text-decoration:underline}
       <div style="font-size:.73rem;color:#94A3B8">PH berpotensi kuat di Kota Melaka (N19–N22, N20 kawasan DAP kuat). PH juga boleh tawan N08 Machap Jaya (MCA yang melemah vs DAP) dan N14 Kelebang (bercampur). Jika PH-Bersatu bekerjasama, PH berpotensi menang 6 daripada 6 kerusi PH-vs-PN. Isu sara hidup dan undi protes generasi muda bandar boleh memberi kejutan. Model berkadar PH menang 8–10 kerusi dalam senario asas.</div>
     </div>
     <div style="background:var(--surf2);border-radius:8px;padding:.875rem;border-left:3px solid var(--pn)">
-      <div style="font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.3rem">Cabaran PN</div>
-      <div style="font-size:.73rem;color:#94A3B8">PN (PAS/Wawasan) bertanding di 7 kerusi yang majoritinya terletak di kawasan bandar Kota Melaka yang berpengundi Cina — pangkalan yang sangat tidak menguntungkan. PN dijangka menang hanya N24 Bemban dan mungkin 1–2 kerusi semi-bandar. Imej "rakan BN" melemahkan daya tarikan PN kepada pengundi anti-BN. Wawasan sebagai parti baru menghadapi cabaran nama dan jentera.</div>
+      <div style="font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.3rem">Cabaran PN (Susut ke 5 Kerusi)</div>
+      <div style="font-size:.73rem;color:#94A3B8">Selepas BERSATU keluar, PN tinggal 5 kerusi (PAS 2, Wawasan 2, Gerakan 1). PN tanpa Bersatu adalah lebih lemah dan berkemungkinan menang 0–1 kerusi sahaja — Gerakan di kawasan Cina bercampur mungkin mengejutkan. Imej "rakan BN" melemahkan daya tarikan kepada pengundi anti-kerajaan.</div>
+    </div>
+    <div style="background:rgba(202,138,4,.06);border-radius:8px;padding:.875rem;border-left:3px solid var(--bsm)">
+      <div style="font-size:.78rem;font-weight:700;color:var(--bsm);margin-bottom:.3rem">⚡ BERSAMA — Kingmaker Baru (16 Kerusi)</div>
+      <div style="font-size:.73rem;color:#94A3B8">BERSAMA berpotensi menang 2–4 kerusi di kawasan Melayu luar bandar di mana undi 3–4 penjuru memecah antara BN, BERSAMA dan BERSATU. Walaupun tidak mampu bentuk kerajaan sendiri, BERSAMA dengan 3+ kerusi boleh tentukan sama ada BN atau PH yang bentuk kerajaan selepas 14 Nov. Ini menjadikan BERSAMA pemain paling penting dalam negosiasi pasca-pilihanraya.</div>
+    </div>
+    <div style="background:rgba(153,27,27,.06);border-radius:8px;padding:.875rem;border-left:3px solid var(--bst)">
+      <div style="font-size:.78rem;font-weight:700;color:var(--bst);margin-bottom:.3rem">BERSATU Bebas — Pemecah Undi Melayu (8 Kerusi)</div>
+      <div style="font-size:.73rem;color:#94A3B8">BERSATU bebas di 8 kerusi berfungsi sebagai "vote splitter" dalam kawasan Melayu — mengambil 10–15% undi yang sebelumnya ke BN atau PN. Dalam pertandingan 4-penjuru ketat, BERSATU boleh menang 1–3 kerusi di kawasan di mana mereka ada jentera bekas ahli. Ketidakpastian terbesar: sama ada sokongan Bersatu lebih membenam BN atau PH.</div>
     </div>
   </div>
 </div>
@@ -488,18 +560,18 @@ a:hover{text-decoration:underline}
   <div class="sec-title">Jadual Hari Mengundi — 14 November 2026</div>
   <div class="res-box">
     <div class="res-timeline">
+      <div class="res-step">
+        <div class="res-dot" style="background:var(--green)"></div>
+        <div>
+          <div class="res-time">31 Okt 2026 ✓ Selesai</div>
+          <div class="res-lbl">Penamaan Calon — 76 calon untuk 28 kerusi (BN 23, PH 24, BSM 16, BST 8, PN 5)</div>
+        </div>
+      </div>
       <div class="res-step next">
         <div class="res-dot"></div>
         <div>
-          <div class="res-time">Kini · 25 Okt 2026</div>
-          <div class="res-lbl">Fasa Kempen Aktif — Penamaan Calon 31 Okt</div>
-        </div>
-      </div>
-      <div class="res-step">
-        <div class="res-dot"></div>
-        <div>
-          <div class="res-time">31 Okt 2026 · Pagi</div>
-          <div class="res-lbl">Hari Penamaan Calon — Senarai rasmi calon dikunci</div>
+          <div class="res-time">Kini · 1 Nov 2026 · 13 hari lagi</div>
+          <div class="res-lbl">Fasa Kempen Aktif — Multi-penjuru 4–5 calon, kempen BERSAMA &amp; BERSATU bebas</div>
         </div>
       </div>
       <div class="res-step">
@@ -534,8 +606,8 @@ a:hover{text-decoration:underline}
 </div>
 
 <div class="footer">
-  <p>PRN Melaka 2026 · Analisis risikan dikemaskini: 25 Oktober 2026</p>
-  <p style="margin-top:.3rem">Sumber: Astro Awani · Malaysiakini · FMT · NST · Berita Harian · Harian Metro · Malaysia Gazette · Newswav · SPR</p>
+  <p>PRN Melaka 2026 · Analisis risikan dikemaskini: 1 November 2026 (selepas penamaan)</p>
+  <p style="margin-top:.3rem">Sumber: Astro Awani · Malaysiakini · FMT · NST · Berita Harian · The Star · Bernama · Momentum · SPR</p>
   <p style="margin-top:.3rem">Model ramalan menggunakan data historis PRN 2021, GE15 2022 dan tinjauan semasa. Bukan unjuran rasmi SPR.</p>
 </div>
 
