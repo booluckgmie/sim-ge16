@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,781 +8,484 @@
 :root{
   --bg:#020C1B;--surf:#081526;--surf2:#0C1E35;
   --ph:#EF4444;--bn:#3B82F6;--pn:#8B5CF6;
-  --bsm:#CA8A04;--bst:#991B1B;
-  --txt:#E2E8F0;--muted:#64748B;--brd:#1E3A5F;
+  --bsm:#E3A008;--bst:#E0457B;--ind:#94A3B8;
+  --txt:#E2E8F0;--muted:#8193AB;--brd:#1E3A5F;
   --green:#10B981;--red:#EF4444;--orange:#F97316;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.5}
-a{color:var(--ph);text-decoration:none}
+a{color:#7DB3FF;text-decoration:none}
 a:hover{text-decoration:underline}
+b,strong{color:#fff}
 
 .hdr{background:linear-gradient(135deg,#0D1B2A 0%,#1A2940 40%,#0D1B2A 100%);border-bottom:2px solid var(--bn);padding:1.5rem 1.25rem}
 .hdr-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.75rem}
-.hdr-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);border-radius:20px;padding:.25rem .75rem;font-size:.75rem;font-weight:700;color:var(--bn);letter-spacing:.05em}
+.hdr-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);border-radius:20px;padding:.25rem .75rem;font-size:.75rem;font-weight:700;color:#7DB3FF;letter-spacing:.05em}
 .hdr-badge::before{content:'';width:8px;height:8px;background:var(--bn);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .hdr-dates{font-size:.72rem;color:var(--muted);text-align:right}
 .hdr-dates span{display:block}
-.hdr-dates strong{color:var(--bn)}
+.hdr-dates strong{color:#7DB3FF}
 .hdr h1{margin-top:.75rem;font-size:1.5rem;font-weight:800;color:#fff}
-.hdr h1 span{color:var(--bn)}
+.hdr h1 span{color:#7DB3FF}
 .hdr-sub{font-size:.875rem;color:#94A3B8;margin-top:.25rem}
 .hdr-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem}
-.tag{background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:.15rem .6rem;font-size:.7rem;color:var(--muted)}
-
-.fcast{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;padding:1rem 1.25rem;background:var(--surf);border-bottom:1px solid var(--brd)}
-@media(max-width:500px){.fcast{grid-template-columns:repeat(2,1fr)}}
-.fc-item{text-align:center;padding:.5rem;background:var(--surf2);border-radius:8px;border:1px solid var(--brd)}
-.fc-val{font-size:1.4rem;font-weight:800}
-.fc-lbl{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-top:.1rem}
+.tag{background:var(--surf2);border:1px solid var(--brd);border-radius:6px;padding:.15rem .6rem;font-size:.7rem;color:#A9B8CC}
+.intel-back{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:var(--surf2);border:1px solid var(--brd);border-radius:8px;font-size:.78rem;color:#A9B8CC;margin:0 0 .75rem}
+.intel-back:hover{color:var(--txt);text-decoration:none}
 
 .sec{padding:1.25rem;border-bottom:1px solid var(--brd)}
 .sec-title{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.875rem;display:flex;align-items:center;gap:.5rem}
 .sec-title::after{content:'';flex:1;height:1px;background:var(--brd)}
+.note{font-size:.72rem;color:var(--muted);margin-top:.6rem;line-height:1.55}
+.lead{font-size:.8rem;color:#B6C3D6;margin-bottom:.75rem;line-height:1.6}
 
-.pred-card{background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(59,130,246,.02));border:1px solid rgba(59,130,246,.3);border-radius:12px;padding:1.25rem}
-.pred-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
-.pred-lbl{font-size:.7rem;color:var(--bn);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
-.pred-winner{font-size:1.2rem;font-weight:800;color:#fff;margin:.3rem 0}
-.pred-sub{font-size:.78rem;color:#94A3B8}
-.pred-conf-box{background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35);border-radius:10px;padding:.75rem 1rem;text-align:center;flex-shrink:0}
-.pred-conf-n{font-size:1.75rem;font-weight:900;color:var(--bn);line-height:1}
-.pred-conf-lbl{font-size:.65rem;color:var(--muted);margin-top:.2rem}
-.pred-seats{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
-.pred-seat-blk{background:var(--surf2);border-radius:8px;padding:.5rem .875rem;text-align:center;border:1px solid var(--brd);flex:1;min-width:70px}
-.pred-seat-n{font-size:1.5rem;font-weight:900}
-.pred-seat-lbl{font-size:.65rem;color:var(--muted);margin-top:.1rem}
-.pred-bar-track{height:12px;background:var(--surf2);border-radius:6px;overflow:hidden;display:flex;position:relative;margin-top:1rem}
-.pred-bar-seg{height:100%}
-.pred-maj-line{position:absolute;top:-4px;bottom:-4px;width:2px;background:#fff;border-radius:1px}
-.pred-warn{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:8px;padding:.6rem .875rem;margin-top:.875rem;font-size:.75rem;color:#FDA4AF;display:flex;gap:.5rem;align-items:flex-start}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+@media(max-width:640px){.facts{grid-template-columns:repeat(2,1fr)}}
+.fact{background:var(--surf2);border:1px solid var(--brd);border-radius:8px;padding:.6rem .75rem}
+.fact b{display:block;font-size:1.25rem;font-weight:800}
+.fact span{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
 
-.scen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}
-@media(max-width:550px){.scen-grid{grid-template-columns:1fr}}
-.scen-card{background:var(--surf2);border-radius:10px;padding:1rem;border:1px solid var(--brd)}
-.scen-card.base{border-color:rgba(59,130,246,.35)}
-.scen-name{font-size:.8rem;font-weight:700;margin-bottom:.25rem}
-.scen-prob{font-size:.7rem;color:var(--muted);margin-bottom:.6rem}
-.scen-seats{font-size:.8rem;font-weight:700}
-.scen-txt{font-size:.72rem;color:#94A3B8;margin-top:.4rem}
+.fcast{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+@media(max-width:640px){.fcast{grid-template-columns:repeat(2,1fr)}}
+.fc-item{text-align:center;padding:.6rem .4rem;background:var(--surf2);border-radius:8px;border:1px solid var(--brd)}
+.fc-val{font-size:1.5rem;font-weight:800}
+.fc-lbl{font-size:.64rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-top:.1rem}
 
-.vshare-bar{height:28px;background:var(--surf2);border-radius:8px;overflow:hidden;display:flex}
-.vs-seg{height:100%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:rgba(255,255,255,.85)}
-.vshare-legend{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:.6rem}
-.vs-lbl{display:flex;align-items:center;gap:.3rem;font-size:.72rem}
-.vs-dot{width:10px;height:10px;border-radius:3px}
+.card{background:var(--surf2);border:1px solid var(--brd);border-radius:10px;padding:1rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.card h4{font-size:.8rem;margin-bottom:.5rem;color:#fff}
 
-.ctype-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}
-@media(min-width:600px){.ctype-grid{grid-template-columns:repeat(4,1fr)}}
-.ctype-card{background:var(--surf2);border:1px solid var(--brd);border-radius:8px;padding:.75rem;text-align:center}
-.ctype-n{font-size:1.75rem;font-weight:900}
-.ctype-lbl{font-size:.65rem;color:var(--muted);margin-top:.15rem}
-.ctype-sub{font-size:.62rem;color:#64748B;margin-top:.2rem}
+.eb{display:grid;grid-template-columns:78px 1fr 92px;gap:.6rem;align-items:center;margin-bottom:.45rem;font-size:.75rem}
+.eb .nm{font-weight:700}
+.eb .tr{position:relative;height:18px;background:#0A1930;border-radius:4px}
+.eb .rng{position:absolute;top:0;bottom:0;border-radius:4px;opacity:.28}
+.eb .fill{position:absolute;top:4px;bottom:4px;border-radius:3px}
+.eb .mk{position:absolute;top:-3px;bottom:-3px;width:2px;background:#fff;opacity:.85}
+.eb .v{color:#CBD5E1;text-align:right}
+.eb .v small{color:var(--muted)}
 
-.sent-grid{display:grid;gap:.6rem}
-.sent-row{display:flex;align-items:center;gap:.75rem}
-.sent-party{font-size:.72rem;font-weight:700;width:48px;flex-shrink:0}
-.sent-bar-wrap{flex:1}
-.sent-bar-bg{height:8px;background:var(--surf2);border-radius:4px;overflow:hidden}
-.sent-bar-fill{height:100%;border-radius:4px}
-.sent-val{font-size:.72rem;color:var(--muted);width:32px;text-align:right;flex-shrink:0}
-.sent-lbl{font-size:.62rem;color:var(--muted)}
+table.t{width:100%;border-collapse:collapse;font-size:.74rem}
+table.t th{background:var(--surf2);padding:.45rem .5rem;text-align:left;color:var(--muted);font-weight:600;font-size:.64rem;text-transform:uppercase;border-bottom:1px solid var(--brd);white-space:nowrap}
+table.t td{padding:.45rem .5rem;border-bottom:1px solid rgba(30,58,95,.5);vertical-align:top}
+table.t tr:hover td{background:rgba(12,30,53,.6)}
+table.t td.r,table.t th.r{text-align:right}
+.pill{display:inline-block;border-radius:4px;padding:.05rem .4rem;font-size:.62rem;font-weight:700;white-space:nowrap}
+.chip{display:inline-block;border-radius:4px;padding:.02rem .35rem;font-size:.6rem;font-weight:800;margin-right:.3rem;color:#fff}
+.cand{font-size:.68rem;line-height:1.55;color:#CBD5E1}
+.pbar{display:flex;align-items:center;gap:.35rem;font-size:.66rem;margin-bottom:2px}
+.pbar i{display:block;height:7px;border-radius:2px}
+.seat-name{font-weight:700;color:#fff}
+.seat-sub{font-size:.62rem;color:var(--muted)}
+.t-selamat{background:rgba(16,185,129,.15);color:#34D399}
+.t-cenderung{background:rgba(59,130,246,.15);color:#7DB3FF}
+.t-sengit{background:rgba(249,115,22,.18);color:#FDBA74}
 
-.tension-grid{display:grid;gap:.6rem}
-.tension-card{background:var(--surf2);border-radius:8px;padding:.875rem;border-left:3px solid}
-.tension-card.high{border-left-color:var(--red)}
-.tension-card.med{border-left-color:var(--orange)}
-.tension-card.low{border-left-color:var(--green)}
-.tension-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;margin-bottom:.3rem}
-.tension-title{font-size:.8rem;font-weight:700}
-.tension-pill{font-size:.62rem;font-weight:700;padding:.1rem .45rem;border-radius:4px;flex-shrink:0}
-.pill-high{background:rgba(239,68,68,.15);color:var(--red)}
-.pill-med{background:rgba(249,115,22,.15);color:var(--orange)}
-.pill-low{background:rgba(16,185,129,.15);color:var(--green)}
-.tension-txt{font-size:.73rem;color:#94A3B8}
-
-.narr-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
-@media(max-width:500px){.narr-grid{grid-template-columns:1fr}}
-.narr-card{background:var(--surf2);border:1px solid var(--brd);border-radius:8px;padding:.875rem}
-.narr-icon{font-size:1.2rem;margin-bottom:.3rem}
-.narr-title{font-size:.8rem;font-weight:700;color:#fff;margin-bottom:.3rem}
-.narr-txt{font-size:.73rem;color:#94A3B8}
-
-.seat-table{width:100%;border-collapse:collapse;font-size:.72rem}
-.seat-table th{background:var(--surf2);padding:.45rem .5rem;text-align:left;color:var(--muted);font-weight:600;font-size:.65rem;text-transform:uppercase;border-bottom:1px solid var(--brd);white-space:nowrap}
-.seat-table td{padding:.4rem .5rem;border-bottom:1px solid rgba(30,58,95,.5);vertical-align:top}
-.seat-table tr:hover td{background:rgba(8,21,38,.5)}
-.seat-n{color:var(--muted);font-size:.65rem}
-.seat-name{font-weight:600;color:#fff}
-.seat-parl{color:var(--muted);font-size:.62rem}
-.c-bn-ph{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:4px;padding:.1rem .3rem;font-size:.62rem;color:var(--bn);font-weight:700;white-space:nowrap}
-.c-ph-pn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:4px;padding:.1rem .3rem;font-size:.62rem;color:var(--ph);font-weight:700;white-space:nowrap}
-.c-bn-so{background:rgba(59,130,246,.04);border:1px solid rgba(59,130,246,.12);border-radius:4px;padding:.1rem .3rem;font-size:.62rem;color:#92400E;font-weight:700;white-space:nowrap}
-.c-pn-so{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:4px;padding:.1rem .3rem;font-size:.62rem;color:var(--pn);font-weight:700;white-space:nowrap}
-.win-bn{color:var(--bn);font-weight:700}
-.win-ph{color:var(--ph);font-weight:700}
-.win-pn{color:var(--pn);font-weight:700}
-.win-to{color:var(--orange);font-weight:700}
-.cand-nm{font-size:.7rem}
-.cand-pty{font-size:.6rem;color:var(--muted)}
-.tba{color:var(--muted);font-style:italic;font-size:.65rem}
+.ctl{display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem}
+@media(max-width:760px){.ctl{grid-template-columns:1fr 1fr}}
+.ctl label{display:block;font-size:.66rem;color:var(--muted);margin-bottom:.25rem}
+.ctl label b{color:#fff}
+.ctl input[type=range]{width:100%;accent-color:#3B82F6}
+.btn{background:var(--surf2);border:1px solid var(--brd);color:#CBD5E1;border-radius:6px;padding:.25rem .7rem;font-size:.7rem;cursor:pointer}
+.btn:hover{border-color:var(--bn);color:#fff}
 
 .news-grid{display:grid;gap:.5rem}
 .news-item{background:var(--surf2);border:1px solid var(--brd);border-radius:8px;padding:.75rem;display:flex;gap:.75rem}
-.news-date{font-size:.65rem;color:var(--muted);white-space:nowrap;flex-shrink:0;margin-top:.1rem}
-.news-src{font-size:.62rem;color:var(--pn);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.news-date{font-size:.65rem;color:var(--muted);white-space:nowrap;flex-shrink:0;margin-top:.1rem;width:44px}
+.news-src{font-size:.62rem;color:#A78BFA;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
 .news-hl{font-size:.78rem;font-weight:600;color:#fff;margin:.2rem 0}
-.news-txt{font-size:.72rem;color:#94A3B8}
+.news-txt{font-size:.72rem;color:#A9B8CC}
 
-.res-box{background:var(--surf2);border:1px solid var(--brd);border-radius:10px;padding:1rem;margin-top:.75rem}
-.res-timeline{display:flex;flex-direction:column;gap:.5rem}
-.res-step{display:flex;gap:.75rem;align-items:flex-start}
-.res-dot{width:8px;height:8px;border-radius:50%;background:var(--brd);flex-shrink:0;margin-top:.3rem}
-.res-step.next .res-dot{background:var(--bn);animation:pulse 2s infinite}
-.res-time{font-size:.68rem;color:var(--muted)}
-.res-lbl{font-size:.75rem;font-weight:600;color:#fff}
+.tension-grid{display:grid;gap:.6rem}
+.tension-card{background:var(--surf2);border-radius:8px;padding:.875rem;border-left:3px solid var(--orange)}
+.tension-card.high{border-left-color:var(--red)}
+.tension-title{font-size:.8rem;font-weight:700;margin-bottom:.3rem;color:#fff}
+.tension-txt{font-size:.73rem;color:#A9B8CC}
 
-.intel-back{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;background:var(--surf2);border:1px solid var(--brd);border-radius:8px;font-size:.78rem;color:var(--muted);margin:1rem 1.25rem 0}
-.intel-back:hover{color:var(--txt)}
+.step{display:flex;gap:.75rem;align-items:flex-start;margin-bottom:.55rem}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--brd);flex-shrink:0;margin-top:.35rem}
+.step.done .dot{background:var(--green)}
+.step.next .dot{background:var(--bn);animation:pulse 2s infinite}
+.step .tm{font-size:.68rem;color:var(--muted)}
+.step .lb{font-size:.76rem;font-weight:600;color:#fff}
+
+.box{background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:.75rem .9rem;font-size:.72rem;color:#B6C3D6;line-height:1.6}
+.warn{background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.35);color:#FED7AA}
 .footer{padding:1.5rem 1.25rem;text-align:center;color:var(--muted);font-size:.7rem;background:var(--surf);border-top:1px solid var(--brd)}
 </style>
 </head>
 <body>
 
 <div class="hdr">
-  <a class="intel-back" href="index.html" style="margin:0 0 .75rem;display:inline-flex">← Kembali ke GE16 Dashboard</a>
+  <a class="intel-back" href="index.html">← Kembali ke GE16 Dashboard</a>
   <div class="hdr-top">
-    <div class="hdr-badge">SELEPAS PENAMAAN · KEMPEN 13 HARI</div>
+    <div class="hdr-badge">MINGGU AKHIR KEMPEN · UNDI SABTU 14 NOV</div>
     <div class="hdr-dates">
       <span>Penamaan Calon: <strong>31 Okt 2026 ✓</strong></span>
-      <span>Hari Mengundi: <strong>14 Nov 2026</strong></span>
-      <span>Dikemas kini: <strong>1 Nov 2026</strong></span>
+      <span>Undi Awal: <strong>10 Nov 2026 ✓</strong></span>
+      <span>Kempen tamat: <strong>Jum 13 Nov, 11.59 mlm</strong></span>
+      <span>Hari Mengundi: <strong>Sab 14 Nov 2026</strong></span>
+      <span>Dikemas kini: <strong>12 Nov 2026</strong></span>
     </div>
   </div>
   <h1>PRN Melaka ke-16 · <span>2026</span></h1>
   <div class="hdr-sub">Analisis Risikan Pilihanraya Negeri · 28 kerusi DUN · Majoriti: 15 kerusi</div>
   <div class="hdr-tags">
-    <span class="tag">28 DUN</span>
-    <span class="tag">BN Caretaker</span>
-    <span class="tag" style="color:var(--green);border-color:var(--green)">✓ Sifar walkover · 28/28 bertanding</span>
-    <span class="tag" style="color:var(--bsm);border-color:var(--bsm)">⚡ BERSAMA 16 kerusi (bebas)</span>
-    <span class="tag" style="color:var(--bst);border-color:var(--bst)">⚡ BERSATU 7 kerusi (bebas)</span>
-    <span class="tag">5 Blok Bertanding · 79 Calon</span>
-    <span class="tag">Pakat BN+PN retak</span>
-    <span class="tag">Undi 14 Nov 2026</span>
+    <span class="tag">79 calon · 7 parti/bebas</span>
+    <span class="tag">Sifar walkover</span>
+    <span class="tag">BN + PN: persefahaman, tiada perjanjian rasmi</span>
+    <span class="tag">BERSAMA 16 kerusi · BERSATU 7 kerusi</span>
   </div>
 </div>
 
-<!-- FORECAST STRIP -->
-<div class="fcast">
-  <div class="fc-item"><div class="fc-val" style="color:var(--bn)">32%</div><div class="fc-lbl">P(BN Majoriti Solo ≥15)</div></div>
-  <div class="fc-item"><div class="fc-val" style="color:var(--orange)">42%</div><div class="fc-lbl">P(Dewan Tergantung)</div></div>
-  <div class="fc-item"><div class="fc-val" style="color:var(--green)">58%</div><div class="fc-lbl">P(BN kerajaan dgn sokongan)</div></div>
-  <div class="fc-item"><div class="fc-val" style="color:var(--bn)">BN 13</div><div class="fc-lbl">Kerusi BN (jangkaan)</div></div>
-  <div class="fc-item"><div class="fc-val" style="color:var(--ph)">PH 9</div><div class="fc-lbl">Kerusi PH (jangkaan)</div></div>
-  <div class="fc-item"><div class="fc-val" style="color:var(--bsm)">BSM 3</div><div class="fc-lbl">BERSAMA (jangkaan)</div></div>
-</div>
-
-<!-- PREDICTION CARD -->
+<!-- STATUS -->
 <div class="sec">
-  <div class="sec-title">Model Ramalan Akhir</div>
-  <div class="pred-card">
-    <div class="pred-top">
-      <div>
-        <div class="pred-lbl">PRN Melaka 2026 · Model Terkini (Selepas Penamaan)</div>
-        <div class="pred-winner">BN paling kuat — tetapi BERSAMA & BERSATU ubah kiraan</div>
-        <div class="pred-sub">Senario Asas (38% kebarangkalian) · BN menang 12–15 kerusi. Dewan tergantung amat mungkin — BN perlu sokongan BERSAMA atau BERSATU untuk majoriti.</div>
-      </div>
-      <div class="pred-conf-box">
-        <div class="pred-conf-n">42%</div>
-        <div class="pred-conf-lbl">Model<br>confidence</div>
-      </div>
-    </div>
-    <div class="pred-seats">
-      <div class="pred-seat-blk">
-        <div class="pred-seat-n win-bn">13</div>
-        <div class="pred-seat-lbl">BN<br><span style="font-size:.6rem;color:var(--muted)">Di bawah majoriti</span></div>
-      </div>
-      <div class="pred-seat-blk">
-        <div class="pred-seat-n win-ph">9</div>
-        <div class="pred-seat-lbl">PH<br><span style="font-size:.6rem;color:var(--muted)">Oposisi</span></div>
-      </div>
-      <div class="pred-seat-blk">
-        <div class="pred-seat-n" style="color:var(--bsm)">3</div>
-        <div class="pred-seat-lbl">BERSAMA<br><span style="font-size:.6rem;color:var(--muted)">Bebas</span></div>
-      </div>
-      <div class="pred-seat-blk">
-        <div class="pred-seat-n" style="color:var(--bst)">2</div>
-        <div class="pred-seat-lbl">BERSATU<br><span style="font-size:.6rem;color:var(--muted)">Bebas</span></div>
-      </div>
-      <div class="pred-seat-blk">
-        <div class="pred-seat-n win-pn">1</div>
-        <div class="pred-seat-lbl">PN<br><span style="font-size:.6rem;color:var(--muted)">Minimum</span></div>
-      </div>
-    </div>
-    <div class="pred-bar-track">
-      <div class="pred-bar-seg" style="width:46.4%;background:var(--bn)"></div>
-      <div class="pred-bar-seg" style="width:32.1%;background:var(--ph)"></div>
-      <div class="pred-bar-seg" style="width:10.7%;background:var(--bsm)"></div>
-      <div class="pred-bar-seg" style="width:7.1%;background:var(--bst)"></div>
-      <div class="pred-bar-seg" style="width:3.6%;background:var(--pn)"></div>
-      <div class="pred-maj-line" style="left:53.57%"></div>
-    </div>
-    <div style="display:flex;justify-content:flex-end;font-size:.62rem;color:var(--muted);margin-top:.2rem">↑ Garis majoriti 15/28</div>
-    <div class="pred-warn">
-      ⚠️ <span>Keyakinan 42% — keadaan paling kabur dalam sejarah PRN Melaka. 79 calon · sifar walkover. BERSAMA (16 kerusi) dan BERSATU bebas (7 kerusi) memecah undi Melayu dalam pertandingan 3–4 penjuru. Pemenang mungkin hanya perlu 30–35% undi — kecekapan kerusi menjadi kunci. Dewan tergantung 42% — BN perlukan BERSAMA (3) atau BERSATU untuk capai majoriti 15.</span>
-    </div>
+  <div class="sec-title">Apa yang berlaku sekarang · Status 12 Nov</div>
+  <div class="facts">
+    <div class="fact"><b>687,697</b><span>pengundi layak</span></div>
+    <div class="fact"><b>79</b><span>calon · 28 kerusi</span></div>
+    <div class="fact"><b id="f-multi">—</b><span>kerusi 3+ penjuru</span></div>
+    <div class="fact"><b>94.96%</b><span>undi awal (~12.5k tentera/polis)</span></div>
+  </div>
+  <p class="note">Corak penamaan (Bernama/Sinar Harian): 11 kerusi satu lawan satu, 11 tiga penjuru, 6 empat penjuru. Berbeza daripada PRN 2021 yang kebanyakan kerusi lima atau enam calon tanpa satu lawan satu. Undi awal hanya melibatkan kira-kira 12,500 anggota tentera/polis dan pasangan, jadi ia bukan petunjuk undi umum.</p>
+</div>
+
+<!-- FORECAST -->
+<div class="sec">
+  <div class="sec-title">Unjuran model · senario asas</div>
+  <div class="fcast" id="fcast"></div>
+  <p class="note" id="fcast-note"></p>
+</div>
+
+<!-- EXPECTED SEATS + PATHWAYS -->
+<div class="sec">
+  <div class="sec-title">Jangkaan kerusi &amp; laluan membentuk kerajaan</div>
+  <div class="grid2">
+    <div class="card"><h4>Jangkaan kerusi (min, julat 10–90%)</h4><div id="eseats"></div>
+      <p class="note">Garis putih = majoriti 15. Bar penuh = purata; bayang = julat 10–90% daripada 12,000 simulasi.</p></div>
+    <div class="card"><h4>Kebarangkalian capai 15 kerusi, mengikut gabungan</h4><div id="paths"></div>
+      <p class="note">Matematik kerusi sahaja, bukan ramalan politik. BN+BERSAMA atau PH+BERSATU belum tentu boleh dirunding.</p></div>
   </div>
 </div>
 
-<!-- SCENARIOS -->
+<!-- CONTROLS -->
 <div class="sec">
-  <div class="sec-title">Analisis Senario</div>
-  <div class="scen-grid">
-    <div class="scen-card">
-      <div class="scen-name" style="color:var(--bn)">BN Tahan Majoriti</div>
-      <div class="scen-prob">Kebarangkalian: 30%</div>
-      <div class="scen-seats"><span style="color:var(--bn)">BN 15–17</span> · <span style="color:var(--ph)">PH 8–9</span> · <span style="color:var(--bsm)">BSM 2–3</span> · <span style="color:var(--bst)">BST 1–2</span></div>
-      <div class="scen-txt">BERSAMA & BERSATU memecah undi anti-BN lebih banyak dari undi BN. Jentera UMNO kuat di luar bandar; BN sweeps kawasan Melayu tegar. BN capai 15+ sendiri — kerajaan BN tanpa syarat.</div>
-    </div>
-    <div class="scen-card base">
-      <div class="scen-name" style="color:var(--orange)">Dewan Tergantung ★</div>
-      <div class="scen-prob">Kebarangkalian: 42%</div>
-      <div class="scen-seats"><span style="color:var(--bn)">BN 12–14</span> · <span style="color:var(--ph)">PH 8–10</span> · <span style="color:var(--bsm)">BSM 2–4</span> · <span style="color:var(--bst)">BST 1–3</span> · <span style="color:var(--pn)">PN 1</span></div>
-      <div class="scen-txt">Multi-penjuru memecah undi luar bandar Melayu. BN gagal 15 sendiri. BERSAMA &amp; BERSATU jadi king-maker — kerajaan BN+BERSAMA (13+3=16) paling mungkin. Negosiasi selepas hari mengundi.</div>
-    </div>
-    <div class="scen-card">
-      <div class="scen-name" style="color:var(--ph)">Gelombang PH + Tergantung</div>
-      <div class="scen-prob">Kebarangkalian: 28%</div>
-      <div class="scen-seats"><span style="color:var(--bn)">BN 10–12</span> · <span style="color:var(--ph)">PH 11–13</span> · <span style="color:var(--bsm)">BSM 3–5</span> · <span style="color:var(--bst)">BST 1–2</span></div>
-      <div class="scen-txt">Undi protes Melayu tinggi, split Melayu BERSATU+BERSAMA + undi Cina kukuh bagi PH. PH menang Kota Melaka + beberapa kerusi semi-bandar. BERSAMA jadi kingmaker paling penting — tentukan siapa bentuk kerajaan.</div>
-    </div>
+  <div class="sec-title">Uji andaian sendiri</div>
+  <div class="ctl">
+    <div><label>Ayunan undi ke BN+PN (mata) <b id="o-swing"></b></label><input id="swing" type="range" min="-6" max="6" step="0.5" value="0"></div>
+    <div><label>BERSAMA, undi dalam kerusi ditanding <b id="o-bsm"></b></label><input id="bsm" type="range" min="3" max="25" step="1" value="10"></div>
+    <div><label>BERSATU, undi dalam kerusi ditanding <b id="o-bst"></b></label><input id="bst" type="range" min="2" max="18" step="1" value="8"></div>
+    <div><label>Undi BERSAMA diambil dari PH <b id="o-aph"></b></label><input id="aph" type="range" min="0" max="100" step="5" value="50"></div>
+    <div><label>Kecekapan pakat BN↔PN <b id="o-t"></b> <span style="color:var(--muted)">(100% = tiada bocor)</span></label><input id="t" type="range" min="50" max="100" step="5" value="100"></div>
+  </div>
+  <div style="margin-top:.75rem;display:flex;gap:.5rem;flex-wrap:wrap"><button class="btn" id="reset">Set semula</button></div>
+  <p class="note">Gerakkan peluncur dan seluruh halaman dikira semula. Lalai: tiada ayunan, BERSAMA 10%, BERSATU 8%, pakat BN–PN tanpa kebocoran (andaian asas: majoriti 2021 dibawa ke 2026). Tiada tinjauan awam dijumpai yang boleh mengunci nilai-nilai ini; ia andaian analis.</p>
+</div>
+
+<!-- SENSITIVITY -->
+<div class="sec">
+  <div class="sec-title">Sensitiviti · bagaimana keputusan berubah jika andaian salah</div>
+  <div style="overflow-x:auto"><table class="t" id="sens"></table></div>
+  <p class="note">Setiap baris menjalankan model semula dengan satu andaian diubah (rawak sama untuk perbandingan adil). Jika kebarangkalian berubah banyak antara baris, keputusan itu bergantung pada andaian tersebut.</p>
+</div>
+
+<!-- SEAT TABLE -->
+<div class="sec">
+  <div class="sec-title">28 kerusi DUN · calon rasmi, majoriti 2021 &amp; kebarangkalian menang</div>
+  <p class="lead">Calon dan majoriti 2021 daripada senarai rasmi (Utusan Malaysia, 31 Okt 2026). Kebarangkalian dikira model, bukan dilaporkan.</p>
+  <div style="overflow-x:auto"><table class="t" id="seatTbl"></table></div>
+</div>
+
+<!-- ANALYTICS -->
+<div class="sec">
+  <div class="sec-title">Analitik utama</div>
+  <div class="grid2">
+    <div class="card"><h4>Kerusi paling rapuh · majoriti 2021 di bawah 1,000</h4><div id="fragile"></div>
+      <p class="note">Dalam kerusi ini, ayunan kecil atau satu calon ketiga yang kuat boleh mengubah pemenang.</p></div>
+    <div class="card"><h4>Kerusi penentu (bellwether)</h4><div id="bell"></div>
+      <p class="note">Kerusi di mana keputusan paling berkait dengan sama ada BN+PN capai 15. Pantau ini dahulu pada malam 14 Nov.</p></div>
+    <div class="card"><h4>BERSAMA: matematik sasaran 15%</h4><div id="bsmmath"></div></div>
+    <div class="card"><h4>BERSATU: siapa yang dicabar</h4><div id="bstmath"></div></div>
+    <div class="card"><h4>Struktur persaingan</h4><div id="struct"></div></div>
+    <div class="card"><h4>Pengundi muda &amp; belum membuat keputusan</h4>
+      <div class="cand" style="font-size:.74rem;line-height:1.7">
+        Umur 18–20: <b>41,138</b> (5.98%) · Umur 21–29: <b>135,687</b> (19.37%) → kira-kira <b>1 daripada 4</b> pengundi di bawah 30 tahun (SPR).<br>
+        Ilham Centre: kira-kira <b>13%</b> belum membuat keputusan, kebanyakannya Gen Z; ia menjangka kesan keseluruhan kecil kerana "kerusi putih kekal putih, kerusi hitam kekal hitam".<br>
+        <span style="color:var(--muted)">Ilham juga menilai kerjasama BN–PN menyatukan sokongan Melayu dan boleh menjejas PH di kerusi yang bertambah pengundi Melayunya.</span>
+      </div></div>
   </div>
 </div>
 
-<!-- VOTE SHARE -->
+<!-- WHAT HAPPENS LATER -->
 <div class="sec">
-  <div class="sec-title">Unjuran Bahagian Undi (Selepas Penamaan)</div>
-  <div class="vshare-bar">
-    <div class="vs-seg" style="width:36%;background:var(--bn)">BN 36%</div>
-    <div class="vs-seg" style="width:30%;background:var(--ph)">PH 30%</div>
-    <div class="vs-seg" style="width:18%;background:var(--bsm)">BSM 18%</div>
-    <div class="vs-seg" style="width:10%;background:var(--bst)">BST 10%</div>
-    <div class="vs-seg" style="width:6%;background:var(--pn)">PN 6%</div>
+  <div class="sec-title">Apa akan berlaku · 13 Nov dan selepas</div>
+  <div class="card" style="margin-bottom:.75rem">
+    <div class="step done"><div class="dot"></div><div><div class="tm">31 Okt ✓ · 10 Nov ✓</div><div class="lb">Penamaan calon dan undi awal selesai</div></div></div>
+    <div class="step next"><div class="dot"></div><div><div class="tm">Kini hingga Jum 13 Nov, 11.59 mlm</div><div class="lb">Hari-hari terakhir kempen: PH beralih daripada memperkenal calon kepada memujuk pengundi</div></div></div>
+    <div class="step"><div class="dot"></div><div><div class="tm">Sab 14 Nov</div><div class="lb">Hari mengundi. Keputusan awal pada waktu malam; pantau kerusi bellwether di atas</div></div></div>
+    <div class="step"><div class="dot"></div><div><div class="tm">15 Nov dan seterusnya</div><div class="lb">Jika satu blok capai 15, Menteri Besar dilantik. Jika dewan tergantung, perundingan bermula; Yang Dipertua Negeri lazimnya memilih calon yang dianggap dapat sokongan majoriti</div></div></div>
   </div>
-  <div class="vshare-legend">
-    <div class="vs-lbl"><div class="vs-dot" style="background:var(--bn)"></div>BN (UMNO 18 · MCA 4 · MIC 1) 36%</div>
-    <div class="vs-lbl"><div class="vs-dot" style="background:var(--ph)"></div>PH (PKR 10 · Amanah 7 · DAP 7) 30%</div>
-    <div class="vs-lbl"><div class="vs-dot" style="background:var(--bsm)"></div>BERSAMA (16 kerusi · bebas) 18%</div>
-    <div class="vs-lbl"><div class="vs-dot" style="background:var(--bst)"></div>BERSATU bebas (7 kerusi) 10%</div>
-    <div class="vs-lbl"><div class="vs-dot" style="background:var(--pn)"></div>PN (PAS 2 · Wawasan 2 · Gerakan 1) 6%</div>
-  </div>
-  <p style="font-size:.7rem;color:var(--muted);margin-top:.6rem">*Unjuran dikemas kini selepas penamaan 31 Okt. BERSAMA (18%) dan BERSATU bebas (10%) memecah undi Melayu secara signifikan — khususnya di luar bandar di mana BN tradisi kuat. Multi-penjuru 3–4 calon dalam kebanyakan kerusi bermakna ambang menang serendah <strong>30–35% undi</strong> sahaja — pemenang tidak semestinya mendapat majoriti mutlak.</p>
-</div>
-
-<!-- CONTEST BREAKDOWN -->
-<div class="sec">
-  <div class="sec-title">Jumlah Kerusi Ditandingi · Penamaan 31 Oktober 2026</div>
-  <div class="ctype-grid">
-    <div class="ctype-card"><div class="ctype-n" style="color:var(--ph)">24</div><div class="ctype-lbl">Pakatan Harapan</div><div class="ctype-sub">PKR 10 · Amanah 7 · DAP 7</div></div>
-    <div class="ctype-card"><div class="ctype-n" style="color:var(--bn)">23</div><div class="ctype-lbl">Barisan Nasional</div><div class="ctype-sub">UMNO 18 · MCA 4 · MIC 1 · 8 muka baharu</div></div>
-    <div class="ctype-card"><div class="ctype-n" style="color:var(--bsm)">16</div><div class="ctype-lbl">BERSAMA</div><div class="ctype-sub">Bebas · bukan ahli mana-mana pakatan</div></div>
-    <div class="ctype-card"><div class="ctype-n" style="color:var(--bst)">7</div><div class="ctype-lbl">BERSATU Bebas</div><div class="ctype-sub">Berpisah dari PN · tiket sendiri</div></div>
-    <div class="ctype-card"><div class="ctype-n" style="color:var(--pn)">5</div><div class="ctype-lbl">Perikatan Nasional</div><div class="ctype-sub">PAS 2 · Wawasan 2 · Gerakan 1</div></div>
-    <div class="ctype-card"><div class="ctype-n" style="color:var(--orange)">79</div><div class="ctype-lbl">Jumlah Calon</div><div class="ctype-sub">28 kerusi · sifar walkover · ~2.8 calon/kerusi</div></div>
-  </div>
-  <div style="margin-top:.875rem;background:rgba(202,138,4,.07);border:1px solid rgba(202,138,4,.25);border-radius:8px;padding:.75rem;font-size:.73rem;color:#FDE68A">
-    ⚡ <strong>PRN paling terbuka dalam sejarah Melaka:</strong> 79 calon · 7 parti/bebas · semua 28 kerusi bertanding — sifar walkover. Penjajaran asal BN(21)+PN(7)=28 retak: BN naik ke 23, PN susut ke 5, BERSATU berpisah dari PN (7 kerusi bebas), BERSAMA 16 kerusi. Pertandingan 3–4 penjuru di majoriti kerusi — ambang menang serendah <strong>30–35% undi</strong> sahaja.
-  </div>
-</div>
-
-<!-- SENTIMENT -->
-<div class="sec">
-  <div class="sec-title">Penanda Sentimen Kempen</div>
-  <div class="sent-grid">
-    <div class="sent-row">
-      <div class="sent-party" style="color:var(--bn)">BN</div>
-      <div class="sent-bar-wrap">
-        <div class="sent-bar-bg"><div class="sent-bar-fill" style="width:74%;background:var(--bn)"></div></div>
-        <div class="sent-lbl">Caretaker kuat — jentera UMNO Melaka paling mantap, rekod 5 tahun pentadbiran</div>
-      </div>
-      <div class="sent-val">74%</div>
-    </div>
-    <div class="sent-row">
-      <div class="sent-party" style="color:var(--ph)">PH</div>
-      <div class="sent-bar-wrap">
-        <div class="sent-bar-bg"><div class="sent-bar-fill" style="width:58%;background:var(--ph)"></div></div>
-        <div class="sent-lbl">Momentum nasional tetapi cabar dalam kawasan luar bandar Melayu Melaka</div>
-      </div>
-      <div class="sent-val">58%</div>
-    </div>
-    <div class="sent-row">
-      <div class="sent-party" style="color:var(--pn)">PN</div>
-      <div class="sent-bar-wrap">
-        <div class="sent-bar-bg"><div class="sent-bar-fill" style="width:28%;background:var(--pn)"></div></div>
-        <div class="sent-lbl">PN semakin kecil — hanya 5 kerusi (PAS/Wawasan/Gerakan). BERSATU keluar, PN lemah tanpa Bersatu</div>
-      </div>
-      <div class="sent-val">28%</div>
-    </div>
-    <div class="sent-row">
-      <div class="sent-party" style="color:var(--bsm)">BSM</div>
-      <div class="sent-bar-wrap">
-        <div class="sent-bar-bg"><div class="sent-bar-fill" style="width:52%;background:var(--bsm)"></div></div>
-        <div class="sent-lbl">BERSAMA (16 kerusi) — parti bebas, daya tarikan Melayu sederhana, ancam undi BN luar bandar</div>
-      </div>
-      <div class="sent-val">52%</div>
-    </div>
-    <div class="sent-row">
-      <div class="sent-party" style="color:var(--bst)">BST</div>
-      <div class="sent-bar-wrap">
-        <div class="sent-bar-bg"><div class="sent-bar-fill" style="width:38%;background:var(--bst)"></div></div>
-        <div class="sent-lbl">BERSATU bebas (8 kerusi) — bekas jentera PN, sentimen sederhana selepas berpisah dari pakatan</div>
-      </div>
-      <div class="sent-val">38%</div>
-    </div>
+  <div class="tension-grid">
+    <div class="tension-card"><div class="tension-title">Ujian 1 · Pakat BN–PN tanpa perjanjian rasmi</div><div class="tension-txt">Zahid mengesahkan "persefahaman" tetapi tiada perjanjian rasmi. BN tidak bertanding di lima kerusi PN dan PN tidak bertanding di 23 kerusi BN. Keputusan menunjukkan sama ada pengundi PAS/PN benar-benar memindahkan undi kepada BN (dan sebaliknya). Peluncur "kecekapan pakat" di atas menguji ini; lalai mengandaikan pindahan sempurna.</div></div>
+    <div class="tension-card"><div class="tension-title">Ujian 2 · BERSAMA melawan sasaran 15%</div><div class="tension-txt">Rafizi menyasarkan 15% undi popular, berbanding 3–6% di Johor. Jika BERSAMA kekal satu digit, ia lebih sebagai pemecah undi daripada pencabar. Jika mencecah belasan peratus, ia memberi isyarat untuk PRU16 walaupun tanpa kerusi.</div></div>
+    <div class="tension-card"><div class="tension-title">Ujian 3 · PH di kawasan Melayu dan hubungan dengan BERSATU</div><div class="tension-txt">BERSATU menandatangani CSA dengan kerajaan Madani pada 29 Okt tetapi bertanding 7 kerusi, tiga daripadanya bertemu PH. Muhyiddin dilaporkan menafikan kerjasama rasmi dengan PH (tajuk Sinar Harian, 6 Nov). Keputusan Melaka akan membentuk rundingan sebelum PRU16.</div></div>
   </div>
 </div>
 
 <!-- TENSIONS -->
 <div class="sec">
-  <div class="sec-title">Titik Tegangan Utama</div>
+  <div class="sec-title">Titik tegangan utama</div>
   <div class="tension-grid">
-    <div class="tension-card high">
-      <div class="tension-head">
-        <div class="tension-title">Adly vs Calon PN — Pemimpin PH di Kerusi PN</div>
-        <span class="tension-pill pill-high">TINGGI</span>
-      </div>
-      <div class="tension-txt">YB Adly Zahari (ketua PH Melaka) bertanding di N17 Bukit Katil — kerusi yang diperuntukkan PN, bukan BN. Ini bermakna pemimpin PH berhadapan dengan calon PAS/Wawasan, bukan CM Ab Rauf. Sekiranya Adly kalah kepada PN di kerusinya sendiri, ini merupakan tamparan dahsyat bagi PH Melaka dan boleh mempengaruhi semangat kempen keseluruhan.</div>
-    </div>
-    <div class="tension-card high">
-      <div class="tension-head">
-        <div class="tension-title">BN Rampas Balik Kerusi dari PN — Pakat Retak Dari Dalam</div>
-        <span class="tension-pill pill-high">TINGGI</span>
-      </div>
-      <div class="tension-txt">Zahid mengumumkan BN 21 + PN 7 = 28 kerusi — tetapi penamaan rasmi mendedahkan BN sebenarnya bertanding 23 kerusi, manakala PN hanya mendapat 5. BN tawan balik sekurang-kurangnya 2 kerusi yang dijanjikan kepada PN. Seterusnya, BERSATU bertembung dengan PN di N24 Bemban dan N16 Ayer Keroh — membuktikan blok Islamis berpecah. "Penyatuan ummah" BN-PN lebih rapuh daripada yang didakwa.</div>
-    </div>
-    <div class="tension-card high">
-      <div class="tension-head">
-        <div class="tension-title">BERSATU Keluar PN — Bertanding 8 Kerusi Secara Bebas</div>
-        <span class="tension-pill pill-high">TINGGI</span>
-      </div>
-      <div class="tension-txt">BERSATU tidak bekerjasama dengan PH dan berpisah dari PN untuk PRN Melaka — bertanding 8 kerusi secara bebas dengan tiket sendiri. Ini bermakna banyak kerusi Melayu kini 4 penjuru (BN + PH + BERSAMA + BERSATU). Split undi Melayu antara BN, BERSAMA dan BERSATU boleh beri kelebihan kepada PH di beberapa kerusi semi-bandar Melayu.</div>
-    </div>
-    <div class="tension-card high">
-      <div class="tension-head">
-        <div class="tension-title">BERSAMA 16 Kerusi — Ancaman Terbesar kepada BN Luar Bandar</div>
-        <span class="tension-pill pill-high">TINGGI</span>
-      </div>
-      <div class="tension-txt">BERSAMA (parti bebas) bertanding 16 daripada 28 kerusi — majoriti di kawasan luar bandar dan semi-bandar Melayu yang selama ini kubu kuat BN. Jika BERSAMA mendapat 15–20% undi Melayu di kawasan ini, BN berisiko kehilangan majoriti dalam pertandingan 4-penjuru. BERSAMA berpotensi menang 2–4 kerusi dan menjadi kingmaker selepas hari mengundi.</div>
-    </div>
-    <div class="tension-card med">
-      <div class="tension-head">
-        <div class="tension-title">Pertarungan MCA-DAP di Kerusi Cina</div>
-        <span class="tension-pill pill-med">SEDERHANA</span>
-      </div>
-      <div class="tension-txt">N08 Machap Jaya (Datuk Ngwe Hee Sem MCA vs Ginie Lim DAP) dan N14 Kelebang (Datuk Wira Lim Ban Hong MCA vs Farzana Hayani PH) adalah pertempuran "Cina lwn Cina" paling sengit. MCA menghadapi soalan kesetiaan komuniti Cina Melaka yang secara historis beralih ke DAP sejak GE13 2013.</div>
-    </div>
+    <div class="tension-card high"><div class="tension-title">Tanjung Bidara: Ketua Menteri bermajoriti 364 undi</div><div class="tension-txt">Datuk Seri Ab Rauf Yusoh berhadapan Mohd Yunazri (PH) satu lawan satu. Majoriti 2021 hanya 364 undi, jauh lebih nipis daripada anggapan "kerusi selamat" lazim untuk seorang Ketua Menteri.</div></div>
+    <div class="tension-card high"><div class="tension-title">Bukit Katil: Adly Zahari (Amanah) dalam pertandingan empat penjuru</div><div class="tension-txt">Pengerusi PH Melaka bertahan dengan majoriti 1,057 undi, dicabar PN, BERSAMA (Dr Aliza Che Amran) dan seorang bebas. Kerusi ini tiada calon BN kerana diperuntukkan kepada PN.</div></div>
+    <div class="tension-card high"><div class="tension-title">Serkam (79), Pengkalan Batu (131), Duyong (200)</div><div class="tension-txt">Tiga kerusi BN dengan majoriti 2021 paling nipis. Serkam dan Pengkalan Batu kini melibatkan BERSAMA (dan BERSATU di Pengkalan Batu) selain PH. Duyong satu lawan satu BN–PH.</div></div>
+    <div class="tension-card"><div class="tension-title">BERSATU: 7 kerusi, lima daripadanya melawan BN</div><div class="tension-txt">Lendu, Sungai Udang, Pantai Kundor, Klebang dan Pengkalan Batu bertemu calon BN; tiga (Klebang, Pengkalan Batu, Ayer Keroh) bertemu PH; dua (Ayer Keroh, Bemban) bertemu PN. Lendu dan Pantai Kundor tiada calon PH.</div></div>
+    <div class="tension-card"><div class="tension-title">Dua beradik berlainan pihak: Akmal vs Solehin</div><div class="tension-txt">Dr Akmal Saleh (BN) mempertahankan Merlimau secara satu lawan satu dengan PH, manakala adiknya Dr Solehin Saleh bertanding di Bemban atas tiket BERSAMA dan mengakui populariti abangnya membantu kempennya.</div></div>
   </div>
 </div>
 
-<!-- NARRATIVES -->
+<!-- NEWS -->
 <div class="sec">
-  <div class="sec-title">Naratif Kempen Utama</div>
-  <div class="narr-grid">
-    <div class="narr-card">
-      <div class="narr-icon">🏛️</div>
-      <div class="narr-title">BN: Rekod 5 Tahun + 8 Muka Baharu</div>
-      <div class="narr-txt">Caretaker BN membawa rekod pentadbiran: infrastruktur Melaka Tengah, pelancongan warisan UNESCO, pengangkutan awam. Tetapi yang paling menarik: 8 muka baharu dalam senarai calon — isyarat pembaharuan generasi. Datuk Akmal Saleh (NP UMNO) di N27 Merlimau menjadi ujian sama ada jentera personaliti nasional masih ampuh.</div>
-    </div>
-    <div class="narr-card">
-      <div class="narr-icon">🌊</div>
-      <div class="narr-title">PH: "Saatnya Berubah" — Reformasi &amp; Sara Hidup</div>
-      <div class="narr-txt">PH membawa naratif kerajaan Madani, pelan ekonomi inklusif, dan isu kos sara hidup. Adly mendakwa rakyat Melaka, khususnya generasi muda dan bandar, layak mendapat alternatif yang lebih baik. Cabaran: membuktikan mampu atasi kelemahan PRN 2021.</div>
-    </div>
-    <div class="narr-card">
-      <div class="narr-icon">⚡</div>
-      <div class="narr-title">BERSAMA: "Suara Rakyat" — 16 Kerusi Bebas</div>
-      <div class="narr-txt">BERSAMA, parti bebas yang menjadi pemain mengejut dalam PRN Melaka, bertanding 16 kerusi dengan naratif "bebas dari pakatan" — cuba menarik undi Melayu yang kecewa dengan BN tetapi tidak mahu PH. Jika berjaya memecah undi BN secara efektif, BERSAMA boleh menentukan siapa bentuk kerajaan.</div>
-    </div>
-    <div class="narr-card">
-      <div class="narr-icon">🔀</div>
-      <div class="narr-title">Paradox BERSATU: Rakan Madani, Lawan PH di Melaka</div>
-      <div class="narr-txt">BERSATU tandatangan CSA dengan Madani 29 Okt tetapi 5 hari kemudian bertanding 7 kerusi — termasuk 4 kerusi PH. "Rakan di Dewan Rakyat, lawan di gelanggang negeri." Lebih mengejutkan: BERSATU bertembung PN di N24 Bemban dan N16 Ayer Keroh — membuktikan perpecahan berlaku dua arah. PRN Melaka menjadi ujian teori "kerjasama pragmatik" yang tidak konsisten.</div>
-    </div>
-  </div>
-</div>
-
-<!-- 28-SEAT TABLE -->
-<div class="sec">
-  <div class="sec-title">Senarai 28 Kerusi DUN Melaka — Calon &amp; Ramalan</div>
-  <p style="font-size:.7rem;color:var(--muted);margin-bottom:.75rem">Selepas penamaan 31 Okt 2026. 79 calon · 7 parti/bebas · sifar walkover — semua 28 kerusi ditandingi buat pertama kali. BERSAMA 16 kerusi · BERSATU bebas 7 kerusi. Kolum "BSM/BST" menunjukkan calon BERSAMA/BERSATU di kerusi terpilih. ★ = calon paling tinggi profil. Jangkaan berdasarkan split undi dalam pertandingan 3–4 penjuru.</p>
-  <div style="overflow-x:auto">
-    <table class="seat-table">
-      <thead>
-        <tr>
-          <th>DUN</th>
-          <th>Kawasan</th>
-          <th>Jenis Tanding</th>
-          <th>Calon BN</th>
-          <th>Calon PH</th>
-          <th>BSM / BST</th>
-          <th>Jangkaan</th>
-        </tr>
-      </thead>
-      <tbody id="seatTbody"></tbody>
-    </table>
-  </div>
-</div>
-
-<!-- NEWS TRACKER -->
-<div class="sec">
-  <div class="sec-title">Penjejak Berita Terkini</div>
+  <div class="sec-title">Penjejak berita · 31 Okt hingga 10 Nov</div>
   <div class="news-grid">
-    <div class="news-item" style="border-color:rgba(153,27,27,.45)">
-      <div class="news-date">29 Okt<br>2026</div>
-      <div>
-        <div class="news-src" style="color:var(--bst)">Malaysiakini · FMT</div>
-        <div class="news-hl">Paradox CSA: BERSATU tandatangan perjanjian kepercayaan Madani — 5 hari kemudian bertanding lawan PH</div>
-        <div class="news-txt">BERSATU menandatangani perjanjian kepercayaan &amp; bekalan (CSA) dengan kerajaan Madani pada 29 Oktober — memberi sokongan luar kepada PH di peringkat Parlimen. Namun hanya 5 hari kemudian, BERSATU memfailkan calon di 7 kerusi DUN Melaka termasuk 4 kerusi yang dipertandingkan PH. "Rakan di Dewan Rakyat, lawan di gelanggang negeri." Ini menjadikan hubungan PH-BERSATU paling kompleks dalam sejarah pilihan raya Malaysia moden.</div>
-      </div>
-    </div>
-    <div class="news-item" style="border-color:rgba(202,138,4,.35)">
-      <div class="news-date">31 Okt<br>2026</div>
-      <div>
-        <div class="news-src" style="color:var(--bsm)">Astro Awani · FMT</div>
-        <div class="news-hl">BERSAMA sahkan 16 calon — mengejutkan semua pihak dengan liputan luas</div>
-        <div class="news-txt">Selepas penamaan rasmi di SPR, BERSAMA mengesahkan 16 calon merentasi kawasan Melayu luar bandar dan semi-bandar seluruh Melaka. Para analis pilihanraya mengakui ini mengubah secara fundamental kiraan kemenangan — kebanyakan kerusi kini 4-penjuru.</div>
-      </div>
-    </div>
-    <div class="news-item" style="border-color:rgba(153,27,27,.35)">
-      <div class="news-date">31 Okt<br>2026</div>
-      <div>
-        <div class="news-src" style="color:var(--bst)">Malaysiakini · Bernama</div>
-        <div class="news-hl">BERSATU rasmi bertanding 8 kerusi — berpisah dari PN Melaka</div>
-        <div class="news-txt">Setelah rundingan dengan PN gagal, BERSATU memfailkan calon sendiri di 8 kerusi DUN Melaka tanpa berpakatan dengan mana-mana gabungan. Ini menamatkan spekulasi kerjasama PH-Bersatu dan mencipta pertandingan 4–5 penjuru di kebanyakan kawasan Melayu.</div>
-      </div>
-    </div>
-    <div class="news-item" style="border-color:rgba(249,115,22,.3)">
-      <div class="news-date">31 Okt<br>2026</div>
-      <div>
-        <div class="news-src" style="color:var(--orange)">The Star · NST</div>
-        <div class="news-hl">Pakat BN-PN berubah: BN 23 kerusi, PN hanya 5 — jurang dari pelan asal</div>
-        <div class="news-txt">Berbeza daripada pengumuman asal Zahid (BN 21 + PN 7 = 28), penamaan rasmi menunjukkan BN sebenarnya bertanding 23 kerusi manakala PN hanya 5. Laporan menunjukkan BN mengambil balik beberapa kerusi yang awalnya dijanjikan kepada PN, menyebabkan ketegangan dalam pakatan.</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <div class="news-date">25 Okt<br>2026</div>
-      <div>
-        <div class="news-src">Astro Awani</div>
-        <div class="news-hl">PH umum 24 calon PRN Melaka — naik dari 21 yang dirancang</div>
-        <div class="news-txt">Pengerusi PH Melaka Adly Zahari mendedahkan senarai akhir 24 calon rasmi merangkumi PKR (10), DAP (7) dan Amanah (7) — lebih dari perancangan asal 21 kerusi apabila PH mula menyasar beberapa kerusi yang awalnya dikhaskan PN.</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <div class="news-date">24 Okt<br>2026</div>
-      <div>
-        <div class="news-src">Malaysiakini</div>
-        <div class="news-hl">Harapan yet to decide on form of cooperation with Bersatu in Malacca</div>
-        <div class="news-txt">PH Melaka belum membuat keputusan muktamad sama ada untuk berkerjasama dengan Bersatu yang kini berada dalam pakatan PN. Keputusan ini akan mempengaruhi dinamik 7 kerusi PN bandar.</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <div class="news-date">24 Okt<br>2026</div>
-      <div>
-        <div class="news-src">Newswav · Harian Metro</div>
-        <div class="news-hl">Zahid: BN 21 kerusi, PN rakan pakat dapat 7 kerusi PRN Melaka</div>
-        <div class="news-txt">Presiden UMNO Datuk Seri Zahid Hamidi mengesahkan BN akan bertanding 21 kerusi manakala PN mendapat peruntukan 7 kerusi dalam pakatan pilihanraya PRN Melaka ke-16. Tiada pertindihan antara kedua-dua pihak.</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <div class="news-date">24 Okt<br>2026</div>
-      <div>
-        <div class="news-src">Malaysia Gazette</div>
-        <div class="news-hl">Wawasan dapat 3 kerusi, PAS 2 kerusi dalam pembahagian PN Melaka</div>
-        <div class="news-txt">Pembahagian 7 kerusi PN: Parti Wawasan mendapat 3 kerusi, PAS 2 kerusi, manakala 2 kerusi lagi untuk komponen PN yang masih dalam rundingan. Calon rasmi akan ditentukan pada Penamaan Calon 31 Oktober.</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <div class="news-date">23 Okt<br>2026</div>
-      <div>
-        <div class="news-src">Berita Harian</div>
-        <div class="news-hl">3,435 anggota polis akan bertugas semasa PRN Melaka</div>
-        <div class="news-txt">Pengarah Polis Melaka mengesahkan 3,435 anggota polis akan dikerahkan bagi memastikan proses pilihanraya berjalan lancar merangkumi semua 28 pusat mengundi DUN Melaka.</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <div class="news-date">23 Sept<br>2026</div>
-      <div>
-        <div class="news-src">FMT · NST</div>
-        <div class="news-hl">Dewan Undang Negeri Melaka dibubarkan secara rasmi</div>
-        <div class="news-txt">DYMM Yang di-Pertuan Besar Melaka memperkenankan pembubaran DUN Melaka atas nasihat Ketua Menteri Datuk Seri Ab Rauf Yusoh. SPR kemudian menetapkan tarikh pilihanraya — penamaan 31 Oktober, mengundi 14 November.</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <div class="news-date">Sept<br>2026</div>
-      <div>
-        <div class="news-src">FMT</div>
-        <div class="news-hl">Adly Zahari sahkan bertanding di N17 Bukit Katil — kerusi PN</div>
-        <div class="news-txt">Pengerusi PH Melaka YB Adly Zahari mengesahkan beliau akan mempertahankan kerusi N17 Bukit Katil. Kerusi tersebut diperuntukkan PN dalam pakatan BN-PN, bermakna Adly akan berhadapan dengan calon PAS atau Wawasan, bukan BN.</div>
-      </div>
-    </div>
-    <div class="news-item">
-      <div class="news-date">Sept<br>2026</div>
-      <div>
-        <div class="news-src">NST</div>
-        <div class="news-hl">Ab Rauf: BN Melaka bersedia — Tanjung Bidara akan dipertahankan lebih kuat</div>
-        <div class="news-txt">Ketua Menteri merangkap calon N02 Tanjung Bidara, Datuk Seri Ab Rauf Yusoh, berkata BN Melaka telah mula bergerak sejak sebulan lalu dan yakin dapat mempertahankan majoriti yang lebih besar berbanding PRN 2021.</div>
-      </div>
-    </div>
+    <div class="news-item"><div class="news-date">10 Nov</div><div><div class="news-src">RTM · SPR</div><div class="news-hl"><a href="https://berita.rtm.gov.my/mandat/berita/senarai-berita-mandat/berita/senarai-artikel/prn-melaka-94-96-peratus-pengundi-awal-tunai-tanggungjawab-spr">Undi awal: 94.96% pengundi awal tunai tanggungjawab</a></div><div class="news-txt">Pengundi awal terdiri daripada anggota tentera, polis dan pasangan (kira-kira 12,500 orang).</div></div></div>
+    <div class="news-item"><div class="news-date">10 Nov</div><div><div class="news-src">Sinar Harian · Awani</div><div class="news-hl"><a href="https://www.sinarharian.com.my/article/804037/berita/politik/prn-melaka-bersama-buru-15-peratus-undi-intai-saingan-sengit-pru---rafizi">Rafizi: BERSAMA buru 15% undi popular, intai saingan sengit PRU</a></div><div class="news-txt">Sasaran lebih tinggi daripada 3–6% di Johor. Rafizi mengakui pengundi Melaka sukar diramal kerana lebih berhati-hati menyatakan pilihan.</div></div></div>
+    <div class="news-item"><div class="news-date">9 Nov</div><div><div class="news-src">NST</div><div class="news-hl"><a href="https://www.nst.com.my/amp/news/regional/2026/11/1573660/melaka-election-final-push-win-over-voters-watch">Melaka election: Final push to win over voters</a></div><div class="news-txt">Suasana agak sepi dengan sedikit ceramah. Anwar menjelajah lima acara (Khamis 5 Nov); Ceramah Santai Orang Melaka (BN dan PAS) menarik lebih 3,000 orang. Ilham Centre: kira-kira 13% belum pasti, PH dinilai lemah dari sudut pemasaran. 19 laporan polis minggu pertama, kebanyakan melibatkan gangguan dan dakwaan rasuah.</div></div></div>
+    <div class="news-item"><div class="news-date">6 Nov</div><div><div class="news-src">Kosmo</div><div class="news-hl"><a href="https://www.kosmo.com.my/2026/11/06/prn-melaka-pengundi-sudah-membuat-pilihan-berhemah-ketika-berkempen-ahmad-zahid/">Zahid: pengundi sudah membuat pilihan, jentera diminta berhemah</a></div><div class="news-txt">Zahid mengakui kempen semakin sengit dan menyebut "persefahaman" BN–PN walaupun tiada perjanjian rasmi.</div></div></div>
+    <div class="news-item"><div class="news-date">~6 Nov</div><div><div class="news-src">Buletin TV3</div><div class="news-hl"><a href="https://www.buletintv3.my/politik/prn-melaka-dr-solehin-akui-tempias-populariti-dr-akmal/">Dr Solehin (BERSAMA, Bemban) akui tempias populariti Dr Akmal</a></div><div class="news-txt">Berdasarkan petikan carian; artikel penuh tidak dapat dibuka.</div></div></div>
+    <div class="news-item"><div class="news-date">31 Okt</div><div><div class="news-src">Utusan · Bernama · Sinar Harian</div><div class="news-hl"><a href="https://www.utusan.com.my/nasional/2026/10/senarai-calon-prn-melaka-ke-16/">Penamaan: 79 calon, PH 24 · BN 23 · BERSAMA 16 · BERSATU 7 · PN 5 · Putra 1 · Bebas 3</a></div><div class="news-txt">Pecahan persaingan: 11 kerusi satu lawan satu, 11 tiga penjuru, 6 empat penjuru. Pada 2021 BN menang 21 kerusi, PH lima dan PN dua.</div></div></div>
   </div>
 </div>
 
-<!-- STRATEGIC OUTLOOK -->
+<!-- METHOD -->
 <div class="sec">
-  <div class="sec-title">Perspektif Strategik</div>
-  <div style="display:grid;gap:.75rem">
-    <div style="background:var(--surf2);border-radius:8px;padding:.875rem;border-left:3px solid var(--bn)">
-      <div style="font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.3rem">Kelebihan BN (Caretaker)</div>
-      <div style="font-size:.73rem;color:#94A3B8">BN memenang 21/28 dalam PRN 2021 dan masih memegang pentadbiran penuh dengan jentera UMNO Melaka paling teratur di Malaysia. Kali ini, seluruh 28 kerusi ditandingi — sifar walkover — namun BN membawa 8 muka baharu dalam kalangan calon-calonnya, mencerminkan keyakinan pembaharuan. Naib Presiden UMNO Datuk Akmal Saleh bertanding di N27 Merlimau — ujian sama ada jentera personaliti nasional boleh tarik undi melebihi jentera tradisi.</div>
-    </div>
-    <div style="background:var(--surf2);border-radius:8px;padding:.875rem;border-left:3px solid var(--ph)">
-      <div style="font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.3rem">Peluang PH</div>
-      <div style="font-size:.73rem;color:#94A3B8">PH kuat di Kota Melaka (N19–N22) dan berpotensi tawan N08 Machap Jaya — di mana calon BERSAMA (bekas Pegawai Khas Ketua Menteri) memecah undi Melayu dari BN/MCA, mempermudah menang DAP. Paradox CSA: BERSATU menandatangani perjanjian kepercayaan dengan Madani pada 29 Okt tetapi bertembung PH di 4 kerusi Melaka — "rakan di Dewan Rakyat, lawan di gelanggang negeri." Dalam pertandingan 3-penjuru (N16 Ayer Keroh: PH+PN+BERSATU), split undi bukan-PH boleh memberi peluang kepada DAP walaupun BN+PN+BERSATU lebih banyak secara agregat.</div>
-    </div>
-    <div style="background:var(--surf2);border-radius:8px;padding:.875rem;border-left:3px solid var(--pn)">
-      <div style="font-size:.78rem;font-weight:700;color:#fff;margin-bottom:.3rem">Cabaran PN (Susut ke 5 Kerusi)</div>
-      <div style="font-size:.73rem;color:#94A3B8">Selepas BERSATU keluar, PN tinggal 5 kerusi (PAS 2, Wawasan 2, Gerakan 1). Lebih kritikal, BERSATU bertembung dengan PN di <strong>N24 Bemban</strong> dan <strong>N16 Ayer Keroh</strong> — membuktikan penyatuan BN-PN tidak kental dan blok Islamis turut berpecah. PN berkemungkinan menang 0–1 kerusi sahaja. Kemenangan BN tidak semestinya menghapuskan Adly — di N17 Bukit Katil, Adly berhadapan PN (bukan BN), dan kekalahan di tangan PN akan jadi tamparan ganda bagi PH Melaka.</div>
-    </div>
-    <div style="background:rgba(202,138,4,.06);border-radius:8px;padding:.875rem;border-left:3px solid var(--bsm)">
-      <div style="font-size:.78rem;font-weight:700;color:var(--bsm);margin-bottom:.3rem">⚡ BERSAMA — Kingmaker Baru (16 Kerusi)</div>
-      <div style="font-size:.73rem;color:#94A3B8">BERSAMA berpotensi menang 2–4 kerusi di kawasan Melayu luar bandar. Calon paling menonjol: bekas Pegawai Khas Ketua Menteri di N08 Machap Jaya — jika menang, BERSAMA membuktikan mampu pecah kerusi bandar bukan hanya luar bandar. Walaupun tidak mampu bentuk kerajaan sendiri, BERSAMA dengan 3+ kerusi boleh tentukan sama ada BN atau PH yang bentuk kerajaan selepas 14 Nov — menjadikan BERSAMA pemain paling penting dalam negosiasi pasca-pilihanraya.</div>
-    </div>
-    <div style="background:rgba(153,27,27,.06);border-radius:8px;padding:.875rem;border-left:3px solid var(--bst)">
-      <div style="font-size:.78rem;font-weight:700;color:var(--bst);margin-bottom:.3rem">BERSATU Bebas — Pemecah Undi Melayu (7 Kerusi)</div>
-      <div style="font-size:.73rem;color:#94A3B8">BERSATU bebas di 7 kerusi berfungsi sebagai "vote splitter" dalam kawasan Melayu — mengambil 10–15% undi yang sebelumnya ke BN atau PN. Ironinya, BERSATU kini bertandang di N24 Bemban dan N16 Ayer Keroh bersama PN — membuktikan perpecahan berlaku dua arah. Ketidakpastian utama: undi BERSATU lebih membenam BN (kawasan Melayu luar bandar) atau PH (kawasan semi-bandar)? Kebanyakan analis percaya BERSATU lebih hurt BN, menjadikan kecekapan kerusi berpihak PH kali ini.</div>
-    </div>
-    <div style="background:rgba(59,130,246,.04);border-radius:8px;padding:.875rem;border-left:3px solid var(--muted)">
-      <div style="font-size:.78rem;font-weight:700;color:#CBD5E1;margin-bottom:.3rem">📐 Matematik Plurality — Menang dengan Undi Minoriti</div>
-      <div style="font-size:.73rem;color:#94A3B8">Dengan pertandingan 3–4 penjuru di kebanyakan kerusi, pemenang mungkin hanya perlu <strong style="color:var(--orange)">30–35% undi</strong> — bukan majoriti mutlak. Contoh N16 Ayer Keroh: undi bukan-DAP (PN + BERSATU) berkemungkinan melebihi DAP secara agregat, tetapi berpecah tiga hala memberi DAP kelebihan plurality. Ini adalah kelemahan sistem FPTP yang sangat relevan PRN kali ini: BN boleh menang kerusi dengan kurang daripada sepertiga undi, begitu juga PH. Model ini memperkirakan kecekapan kerusi berdasarkan split undi — bukan sekadar keseluruhan bahagian undi.</div>
-    </div>
-  </div>
-</div>
-
-<!-- LIVE RESULTS TIMELINE -->
-<div class="sec">
-  <div class="sec-title">Jadual Hari Mengundi — 14 November 2026</div>
-  <div class="res-box">
-    <div class="res-timeline">
-      <div class="res-step">
-        <div class="res-dot" style="background:var(--green)"></div>
-        <div>
-          <div class="res-time">31 Okt 2026 ✓ Selesai</div>
-          <div class="res-lbl">Penamaan Calon — 79 calon untuk 28 kerusi (BN 23, PH 24, BSM 16, BST 7, PN 5, Bebas 4) — sifar walkover</div>
-        </div>
-      </div>
-      <div class="res-step next">
-        <div class="res-dot"></div>
-        <div>
-          <div class="res-time">Kini · 1 Nov 2026 · 13 hari lagi</div>
-          <div class="res-lbl">Fasa Kempen Aktif — Multi-penjuru 4–5 calon, kempen BERSAMA &amp; BERSATU bebas</div>
-        </div>
-      </div>
-      <div class="res-step">
-        <div class="res-dot"></div>
-        <div>
-          <div class="res-time">14 Nov 2026 · 8:00 pagi</div>
-          <div class="res-lbl">Saluran Mengundi Dibuka — 28 DUN Melaka</div>
-        </div>
-      </div>
-      <div class="res-step">
-        <div class="res-dot"></div>
-        <div>
-          <div class="res-time">14 Nov 2026 · 5:00 petang</div>
-          <div class="res-lbl">Saluran Ditutup — Kiraan undi bermula</div>
-        </div>
-      </div>
-      <div class="res-step">
-        <div class="res-dot"></div>
-        <div>
-          <div class="res-time">14 Nov 2026 · 8:00–11:00 malam</div>
-          <div class="res-lbl">Keputusan Pertama Dijangka — Majoriti anggaran jam 11 malam</div>
-        </div>
-      </div>
-    </div>
-    <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.875rem">
-      <a class="res-link" href="#" onclick="return false" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.3rem .7rem;font-size:.7rem;color:var(--ph)">Astro Awani PRN Melaka</a>
-      <a class="res-link" href="#" onclick="return false" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.3rem .7rem;font-size:.7rem;color:var(--ph)">SPR eCentral</a>
-      <a class="res-link" href="#" onclick="return false" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.3rem .7rem;font-size:.7rem;color:var(--ph)">Bernama Live</a>
-      <a class="res-link" href="#" onclick="return false" style="background:var(--surf);border:1px solid var(--brd);border-radius:6px;padding:.3rem .7rem;font-size:.7rem;color:var(--ph)">Malaysiakini Live</a>
-    </div>
+  <div class="sec-title">Metodologi &amp; had</div>
+  <div class="box warn">
+    <b>Ini bukan tinjauan atau unjuran rasmi.</b> Ia model simulasi (12,000 larian) dengan andaian analis yang boleh anda ubah di atas.<br><br>
+    <b>Cara model berfungsi.</b> (1) Setiap kerusi bermula daripada majoriti 2021 sebagai peratus undi dijangka (andaian keluar mengundi 72%) bagi mengira pertandingan dua pihak: pakat BN+PN lawan PH. (2) Ayunan statewide dan ralat rawak ditambah (4 mata statewide, 6 mata bagi setiap calon, kerana landskap 2026 berbeza daripada 2021). (3) BERSAMA dan BERSATU mengambil undi dengan peratusan yang ditetapkan peluncur, dengan nisbah sumber berbeza. (4) Di kerusi tanpa calon PH (Lendu, Sungai Udang, Pantai Kundor, Bemban), undi sisi PH diagihkan kepada BERSAMA/BERSATU dan sedikit kepada pakat. (5) Calon dengan undi tertinggi menang.<br><br>
+    <b>Had utama.</b> Majoriti 2021 diukur dalam landskap berbeza (pakat BN–PN dan BERSAMA tidak wujud). Tiada data tinjauan awam dengan niat mengundi dijumpai. Faktor tempatan (calon, jentera, kaum) tidak dimodelkan kerusi demi kerusi. Gunakan jadual sensitiviti, bukan satu nombor, untuk membuat penilaian.
   </div>
 </div>
 
 <div class="footer">
-  <p>PRN Melaka 2026 · Analisis risikan dikemaskini: 1 November 2026 (selepas penamaan — 79 calon, sifar walkover)</p>
-  <p style="margin-top:.3rem">Sumber: Astro Awani · Malaysiakini · FMT · NST · Berita Harian · The Star · Bernama · Momentum · SPR</p>
-  <p style="margin-top:.3rem">Model ramalan menggunakan data historis PRN 2021, GE15 2022 dan tinjauan semasa. Bukan unjuran rasmi SPR.</p>
+  <p>PRN Melaka 2026 · Analisis risikan dikemaskini: 12 November 2026</p>
+  <p style="margin-top:.3rem">Sumber: Utusan Malaysia · Bernama · Sinar Harian · NST · Kosmo · RTM/SPR · Awani · Buletin TV3 · Ilham Centre (melalui NST)</p>
+  <p style="margin-top:.3rem">Analisis peribadi, bukan unjuran rasmi SPR.</p>
 </div>
 
 <script>
+/* ---------- DATA (Utusan Malaysia, senarai calon rasmi 31 Okt 2026) ---------- */
+var NAMES={BN:'BN',PH:'PH',PN:'PN',BSM:'BERSAMA',BST:'BERSATU',PUTRA:'Putra',IND:'Bebas'};
+var COL={BN:'#3B82F6',PH:'#EF4444',PN:'#8B5CF6',BSM:'#E3A008',BST:'#E0457B',PUTRA:'#64748B',IND:'#94A3B8'};
+var PARTIES=['BN','PN','PH','BSM','BST','PUTRA','IND'];
 var SEATS=[
-  {n:1,seat:'Kuala Linggi',parl:'P134 Masjid Tanah',type:'BN-PH',
-   bn:{nm:'Datuk Hj Rosli bin Abdullah',pty:'UMNO'},
-   ph:{nm:'Muhammad Mukhlisul Mubin',pty:'PKR'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:75},
-  {n:2,seat:'Tanjung Bidara',parl:'P134 Masjid Tanah',type:'BN-PH',
-   bn:{nm:'YAB Datuk Seri Ab Rauf Yusoh',pty:'UMNO (CM)'},
-   ph:{nm:'Mohd Yunazri',pty:'PKR'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Safe',pct:85},
-  {n:3,seat:'Ayer Limau',parl:'P134 Masjid Tanah',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Calon PH',pty:'PKR/Amanah'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:72},
-  {n:4,seat:'Lendu',parl:'P134 Masjid Tanah',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Calon PH',pty:'PKR/Amanah'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:70},
-  {n:5,seat:'Taboh Naning',parl:'P134 Masjid Tanah',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Calon PH',pty:'Amanah/PKR'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:68},
-  {n:6,seat:'Rembia',parl:'P135 Alor Gajah',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Mohd Khuzairie',pty:'Amanah'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:70},
-  {n:7,seat:'Gadek',parl:'P135 Alor Gajah',type:'BN-PH',
-   bn:{nm:'Nadarajah',pty:'MIC'},
-   ph:{nm:'Jegasilan K.',pty:'PKR'},pn:null,bsm:null,bst:null,
-   win:'Toss',cat:'Swing',pct:52},
-  {n:8,seat:'Machap Jaya',parl:'P135 Alor Gajah',type:'3-corner',
-   bn:{nm:'Datuk Ngwe Hee Sem',pty:'MCA'},
-   ph:{nm:'Ginie Lim Siew Lin',pty:'DAP'},pn:null,
-   bsm:{nm:'Bekas Peg. Khas Ketua Menteri ★',pty:'BERSAMA (bebas)'},bst:null,
-   win:'PH',cat:'Lean',pct:44},
-  {n:9,seat:'Durian Tunggal',parl:'P135 Alor Gajah',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Datuk Ashraf',pty:'PKR'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:72},
-  {n:10,seat:'Asahan',parl:'P135 Alor Gajah',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Denesh a/l Palasub',pty:'PKR'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:75},
-  {n:11,seat:'Sungai Udang',parl:'P136 Tangga Batu',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Calon PH',pty:'PKR/Amanah'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:70},
-  {n:12,seat:'Pantai Kundor',parl:'P136 Tangga Batu',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Calon PH',pty:'PKR/Amanah'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:72},
-  {n:13,seat:'Paya Rumput',parl:'P136 Tangga Batu',type:'PH-PN',
-   bn:null,
-   ph:{nm:'Datuk Azman bin Abidin',pty:'PKR'},
-   pn:{nm:'Calon PN',pty:'PAS/Wawasan'},bsm:null,bst:null,
-   win:'PH',cat:'Likely',pct:62},
-  {n:14,seat:'Kelebang',parl:'P136 Tangga Batu',type:'BN-PH',
-   bn:{nm:'Datuk Wira Lim Ban Hong',pty:'MCA'},
-   ph:{nm:'Farzana Hayani',pty:'DAP'},pn:null,bsm:null,bst:null,
-   win:'Toss',cat:'Swing',pct:52},
-  {n:15,seat:'Pengkalan Batu',parl:'P137 Hang Tuah Jaya',type:'BN-PH',
-   bn:{nm:'Siti Aisyah',pty:'UMNO'},
-   ph:{nm:'Jason Tze-Xi Nathan',pty:'DAP'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Lean',pct:60},
-  {n:16,seat:'Ayer Keroh',parl:'P137 Hang Tuah Jaya',type:'3-corner',
-   bn:null,
-   ph:{nm:'Kerk Cheen Yee',pty:'DAP'},
-   pn:{nm:'Calon PN',pty:'Wawasan/PAS'},bsm:null,
-   bst:{nm:'Calon BERSATU ★',pty:'BERSATU (bebas)'},
-   win:'PH',cat:'Lean',pct:48},
-  {n:17,seat:'Bukit Katil',parl:'P137 Hang Tuah Jaya',type:'PH-PN',
-   bn:null,
-   ph:{nm:'YB Adly bin Zahari ★',pty:'PKR (Ketua PH)'},
-   pn:{nm:'Calon PN',pty:'PAS/Wawasan'},bsm:null,bst:null,
-   win:'PH',cat:'Likely',pct:65},
-  {n:18,seat:'Ayer Molek',parl:'P137 Hang Tuah Jaya',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Muhammad Hakimin',pty:'Amanah'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:72},
-  {n:19,seat:'Kesidang',parl:'P138 Kota Melaka',type:'PH-PN',
-   bn:null,
-   ph:{nm:'Seah Shoo Chin',pty:'DAP'},
-   pn:{nm:'Calon PN',pty:'Wawasan/PAS'},bsm:null,bst:null,
-   win:'PH',cat:'Safe',pct:72},
-  {n:20,seat:'Kota Laksamana',parl:'P138 Kota Melaka',type:'PH-PN',
-   bn:null,
-   ph:{nm:'Low Chee Leong',pty:'DAP'},
-   pn:{nm:'Calon PN',pty:'Wawasan/PAS'},bsm:null,bst:null,
-   win:'PH',cat:'Safe',pct:73},
-  {n:21,seat:'Duyong',parl:'P138 Kota Melaka',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Poo Long Suan',pty:'DAP'},pn:null,bsm:null,bst:null,
-   win:'Toss',cat:'Swing',pct:52},
-  {n:22,seat:'Bandar Hilir',parl:'P138 Kota Melaka',type:'PH-PN',
-   bn:null,
-   ph:{nm:'Leng Chau Yen',pty:'DAP'},
-   pn:{nm:'Calon PN',pty:'Wawasan/PAS'},bsm:null,bst:null,
-   win:'PH',cat:'Safe',pct:72},
-  {n:23,seat:'Telok Mas',parl:'P138 Kota Melaka',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Kapten Mohamad Jaafar',pty:'Amanah'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Lean',pct:65},
-  {n:24,seat:'Bemban',parl:'P139 Jasin',type:'PN-BST',
-   bn:null,ph:null,
-   pn:{nm:'Calon PN',pty:'PAS/Wawasan'},bsm:null,
-   bst:{nm:'Calon BERSATU bebas ★',pty:'BERSATU (bebas)'},
-   win:'PN',cat:'Lean',pct:55},
-  {n:25,seat:'Rim',parl:'P139 Jasin',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Esma Eazreen',pty:'PKR'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:72},
-  {n:26,seat:'Serkam',parl:'P139 Jasin',type:'BN-PH',
-   bn:{nm:'Calon UMNO/BN',pty:'UMNO'},
-   ph:{nm:'Muhammad Faiq',pty:'Amanah'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:78},
-  {n:27,seat:'Merlimau',parl:'P139 Jasin',type:'BN-PH',
-   bn:{nm:'Datuk Akmal Saleh (NP UMNO) ★',pty:'UMNO'},
-   ph:{nm:'Rahayu binti Hamzah',pty:'PKR'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Safe',pct:82},
-  {n:28,seat:'Sungai Rambai',parl:'P139 Jasin',type:'BN-PH',
-   bn:{nm:'Jezlee bin Pit',pty:'UMNO'},
-   ph:{nm:'Calon PH',pty:'PKR/Amanah'},pn:null,bsm:null,bst:null,
-   win:'BN',cat:'Likely',pct:72}
+{n:1,s:'Kuala Linggi',p:'P134 Masjid Tanah',v:15483,m:1836,i:'P',c:[['PH','Muhammad Mukhlisul Mubin Julaisapiyah'],['BSM','Dr. Nur Farhana Hamzah'],['BN','Datuk Rosli Abdullah']]},
+{n:2,s:'Tanjung Bidara',p:'P134 Masjid Tanah',v:15003,m:364,i:'P',c:[['PH','Mohd Yunazri Mustamiri'],['BN','Datuk Seri Ab. Rauf Yusoh (KM)']]},
+{n:3,s:'Ayer Limau',p:'P134 Masjid Tanah',v:15379,m:1085,i:'P',c:[['PH','Mejar (B) Jaini Dimon'],['BN','Datuk Hameed Mytheen Kunju Basheer']]},
+{n:4,s:'Lendu',p:'P134 Masjid Tanah',v:15043,m:3104,i:'P',c:[['BN','Datuk Abdul Hakim Abdul Wahid'],['BST','Nazri Ramli']]},
+{n:5,s:'Taboh Naning',p:'P134 Masjid Tanah',v:11299,m:1825,i:'P',c:[['PH','Junainah Sahat'],['BN','Datuk Zulkiflee Mohd Zin']]},
+{n:6,s:'Rembia',p:'P135 Alor Gajah',v:23291,m:860,i:'P',c:[['BSM','Muhamed Aman Akil Abdul Talib'],['BN','Ahmad Norazril Abd Aziz'],['PH','Mohd Khuzairie Mohd Kamal Kannan']]},
+{n:7,s:'Gadek',p:'P135 Alor Gajah',v:16617,m:559,i:'P',c:[['PH','K. Jegasilan'],['BSM','B Laveen'],['PUTRA','Laila Norinda Maon'],['BN','S. Nadarajah']]},
+{n:8,s:'Machap Jaya',p:'P135 Alor Gajah',v:16030,m:938,i:'P',c:[['BN','Datuk Ngwe Hee Sem'],['PH','Datuk Ginie Lim Siew Lin'],['BSM','Prasanth Kumar Brakasam']]},
+{n:9,s:'Durian Tunggal',p:'P135 Alor Gajah',v:21181,m:559,i:'P',c:[['BN','Datuk Dr. Mustafa Musa'],['PH','Datuk Ashraf Mukhlis Minghat']]},
+{n:10,s:'Asahan',p:'P135 Alor Gajah',v:20217,m:2993,i:'P',c:[['BN','Datuk Dr. Fairul Nizam Roslan'],['PH','P. Denesh']]},
+{n:11,s:'Sungai Udang',p:'P136 Tangga Batu',v:29692,m:530,i:'P',c:[['BST','Mejar (B) Abdullah Mahadi'],['BSM','Mohd. Ridzuan Abdul Rahman'],['BN','Datuk Rais Yasin']]},
+{n:12,s:'Pantai Kundor',p:'P136 Tangga Batu',v:20855,m:827,i:'P',c:[['BST','Datin Seri Dr Asmah Samat'],['BN','Datuk Tuminah Kadi']]},
+{n:13,s:'Paya Rumput',p:'P136 Tangga Batu',v:46521,m:629,i:'P',c:[['PN','Rafie Ahmad'],['BSM','Abdul Rashid Abu Bakar'],['PH','Datuk Azman Abidin']]},
+{n:14,s:'Klebang',p:'P136 Tangga Batu',v:27339,m:876,i:'P',c:[['PH','Farzana Hayani Mohd. Nasir'],['BST','Datuk Seri Mohamad Ali Mohamad'],['BSM','Young Jie Yu'],['BN','Datuk Lim Ban Hong']]},
+{n:15,s:'Pengkalan Batu',p:'P137 Hang Tuah Jaya',v:25948,m:131,i:'P',c:[['BN','Siti Aisyah Mahmood'],['BSM','Goh Han Koon'],['PH','Jason Tze-Xi Nathan'],['BST','Datuk Norhizam Hassan Baktee']]},
+{n:16,s:'Ayer Keroh',p:'P137 Hang Tuah Jaya',v:38252,m:5624,i:'H',c:[['BSM','Muhammad Muhaimin Lau Abdullah'],['PH','Kerk Chee Yee'],['PN','Datuk Seri Michael Gan Peng Lam'],['BST','Mohd. Hamnaim Mohamad']]},
+{n:17,s:'Bukit Katil',p:'P137 Hang Tuah Jaya',v:35359,m:1057,i:'H',c:[['PH','Adly Zahari'],['PN','Muhammad Ridzuan Mohd. Sarif'],['IND','Abu Bakar Sabudin'],['BSM','Dr. Aliza Che Amran']]},
+{n:18,s:'Ayer Molek',p:'P137 Hang Tuah Jaya',v:24614,m:2802,i:'P',c:[['BN','Datuk Mohd. Ridhwan Mohd. Ali'],['PH','Muhammad Hakimin Mokhtar']]},
+{n:19,s:'Kesidang',p:'P138 Kota Melaka',v:54910,m:10237,i:'H',c:[['BSM','Dr. Bryan Kek Kit Hun'],['PH','Allex Seah Shoo Chin'],['PN','Albert Kok Boon Chang (Wawasan)']]},
+{n:20,s:'Kota Laksamana',p:'P138 Kota Melaka',v:34066,m:11494,i:'H',c:[['PH','Low Chee Leong'],['BN','Melvin Chua Kew Wei'],['BSM','Ethan Lim Zhi Hao']]},
+{n:21,s:'Duyong',p:'P138 Kota Melaka',v:26528,m:200,i:'P',c:[['PH','Poo Long Suan'],['BN','Datuk Mohd. Noor Helmy Abdul Halem']]},
+{n:22,s:'Bandar Hilir',p:'P138 Kota Melaka',v:23042,m:7778,i:'H',c:[['BN','Jasmine Lok Huey Yee'],['PH','Leng Chau Yen'],['BSM','Dr. Mohd. Nor Rashidi Ab. Jalil']]},
+{n:23,s:'Telok Mas',p:'P138 Kota Melaka',v:29751,m:2076,i:'P',c:[['PH','Kapten (B) Mohamad Jaafar'],['BN','Datuk Abdul Razak Abdul Rahman'],['BSM','Muhammad Hazwan Mustafa']]},
+{n:24,s:'Bemban',p:'P139 Jasin',v:26381,m:328,i:'P',c:[['BST','Muhammad Rabaie Ab Hamid'],['BSM','Dr. Muhammad Solehin Saleh'],['PN','Dr. Mohd. Yadzil Yaakub'],['IND','Abd. Halim Said']]},
+{n:25,s:'Rim',p:'P139 Jasin',v:17742,m:1327,i:'P',c:[['PH','Esma Eazreen Husin'],['BN','Datuk Khaidhirah Abu Zahar']]},
+{n:26,s:'Serkam',p:'P139 Jasin',v:21352,m:79,i:'P',c:[['BN','Datuk Azman Abdullah'],['PH','Muhammad Faiq Azman'],['BSM','Muhammad Saffie Md. Yasan']]},
+{n:27,s:'Merlimau',p:'P139 Jasin',v:19759,m:3248,i:'P',c:[['BN','Datuk Dr. Muhamad Akmal Saleh'],['PH','Rahayu Hamzah']]},
+{n:28,s:'Sungai Rambai',p:'P139 Jasin',v:16043,m:1137,i:'P',c:[['BN','Jezlee Pit'],['PH','Aminuddin Abdul Jalil'],['IND','Norrizan Jantan']]}
 ];
+/* i: 'P' = penyandang 2021 dari sisi pakat BN/PN, 'H' = penyandang PH */
 
-function typeTag(t){
-  if(t==='BN-PH') return '<span class="c-bn-ph">BN lwn PH</span>';
-  if(t==='PH-PN') return '<span class="c-ph-pn">PH lwn PN</span>';
-  if(t==='PN-BST') return '<span class="c-pn-so">PN lwn BERSATU</span>';
-  if(t==='3-corner') return '<span style="background:rgba(202,138,4,.08);border:1px solid rgba(202,138,4,.25);border-radius:4px;padding:.1rem .3rem;font-size:.62rem;color:var(--bsm);font-weight:700">3 Penjuru</span>';
-  if(t==='4-corner') return '<span style="background:rgba(202,138,4,.1);border:1px solid rgba(202,138,4,.3);border-radius:4px;padding:.1rem .3rem;font-size:.62rem;color:var(--bsm);font-weight:700">4 Penjuru</span>';
-  return '<span class="c-bn-so">BN Sahaja</span>';
-}
-function candCell(c,col){
-  if(!c) return '<span class="tba">—</span>';
-  var s=col?'style="font-weight:700;color:'+col+'"':'class="cand-nm"';
-  return '<div '+s+'>'+c.nm+'</div><div class="cand-pty">'+c.pty+'</div>';
-}
-function winCell(w,cat,pct){
-  var cls=w==='BN'?'win-bn':w==='PH'?'win-ph':w==='PN'?'win-pn':'win-to';
-  return '<span class="'+cls+'">'+w+'</span><br><span style="font-size:.6rem;color:var(--muted)">'+cat+' '+pct+'%</span>';
-}
-
-var tb=document.getElementById('seatTbody');
-SEATS.forEach(function(s){
-  var tr=document.createElement('tr');
-  var lain=s.bsm||s.bst||null;
-  var lainCol=s.bsm?'var(--bsm)':s.bst?'var(--bst)':null;
-  tr.innerHTML=
-    '<td><span class="seat-n">N'+s.n+'</span></td>'+
-    '<td><div class="seat-name">'+s.seat+'</div><div class="seat-parl">'+s.parl+'</div></td>'+
-    '<td>'+typeTag(s.type)+'</td>'+
-    '<td>'+candCell(s.bn,'var(--bn)')+'</td>'+
-    '<td>'+candCell(s.ph,'var(--ph)')+'</td>'+
-    '<td>'+(lain?candCell(lain,lainCol):'<span class="tba" style="font-size:.6rem">+BSM/BST</span>')+'</td>'+
-    '<td>'+winCell(s.win,s.cat,s.pct)+'</td>';
-  tb.appendChild(tr);
+var TURNOUT=0.72,MAJ=15,N_MAIN=12000,N_SENS=5000,SEED=14112026;
+SEATS.forEach(function(S){
+  var has={};S.c.forEach(function(c){has[c[0]]=1});
+  S.has=has;S.k=S.c.length;
+  S.pactP=has.BN?'BN':'PN';
+  var lead=Math.min(S.m/(TURNOUT*S.v),0.35),w=0.5+lead/2;
+  S.pact2=S.i==='P'?w:1-w;
+  S.nm=(has.PUTRA?1:0)+(has.IND?1:0);
 });
+var TOTV=SEATS.reduce(function(a,S){return a+S.v},0);
+
+/* ---------- MODEL ---------- */
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function clamp(x,a,b){return Math.max(a,Math.min(b,x))}
+function run(P,N,keep){
+  var rnd=mulberry(SEED),K=SEATS.length;
+  function rn(){var u=1-rnd(),v=rnd();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)}
+  var win=SEATS.map(function(){return[0,0,0,0,0,0,0]});
+  var tally={BN:new Int8Array(N),PN:new Int8Array(N),PH:new Int8Array(N),BSM:new Int8Array(N),BST:new Int8Array(N)};
+  var W=keep?new Int8Array(N*K):null;
+  var aph=P.aph/100,leak=(1-P.t/100)*0.30;
+  for(var r=0;r<N;r++){
+    var z=rn()*0.04,g=P.swing/100+z,cnt=[0,0,0,0,0,0,0];
+    for(var k=0;k<K;k++){
+      var S=SEATS[k],pb=clamp(S.pact2+g,0.05,0.95),hb=1-pb;
+      var sB=S.has.BSM?Math.max(0,P.bsm/100*(1+0.4*rn())):0;
+      var sT=S.has.BST?Math.max(0,P.bst/100*(1+0.4*rn())):0;
+      var pact,ph=0,bsm=0,bst=0;
+      if(S.has.PH){ph=hb-sB*aph-sT*0.25;pact=pb-sB*(1-aph)-sT*0.75;bsm=sB;bst=sT}
+      else{var nb=(S.has.BSM?1:0)+(S.has.BST?1:0);
+        var sh=nb?0.4:0;
+        pact=pb+0.10*hb-sB-sT;bsm=S.has.BSM?sB+sh*hb:0;bst=S.has.BST?sT+sh*hb:0}
+      pact-=S.nm*0.015;
+      pact*=(1-leak);
+      var sc=[0,0,0,0,0,0,0],best=-9,bi=0;
+      for(var j=0;j<7;j++){
+        var pty=PARTIES[j],present=(pty==='BN'||pty==='PN')?(pty===S.pactP):!!S.has[pty];
+        if(!present){sc[j]=-9;continue}
+        var base=pty==='BN'||pty==='PN'?pact:pty==='PH'?ph:pty==='BSM'?bsm:pty==='BST'?bst:0.015;
+        sc[j]=Math.max(0,base)+rn()*0.06;
+        if(sc[j]>best){best=sc[j];bi=j}
+      }
+      win[k][bi]++;cnt[bi]++;if(keep)W[r*K+k]=bi;
+    }
+    tally.BN[r]=cnt[0];tally.PN[r]=cnt[1];tally.PH[r]=cnt[2];tally.BSM[r]=cnt[3];tally.BST[r]=cnt[4];
+  }
+  var out={N:N,seats:win.map(function(a){return a.map(function(x){return x/N})}),exp:{},lo:{},hi:{},pr:{}};
+  ['BN','PN','PH','BSM','BST'].forEach(function(p){
+    var arr=Array.prototype.slice.call(tally[p]),s=0;arr.forEach(function(x){s+=x});
+    var sorted=arr.slice().sort(function(a,b){return a-b});
+    out.exp[p]=s/N;out.lo[p]=sorted[Math.floor(N*0.1)];out.hi[p]=sorted[Math.floor(N*0.9)];
+  });
+  var c={solo:0,pact:0,ph:0,hung:0,pbsm:0,pbst:0,pbb:0,phb:0,phbb:0,phst:0,king:0,bsmAny:0,bsm3:0};
+  for(r=0;r<N;r++){
+    var bn=tally.BN[r],pn=tally.PN[r],ph2=tally.PH[r],bs=tally.BSM[r],bt=tally.BST[r],pa=bn+pn;
+    if(bn>=MAJ)c.solo++;if(pa>=MAJ)c.pact++;if(ph2>=MAJ)c.ph++;
+    var hung=pa<MAJ&&ph2<MAJ;if(hung)c.hung++;
+    if(pa+bs>=MAJ)c.pbsm++;if(pa+bt>=MAJ)c.pbst++;if(pa+bs+bt>=MAJ)c.pbb++;
+    if(ph2+bs>=MAJ)c.phb++;if(ph2+bt>=MAJ)c.phst++;if(ph2+bs+bt>=MAJ)c.phbb++;
+    if(hung&&(bs+bt)>0&&(pa+bs+bt>=MAJ||ph2+bs+bt>=MAJ))c.king++;
+    if(bs>=1)c.bsmAny++;if(bs>=3)c.bsm3++;
+  }
+  Object.keys(c).forEach(function(k){out.pr[k]=c[k]/N});
+  if(keep){
+    var bell=[];
+    for(k=0;k<K;k++){
+      var a=0,ma=0,na=0,mn=0;
+      for(r=0;r<N;r++){var wj=W[r*K+k],isP=(wj===0||wj===1),maj=(tally.BN[r]+tally.PN[r])>=MAJ;
+        if(isP){a++;if(maj)ma++}else{na++;if(maj)mn++}}
+      var pA=a/N;
+      if(pA>0.15&&pA<0.85)bell.push({k:k,pA:pA,lift:(ma/a)-(mn/na),mA:ma/a,mN:mn/na});
+    }
+    bell.sort(function(x,y){return y.lift-x.lift});out.bell=bell;
+  }
+  return out;
+}
+var DEF={swing:0,bsm:10,bst:8,aph:50,t:100};
+var P=JSON.parse(JSON.stringify(DEF));
+
+/* ---------- RENDER ---------- */
+function pct(x,d){return(x*100).toFixed(d||0)+'%'}
+function pctS(x){return x>0.995?'>99%':x<0.005?'<1%':pct(x)}
+function pcol(x){return x>=0.6?'var(--green)':x>=0.3?'var(--orange)':'#94A3B8'}
+function top2(sp){var a=[];for(var j=0;j<7;j++)if(sp[j]>0.001)a.push([j,sp[j]]);a.sort(function(x,y){return y[1]-x[1]});return a}
+function tier(p){return p>=0.85?['Selamat','t-selamat']:p>=0.65?['Cenderung','t-cenderung']:['Sengit','t-sengit']}
+
+function render(R,K){
+  document.getElementById('f-multi').textContent=SEATS.filter(function(S){return S.k>=3}).length+' / 28';
+  var pr=R.pr;
+  document.getElementById('fcast').innerHTML=
+   '<div class="fc-item"><div class="fc-val" style="color:var(--bn)">'+pct(pr.pact)+'</div><div class="fc-lbl">BN+PN capai 15</div></div>'+
+   '<div class="fc-item"><div class="fc-val" style="color:var(--ph)">'+pct(pr.ph)+'</div><div class="fc-lbl">PH capai 15</div></div>'+
+   '<div class="fc-item"><div class="fc-val" style="color:var(--orange)">'+pct(pr.hung)+'</div><div class="fc-lbl">Dewan tergantung</div></div>'+
+   '<div class="fc-item"><div class="fc-val" style="color:var(--bn)">'+pct(pr.solo)+'</div><div class="fc-lbl">BN seorang capai 15</div></div>';
+  document.getElementById('fcast-note').innerHTML='Purata jangkaan: <b style="color:var(--bn)">BN '+R.exp.BN.toFixed(1)+'</b> + PN '+R.exp.PN.toFixed(1)+' · <b style="color:var(--ph)">PH '+R.exp.PH.toFixed(1)+'</b> · <b style="color:var(--bsm)">BERSAMA '+R.exp.BSM.toFixed(1)+'</b> · <b style="color:var(--bst)">BERSATU '+R.exp.BST.toFixed(1)+'</b>. P(BERSAMA menang sekurang-kurangnya satu kerusi) = <b>'+pct(pr.bsmAny)+'</b>. Keputusan bergantung pada andaian; lihat jadual sensitiviti.';
+
+  var rows=[['BN','BN'],['PN','PN'],['PH','PH'],['BSM','BERSAMA'],['BST','BERSATU']],h='';
+  rows.forEach(function(r){
+    var p=r[0],mx=28,lo=R.lo[p]/mx*100,hi=R.hi[p]/mx*100,e=R.exp[p]/mx*100;
+    h+='<div class="eb"><div class="nm" style="color:'+COL[p]+'">'+r[1]+'</div><div class="tr"><div class="rng" style="left:'+lo+'%;width:'+Math.max(hi-lo,1.5)+'%;background:'+COL[p]+'"></div><div class="fill" style="left:0;width:'+e+'%;background:'+COL[p]+'"></div><div class="mk" style="left:'+(MAJ/mx*100)+'%"></div></div><div class="v"><b>'+R.exp[p].toFixed(1)+'</b> <small>('+R.lo[p]+'–'+R.hi[p]+')</small></div></div>';
+  });
+  document.getElementById('eseats').innerHTML=h;
+
+  var paths=[['BN seorang',pr.solo],['BN + PN',pr.pact],['BN + PN + BERSAMA',pr.pbsm],['BN + PN + BERSATU',pr.pbst],['BN + PN + kedua-duanya',pr.pbb],['PH seorang',pr.ph],['PH + BERSAMA',pr.phb],['PH + BERSATU',pr.phst],['PH + kedua-duanya',pr.phbb]];
+  h='';paths.forEach(function(x){h+='<div class="eb" style="grid-template-columns:170px 1fr 48px"><div class="nm" style="font-weight:600">'+x[0]+'</div><div class="tr"><div class="fill" style="left:0;width:'+x[1]*100+'%;background:'+pcol(x[1])+'"></div></div><div class="v"><b>'+pct(x[1])+'</b></div></div>'});
+  h+='<p class="note">P(dewan tergantung dan BERSAMA/BERSATU menentukan): <b>'+pct(pr.king)+'</b>.</p>';
+  document.getElementById('paths').innerHTML=h;
+
+  /* seat table */
+  var T='<thead><tr><th>DUN</th><th class="r">Pengundi</th><th class="r">Maj. 2021</th><th>Calon</th><th>Peluang menang</th><th>Nilai</th></tr></thead><tbody>';
+  SEATS.forEach(function(S,k){
+    var sp=R.seats[k],t2=top2(sp),lead=t2[0],ti=tier(lead[1]);
+    var cs=S.c.map(function(c){return '<div><span class="chip" style="background:'+COL[c[0]]+'">'+NAMES[c[0]]+'</span>'+c[1]+'</div>'}).join('');
+    var pb=t2.slice(0,3).map(function(x){return '<div class="pbar"><span style="width:62px;color:'+COL[PARTIES[x[0]]]+';font-weight:700">'+NAMES[PARTIES[x[0]]]+'</span><i style="width:'+Math.round(x[1]*70)+'px;background:'+COL[PARTIES[x[0]]]+'"></i><span>'+pctS(x[1])+'</span></div>'}).join('');
+    var inc=S.i==='H'?'PH':'BN/PN';
+    T+='<tr><td><div class="seat-name">N'+String(S.n).padStart(2,'0')+' '+S.s+'</div><div class="seat-sub">'+S.p+' · '+S.k+' calon</div></td><td class="r">'+S.v.toLocaleString('en-US')+'</td><td class="r">'+S.m.toLocaleString('en-US')+'<div class="seat-sub">'+inc+'</div></td><td class="cand">'+cs+'</td><td>'+pb+'</td><td><span class="pill '+ti[1]+'">'+ti[0]+'</span></td></tr>';
+  });
+  document.getElementById('seatTbl').innerHTML=T+'</tbody>';
+
+  /* fragile */
+  var fr=SEATS.filter(function(S){return S.m<1000}).sort(function(a,b){return a.m-b.m});
+  h='<div class="cand" style="font-size:.74rem;line-height:1.75"><b>'+fr.length+' daripada 28</b> kerusi:<br>';
+  fr.forEach(function(S){h+='N'+S.n+' '+S.s+' <b>'+S.m+'</b> · '});
+  document.getElementById('fragile').innerHTML=h.replace(/ · $/,'')+'</div>';
+
+  /* bellwether */
+  h='';
+  if(R.bell){R.bell.slice(0,6).forEach(function(b){var S=SEATS[b.k];
+    h+='<div class="eb" style="grid-template-columns:130px 1fr 150px"><div class="nm" style="font-weight:600">'+S.s+'</div><div class="tr"><div class="fill" style="left:0;width:'+clamp(b.lift,0,1)*100+'%;background:var(--bn)"></div></div><div class="v">BN+PN: <b>'+pct(b.mA)+'</b> jika menang · '+pct(b.mN)+' jika kalah</div></div>'});}
+  document.getElementById('bell').innerHTML=h;
+
+  /* bersama maths */
+  var bs=SEATS.filter(function(S){return S.has.BSM}),cov=bs.reduce(function(a,S){return a+S.v},0)/TOTV,imp=P.bsm/100*cov,need=0.15/cov;
+  document.getElementById('bsmmath').innerHTML='<div class="cand" style="font-size:.74rem;line-height:1.75">BERSAMA bertanding <b>'+bs.length+' kerusi</b> yang meliputi <b>'+pct(cov,0)+'</b> pengundi berdaftar.<br>Pada andaian anda ('+P.bsm+'% dalam kerusi ditanding): setara <b>≈'+(imp*100).toFixed(1)+'%</b> undi seluruh negeri.<br>Untuk capai sasaran Rafizi 15% seluruh negeri, ia perlu <b style="color:var(--orange)">≈'+(need*100).toFixed(0)+'%</b> di <i>setiap</i> kerusi yang ditandingi.<br><span style="color:var(--muted)">Rujukan: 3–6% di Johor (kenyataan Rafizi). Pengiraan ini andaian sama rata antara kerusi dan keluar mengundi sama.</span></div>';
+
+  /* bersatu */
+  var bt=SEATS.filter(function(S){return S.has.BST}),vsBN=bt.filter(function(S){return S.has.BN}),vsPH=bt.filter(function(S){return S.has.PH}),vsPN=bt.filter(function(S){return S.has.PN});
+  function nm(a){return a.map(function(S){return S.s}).join(', ')}
+  document.getElementById('bstmath').innerHTML='<div class="cand" style="font-size:.74rem;line-height:1.75">7 kerusi. Bertemu <b>BN</b> di '+vsBN.length+' ('+nm(vsBN)+').<br>Bertemu <b>PH</b> di '+vsPH.length+' ('+nm(vsPH)+').<br>Bertemu <b>PN</b> di '+vsPN.length+' ('+nm(vsPN)+').<br><span style="color:var(--muted)">Majoriti kerusi BERSATU lebih banyak mencabar calon BN daripada PH, jadi kesan pemecahan undi Melayu dijangka lebih menekan pakat BN–PN.</span></div>';
+
+  /* structure */
+  var c1=SEATS.filter(function(S){return S.k===2}).length,c3=SEATS.filter(function(S){return S.k===3}).length,c4=SEATS.filter(function(S){return S.k===4}).length;
+  var noPH=SEATS.filter(function(S){return !S.has.PH}).map(function(S){return S.s}).join(', ');
+  document.getElementById('struct').innerHTML='<div class="cand" style="font-size:.74rem;line-height:1.75">Dua calon: <b>'+c1+'</b> · Tiga: <b>'+c3+'</b> · Empat: <b>'+c4+'</b> · purata <b>'+(79/28).toFixed(1)+'</b> calon/kerusi.<br>Kerusi tanpa calon PH: <b>'+noPH+'</b>.<br>Kerusi tanpa calon BN (lima, kepada PN): <b>'+SEATS.filter(function(S){return !S.has.BN}).map(function(S){return S.s}).join(', ')+'</b>.<br><span style="color:var(--muted)">Hanya '+(c3+c4)+' kerusi benar-benar berbilang penjuru, jadi pemenang dengan 30–35% undi hanya relevan di sebahagian kerusi, bukan seluruh negeri.</span></div>';
+}
+
+function sens(){
+  var rows=[['Asas',{}],['BERSAMA lemah (5%)',{bsm:5}],['BERSAMA kuat (20%)',{bsm:20}],['Ayunan BN +3',{swing:3}],['Ayunan PH +3',{swing:-3}],['Pakat bocor (70% cekap)',{t:70}],['BERSAMA kuat + ayunan PH',{bsm:20,swing:-3}]];
+  var h='<thead><tr><th>Andaian</th><th class="r">BN+PN ≥15</th><th class="r">PH ≥15</th><th class="r">Tergantung</th><th class="r">BERSAMA (min kerusi)</th></tr></thead><tbody>';
+  rows.forEach(function(r){
+    var Q=JSON.parse(JSON.stringify(P));for(var k in r[1])Q[k]=r[1][k];
+    var o=run(Q,N_SENS,false);
+    h+='<tr><td>'+r[0]+'</td><td class="r"><b>'+pct(o.pr.pact)+'</b></td><td class="r"><b>'+pct(o.pr.ph)+'</b></td><td class="r">'+pct(o.pr.hung)+'</td><td class="r">'+o.exp.BSM.toFixed(1)+'</td></tr>';
+    if(r[0]==='Asas')window.__SENS=[];window.__SENS.push({a:r[0],pact:o.pr.pact,ph:o.pr.ph,hung:o.pr.hung,bsm:o.exp.BSM});
+  });
+  document.getElementById('sens').innerHTML=h+'</tbody>';
+}
+function labels(){
+  document.getElementById('o-swing').textContent=(P.swing>0?'+':'')+P.swing;
+  document.getElementById('o-bsm').textContent=P.bsm+'%';
+  document.getElementById('o-bst').textContent=P.bst+'%';
+  document.getElementById('o-aph').textContent=P.aph+'%';
+  document.getElementById('o-t').textContent=P.t+'%';
+}
+function refresh(full){
+  labels();var R=run(P,full?N_MAIN:6000,true);window.__R=R;render(R);sens();
+}
+['swing','bsm','bst','aph','t'].forEach(function(id){
+  document.getElementById(id).addEventListener('input',function(e){P[id]=parseFloat(e.target.value);refresh(false)});
+});
+document.getElementById('reset').addEventListener('click',function(){
+  P=JSON.parse(JSON.stringify(DEF));['swing','bsm','bst','aph','t'].forEach(function(id){document.getElementById(id).value=P[id]});refresh(true);
+});
+refresh(true);
+window.__SEATS=SEATS;
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
