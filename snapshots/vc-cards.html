@@ -23,92 +23,93 @@ body{background:#888;font-family:'Inter',sans-serif;color:var(--ink)}
 .wf div{aspect-ratio:1.9;border-radius:10px}
 .wf div.m{outline:4px solid var(--ink);outline-offset:2px}
 .maj{position:relative;font-size:19px;font-weight:700;color:var(--acc);margin:6px 0 20px}
-.sc{display:grid;grid-template-columns:330px 1fr 90px;align-items:center;gap:14px;margin-bottom:12px}
-.sc .lb{font-size:25px;font-weight:700;line-height:1.1}
-.sc .lb small{display:block;font-size:17px;font-weight:500;color:var(--mut)}
-.sc .b{height:44px;border-radius:0 9px 9px 0}
-.pr{display:grid;grid-template-columns:260px 1fr 70px;align-items:center;gap:14px;margin-bottom:15px}
-.pr .lb{font-size:24px;font-weight:800;line-height:1.1}
-.pr .lb small{display:block;font-size:16px;font-weight:500;color:var(--mut)}
-.pr .tr{position:relative;height:54px;background:#EADFC9;border-radius:0 9px 9px 0}
-.pr .tr div{height:100%;border-radius:0 9px 9px 0}
-.pr .mk{position:absolute;top:-8px;bottom:-8px;width:3px;background:var(--ink);left:50%}
-.pr .v{font-size:27px;font-weight:900}
-</style></head><body>
 
+#c1 .bar{height:60px}
+#c1 .row{margin-bottom:13px}
+#c1 .sub{margin:14px 0 18px}
+.sc{display:grid;grid-template-columns:330px 1fr 80px;align-items:center;gap:14px;margin-bottom:14px}
+.sc .lb{font-size:25px;font-weight:700;line-height:1.1}
+.sc .tr{position:relative;height:50px;background:#E8DEC8;border-radius:0 9px 9px 0}
+.sc .b{height:100%;border-radius:0 9px 9px 0}
+.sc .mk{position:absolute;top:-8px;bottom:-8px;width:3px;background:var(--ink);left:50%}
+.pr{display:grid;grid-template-columns:330px 1fr 120px;align-items:center;gap:14px;margin-bottom:13px}
+.pr .lb{font-size:25px;font-weight:800;line-height:1.1}
+.pr .lb small{display:block;font-size:15px;font-weight:500;color:var(--mut);margin-top:2px}
+.pr .tr{position:relative;height:50px;background:#E8DEC8;border-radius:0 9px 9px 0}
+.pr .tr div{height:100%;border-radius:0 9px 9px 0}
+.pr .tr .mk{position:absolute;top:-8px;bottom:-8px;width:3px;background:var(--ink);left:50%;height:auto}
+.pr .v{font-size:25px;font-weight:900}
+</style></head><body>
 <div class="card" id="c1">
   <div class="tt">79 calon, 28 kerusi,<br><em>sifar walkover</em></div>
-  <div class="sub">Bilangan calon bertanding mengikut blok · PRN Melaka ke-16, penamaan calon 31 Okt 2026</div>
-  <div class="leg"><span><i style="background:var(--ph)"></i>Pakatan Harapan</span><span><i style="background:var(--bn)"></i>Barisan Nasional</span><span><i style="background:var(--bsm)"></i>BERSAMA (bebas)</span><span><i style="background:var(--bst)"></i>BERSATU (bebas)</span><span><i style="background:var(--pn)"></i>Perikatan Nasional</span></div>
+  <div class="sub">Bilangan calon bertanding mengikut parti · PRN Melaka ke-16, penamaan calon 31 Okt 2026</div>
+  <div class="leg"><span><i style="background:var(--ph)"></i>Pakatan Harapan</span><span><i style="background:var(--bn)"></i>Barisan Nasional</span><span><i style="background:var(--bsm)"></i>BERSAMA</span><span><i style="background:var(--bst)"></i>BERSATU</span><span><i style="background:var(--pn)"></i>Perikatan Nasional</span></div>
   <div class="row"><div class="lb">PH</div><div class="bar" style="width:100%;background:var(--ph)">24</div></div>
   <div class="row"><div class="lb">BN</div><div class="bar" style="width:95.8%;background:var(--bn)">23</div></div>
   <div class="row"><div class="lb">BERSAMA<small>parti baharu</small></div><div class="bar" style="width:66.7%;background:var(--bsm)">16</div></div>
   <div class="row"><div class="lb">BERSATU<small>keluar dari PN</small></div><div class="bar" style="width:29.2%;background:var(--bst)">7</div></div>
   <div class="row"><div class="lb">PN</div><div class="bar" style="width:20.8%;background:var(--pn)">5</div></div>
-  <div class="row"><div class="lb">Bebas</div><div class="bar" style="width:16.7%;background:var(--ind)">4</div></div>
-  <div style="display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 24px">
-    <span class="tag">2.8 calon bagi setiap kerusi</span>
-    <span class="tag">BN 23 · PN 5: pakat 21+7 tidak kekal</span>
+  <div class="row"><div class="lb">Bebas</div><div class="bar" style="width:12.5%;background:var(--ind)">3</div></div>
+  <div class="row"><div class="lb">Putra</div><div class="bar" style="width:4.2%;background:#64748B;min-width:50px;justify-content:center;padding:0">1</div></div>
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin:6px 0 20px">
+    <span class="tag">17 daripada 28 kerusi berbilang penjuru</span>
+    <span class="tag">BN dan PN: persefahaman, tiada perjanjian rasmi</span>
   </div>
   <div class="take"><h4>Dapatan utama</h4><ul>
-    <li>Semua 28 kerusi ditandingi: tiada satu pun kerusi tanpa lawan.</li>
-    <li>Bukan BN lwn PH: lima blok bersaing, dengan BERSAMA dan BERSATU di luar pakatan.</li>
-    <li>Pertandingan 3–4 penjuru: menang dengan 30–35% undi sudah cukup.</li>
+    <li>Semua 28 kerusi ditandingi: 11 satu lawan satu, 11 tiga penjuru, 6 empat penjuru.</li>
+    <li>BERSATU bertanding 7 kerusi, lima daripadanya melawan calon BN.</li>
+    <li>Di kerusi berbilang penjuru, pemenang boleh menang tanpa majoriti mutlak.</li>
   </ul></div>
-  <div class="foot"><span>Sumber: penamaan calon SPR, 31 Okt 2026 · analisis <b>GE16 Simulation</b></span><span>Analisis peribadi, bukan unjuran rasmi</span></div>
+  <div class="foot"><span>Sumber: senarai calon rasmi (Utusan, 31 Okt 2026) · analisis <b>GE16 Simulation</b></span><span>Analisis peribadi, bukan unjuran rasmi</span></div>
 </div>
 
 <div class="card" id="c2">
-  <div class="tt">BN paling hampir majoriti,<br><em>tetapi tak sampai</em></div>
-  <div class="sub">Unjuran kerusi senario asas (28 kerusi DUN) dan kebarangkalian setiap senario · model 1 Nov 2026</div>
-  <div class="leg"><span><i style="background:var(--bn)"></i>BN 13</span><span><i style="background:var(--ph)"></i>PH 9</span><span><i style="background:var(--bsm)"></i>BERSAMA 3</span><span><i style="background:var(--bst)"></i>BERSATU 2</span><span><i style="background:var(--pn)"></i>PN 1</span></div>
-  <div class="wf" id="wf"></div>
-  <div class="maj">Petak berbingkai = kerusi ke-15, ambang majoriti. BN hanya 13: kurang 2 kerusi.</div>
-  <div style="font-size:22px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin:6px 0 14px">Kebarangkalian senario</div>
-  <div class="sc"><div class="lb">Dewan tergantung<small>BN 12–14 · PH 8–10 · BSM 2–4</small></div><div class="b" style="width:100%;background:var(--acc)"></div><div class="val" style="color:var(--acc)">42%</div></div>
-  <div class="sc"><div class="lb">BN tahan majoriti<small>BN 15–17 · PH 8–9</small></div><div class="b" style="width:71.4%;background:var(--bn)"></div><div class="val">30%</div></div>
-  <div class="sc"><div class="lb">Gelombang PH<small>PH 11–13 · BN 10–12</small></div><div class="b" style="width:66.7%;background:var(--ph)"></div><div class="val">28%</div></div>
-  <div style="font-size:22px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin:24px 0 12px">Unjuran bahagian undi</div>
-  <div style="display:flex;height:64px;border-radius:10px;overflow:hidden;font-weight:900;font-size:24px;color:#fff">
-    <div style="width:36%;background:var(--bn);display:flex;align-items:center;justify-content:center">BN 36%</div>
-    <div style="width:30%;background:var(--ph);display:flex;align-items:center;justify-content:center">PH 30%</div>
-    <div style="width:18%;background:var(--bsm);display:flex;align-items:center;justify-content:center">BSM 18%</div>
-    <div style="width:10%;background:var(--bst);display:flex;align-items:center;justify-content:center;font-size:20px">BST 10%</div>
-    <div style="width:6%;background:var(--pn)"></div></div>
-  <div style="margin-top:20px"><span class="tag">BERSAMA + BERSATU: 28% undi, kingmaker selepas 14 Nov</span></div>
-  <div class="foot" style="margin-top:auto"><span>Sumber: model <b>GE16 Simulation</b>, 1 Nov 2026</span><span>Analisis peribadi, bukan unjuran rasmi</span></div>
+  <div class="tt">BN+PN diutamakan,<br><em>tetapi rapuh</em></div>
+  <div class="sub">Kebarangkalian BN+PN capai 15 kerusi (daripada 28) di bawah andaian berbeza · simulasi 12 Nov 2026</div>
+  <div class="leg"><span><i style="background:var(--acc)"></i>Andaian asas</span><span><i style="background:var(--bn)"></i>BN+PN lebih 50%</span><span><i style="background:var(--ph)"></i>Kurang 50%</span><span>Garis hitam = 50%</span></div>
+<div class="sc"><div class="lb">Ayunan BN +3 mata</div><div class="tr"><div class="b" style="width:91%;background:var(--bn)"></div><span class="mk"></span></div><div class="val" style="color:var(--ink)">91%</div></div>
+<div class="sc"><div class="lb">BERSAMA lemah (5%)</div><div class="tr"><div class="b" style="width:76%;background:var(--bn)"></div><span class="mk"></span></div><div class="val" style="color:var(--ink)">76%</div></div>
+<div class="sc"><div class="lb">Andaian asas</div><div class="tr"><div class="b" style="width:73%;background:var(--acc)"></div><span class="mk"></span></div><div class="val" style="color:var(--acc)">73%</div></div>
+<div class="sc"><div class="lb">BERSAMA kuat (20%)</div><div class="tr"><div class="b" style="width:67%;background:var(--bn)"></div><span class="mk"></span></div><div class="val" style="color:var(--ink)">67%</div></div>
+<div class="sc"><div class="lb">Pakat BN–PN bocor (70%)</div><div class="tr"><div class="b" style="width:53%;background:var(--bn)"></div><span class="mk"></span></div><div class="val" style="color:var(--ink)">53%</div></div>
+<div class="sc"><div class="lb">Ayunan PH +3 mata</div><div class="tr"><div class="b" style="width:46%;background:var(--ph)"></div><span class="mk"></span></div><div class="val" style="color:var(--ink)">46%</div></div>
+<div class="sc"><div class="lb">BERSAMA kuat + ayunan PH</div><div class="tr"><div class="b" style="width:39%;background:var(--ph)"></div><span class="mk"></span></div><div class="val" style="color:var(--ink)">39%</div></div>
+
+  <div style="font-size:22px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin:22px 0 10px">Jangkaan kerusi (asas)</div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;font-weight:800;font-size:24px;color:#fff">
+    <span style="background:var(--bn);border-radius:9px;padding:8px 16px">BN 15.8</span><span style="background:var(--pn);border-radius:9px;padding:8px 16px">PN 1.5</span><span style="background:var(--ph);border-radius:9px;padding:8px 16px">PH 9.9</span><span style="background:var(--bsm);border-radius:9px;padding:8px 16px">BERSAMA 0.4</span><span style="background:var(--bst);border-radius:9px;padding:8px 16px">BERSATU 0.3</span>
+  </div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin:18px 0 0">
+    <span class="tag">Dewan tergantung: 10% (asas)</span>
+    <span class="tag">BERSAMA/BERSATU jadi penentu: 9%</span>
+  </div>
+  <div class="take" style="margin-top:20px"><h4>Pengajaran</h4><ul>
+    <li>Ayunan 3 mata sahaja menggerakkan peluang BN+PN dari 91% ke 46%.</li>
+    <li>BERSAMA lebih sebagai pemecah undi: jangkaan purata kurang satu kerusi.</li>
+  </ul></div>
+  <div class="foot" style="margin-top:auto"><span>Sumber: model <b>GE16 Simulation</b> · bukan tinjauan awam</span><span>Analisis peribadi, bukan unjuran rasmi</span></div>
 </div>
 
 <div class="card" id="c3">
   <div class="tt">8 kerusi sengit,<br>pendahulu <em>&lt;65% yakin</em></div>
-  <div class="sub">Kebarangkalian menang calon unggul mengikut model · garis hitam = 50% (seri)</div>
-  <div class="leg"><span><i style="background:var(--ph)"></i>PH unggul</span><span><i style="background:var(--bn)"></i>BN unggul</span><span><i style="background:var(--pn)"></i>PN unggul</span><span><i style="background:var(--acc)"></i>Seri (52%)</span></div>
-  <div id="pr"></div>
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin:14px 0 22px">
-    <span class="tag">Machap Jaya & Ayer Keroh: pertandingan 3 penjuru</span>
-    <span class="tag">Bemban: PN lwn BERSATU, bukan lagi walkover</span>
+  <div class="sub">Kebarangkalian menang calon unggul mengikut model · garis hitam = 50%</div>
+  <div class="leg"><span><i style="background:var(--bn)"></i>BN unggul</span><span><i style="background:var(--ph)"></i>PH unggul</span><span><i style="background:var(--pn)"></i>PN unggul</span></div>
+<div class="pr"><div class="lb">Serkam<small>BN · PH · BERSAMA · maj. 2021: 79</small></div><div class="tr"><div style="width:52%;background:var(--bn)"></div><span class="mk"></span></div><div class="v">BN 52%</div></div>
+<div class="pr"><div class="lb">Klebang<small>BN · PH · BERSATU · BERSAMA · maj. 2021: 876</small></div><div class="tr"><div style="width:52%;background:var(--bn)"></div><span class="mk"></span></div><div class="v">BN 52%</div></div>
+<div class="pr"><div class="lb">Duyong<small>BN · PH (1 lawan 1) · maj. 2021: 200</small></div><div class="tr"><div style="width:53%;background:var(--bn)"></div><span class="mk"></span></div><div class="v">BN 53%</div></div>
+<div class="pr"><div class="lb">Paya Rumput<small>PN · PH · BERSAMA · maj. 2021: 629</small></div><div class="tr"><div style="width:57%;background:var(--pn)"></div><span class="mk"></span></div><div class="v">PN 57%</div></div>
+<div class="pr"><div class="lb">Gadek<small>BN · PH · BERSAMA · Putra · maj. 2021: 559</small></div><div class="tr"><div style="width:61%;background:var(--bn)"></div><span class="mk"></span></div><div class="v">BN 61%</div></div>
+<div class="pr"><div class="lb">Pengkalan Batu<small>BN · PH · BERSAMA · BERSATU · maj. 2021: 131</small></div><div class="tr"><div style="width:61%;background:var(--ph)"></div><span class="mk"></span></div><div class="v">PH 61%</div></div>
+<div class="pr"><div class="lb">Bemban<small>PN · BERSATU · BERSAMA · Bebas · maj. 2021: 328</small></div><div class="tr"><div style="width:62%;background:var(--pn)"></div><span class="mk"></span></div><div class="v">PN 62%</div></div>
+<div class="pr"><div class="lb">Tanjung Bidara<small>BN (Ketua Menteri) · PH · maj. 2021: 364</small></div><div class="tr"><div style="width:62%;background:var(--bn)"></div><span class="mk"></span></div><div class="v">BN 62%</div></div>
+
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 18px">
+    <span class="tag">Serkam, Pengkalan Batu, Duyong: majoriti 2021 paling nipis</span>
   </div>
   <div class="take"><h4>Kenapa ia penting</h4><ul>
-    <li>Pecahan undi bukan-PH (BERSAMA, BERSATU, PN) memberi DAP kelebihan di Machap Jaya dan Ayer Keroh.</li>
-    <li>BN perlukan 15 kerusi; tiga kerusi seri (Gadek, Kelebang, Duyong) boleh menentukan sama ada BN capai majoriti.</li>
+    <li>BN perlukan 15 kerusi; kerusi di atas menentukan sama ada BN+PN lepasi garis.</li>
+    <li>Ketua Menteri di Tanjung Bidara hanya menang dengan 364 undi pada 2021.</li>
   </ul></div>
-  <div class="foot"><span>Sumber: model <b>GE16 Simulation</b>, 1 Nov 2026</span><span>Analisis peribadi, bukan unjuran rasmi</span></div>
+  <div class="foot"><span>Sumber: model <b>GE16 Simulation</b>, 12 Nov 2026 · majoriti 2021: Utusan</span><span>Analisis peribadi, bukan unjuran rasmi</span></div>
 </div>
-
-<script>
-var c=0,W=[['bn',13],['ph',9],['bsm',3],['bst',2],['pn',1]],h='';
-W.forEach(function(p){for(var i=0;i<p[1];i++){h+='<div'+(c==14?' class="m"':'')+' style="background:var(--'+p[0]+')"></div>';c++}});
-document.getElementById('wf').innerHTML=h;
-var R=[
-['Machap Jaya','MCA · DAP · BERSAMA',44,'ph'],
-['Ayer Keroh','DAP · PN · BERSATU',48,'ph'],
-['Gadek','MIC · PKR',52,'acc'],
-['Kelebang','MCA · DAP',52,'acc'],
-['Duyong','UMNO · DAP',52,'acc'],
-['Bemban','PN · BERSATU',55,'pn'],
-['Pengkalan Batu','UMNO · DAP',60,'bn'],
-['Paya Rumput','PKR · PN',62,'ph']];
-document.getElementById('pr').innerHTML=R.map(function(r){
- return '<div class="pr"><div class="lb">'+r[0]+'<small>'+r[1]+'</small></div><div class="tr"><div style="width:'+r[2]+'%;background:var(--'+r[3]+')"></div><span class="mk"></span></div><div class="v">'+r[2]+'%</div></div>'}).join('');
-</script>
 </body></html>
