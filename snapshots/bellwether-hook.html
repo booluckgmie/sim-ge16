@@ -1,0 +1,40 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+:root{--bg:#F6F0E4;--ink:#1B2A3A;--mut:#6B7280;--bn:#2F6FDB;--lose:#9AA3AE;--acc:#F2670D}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#888;font-family:'Inter',sans-serif;color:var(--ink)}
+.card{width:1200px;height:1350px;background:var(--bg);padding:58px 64px 38px;display:flex;flex-direction:column}
+.tt{font-family:'Bitstream Charter','DejaVu Serif',serif;font-weight:900;font-size:78px;line-height:1.02;letter-spacing:-.01em}
+.tt em{font-style:normal;color:var(--acc)}
+.en{font-family:'Bitstream Charter','DejaVu Serif',serif;font-weight:700;font-size:34px;color:var(--mut);margin-top:10px}
+.sub{font-size:22px;color:var(--mut);margin:12px 0 14px;line-height:1.35}
+.leg{display:flex;gap:30px;font-size:21px;font-weight:700;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.leg i{display:inline-block;width:20px;height:20px;border-radius:5px;margin-right:9px;vertical-align:-3px}
+.seat{display:grid;grid-template-columns:230px 1fr;gap:16px;align-items:center;margin-bottom:12px}
+.seat .nm{font-size:29px;font-weight:800;line-height:1.05}
+.seat .bars div{height:34px;border-radius:0 8px 8px 0;display:flex;align-items:center;justify-content:flex-end;padding-right:14px;color:#fff;font-weight:900;font-size:24px;margin-bottom:5px}
+.tag{display:inline-block;background:#FFF1D6;border:1.5px solid var(--acc);color:#9A3B00;border-radius:8px;padding:6px 14px;font-size:20px;font-weight:700;line-height:1.25}
+.take{background:#fff;border:2px solid var(--ink);border-radius:14px;padding:18px 26px;margin-top:auto}
+.take h4{font-size:18px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.take li{font-size:22px;line-height:1.35;margin-left:22px;margin-bottom:3px}
+.foot{display:flex;justify-content:space-between;font-size:17px;color:var(--mut);margin-top:14px}
+.foot b{color:var(--ink)}
+</style></head><body>
+<div class="card" id="c">
+  <div class="tt">Malam 14 Nov:<br>tengok <em>6 kerusi</em> ni dulu</div>
+  <div class="en">Election night: watch these 6 seats first</div>
+  <div class="sub">Peluang BN+PN capai 15 kerusi, bergantung pada keputusan satu kerusi · model saya<br>Chance BN+PN reach 15 seats, given the result in one seat · my model</div>
+  <div class="leg"><span><i style="background:var(--bn)"></i>Jika BN+PN menang / If BN+PN win</span><span><i style="background:var(--lose)"></i>Jika kalah / If they lose</span></div>
+  <div id="rows"></div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 16px">
+    <span class="tag">Ilham (13 Nov): BN+PN depan di 24 / 28 kerusi · leads in 24 of 28</span>
+  </div>
+  <div class="take"><h4>Baca dengan teliti / Read with care</h4><ul>
+    <li>Ini bellwether dalam model berasaskan majoriti 2021, bukan data lapangan. / Model-based, not field data.</li>
+    <li>Jika tinjauan Ilham betul, keenam-enam ini ke BN+PN. Pantau juga Bukit Katil, Ayer Keroh, Kesidang. / If the poll is right, all six go BN+PN; also watch Bukit Katil, Ayer Keroh, Kesidang.</li>
+  </ul></div>
+  <div class="foot"><span>Sumber / Source: <b>GE16 Simulation</b>, 13 Nov 2026 · Ilham Centre via Malay Mail</span><span>Analisis peribadi / Personal analysis</span></div>
+</div>
+<script>
+var D=[['Telok Mas',84,30],['Rim',83,30],['Ayer Limau',84,31],['Sungai Rambai',85,35],['Machap Jaya',85,36],['Rembia',89,42]];
+document.getElementById('rows').innerHTML=D.map(function(d){return '<div class="seat"><div class="nm">'+d[0]+'</div><div class="bars"><div style="width:'+d[1]+'%;background:var(--bn)">'+d[1]+'%</div><div style="width:'+d[2]+'%;background:var(--lose)">'+d[2]+'%</div></div></div>'}).join('');
+</script></body></html>
