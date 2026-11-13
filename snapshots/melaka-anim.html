@@ -1,0 +1,197 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+:root{--bg:#0A1020;--card:#121C33;--ink:#EEF3FC;--mut:#8FA0BC;--bn:#3B82F6;--pn:#8B5CF6;--ph:#F0525B;--bsm:#F5B301;--bst:#F472B6;--oth:#64748B;--acc:#34D399;--warn:#FBBF24}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1080px;overflow:hidden;background:#000}
+#stage{position:relative;width:1080px;height:1080px;background:radial-gradient(900px 700px at 15% 0%,#16254A 0%,#0A1020 60%);font-family:'Inter',sans-serif;color:var(--ink);overflow:hidden}
+.abs{position:absolute}
+#top{left:30px;right:30px;top:26px;height:44px;display:flex;justify-content:space-between;align-items:center}
+.pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:8px 18px;font-size:19px;font-weight:800;letter-spacing:.08em}
+.pill.d{background:var(--acc);color:#06281C;border-color:var(--acc)}
+#hook{left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#hook .pre{font-size:34px;font-weight:800;letter-spacing:.18em;color:var(--mut)}
+#hook .big{font-size:230px;font-weight:900;line-height:.95;letter-spacing:-.04em;background:linear-gradient(90deg,#60A5FA,#34D399);-webkit-background-clip:text;color:transparent}
+#hook .sub{font-size:46px;font-weight:700;margin-top:18px}
+#chips{display:flex;gap:16px;margin-top:44px}
+.chip{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:16px 26px;font-size:30px;font-weight:800}
+.chip b{color:var(--acc)}
+#title{left:36px;right:36px;top:92px}
+#title h1{font-size:57px;line-height:1.04;font-weight:900;letter-spacing:-.025em}
+#title p{font-size:26px;color:var(--mut);margin-top:10px;line-height:1.3}
+#map{left:30px;top:268px;width:1020px;height:445px}
+.tile{position:absolute;width:138px;height:104px;border-radius:16px;overflow:hidden;border:2px solid rgba(255,255,255,.12)}
+.tile .n{position:absolute;left:9px;top:6px;font-size:14px;font-weight:700;opacity:.85}
+.tile .nm{position:absolute;left:9px;bottom:8px;font-size:21px;font-weight:800;text-shadow:0 1px 3px rgba(0,0,0,.65)}
+.tile .pc{position:absolute;right:9px;top:5px;font-size:17px;font-weight:800;text-shadow:0 1px 3px rgba(0,0,0,.65)}
+#score{left:30px;top:732px;width:1020px;display:flex;gap:14px}
+.sc{flex:1;background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:12px 20px}
+.sc .v{font-size:84px;font-weight:900;line-height:1;letter-spacing:-.03em}
+.sc .l{font-size:22px;font-weight:700;color:var(--mut);margin-top:2px}
+#note{left:36px;right:36px;top:914px;font-size:27px;font-weight:700;text-align:center}
+#note span{background:rgba(52,211,153,.14);border:1px solid rgba(52,211,153,.5);color:#A7F3D0;border-radius:14px;padding:8px 18px}
+#legend{left:36px;right:36px;top:978px;display:flex;justify-content:center;gap:24px;font-size:21px;font-weight:700}
+#legend i{display:inline-block;width:18px;height:18px;border-radius:5px;margin-right:8px;vertical-align:-3px}
+#foot{left:36px;right:36px;bottom:20px;font-size:18px;color:var(--mut);text-align:center}
+#maj{left:36px;right:36px;top:270px}
+.mrow{margin-bottom:36px}
+.mrow .lb{font-size:30px;font-weight:800;margin-bottom:10px}
+.mbar{position:relative;height:96px;background:#0F172A;border-radius:14px;overflow:hidden;display:flex}
+.mbar div{height:100%;display:flex;align-items:center;padding:0 14px;font-size:34px;font-weight:900;color:#fff;overflow:hidden;white-space:nowrap}
+.mk{position:absolute;top:-6px;bottom:-6px;width:4px}
+.mtag{position:absolute;top:-34px;font-size:20px;font-weight:800;white-space:nowrap}
+.mp{display:flex;gap:14px;margin-top:12px}
+.mp div{background:var(--card);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:10px 20px;font-size:26px;font-weight:800}
+.mp b{font-size:40px;color:var(--acc);margin-left:8px}
+#watch{left:36px;right:36px;top:262px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+#tk{left:36px;right:36px;top:760px;background:var(--card);border:1px solid rgba(52,211,153,.5);border-left:8px solid var(--acc);border-radius:20px;padding:22px 28px;font-size:34px;font-weight:800;line-height:1.25}
+.wc{background:var(--card);border:1px solid rgba(255,255,255,.1);border-left:7px solid var(--warn);border-radius:18px;padding:20px 22px;height:208px}
+.wc h3{font-size:36px;font-weight:900;letter-spacing:-.01em}
+.wc p{font-size:25px;color:#C7D2E6;margin-top:8px;line-height:1.3}
+#end{left:0;right:0;top:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 70px}
+#end h2{font-size:84px;line-height:1.02;font-weight:900;letter-spacing:-.03em}
+#end h2 em{font-style:normal;background:linear-gradient(90deg,#60A5FA,#34D399);-webkit-background-clip:text;color:transparent}
+#end .a{font-size:40px;font-weight:800;margin-top:34px;background:var(--acc);color:#06281C;border-radius:18px;padding:14px 30px}
+#end .h{font-size:44px;font-weight:900;margin-top:30px;color:var(--warn)}
+#end .d{font-size:24px;color:var(--mut);margin-top:26px;line-height:1.4}
+</style></head><body>
+<div id="stage">
+  <div id="top" class="abs"><div class="pill" id="brand"></div><div class="pill d" id="date"></div></div>
+  <div id="hook" class="abs"><div class="pre" id="hpre"></div><div class="big" id="hbig"></div><div class="sub" id="hsub"></div><div id="chips"></div></div>
+  <div id="title" class="abs"><h1 id="h1"></h1><p id="p1"></p></div>
+  <div id="map" class="abs"></div>
+  <div id="score" class="abs"></div>
+  <div id="note" class="abs"></div>
+  <div id="legend" class="abs"></div>
+  <div id="maj" class="abs"></div>
+  <div id="tk" class="abs"></div>
+  <div id="watch" class="abs"></div>
+  <div id="end" class="abs"></div>
+  <div id="foot" class="abs"></div>
+</div>
+<script>
+const DATA={"seats":[{"n":1,"s":"Kuala Linggi","y21":"BN"},{"n":2,"s":"Tanjung Bidara","y21":"BN"},{"n":3,"s":"Ayer Limau","y21":"BN"},{"n":4,"s":"Lendu","y21":"BN"},{"n":5,"s":"Taboh Naning","y21":"BN"},{"n":6,"s":"Rembia","y21":"BN"},{"n":7,"s":"Gadek","y21":"BN"},{"n":8,"s":"Machap Jaya","y21":"BN"},{"n":9,"s":"Durian Tunggal","y21":"BN"},{"n":10,"s":"Asahan","y21":"BN"},{"n":11,"s":"Sungai Udang","y21":"PN"},{"n":12,"s":"Pantai Kundor","y21":"BN"},{"n":13,"s":"Paya Rumput","y21":"BN"},{"n":14,"s":"Klebang","y21":"BN"},{"n":15,"s":"Pengkalan Batu","y21":"BN"},{"n":16,"s":"Ayer Keroh","y21":"PH"},{"n":17,"s":"Bukit Katil","y21":"PH"},{"n":18,"s":"Ayer Molek","y21":"BN"},{"n":19,"s":"Kesidang","y21":"PH"},{"n":20,"s":"Kota Laksamana","y21":"PH"},{"n":21,"s":"Duyong","y21":"BN"},{"n":22,"s":"Bandar Hilir","y21":"PH"},{"n":23,"s":"Telok Mas","y21":"BN"},{"n":24,"s":"Bemban","y21":"PN"},{"n":25,"s":"Rim","y21":"BN"},{"n":26,"s":"Serkam","y21":"BN"},{"n":27,"s":"Merlimau","y21":"BN"},{"n":28,"s":"Sungai Rambai","y21":"BN"}],"base":{"exp":{"BN":15.84175,"PN":1.5335,"PH":9.891083333333333,"BSM":0.44233333333333336,"BST":0.29133333333333333},"pr":{"two":0.4681666666666667,"solo":0.6676666666666666,"pact":0.733,"ph":0.1645,"hung":0.1025,"pbsm":0.76575,"pbst":0.7534166666666666,"pbb":0.788,"phb":0.19416666666666665,"phbb":0.21375,"phst":0.18258333333333332,"king":0.09025,"bsmAny":0.382,"bsm3":0},"seats":[[0.923,0,0.077,0,0,0,0],[0.621,0,0.379,0,0,0,0],[0.803,0,0.197,0,0,0,0],[0.999,0,0,0,0.001,0,0],[0.972,0,0.028,0,0,0,0],[0.671,0,0.329,0,0,0,0],[0.61,0,0.39,0,0,0,0],[0.763,0,0.236,0,0,0,0],[0.627,0,0.373,0,0,0,0],[0.96,0,0.04,0,0,0,0],[0.678,0,0,0.204,0.118,0,0],[0.975,0,0,0,0.025,0,0],[0,0.571,0.429,0,0,0,0],[0.523,0,0.477,0,0,0,0],[0.389,0,0.611,0,0,0,0],[0,0.018,0.982,0,0,0,0],[0,0.317,0.683,0,0,0,0],[0.917,0,0.083,0,0,0,0],[0,0.013,0.987,0,0,0,0],[0.001,0,0.999,0,0,0,0],[0.534,0,0.466,0,0,0,0],[0.001,0,0.999,0,0,0,0],[0.8,0,0.2,0,0,0,0],[0,0.615,0,0.237,0.147,0,0],[0.815,0,0.185,0,0,0,0],[0.522,0,0.478,0,0,0,0],[0.974,0,0.026,0,0,0,0],[0.763,0,0.237,0,0,0,0]]},"poll":{"exp":{"BN":20.629,"PN":3.258166666666667,"PH":3.9235,"BSM":0.12258333333333334,"BST":0.06675},"pr":{"two":0.9786666666666667,"solo":0.9950833333333333,"pact":0.99725,"ph":0.0006666666666666666,"hung":0.0020833333333333333,"pbsm":0.998,"pbst":0.9975833333333334,"pbb":0.99825,"phb":0.0010833333333333333,"phbb":0.0015,"phst":0.0010833333333333333,"king":0.0016666666666666668,"bsmAny":0.11675,"bsm3":0},"seats":[[0.998,0,0.002,0,0,0,0],[0.968,0,0.032,0,0,0,0],[0.992,0,0.008,0,0,0,0],[1,0,0,0,0,0,0],[1,0,0,0,0,0,0],[0.976,0,0.024,0,0,0,0],[0.968,0,0.033,0,0,0,0],[0.989,0,0.011,0,0,0,0],[0.969,0,0.031,0,0,0,0],[1,0,0,0,0,0,0],[0.92,0,0,0.053,0.027,0,0],[0.998,0,0,0,0.002,0,0],[0,0.958,0.043,0,0,0,0],[0.944,0,0.056,0,0,0,0],[0.892,0,0.107,0,0,0,0],[0,0.297,0.703,0,0,0,0],[0,0.863,0.138,0,0,0,0],[0.999,0,0.001,0,0,0,0],[0,0.248,0.751,0,0,0,0],[0.071,0,0.928,0,0,0,0],[0.953,0,0.047,0,0,0,0],[0.073,0,0.927,0,0,0,0],[0.992,0,0.008,0,0,0,0],[0,0.893,0,0.069,0.038,0,0],[0.993,0,0.007,0,0,0,0],[0.946,0,0.054,0,0,0,0],[1,0,0,0,0,0,0],[0.988,0,0.012,0,0,0,0]]}};
+const LANG=new URLSearchParams(location.search).get('lang')||'bm';
+const TX={
+bm:{brand:'PRN MELAKA 2026',date:'UNDI 14 NOV',hpre:'PRN MELAKA KE-16',hbig:'14 NOV',hsub:'Apa kata model kami?',chips:['28 kerusi','79 calon','687,697 pengundi'],
+ t2:'2021: BN menang 21 kerusi',s2:'PH 5 · PN 2 · peta 28 kerusi DUN',
+ t3:'Model asas: BN+PN depan, rapuh',s3:'Berasaskan majoriti 2021 · 12,000 simulasi · warna = peluang menang',
+ t4:'Ikut Ilham: BN+PN jauh depan',s4:'Model dengan ayunan +9 mata ke BN+PN · Ilham: depan di 24 / 28 kerusi',
+ sc:['BN + PN','PH','Lain'],n2:'PRN 2021: BN 21 · PN 2 · PH 5',p15:'BN+PN capai 15',p19:'dua pertiga (19)',
+ leg:['BN','PN','PH','BERSAMA','BERSATU'],
+ t5:'Soalan sebenar: seberapa besar?',s5:'Jangkaan kerusi mengikut dua bacaan model',rows:['Model asas','Selaras tinjauan'],m15:'15 majoriti',m19:'19 dua pertiga',tk:'Dalam kedua-dua bacaan BN+PN depan. Bezanya: seberapa besar, dan sama ada dua pertiga.',
+ t6:'Pantau malam 14 Nov',s6:'Kerusi yang paling menentukan cerita',
+ w:[['Bukit Katil','Adly (PH) lawan PN · 68% pengundi Melayu'],['Ayer Keroh','PH lawan PN, BERSATU, BERSAMA'],['Kesidang','Ilham: sengit · PH menang selesa 2021'],['Kota Laksamana · Bandar Hilir','Berapa undi DAP hilang kepada MCA dan BERSAMA'],['Merlimau','Majoriti Akmal Saleh berbanding 2021'],['Serkam · Pengkalan Batu · Duyong','Majoriti 2021 paling nipis: 79 · 131 · 200']],
+ e1:'Model penuh,',e2:'ubah andaian sendiri',ea:'Pautan di komen pertama',eh:'#melakamemilih',ed:'Analisis peribadi, bukan unjuran rasmi SPR. Model boleh salah.',foot:'Sumber: senarai calon rasmi · model GE16 Simulation · Ilham Centre (via Malay Mail)'},
+en:{brand:'MELAKA 2026',date:'VOTE 14 NOV',hpre:'16TH MELAKA STATE ELECTION',hbig:'14 NOV',hsub:'What does our model say?',chips:['28 seats','79 candidates','687,697 voters'],
+ t2:'2021: BN won 21 seats',s2:'PH 5 · PN 2 · map of the 28 state seats',
+ t3:'Base model: BN+PN lead, fragile',s3:'Built on 2021 margins · 12,000 simulations · colour = chance to win',
+ t4:'Per Ilham: BN+PN far ahead',s4:'Model with +9 pt swing to BN+PN · Ilham: leads in 24 of 28 seats',
+ sc:['BN + PN','PH','Others'],n2:'2021: BN 21 · PN 2 · PH 5',p15:'BN+PN reach 15',p19:'two-thirds (19)',
+ leg:['BN','PN','PH','BERSAMA','BERSATU'],
+ t5:'The real question: by how much?',s5:'Expected seats under two model readings',rows:['Base model','Matching the poll'],m15:'15 majority',m19:'19 two-thirds',tk:'In both readings BN+PN lead. The difference: by how much, and whether they reach two-thirds.',
+ t6:'Watch on election night',s6:'The seats that tell the story',
+ w:[['Bukit Katil','Adly (PH) vs PN · 68% Malay voters'],['Ayer Keroh','PH vs PN, BERSATU, BERSAMA'],['Kesidang','Ilham: close · PH won comfortably in 2021'],['Kota Laksamana · Bandar Hilir','How much DAP loses to MCA and BERSAMA'],['Merlimau','Akmal Saleh\'s margin vs 2021'],['Serkam · Pengkalan Batu · Duyong','Thinnest 2021 margins: 79 · 131 · 200']],
+ e1:'Full model,',e2:'change the assumptions',ea:'Link in first comment',eh:'#melakamemilih',ed:'Personal analysis, not an official projection. Models can be wrong.',foot:'Sources: official candidate list · GE16 Simulation model · Ilham Centre (via Malay Mail)'}
+}[LANG];
+const COL={BN:'#3B82F6',PN:'#8B5CF6',PH:'#F0525B',BSM:'#F5B301',BST:'#F472B6',OTH:'#64748B'};
+const ORDER=['BN','PN','BSM','BST','OTH','PH'];
+const SHORT={'Kuala Linggi':'K. Linggi','Tanjung Bidara':'T. Bidara','Taboh Naning':'Taboh N.','Durian Tunggal':'D. Tunggal','Sungai Udang':'S. Udang','Pantai Kundor':'P. Kundor','Paya Rumput':'P. Rumput','Pengkalan Batu':'P. Batu','Bukit Katil':'B. Katil','Ayer Molek':'A. Molek','Kota Laksamana':'Laksamana','Bandar Hilir':'B. Hilir','Machap Jaya':'M. Jaya','Sungai Rambai':'S. Rambai','Ayer Limau':'A. Limau','Ayer Keroh':'A. Keroh'};
+const $=id=>document.getElementById(id);
+const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>{x=clamp(x);return 1-Math.pow(1-x,3)};
+const eio=x=>{x=clamp(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+const fade=(t,a,b,c,d)=>Math.min(seg(t,a,b),1-seg(t,c,d));
+function vec(p){return {BN:p[0],PN:p[1],BSM:p[3],BST:p[4],OTH:p[5]+p[6],PH:p[2]}}
+const V21=DATA.seats.map(s=>({BN:0,PN:0,BSM:0,BST:0,OTH:0,PH:0,...{[s.y21]:1}}));
+const VB=DATA.base.seats.map(vec), VP=DATA.poll.seats.map(vec);
+function mix(a,b,k){const o={};for(const x of ORDER)o[x]=a[x]*(1-k)+b[x]*k;return o}
+// build static DOM
+const map=$('map');
+const tiles=DATA.seats.map((s,i)=>{const d=document.createElement('div');d.className='tile';
+ d.style.left=(i%7)*(138+9)+'px';d.style.top=Math.floor(i/7)*(104+9)+'px';
+ d.innerHTML='<div class="n">N'+String(s.n).padStart(2,'0')+'</div><div class="pc"></div><div class="nm">'+(SHORT[s.s]||s.s)+'</div>';
+ map.appendChild(d);return d});
+$('brand').textContent=TX.brand;$('date').textContent=TX.date;
+$('hpre').textContent=TX.hpre;$('hbig').textContent=TX.hbig;$('hsub').textContent=TX.hsub;
+$('chips').innerHTML=TX.chips.map(c=>'<div class="chip">'+c.replace(/(\d[\d,]*)/,'<b>$1</b>')+'</div>').join('');
+$('score').innerHTML=[0,1,2].map(i=>'<div class="sc"><div class="v" id="sv'+i+'"></div><div class="l">'+TX.sc[i]+'</div></div>').join('');
+$('legend').innerHTML=[['BN','BN'],['PN','PN'],['PH','PH'],['BSM','BERSAMA'],['BST','BERSATU']].map(x=>'<span><i style="background:'+COL[x[0]]+'"></i>'+x[1]+'</span>').join('');
+$('foot').textContent=TX.foot;
+const sc0=[DATA.base,DATA.poll].map(m=>({pact:m.exp.BN+m.exp.PN,ph:m.exp.PH,oth:28-(m.exp.BN+m.exp.PN)-m.exp.PH}));
+const S21={pact:23,ph:5,oth:0};
+const P15=[DATA.base.pr.pact,DATA.poll.pr.pact],P19=[DATA.base.pr.two,DATA.poll.pr.two];
+const pf=x=>x>0.995?'>99%':Math.round(x*100)+'%';
+// maj rows
+$('maj').innerHTML='<div style="position:relative;height:0"></div>'+[0,1].map(i=>'<div class="mrow"><div class="lb">'+TX.rows[i]+'</div><div class="mbar" id="mb'+i+'"><div style="background:var(--bn)"></div><div style="background:var(--bsm)"></div><div style="background:var(--ph);margin-left:auto"></div><span class="mk" style="left:'+(15/28*100)+'%;background:#fff"></span><span class="mk" style="left:'+(19/28*100)+'%;background:var(--warn)"></span>'+(i==0?'<span class="mtag" style="left:'+(15/28*100-6)+'%;color:#fff">'+TX.m15+'</span><span class="mtag" style="left:'+(19/28*100+0.5)+'%;color:var(--warn)">'+TX.m19+'</span>':'')+'</div><div class="mp"><div>'+TX.p15+'<b id="a'+i+'"></b></div><div>'+TX.p19+'<b id="b'+i+'"></b></div></div></div>').join('');
+$('tk').textContent=TX.tk;
+$('watch').innerHTML=TX.w.map(w=>'<div class="wc"><h3>'+w[0]+'</h3><p>'+w[1]+'</p></div>').join('');
+$('end').innerHTML='<h2>'+TX.e1+'<br><em>'+TX.e2+'</em></h2><div class="a">'+TX.ea+'</div><div class="h">'+TX.eh+'</div><div class="d">'+TX.ed+'</div>';
+function setTitle(a,b){$('h1').textContent=a;$('p1').textContent=b}
+function render(t){
+  // hook
+  $('hook').style.opacity=fade(t,0.1,0.7,2.5,3.1);
+  $('hook').style.transform='scale('+(0.96+0.04*ease(seg(t,0.1,1.0)))+')';
+  const cs=$('chips').children;for(let i=0;i<3;i++){cs[i].style.opacity=ease(seg(t,0.5+i*0.25,1.0+i*0.25));cs[i].style.transform='translateY('+(18*(1-ease(seg(t,0.5+i*0.25,1.0+i*0.25))))+'px)'}
+  // map phases
+  const mapOn=t>=2.9&&t<19.4;
+  const mapOp=fade(t,2.9,3.4,18.6,19.3);
+  for(const id of ['title','map','score','note','legend'])$(id).style.opacity=mapOp;
+  // title
+  let ti,su;
+  if(t<7.0){ti=TX.t2;su=TX.s2}else if(t<12.6){ti=TX.t3;su=TX.s3}else{ti=TX.t4;su=TX.s4}
+  if(mapOn){setTitle(ti,su);
+    const edge=[7.0,12.6];let tp=1;for(const e of edge){const d=Math.abs(t-e);if(d<0.25)tp=Math.min(tp,d/0.25)}
+    $('title').style.opacity=mapOp*tp}
+  // tile state
+  let k1=eio(seg(t,7.0,8.2)),k2=eio(seg(t,12.6,13.8));
+  let cur=[];let phase=0;
+  for(let i=0;i<28;i++){let v=mix(V21[i],VB[i],k1);v=mix(v,VP[i],k2);cur.push(v)}
+  for(let i=0;i<28;i++){
+    const v=cur[i];let acc=0,stops=[];
+    for(const p of ORDER){const w=v[p]*100;if(w<0.01)continue;stops.push(COL[p]+' '+acc.toFixed(2)+'% '+(acc+w).toFixed(2)+'%');acc+=w}
+    tiles[i].style.background='linear-gradient(90deg,'+stops.join(',')+')';
+    const pop=ease(seg(t,3.0+i*0.045,3.5+i*0.045));
+    tiles[i].style.transform='scale('+(0.55+0.45*pop)+')';tiles[i].style.opacity=pop;
+    let mx=0;for(const p of ORDER)mx=Math.max(mx,v[p]);
+    const showPc=t>=7.0;
+    tiles[i].querySelector('.pc').textContent=showPc&&mx<0.995?Math.round(mx*100)+'%':'';
+    const close=showPc&&mx<0.62;
+    tiles[i].style.borderColor=close?'rgba(251,191,36,'+(0.55+0.4*Math.sin(t*5+i))+')':'rgba(255,255,255,.12)';
+    tiles[i].style.borderWidth=close?'3px':'2px';
+  }
+  // score
+  const A=S21,B=sc0[0],C=sc0[1];
+  const m1=mix1=>mix1;
+  const pick=k=>{const a=A[k]*(1-k1)+B[k]*k1;return a*(1-k2)+C[k]*k2};
+  const vals=[pick('pact'),pick('ph'),pick('oth')];
+  const cc=['var(--bn)','var(--ph)','var(--bsm)'];
+  for(let i=0;i<3;i++){const e=$('sv'+i);e.style.color=cc[i];e.textContent=(t<7.0?vals[i].toFixed(0):vals[i].toFixed(1))}
+  // note
+  let note='';
+  if(t<7.0)note=TX.n2;else if(t<12.6)note=TX.p15+' '+pf(P15[0])+' · '+TX.p19+' '+pf(P19[0]);else note=TX.p15+' '+pf(P15[1])+' · '+TX.p19+' '+pf(P19[1]);
+  $('note').innerHTML='<span>'+note+'</span>';
+  // majority scene
+  const majOp=fade(t,19.3,19.9,25.0,25.6);
+  $('maj').style.opacity=majOp;
+  $('tk').style.opacity=0;
+  if(majOp>0){
+    if(t>=19.3&&t<25.6){$('title').style.opacity=majOp;setTitle(TX.t5,TX.s5)}
+    for(let i=0;i<2;i++){const s=i?sc0[1]:sc0[0],g=ease(seg(t,19.8+i*0.5,21.4+i*0.5));
+      const bar=$('mb'+i).children;
+      bar[0].style.width=(s.pact/28*100*g)+'%';bar[1].style.width=(s.oth/28*100*g)+'%';bar[2].style.width=(s.ph/28*100*g)+'%';bar[0].textContent=g>0.6?s.pact.toFixed(1):'';bar[2].textContent=g>0.6?s.ph.toFixed(1):'';bar[2].style.justifyContent='flex-end';$('tk').style.opacity=majOp*ease(seg(t,22.6,23.3));
+      $('a'+i).textContent=(g>0.98?pf(P15[i]):Math.round(P15[i]*100*g)+'%');
+      $('b'+i).textContent=(g>0.98?pf(P19[i]):Math.round(P19[i]*100*g)+'%')}
+  }
+  // watch scene
+  const wOp=fade(t,25.4,26.0,29.6,30.2);
+  $('watch').style.opacity=wOp;
+  if(t>=25.4&&t<30.2){$('title').style.opacity=wOp;setTitle(TX.t6,TX.s6)}
+  const wc=$('watch').children;for(let i=0;i<6;i++){const e=ease(seg(t,26.0+i*0.3,26.5+i*0.3));wc[i].style.opacity=e;wc[i].style.transform='translateY('+(24*(1-e))+'px)'}
+  // end
+  $('end').style.opacity=fade(t,30.0,30.7,99,100);
+  $('end').style.transform='scale('+(0.97+0.03*ease(seg(t,30.0,31)))+')';
+  $('foot').style.opacity=(t>=2.9&&t<30.0)?1:0;
+  $('top').style.opacity=1;
+}
+render(0);
+</script></body></html>
