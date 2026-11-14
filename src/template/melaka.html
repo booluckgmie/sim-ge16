@@ -207,7 +207,7 @@ body{overflow-x:hidden}
     <span class="tag">BERSAMA 16 kerusi · BERSATU 7 kerusi</span>
   </div>
 </div>
-<div class="nav"><a href="#keputusan">Keputusan</a><a href="#live">Keluar mengundi</a><a href="#peta">Peta</a><a href="#analitik-langsung">Analisis keluar mengundi</a><a href="#model">Model</a><a href="#tinjauan">Tinjauan</a><a href="#ge16">Model GE16</a><a href="#kerusi">28 kerusi</a><a href="#berita">Berita</a></div>
+<div class="nav"><a href="#keputusan">Keputusan</a><a href="#ketepatan">Ketepatan model</a><a href="#live">Keluar mengundi</a><a href="#peta">Peta</a><a href="#analitik-langsung">Analisis keluar mengundi</a><a href="#model">Model</a><a href="#tinjauan">Tinjauan</a><a href="#ge16">Model GE16</a><a href="#kerusi">28 kerusi</a><a href="#berita">Berita</a></div>
 
 <!-- RESULTS -->
 <div class="sec" id="keputusan">
@@ -219,6 +219,27 @@ body{overflow-x:hidden}
   </div>
   <div class="card" style="margin-top:.75rem"><h4>Undi popular (kerusi yang telah diisytihar SPR)</h4><div id="res-votes"></div><p class="note" id="res-votes-note"></p></div>
   <p class="note" id="res-src-note">Sumber: keputusan SPR melalui <a href="https://electiondata.my/elections/mlk/SE-16/">electiondata.my</a> (API /results, disegarkan setiap minit). Kerusi yang belum diisytihar SPR ditanda berdasarkan akhbar (<a href="https://www.utusan.com.my/top/2026/11/tidak-rasmi-bn-pn-menang-24-ph-pertahan-empat-kerusi/">Utusan</a>, <a href="https://www.kosmo.com.my/2026/11/14/prn-melaka-bn-pn-sah-menang-24-dun-calonkan-ab-rauf-ketua-menteri/">Kosmo</a>, <a href="https://berita.rtm.gov.my/mandat/berita/senarai-berita-mandat/berita/senarai-artikel/prn-melaka-bn-pn-raih-24-kerusi-lepasi-majoriti-dua-pertiga/">RTM</a>) dan akan bertukar kepada rasmi secara automatik.</p>
+</div>
+
+<!-- MODEL ACCURACY -->
+<div class="sec" id="ketepatan">
+  <div class="sec-title">Ketepatan model · kad skor penuh</div>
+  <p class="lead">Semua versi model kita diukur terhadap keputusan SPR. <b>v1</b> ialah ramalan yang dinilai secara manual (1 hingga 12 Nov); <b>v2 asas</b> ialah simulasi berasaskan majoriti 2021; <b>v2 +9</b> dilaraskan kepada tinjauan Ilham <i>sebelum</i> keputusan, jadi bukan ujian bebas. <b>Naif 2021</b> hanya mengandaikan pemenang 2021 berulang. Kad skor di atas kekal; bahagian ini lebih terperinci.</p>
+  <div class="grid2">
+    <div class="card"><h4>Ringkasan ketepatan</h4><div style="overflow-x:auto"><table class="t" id="acc-sum"></table></div><p class="note" id="acc-sum-note"></p></div>
+    <div class="card"><h4>Panggilan besar</h4><div style="overflow-x:auto"><table class="t" id="acc-ev"></table></div><p class="note">Kebarangkalian yang diberi model bagi setiap peristiwa, dan sama ada ia berlaku.</p></div>
+    <div class="card"><h4>Peratus undi: sebenar lawan model</h4><div style="overflow-x:auto"><table class="t" id="acc-sh"></table></div><p class="note" id="acc-sh-note"></p></div>
+    <div class="card"><h4>Kalibrasi v2 asas</h4><div style="overflow-x:auto"><table class="t" id="acc-cal"></table></div><p class="note">Kerusi dikumpul mengikut kebarangkalian pakat BN+PN menang yang diberi model, dibandingkan dengan peratusan yang benar-benar dimenangi pakat.</p></div>
+  </div>
+  <div class="card" style="margin-top:.75rem"><h4>Apa yang kita pelajari</h4><div class="kv" id="acc-learn">
+    <b>1. Arah betul, magnitud salah.</b> Semua versi meletakkan BN+PN di depan, tetapi jumlah kerusi BN+PN terlalu rendah: v1 sebanyak 10 kerusi, v2 asas sekitar 6.6 kerusi.<br>
+    <b>2. Pembanding naif sukar dikalahkan.</b> Andaian "pemenang 2021 berulang" tepat pada 27 daripada 28 kerusi dan hanya silap satu kerusi pada jumlah BN+PN. Kita belum mengalahkannya pada ramalan kerusi; nilai tambah model ialah kebarangkalian dan senario, dan itu pun perlu dibaiki.<br>
+    <b>3. Parti ketiga dianggar terlalu tinggi.</b> Andaian BERSAMA 10% di kerusi ditandingi lawan sebenar 5.9%; v1 menjangka 18% undi seluruh negeri lawan 3.9%. Itu mengurangkan undi pakat dan PH dalam model.<br>
+    <b>4. Kubu luar bandar Melayu dianggar terlalu rendah untuk pakat.</b> Dalam v2 asas, undi BN+PN terlalu rendah sekitar 18 mata purata setiap kerusi, paling teruk di Sungai Udang, Serkam, Tanjung Bidara dan Ayer Limau.<br>
+    <b>5. Model terlalu berhati-hati.</b> Setiap kerusi yang diberi 35% hingga 90% untuk pakat oleh v2 asas akhirnya dimenangi pakat; kalibrasi menunjukkan kebarangkalian patut lebih tegas.<br>
+    <b>6. Satu pilihan raya, 28 kerusi.</b> Kerusi tidak bebas antara satu sama lain, jadi skor ini hanya petunjuk, bukan bukti. v2 +9 bukan ujian bebas kerana ayunannya dipilih daripada tinjauan.<br>
+    <b>Penambahbaikan seterusnya:</b> longgarkan penambat 2021 dengan menentukur ayunan daripada PRN Johor dan N. Sembilan sebelum pilihan raya, hadkan andaian parti ketiga mengikut bukti, dan jadikan kebarangkalian lebih tegas.
+  </div></div>
 </div>
 
 <!-- LIVE TURNOUT -->
@@ -885,7 +906,7 @@ function renderClose(){
     h+='<tr><td><span class="seat-name">'+S.s+'</span>'+(ph?' <span style="color:#34D399">●</span>':'')+'</td><td><b style="color:'+COL[PARTIES[r.j]]+'">'+NAMES[PARTIES[r.j]]+' '+pctS(r.p)+'</b></td><td class="r">'+(u?u.overall_vto.toFixed(1)+'%':'—')+'</td><td class="r">'+(d==null?'—':(d>=0?'+':'')+d.toFixed(1))+'</td></tr>'});
   $('closet').innerHTML=h+'</tbody>';
 }
-function afterModel(){renderMap();renderClose();renderGE();renderResults();if(SEL>=0)renderDetail(SEL)}
+function afterModel(){renderMap();renderClose();renderGE();renderResults();if(typeof renderAccuracy==='function')renderAccuracy();if(SEL>=0)renderDetail(SEL)}
 $('mapmode').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;USERPICK=true;MAPMODE=b.getAttribute('data-m');syncBtns();renderMap()});
 
 ['swing','bsm','bst','aph','t'].forEach(function(id){
@@ -964,7 +985,72 @@ function renderGE(){
   document.getElementById('ge-link').innerHTML=L;
 }
 
-loadLatest();loadSeries();loadGE();loadResults();setInterval(loadLatest,60000);setInterval(loadSeries,120000);setInterval(loadResults,60000);
+/* ---------- MODEL ACCURACY REPORT CARD ---------- */
+var V1S=[["BN",75],["BN",85],["BN",72],["BN",70],["BN",68],["BN",70],["Toss",52],["PH",44],["BN",72],["BN",75],["BN",70],["BN",72],["PH",62],["Toss",52],["BN",60],["PH",48],["PH",65],["BN",72],["PH",72],["PH",73],["Toss",52],["PH",72],["BN",65],["PN",55],["BN",72],["BN",78],["BN",82],["BN",72]];
+var V1T={BN:13,PN:1,PH:9,BSM:3,BST:2},V1SH={BN:36,PH:30,PN:6,BSM:18,BST:10},N21T={BN:21,PN:2,PH:5,BSM:0,BST:0},N21SH={BN:38.4,PH:35.8,PN:24.3,BSM:0,BST:0};
+var V1EV={solo:0.32,hung:0.42,two:null,pact:null},ACC=null;
+function clp(x){return Math.min(.99,Math.max(.01,x))}
+function pactOut(i){return resOf(i)==='PH'?0:1}
+function accScore(pp){var br=0,ll=0,hit=0;pp.forEach(function(p,i){var o=pactOut(i);br+=(p-o)*(p-o);ll+=-Math.log(o?clp(p):clp(1-p));if((p>.5)===(o===1))hit++});return {brier:br/28,ll:ll/28,hit:hit}}
+function impliedShares(sw,W){
+  var P0={bsm:10,bst:8,aph:50},tot=0,out={BN:0,PN:0,PH:0,BSM:0,BST:0,PUTRA:0,IND:0};
+  SEATS.forEach(function(S,i){var g=sw/100,pb=clamp(S.pact2+g,.05,.95),hb=1-pb,sB=S.has.BSM?P0.bsm/100:0,sT=S.has.BST?P0.bst/100:0,aph=P0.aph/100,pact,ph=0,bsm=0,bst=0;
+    if(S.has.PH){ph=hb-sB*aph-sT*.25;pact=pb-sB*(1-aph)-sT*.75;bsm=sB;bst=sT}
+    else{var nb=(S.has.BSM?1:0)+(S.has.BST?1:0),sh=nb?.4:0;pact=pb+.1*hb-sB-sT;bsm=S.has.BSM?sB+sh*hb:0;bst=S.has.BST?sT+sh*hb:0}
+    pact-=S.nm*.015;var v={BN:0,PN:0,PH:Math.max(0,ph),BSM:Math.max(0,bsm),BST:Math.max(0,bst),PUTRA:S.has.PUTRA?.015:0,IND:S.has.IND?.015:0};v[S.pactP]=Math.max(0,pact);
+    var t=0;for(var k in v)t+=v[k];for(var k in v)out[k]+=v[k]/t*W[i];tot+=W[i]});
+  for(var k in out)out[k]=out[k]/tot*100;return out}
+function initAcc(){ACC={base:run(DEF,N_MAIN,false),poll:run(Object.assign({},DEF,{swing:9}),N_MAIN,false)};renderAccuracy()}
+function renderAccuracy(){
+  if(!ACC||!$('acc-sum'))return;
+  var T=resTotals(),act={BN:T.BN,PN:T.PN,PH:T.PH,BSM:0,BST:0},pactN=T.BN+T.PN,off=nOfficial();
+  var KEYS=['BN','PN','PH','BSM','BST'];
+  function mae(m){var e=0;KEYS.forEach(function(k){e+=Math.abs(m[k]-act[k])});return e/5}
+  // seat-level
+  var v1p=V1S.map(function(x){return x[0]==='Toss'?.5:(x[0]==='PH'?1-x[1]/100:x[1]/100)});
+  var v1calls=0,v1hit=0,v1toss=0;V1S.forEach(function(x,i){if(x[0]==='Toss'){v1toss++;return}v1calls++;if((x[0]==='PH')===(pactOut(i)===0))v1hit++});
+  var sv1=accScore(v1p),s0=accScore(ACC.base.seats.map(function(a){return a[0]+a[1]})),s9=accScore(ACC.poll.seats.map(function(a){return a[0]+a[1]}));
+  var naiveHit=0;for(var i=0;i<28;i++){if((Y21(i)==='PH')===(resOf(i)==='PH'))naiveHit++}
+  var W=SEATS.map(function(S,i){var x=RESX&&RESX.seats[i];if(x&&x.declared){var v=0;x.b.forEach(function(c){v+=c.v});return v}return S.v*.7});
+  var i0=impliedShares(0,W),i9=impliedShares(9,W);
+  var actSh=null;
+  if(RESX&&off>0){var vt={BN:0,PN:0,PH:0,BSM:0,BST:0},vv=0;RESX.seats.forEach(function(x){if(!x.declared)return;x.b.forEach(function(c){vv+=c.v;var P=String(c.p).toUpperCase(),k=c.c==='BN'?'BN':c.c==='PN'?'PN':c.c==='PH'?'PH':P==='BERSAMA'?'BSM':P==='BERSATU'?'BST':null;if(k)vt[k]+=c.v})});actSh={};KEYS.forEach(function(k){actSh[k]=vt[k]/vv*100})}
+  function shMae(m){if(!actSh)return null;var e=0;KEYS.forEach(function(k){e+=Math.abs(m[k]-actSh[k])});return e/5}
+  var M=[['v1',V1T,V1SH],['v2 asas',ACC.base.exp,i0],['v2 +9*',ACC.poll.exp,i9],['Naif 2021',N21T,N21SH]];
+  var sumRows=[
+    ['Pihak menang betul (BN+PN lawan PH)',(v1hit+' / '+v1calls+' panggilan'),s0.hit+' / 28',s9.hit+' / 28',naiveHit+' / 28'],
+    ['Skor Brier setiap kerusi (0 sempurna, 0.25 tekaan)',sv1.brier.toFixed(3),s0.brier.toFixed(3),s9.brier.toFixed(3),'–'],
+    ['Log loss (tekaan = 0.693)',sv1.ll.toFixed(3),s0.ll.toFixed(3),s9.ll.toFixed(3),'–'],
+    ['BN+PN dijangka (sebenar '+pactN+')',(M[0][1].BN+M[0][1].PN).toFixed(1),(M[1][1].BN+M[1][1].PN).toFixed(1),(M[2][1].BN+M[2][1].PN).toFixed(1),(N21T.BN+N21T.PN).toFixed(0)],
+    ['PH dijangka (sebenar '+T.PH+')',M[0][1].PH.toFixed(1),M[1][1].PH.toFixed(1),M[2][1].PH.toFixed(1),N21T.PH.toFixed(0)],
+    ['Purata ralat jumlah kerusi (5 parti)',mae(M[0][1]).toFixed(2),mae(M[1][1]).toFixed(2),mae(M[2][1]).toFixed(2),mae(M[3][1]).toFixed(2)],
+    ['Purata ralat peratus undi (5 parti, mata)',shMae(M[0][2])==null?'–':shMae(M[0][2]).toFixed(1),shMae(M[1][2])==null?'–':shMae(M[1][2]).toFixed(1),shMae(M[2][2])==null?'–':shMae(M[2][2]).toFixed(1),shMae(M[3][2])==null?'–':shMae(M[3][2]).toFixed(1)]
+  ];
+  var t='<thead><tr><th>Ukuran</th><th class="r">v1</th><th class="r">v2 asas</th><th class="r">v2 +9*</th><th class="r">Naif 2021</th></tr></thead><tbody>';
+  sumRows.forEach(function(r){t+='<tr><td>'+r[0]+'</td><td class="r">'+r[1]+'</td><td class="r"><b>'+r[2]+'</b></td><td class="r">'+r[3]+'</td><td class="r">'+r[4]+'</td></tr>'});
+  $('acc-sum').innerHTML=t+'</tbody>';
+  $('acc-sum-note').innerHTML='*v2 +9 dilaraskan kepada tinjauan Ilham sebelum keputusan (dalam sampel). v1 mempunyai '+v1toss+' kerusi "seri" yang tidak dikira sebagai panggilan (ketiga-tiganya dimenangi BN); Brier v1 mengira seri sebagai 50/50.'+(off<28?' Keputusan kerusi yang belum diisytihar SPR menggunakan akhbar.':'');
+  // events
+  var ev=[['BN seorang capai 15',V1EV.solo,ACC.base.pr.solo,ACC.poll.pr.solo,T.BN>=15],['Dewan tergantung',V1EV.hung,ACC.base.pr.hung,ACC.poll.pr.hung,!(pactN>=15)&&!(T.PH>=15)],['BN+PN capai 15',V1EV.pact,ACC.base.pr.pact,ACC.poll.pr.pact,pactN>=15],['BN+PN dua pertiga (19)',V1EV.two,ACC.base.pr.two,ACC.poll.pr.two,pactN>=19]];
+  function pc(x){return x==null?'–':x>0.995?'>99%':x<0.005?'<1%':Math.round(x*100)+'%'}
+  var e='<thead><tr><th>Peristiwa</th><th class="r">v1</th><th class="r">v2 asas</th><th class="r">v2 +9*</th><th class="r">Berlaku?</th></tr></thead><tbody>';
+  ev.forEach(function(r){e+='<tr><td>'+r[0]+'</td><td class="r">'+pc(r[1])+'</td><td class="r"><b>'+pc(r[2])+'</b></td><td class="r">'+pc(r[3])+'</td><td class="r"><b style="color:'+(r[4]?'#34D399':'#F87171')+'">'+(r[4]?'Ya':'Tidak')+'</b></td></tr>'});
+  $('acc-ev').innerHTML=e+'</tbody>';
+  // vote share
+  if(actSh){
+    var h='<thead><tr><th>Parti</th><th class="r">Sebenar</th><th class="r">v1</th><th class="r">v2 asas</th><th class="r">v2 +9*</th><th class="r">2021</th></tr></thead><tbody>';
+    KEYS.forEach(function(k){var nm={BN:'BN',PN:'PN',PH:'PH',BSM:'BERSAMA',BST:'BERSATU'}[k];function cell(v){var d=v-actSh[k];return v.toFixed(1)+'% <span class="seat-sub">('+(d>=0?'+':'')+d.toFixed(1)+')</span>'}
+      h+='<tr><td><b style="color:'+(COL[k]||'#fff')+'">'+nm+'</b></td><td class="r"><b>'+actSh[k].toFixed(1)+'%</b></td><td class="r">'+cell(V1SH[k])+'</td><td class="r">'+cell(i0[k])+'</td><td class="r">'+cell(i9[k])+'</td><td class="r">'+cell(N21SH[k])+'</td></tr>'});
+    $('acc-sh').innerHTML=h+'</tbody>';
+    $('acc-sh-note').innerHTML='Peratus undi sah di '+off+' kerusi diisytihar. Angka v2 ialah peratus tersirat model (tanpa hingar, ditimbang dengan undi sah sebenar setiap kerusi). Angka 2021: BN 38.4%, PH 35.8%, PN 24.3% (BN+PN gabungan 62.7% berbanding 63.2% pada 2026).';
+  }
+  // calibration
+  var pp=ACC.base.seats.map(function(a){return a[0]+a[1]}),bins=[[0,.35,'di bawah 35%'],[.35,.65,'35% hingga 65%'],[.65,.9,'65% hingga 90%'],[.9,1.01,'90% ke atas']],c='<thead><tr><th>Model beri pakat</th><th class="r">Kerusi</th><th class="r">Dijangka</th><th class="r">Menang</th></tr></thead><tbody>';
+  bins.forEach(function(b){var ix=[];pp.forEach(function(p,i){if(p>=b[0]&&p<b[1])ix.push(i)});var n=ix.length,pr=n?ix.reduce(function(a,i){return a+pp[i]},0)/n:0,ac=n?ix.reduce(function(a,i){return a+pactOut(i)},0)/n:0;c+='<tr><td>'+b[2]+'</td><td class="r">'+n+'</td><td class="r">'+(n?Math.round(pr*100)+'%':'–')+'</td><td class="r"><b>'+(n?Math.round(ac*100)+'%':'–')+'</b></td></tr>'});
+  $('acc-cal').innerHTML=c+'</tbody>';
+}
+
+loadLatest();loadSeries();loadGE();loadResults();setTimeout(initAcc,60);setInterval(loadLatest,60000);setInterval(loadSeries,120000);setInterval(loadResults,60000);
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <a class="home-fab" href="/" aria-label="Laman utama">🏠 Laman Utama</a>
