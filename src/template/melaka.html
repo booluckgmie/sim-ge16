@@ -157,6 +157,29 @@ body{background:radial-gradient(1100px 520px at 12% -8%,#112650 0%,#020C1B 58%) 
 .rk .tr{height:12px;background:#0A1930;border-radius:4px;overflow:hidden}.rk .tr i{display:block;height:100%}
 .gapbig{font-size:2rem;font-weight:900;letter-spacing:-.03em;line-height:1}
 .kv{font-size:.74rem;line-height:1.75;color:#CBD5E1}
+.cd{margin-top:.75rem}
+.cd-main{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:flex-end}
+.cd-lbl{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.cd-time{font-size:2.7rem;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#fff;line-height:1.1}
+.cd-time.done{color:#94A3B8}
+.cd-bar{height:10px;background:#0A1930;border-radius:6px;margin-top:.75rem;overflow:hidden}
+.cd-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3B82F6,#34D399);border-radius:6px}
+.cd-scale{display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted);margin-top:.25rem}
+.cd-side{font-size:.74rem;line-height:1.65;color:#CBD5E1;max-width:430px}
+.scgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+@media(max-width:900px){.scgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.scgrid{grid-template-columns:1fr}}
+.sc4{border-radius:14px;border:1px solid var(--brd);border-top:3px solid var(--c);padding:.8rem;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.012)),var(--surf2)}
+.sc4 .tt{display:flex;justify-content:space-between;align-items:center;gap:.4rem;font-weight:800;font-size:.85rem;color:#fff}
+.sc4 .pr{font-size:.58rem;font-weight:800;padding:.1rem .45rem;border-radius:999px;background:rgba(255,255,255,.09);color:#CBD5E1;white-space:nowrap}
+.stk{display:flex;height:16px;border-radius:5px;overflow:hidden;position:relative;margin:.55rem 0 .4rem;background:#0A1930}
+.stk i{display:block;height:100%}
+.stk b{position:absolute;top:0;bottom:0;width:2px;background:#fff;left:50.45%}
+.sc4 .ln{font-size:.66rem;color:#CBD5E1;line-height:1.55}
+.sc4 .vd{font-size:.68rem;margin-top:.4rem;font-weight:700;line-height:1.4}
+.sc4 .ml{font-size:.68rem;margin-top:.45rem;padding-top:.45rem;border-top:1px solid var(--brd);color:#CBD5E1}
+.home-fab{position:fixed;left:14px;bottom:14px;z-index:60;display:inline-flex;align-items:center;gap:.4rem;padding:.55rem .95rem;border-radius:999px;background:rgba(8,21,38,.93);border:1px solid #1E3A5F;color:#E2E8F0;font:700 .78rem/1 'Segoe UI',system-ui,sans-serif;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.home-fab:hover{border-color:#3B82F6;color:#fff;text-decoration:none}
 .grid2>*,.hero-grid>*{min-width:0}
 body{overflow-x:hidden}
 </style>
@@ -184,7 +207,7 @@ body{overflow-x:hidden}
     <span class="tag">BERSAMA 16 kerusi · BERSATU 7 kerusi</span>
   </div>
 </div>
-<div class="nav"><a href="#live">Langsung</a><a href="#peta">Peta</a><a href="#analitik-langsung">Analisis keluar mengundi</a><a href="#model">Model</a><a href="#tinjauan">Tinjauan</a><a href="#kerusi">28 kerusi</a><a href="#berita">Berita</a></div>
+<div class="nav"><a href="#live">Langsung</a><a href="#peta">Peta</a><a href="#analitik-langsung">Analisis keluar mengundi</a><a href="#model">Model</a><a href="#tinjauan">Tinjauan</a><a href="#ge16">Model GE16</a><a href="#kerusi">28 kerusi</a><a href="#berita">Berita</a></div>
 
 <!-- LIVE TURNOUT -->
 <div class="sec" id="live">
@@ -196,6 +219,7 @@ body{overflow-x:hidden}
     </div></div>
     <div class="card"><h4>Keluar mengundi mengikut kaum · semasa dan unjuran</h4><div id="eth"></div><p class="note" id="eth-note"></p></div>
   </div>
+  <div class="card cd"><div class="cd-main"><div><div class="cd-lbl" id="cd-lbl">Pusat mengundi tutup dalam</div><div class="cd-time" id="cd-time">--:--:--</div></div><div class="cd-side" id="cd-side"></div></div><div class="cd-bar"><i id="cd-fill"></i></div><div class="cd-scale"><span>8.00 pagi (buka)</span><span>6.00 petang (tutup)</span></div></div>
   <p class="note" id="lv-note">Sumber: SPR melalui electiondata.my, dikemas kini setiap 5 minit. Bar hijau = semasa; bar berjalur = unjuran; garis kuning = anggaran akhir Johor / N. Sembilan.</p>
 </div>
 
@@ -271,6 +295,18 @@ body{overflow-x:hidden}
     <b>Merlimau</b>: majoriti Akmal Saleh berbanding 2021, ujian sokongan bukan Melayu.<br>
     <b>Serkam, Pengkalan Batu, Duyong</b>: majoriti 2021 paling nipis (79, 131, 200).<br>
     <b>Keluar mengundi</b>: jurang Melayu–Cina (77% lawan 63% di Johor) menentukan kerusi campuran.</div></div>
+</div>
+
+<!-- GE16 MODEL -->
+<div class="sec" id="ge16">
+  <div class="sec-title">Model GE16 asal · kaitan dengan Melaka</div>
+  <p class="lead">Model parlimen 222 kerusi di <a href="/">dashboard utama</a>. Ia dikira di pelayan; halaman ini hanya menerima hasil yang sudah dikira. Empat senario: Baseline 55%, Best case 20%, Worst case 25%, dan Trend 2026 yang dikalibrasi daripada PRN Johor (BN 48/56) dan N. Sembilan (BN 18/36). Garis putih = majoriti 112.</p>
+  <div class="scgrid" id="ge-cards"><div class="note">Memuatkan model GE16…</div></div>
+  <div class="grid2" style="margin-top:.75rem">
+    <div class="card"><h4>Melaka dalam setiap senario (6 kerusi parlimen)</h4><div style="overflow-x:auto"><table class="t" id="ge-mlk"></table></div>
+      <p class="note">Baris bawah ialah bacaan PRN Melaka kita, ditukar kepada kerusi parlimen dengan anggaran kasar: setiap parlimen dianggap dimenangi blok yang memenangi DUN dengan pengundi lebih ramai.</p></div>
+    <div class="card"><h4>Apa maksud Melaka untuk senario GE16</h4><div id="ge-link" class="kv"></div></div>
+  </div>
 </div>
 
 <!-- EXPECTED SEATS + PATHWAYS -->
@@ -441,6 +477,7 @@ SEATS.forEach(function(S){
   var lead=Math.min(S.m/(TURNOUT*S.v),0.35),w=0.5+lead/2;
   S.pact2=S.i==='P'?w:1-w;
   S.nm=(has.PUTRA?1:0)+(has.IND?1:0);
+  S.pi=parseInt(S.p.slice(1,4),10)-134;
 });
 var TOTV=SEATS.reduce(function(a,S){return a+S.v},0);
 
@@ -454,8 +491,10 @@ function run(P,N,keep){
   var tally={BN:new Int8Array(N),PN:new Int8Array(N),PH:new Int8Array(N),BSM:new Int8Array(N),BST:new Int8Array(N)};
   var W=keep?new Int8Array(N*K):null;
   var aph=P.aph/100,leak=(1-P.t/100)*0.30;
+  var phV=[0,0,0,0,0,0],paV=[0,0,0,0,0,0],parlPH=[0,0,0,0,0,0],phParlSum=0;
   for(var r=0;r<N;r++){
     var z=rn()*0.04,g=P.swing/100+z,cnt=[0,0,0,0,0,0,0];
+    phV.fill(0);paV.fill(0);
     for(var k=0;k<K;k++){
       var S=SEATS[k],pb=clamp(S.pact2+g,0.05,0.95),hb=1-pb;
       var sB=S.has.BSM?Math.max(0,P.bsm/100*(1+0.4*rn())):0;
@@ -476,10 +515,12 @@ function run(P,N,keep){
         if(sc[j]>best){best=sc[j];bi=j}
       }
       win[k][bi]++;cnt[bi]++;if(keep)W[r*K+k]=bi;
+      if(bi===2)phV[S.pi]+=S.v;else if(bi<2)paV[S.pi]+=S.v;
     }
     tally.BN[r]=cnt[0];tally.PN[r]=cnt[1];tally.PH[r]=cnt[2];tally.BSM[r]=cnt[3];tally.BST[r]=cnt[4];
+    for(var q=0;q<6;q++){if(phV[q]>paV[q]){phParlSum++;parlPH[q]++}}
   }
-  var out={N:N,seats:win.map(function(a){return a.map(function(x){return x/N})}),exp:{},lo:{},hi:{},pr:{}};
+  var out={phParlExp:phParlSum/N,parlP:parlPH.map(function(x){return x/N}),N:N,seats:win.map(function(a){return a.map(function(x){return x/N})}),exp:{},lo:{},hi:{},pr:{}};
   ['BN','PN','PH','BSM','BST'].forEach(function(p){
     var arr=Array.prototype.slice.call(tally[p]),s=0;arr.forEach(function(x){s+=x});
     var sorted=arr.slice().sort(function(a,b){return a-b});
@@ -588,7 +629,7 @@ function sens(){
     var o=run(Q,N_SENS,false);
     var e=o.exp.BN+o.exp.PN;
     h+='<tr><td>'+r[0]+'</td><td class="r"><b>'+pct(o.pr.pact)+'</b></td><td class="r">'+pct(o.pr.two)+'</td><td class="r"><b>'+pct(o.pr.ph)+'</b></td><td class="r">'+pct(o.pr.hung)+'</td><td class="r">'+e.toFixed(1)+'</td><td class="r">'+o.exp.PH.toFixed(1)+'</td></tr>';
-    if(r[0].indexOf('Ilham')>=0)window.__POLLSEATS=o.seats;
+    if(r[0].indexOf('Ilham')>=0){window.__POLLSEATS=o.seats;window.__POLLR=o}
     window.__SENS.push({a:r[0],pact:o.pr.pact,two:o.pr.two,ph:o.pr.ph,hung:o.pr.hung,bsm:o.exp.BSM,bnpn:e,phexp:o.exp.PH});
   });
   document.getElementById('sens').innerHTML=h+'</tbody>';
@@ -753,7 +794,7 @@ function renderAnalytics(){
     h+='<div class="kv" style="margin-bottom:.3rem"><b>Tertinggi</b></div>'+rows.slice(0,5).map(rk).join('')+'<div class="kv" style="margin:.5rem 0 .3rem"><b>Terendah</b></div>'+rows.slice(-5).reverse().map(rk).join('');
     $('rank').innerHTML=h;
     var pj=LIVE.projAll,tot=LIVE.state.overall_electorate,pv=pj?tot*pj/100:0;
-    $('proj').innerHTML=pj?('Unjuran akhir berpemberat kaum: <b>'+pj.toFixed(1)+'%</b>, kira-kira <b>'+fmtN(pv)+'</b> undi.<br>Dicatat setakat ini: <b>'+fmtN(LIVE.state.overall_abs)+'</b>. Baki dijangka: <b>≈'+fmtN(Math.max(0,pv-LIVE.state.overall_abs))+'</b> undi.<br><span style="color:var(--muted)">Angka unjuran daripada API (tiada definisi didokumenkan); gabungan unjuran Melayu '+LIVE.ethnicity.malay.projected.toFixed(1)+'%, Cina '+LIVE.ethnicity.chinese.projected.toFixed(1)+'%.</span>'):'Unjuran tidak tersedia.';
+    $('proj').innerHTML=pj?('Unjuran akhir berpemberat kaum: <b>'+pj.toFixed(1)+'%</b>, kira-kira <b>'+fmtN(pv)+'</b> undi.<br>Dicatat setakat ini: <b>'+fmtN(LIVE.state.overall_abs)+'</b>. Baki dijangka: <b>≈'+fmtN(Math.max(0,pv-LIVE.state.overall_abs))+'</b> undi.<br><span style="color:var(--muted)">Angka unjuran daripada API (tiada definisi didokumenkan); gabungan unjuran Melayu '+LIVE.ethnicity.malay.projected.toFixed(1)+'%, Cina '+LIVE.ethnicity.chinese.projected.toFixed(1)+'%.</span><br><span style="color:var(--muted)">SPR menjangka keluar mengundi mencecah kira-kira 70% (Bernama, 14 Nov).</span>'):'Unjuran tidak tersedia.';
   }
   renderClose();
 }
@@ -765,7 +806,7 @@ function renderClose(){
     h+='<tr><td><span class="seat-name">'+S.s+'</span>'+(ph?' <span style="color:#34D399">●</span>':'')+'</td><td><b style="color:'+COL[PARTIES[r.j]]+'">'+NAMES[PARTIES[r.j]]+' '+pctS(r.p)+'</b></td><td class="r">'+(u?u.overall_vto.toFixed(1)+'%':'—')+'</td><td class="r">'+(d==null?'—':(d>=0?'+':'')+d.toFixed(1))+'</td></tr>'});
   $('closet').innerHTML=h+'</tbody>';
 }
-function afterModel(){renderMap();renderClose();if(SEL>=0)renderDetail(SEL)}
+function afterModel(){renderMap();renderClose();renderGE();if(SEL>=0)renderDetail(SEL)}
 $('mapmode').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;USERPICK=true;MAPMODE=b.getAttribute('data-m');syncBtns();renderMap()});
 
 ['swing','bsm','bst','aph','t'].forEach(function(id){
@@ -776,8 +817,75 @@ document.getElementById('reset').addEventListener('click',function(){
 });
 refresh(true);
 window.__SEATS=SEATS;
-loadLatest();loadSeries();setInterval(loadLatest,60000);setInterval(loadSeries,120000);
+/* ---------- COUNTDOWN (polling 08:00-18:00 MYT, SPR) ---------- */
+var OPEN_T=Date.UTC(2026,10,14,0,0,0),CLOSE_T=Date.UTC(2026,10,14,10,0,0);
+function pad2(n){return String(n).padStart(2,'0')}
+function fmtD(ms){var s=Math.max(0,Math.floor(ms/1000));return pad2(Math.floor(s/3600))+':'+pad2(Math.floor(s%3600/60))+':'+pad2(s%60)}
+function recentRate(){
+  if(!SERIES||SERIES.slots.length<2)return null;
+  var ele=SERIES.electorate,pts=SERIES.slots.map(function(s){return {m:slotMin(s.slot),a:groups(s.abs,ele).abs}}),l=pts[pts.length-1],p=pts[pts.length-2];
+  for(var i=pts.length-2;i>=0;i--){p=pts[i];if(l.m-pts[i].m>=30)break}
+  return (l.a-p.a)/(l.m-p.m)*60;
+}
+function tick(){
+  var now=Date.now(),t=$('cd-time'),lb=$('cd-lbl'),side=$('cd-side'),fill=0;
+  if(now<OPEN_T){lb.textContent='Pusat mengundi dibuka dalam';t.textContent=fmtD(OPEN_T-now);t.className='cd-time';side.textContent='Waktu mengundi 8.00 pagi hingga 6.00 petang (SPR).'}
+  else if(now<CLOSE_T){
+    lb.textContent='Pusat mengundi tutup dalam';t.textContent=fmtD(CLOSE_T-now);t.className='cd-time';fill=(now-OPEN_T)/(CLOSE_T-OPEN_T)*100;
+    var h='Tutup pada <b>6.00 petang</b> (SPR).';
+    if(LIVE&&LIVE.projAll){
+      var pv=LIVE.state.overall_electorate*LIVE.projAll/100,rem=Math.max(0,pv-LIVE.state.overall_abs),hl=(CLOSE_T-now)/3.6e6,need=hl>0?rem/hl:0,rate=recentRate();
+      h+='<br>Untuk capai unjuran <b>'+LIVE.projAll.toFixed(1)+'%</b> perlu kira-kira <b>'+(need/1000).toFixed(1)+' ribu</b> undi sejam'+(rate!=null?'; kadar 30 minit terakhir <b>'+(rate/1000).toFixed(1)+' ribu</b> sejam. '+(rate>=need?'Kadar semasa melebihi keperluan: unjuran boleh dicapai walaupun kadar menurun sehingga '+Math.round((1-need/rate)*100)+'%.':'Kadar semasa di bawah keperluan: unjuran sukar dicapai kecuali kadar meningkat petang nanti.'):'.');
+    }
+    side.innerHTML=h;
+  }else{lb.textContent='Pusat mengundi telah ditutup';t.textContent='00:00:00';t.className='cd-time done';fill=100;side.textContent='Pengundian tamat pada 6.00 petang. Pengiraan undi bermula; keputusan rasmi 28 kerusi diumumkan selepas penjumlahan rasmi (SPR).'}
+  $('cd-fill').style.width=fill+'%';
+}
+tick();setInterval(tick,1000);
+
+/* ---------- GE16 ORIGINAL MODEL (computed server-side via /api/data) ---------- */
+var GE=null,GEERR=false;
+var GEDEF={yT:72,sT:78,mS:48,cS:78,iS:68,lS:45},GETR={yT:67,sT:80,mS:36,cS:72,iS:62,lS:38};
+var GESC=[['base','Baseline','55% kebarangkalian',GEDEF,'📊','#3B82F6'],['best','Best case','20% kebarangkalian',GEDEF,'📈','#10B981'],['worst','Worst case','25% kebarangkalian',GEDEF,'📉','#EF4444'],['trend','Trend 2026','dikalibrasi PRN',GETR,'🌊','#06B6D4']];
+var GECOL={ph:'#EF4444',bm:'#E3A008',bn:'#3B82F6',pn:'#8B5CF6',gps:'#059669',war:'#64748B'};
+function geFetch(sc,sl){return fetch('/api/data',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.assign({action:'summary',scen:sc},sl))}).then(function(r){return r.json()}).then(function(j){if(!j||!j.ok)throw new Error('api');return j.data})}
+function loadGE(){Promise.all(GESC.map(function(x){return geFetch(x[0],x[3])})).then(function(a){GE=a;renderGE()}).catch(function(){GEERR=true;renderGE()})}
+function melAlloc(d){var m=(d.byState&&d.byState.Melaka)||{},o={PH:0,BN:0,PN:0,BSM:0,LAIN:0};Object.keys(m).forEach(function(k){if(k==='total')return;var n=m[k];if(k==='PKR'||k==='DAP'||k==='AMANAH')o.PH+=n;else if(k==='BERSAMA')o.BSM+=n;else if(k.indexOf('PN-')===0)o.PN+=n;else if(k.indexOf('BN-')===0)o.BN+=n;else o.LAIN+=n});return o}
+function renderGE(){
+  var box=document.getElementById('ge-cards');if(!box)return;
+  if(GEERR&&!GE){box.innerHTML='<div class="note">Model GE16 tidak dapat dimuatkan sekarang. Bahagian lain halaman ini tidak terjejas. Buka <a href="/">dashboard utama</a>.</div>';return}
+  if(!GE)return;
+  var h='';
+  GESC.forEach(function(x,i){
+    var d=GE[i],c=d.coalitions,tot=c.ph+c.bm+c.bn+c.pn+c.gps+c.war,ma=melAlloc(d);
+    var stk=['ph','bm','bn','pn','gps','war'].map(function(k){return '<i style="width:'+(c[k]/tot*100)+'%;background:'+GECOL[k]+'" title="'+k.toUpperCase()+' '+c[k]+'"></i>'}).join('');
+    var vc=d.verdict.type==='ok'?'#34D399':d.verdict.type==='no'?'#F87171':'#FDBA74';
+    h+='<div class="sc4" style="--c:'+x[5]+'"><div class="tt"><span>'+x[4]+' '+x[1]+'</span><span class="pr">'+x[2]+'</span></div><div class="stk">'+stk+'<b></b></div>'+
+      '<div class="ln"><b style="color:#F87171">PH '+c.ph+'</b> · <b style="color:#A78BFA">PN '+c.pn+'</b> · <b style="color:#60A5FA">BN '+c.bn+'</b> · <b style="color:#FACC15">BERSAMA '+c.bm+'</b> · <b style="color:#34D399">GPS '+c.gps+'</b>'+(c.war?' · WARISAN '+c.war:'')+'</div>'+
+      '<div class="vd" style="color:'+vc+'">'+d.verdict.text+'</div>'+
+      '<div class="ml">Melaka (6 parlimen): '+(ma.PH?'<b style="color:#F87171">PH '+ma.PH+'</b> ':'')+(ma.BN?'<b style="color:#60A5FA">BN '+ma.BN+'</b> ':'')+(ma.PN?'<b style="color:#A78BFA">PN '+ma.PN+'</b> ':'')+(ma.BSM?'<b style="color:#FACC15">BERSAMA '+ma.BSM+'</b> ':'')+(ma.LAIN?'Lain '+ma.LAIN:'')+'</div></div>';
+  });
+  box.innerHTML=h;
+  var sc=GE.map(function(d){return melAlloc(d)}),R0=window.__R,R1=window.__POLLR;
+  var t='<thead><tr><th>Senario / bacaan</th><th class="r">PH</th><th class="r">BN+PN</th><th class="r">Lain</th></tr></thead><tbody>';
+  GESC.forEach(function(x,i){var m=sc[i];t+='<tr><td>'+x[4]+' '+x[1]+' <span class="seat-sub">'+x[2]+'</span></td><td class="r"><b>'+m.PH+'</b></td><td class="r">'+(m.BN+m.PN)+'</td><td class="r">'+(m.BSM+m.LAIN)+'</td></tr>'});
+  function rd(lbl,R){if(!R||R.phParlExp==null)return '';return '<tr><td>'+lbl+'</td><td class="r"><b>'+R.phParlExp.toFixed(1)+'</b></td><td class="r">'+(6-R.phParlExp).toFixed(1)+'</td><td class="r">–</td></tr>'}
+  t+=rd('PRN Melaka: model asas (majoriti 2021)',R0)+rd('PRN Melaka: selaras tinjauan Ilham (+9)',R1);
+  document.getElementById('ge-mlk').innerHTML=t+'</tbody>';
+  function nearest(R){var best=null;GESC.forEach(function(x,i){var dv=Math.abs(sc[i].PH-R.phParlExp);if(!best||dv<best.dv)best={dv:dv,i:i}});return GESC.filter(function(x,i){return Math.abs(sc[i].PH-R.phParlExp)-best.dv<0.01}).map(function(x){return x[1]}).join(' / ')}
+  var L='';
+  if(R0&&R0.phParlExp!=null&&R1&&R1.phParlExp!=null){
+    L+='Dalam <b>Baseline</b> dan <b>Best case</b> PH menang <b>'+sc[0].PH+' daripada 6</b> parlimen Melaka; dalam <b>Worst</b> dan <b>Trend</b> hanya <b>'+sc[2].PH+'</b>.<br>'+
+      'Bacaan PRN kita: model asas PH ≈ <b>'+R0.phParlExp.toFixed(1)+'</b> parlimen (paling hampir: <b>'+nearest(R0)+'</b>); selaras tinjauan PH ≈ <b>'+R1.phParlExp.toFixed(1)+'</b> (paling hampir: <b>'+nearest(R1)+'</b>).<br>'+
+      'Maksudnya, keputusan Melaka yang menyerupai kedua-dua bacaan ini akan menyokong senario <b>Worst / Trend 2026</b> berbanding Baseline 55%. Melaka ialah negeri ketiga selepas Johor dan N. Sembilan yang menguji arah ayunan BN.<br>'+
+      '<span style="color:var(--muted)">Satu negeri dengan enam parlimen tidak mengubah kebarangkalian 55 / 20 / 25 secara automatik; ia isyarat, bukan kemas kini statistik. Kaitan DUN ke parlimen di sini ialah anggaran kasar.</span>';
+  }else L='Menunggu keputusan simulasi Melaka.';
+  document.getElementById('ge-link').innerHTML=L;
+}
+
+loadLatest();loadSeries();loadGE();setInterval(loadLatest,60000);setInterval(loadSeries,120000);
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
+<a class="home-fab" href="/" aria-label="Laman utama">🏠 Laman Utama</a>
 </body>
 </html>

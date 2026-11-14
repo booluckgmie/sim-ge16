@@ -93,6 +93,8 @@ body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Inte
 
 /* ── Footer ── */
 .footer{margin-top:20px;font-size:11px;color:var(--text3);text-align:center}
+.home-fab{position:fixed;left:14px;bottom:14px;z-index:60;display:inline-flex;align-items:center;gap:.4rem;padding:.55rem .95rem;border-radius:999px;background:rgba(8,21,38,.93);border:1px solid #1E3A5F;color:#E2E8F0;font:700 .78rem/1 'Segoe UI',system-ui,sans-serif;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.home-fab:hover{border-color:#3B82F6;color:#fff;text-decoration:none}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -301,5 +303,6 @@ applyTheme(detectTheme());
 if(btn)btn.addEventListener('click',function(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');});
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
+<a class="home-fab" href="/" aria-label="Laman utama">🏠 Laman Utama</a>
 </body>
 </html>

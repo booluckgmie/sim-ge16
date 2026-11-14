@@ -191,6 +191,8 @@ body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg)
   .main{padding:1rem}
   .scen-seats{flex-direction:column;gap:4px}
 }
+.home-fab{position:fixed;left:14px;bottom:14px;z-index:60;display:inline-flex;align-items:center;gap:.4rem;padding:.55rem .95rem;border-radius:999px;background:rgba(8,21,38,.93);border:1px solid #1E3A5F;color:#E2E8F0;font:700 .78rem/1 'Segoe UI',system-ui,sans-serif;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+.home-fab:hover{border-color:#3B82F6;color:#fff;text-decoration:none}
 </style>
 </head>
 <body>
@@ -687,5 +689,6 @@ function fv(v){return v>0?v.toFixed(v===Math.round(v)?0:1)+'%':'—';}
 })();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
+<a class="home-fab" href="/" aria-label="Laman utama">🏠 Laman Utama</a>
 </body>
 </html>
