@@ -189,7 +189,7 @@ body{overflow-x:hidden}
 <div class="hdr">
   <a class="intel-back" href="index.html">← Kembali ke GE16 Dashboard</a>
   <div class="hdr-top">
-    <div class="hdr-badge">KEPUTUSAN TIDAK RASMI · 14 NOV</div>
+    <div class="hdr-badge">KEPUTUSAN PRN · 14 NOV</div>
     <div class="hdr-dates">
       <span>Penamaan Calon: <strong>31 Okt 2026 ✓</strong></span>
       <span>Undi Awal: <strong>10 Nov 2026 ✓</strong></span>
@@ -211,13 +211,14 @@ body{overflow-x:hidden}
 
 <!-- RESULTS -->
 <div class="sec" id="keputusan">
-  <div class="sec-title">Keputusan PRN Melaka <span class="live-badge" style="background:rgba(249,115,22,.16);color:#FDBA74">TIDAK RASMI</span></div>
+  <div class="sec-title">Keputusan PRN Melaka <span class="live-badge" id="res-badge" style="background:rgba(249,115,22,.16);color:#FDBA74">MEMUATKAN…</span></div>
   <div class="card" id="res-banner"></div>
   <div class="grid2" style="margin-top:.75rem">
     <div class="card"><h4>Bagaimana model dan peramal kita?</h4><div style="overflow-x:auto"><table class="t" id="res-score"></table></div><p class="note" id="res-score-note"></p></div>
     <div class="card"><h4>Kerusi bertukar tangan berbanding 2021</h4><div id="res-swap" class="kv"></div><h4 style="margin-top:.8rem">Kerusi yang model kita silap</h4><div id="res-miss" class="kv"></div></div>
   </div>
-  <p class="note">Sumber: <a href="https://www.utusan.com.my/top/2026/11/tidak-rasmi-bn-pn-menang-24-ph-pertahan-empat-kerusi/">Utusan</a>, <a href="https://www.kosmo.com.my/2026/11/14/prn-melaka-bn-pn-sah-menang-24-dun-calonkan-ab-rauf-ketua-menteri/">Kosmo</a>, <a href="https://berita.rtm.gov.my/mandat/berita/senarai-berita-mandat/berita/senarai-artikel/prn-melaka-bn-pn-raih-24-kerusi-lepasi-majoriti-dua-pertiga/">RTM</a> (malam 14 Nov). Angka datang daripada papan keputusan dan bilik gerakan parti serta laporan akhbar; SPR belum mengumumkan keputusan rasmi dan tiada majoriti undi bagi setiap kerusi dalam sumber ini. Halaman ini akan perlu dikemas kini apabila angka rasmi keluar.</p>
+  <div class="card" style="margin-top:.75rem"><h4>Undi popular (kerusi yang telah diisytihar SPR)</h4><div id="res-votes"></div><p class="note" id="res-votes-note"></p></div>
+  <p class="note" id="res-src-note">Sumber: keputusan SPR melalui <a href="https://electiondata.my/elections/mlk/SE-16/">electiondata.my</a> (API /results, disegarkan setiap minit). Kerusi yang belum diisytihar SPR ditanda berdasarkan akhbar (<a href="https://www.utusan.com.my/top/2026/11/tidak-rasmi-bn-pn-menang-24-ph-pertahan-empat-kerusi/">Utusan</a>, <a href="https://www.kosmo.com.my/2026/11/14/prn-melaka-bn-pn-sah-menang-24-dun-calonkan-ab-rauf-ketua-menteri/">Kosmo</a>, <a href="https://berita.rtm.gov.my/mandat/berita/senarai-berita-mandat/berita/senarai-artikel/prn-melaka-bn-pn-raih-24-kerusi-lepasi-majoriti-dua-pertiga/">RTM</a>) dan akan bertukar kepada rasmi secara automatik.</p>
 </div>
 
 <!-- LIVE TURNOUT -->
@@ -237,7 +238,7 @@ body{overflow-x:hidden}
 <!-- SEAT MAP -->
 <div class="sec" id="peta">
   <div class="sec-title">Peta kerusi · klik sebuah petak untuk butiran</div>
-  <div class="seg" id="mapmode"><button data-m="res" class="on">Keputusan (tidak rasmi)</button><button data-m="turn">Keluar mengundi</button><button data-m="base">Model asas</button><button data-m="poll">Selaras tinjauan</button><button data-m="y21">PRN 2021</button></div>
+  <div class="seg" id="mapmode"><button data-m="res" class="on">Keputusan</button><button data-m="turn">Keluar mengundi</button><button data-m="base">Model asas</button><button data-m="poll">Selaras tinjauan</button><button data-m="y21">PRN 2021</button></div>
   <div id="tmap"></div>
   <p class="note" id="tleg"></p>
   <div class="card" id="tdet" style="margin-top:.75rem"><div class="kv">Klik sebuah petak untuk melihat calon, majoriti 2021, peluang menang mengikut model dan keluar mengundi langsung.</div></div>
@@ -387,12 +388,12 @@ body{overflow-x:hidden}
     <div class="step done"><div class="dot"></div><div><div class="tm">31 Okt ✓ · 10 Nov ✓</div><div class="lb">Penamaan calon dan undi awal selesai</div></div></div>
     <div class="step done"><div class="dot"></div><div><div class="tm">13 Nov, 11.59 mlm ✓</div><div class="lb">Kempen tamat</div></div></div>
     <div class="step done"><div class="dot"></div><div><div class="tm">Sab 14 Nov ✓</div><div class="lb">Hari mengundi. Keluar mengundi akhir 70.06% (SPR melalui electiondata.my)</div></div></div>
-    <div class="step next"><div class="dot"></div><div><div class="tm">Malam 14 Nov</div><div class="lb">Keputusan tidak rasmi: BN-PN 24 daripada 28 kerusi. Zahid: BN dan PN mencalonkan Ab Rauf Yusoh sebagai Ketua Menteri; watikah dihantar kepada Yang di-Pertua Negeri malam ini (Kosmo)</div></div></div>
+    <div class="step next"><div class="dot"></div><div><div class="tm">Malam 14 Nov</div><div class="lb">SPR mengisytihar BN 21, PH 4 dan PN 1 (26 daripada 28 kerusi); dua kerusi PN menunggu, dan BN-PN 24 menurut akhbar. Zahid: BN dan PN mencalonkan Ab Rauf Yusoh sebagai Ketua Menteri; watikah dihantar kepada Yang di-Pertua Negeri malam ini (Kosmo)</div></div></div>
     <div class="step"><div class="dot"></div><div><div class="tm">Seterusnya</div><div class="lb">Pengumuman rasmi SPR bagi 28 kerusi, kemudian Yang di-Pertua Negeri melantik Ketua Menteri dan barisan exco dilantik</div></div></div>
   </div>
   <div class="tension-grid">
-    <div class="tension-card"><div class="tension-title">Ujian 1 · Pakat BN–PN tanpa perjanjian rasmi: lulus</div><div class="tension-txt">Zahid mengesahkan "persefahaman" tetapi tiada perjanjian rasmi. BN tidak bertanding di lima kerusi PN dan PN tidak bertanding di 23 kerusi BN. Tinjauan Ilham 13 Nov: 91% penyokong PN sedia mengundi BN dan 78% penyokong BN sedia mengundi PN. <b>Keputusan tidak rasmi: BN-PN menang 24 daripada 28 kerusi (BN 21, PN 3)</b>, selaras dengan tinjauan Ilham. Pindahan undi tampaknya berlaku, dan pakat BN–PN melepasi dua pertiga (19).</div></div>
-    <div class="tension-card"><div class="tension-title">Ujian 2 · BERSAMA melawan sasaran 15%: tiada kerusi</div><div class="tension-txt">Rafizi menyasarkan 15% undi popular, berbanding 3–6% di Johor. <b>BERSAMA tidak menang sebarang kerusi daripada 16</b> (mengikut senarai pemenang tidak rasmi). Peratus undi popular belum ada daripada sumber yang saya dapat, jadi sama ada sasaran 15% tercapai belum dapat dinilai.</div></div>
+    <div class="tension-card"><div class="tension-title">Ujian 1 · Pakat BN–PN tanpa perjanjian rasmi: lulus</div><div class="tension-txt">Zahid mengesahkan "persefahaman" tetapi tiada perjanjian rasmi. BN tidak bertanding di lima kerusi PN dan PN tidak bertanding di 23 kerusi BN. Tinjauan Ilham 13 Nov: 91% penyokong PN sedia mengundi BN dan 78% penyokong BN sedia mengundi PN. <b>BN-PN menang 24 daripada 28 kerusi (BN 21, PN 3; dua kerusi PN menunggu pengisytiharan SPR)</b>, selaras dengan tinjauan Ilham. Pindahan undi tampaknya berlaku, dan pakat BN–PN melepasi dua pertiga (19).</div></div>
+    <div class="tension-card"><div class="tension-title">Ujian 2 · BERSAMA melawan sasaran 15%: tiada kerusi</div><div class="tension-txt">Rafizi menyasarkan 15% undi popular, berbanding 3–6% di Johor. <b>BERSAMA tidak menang sebarang kerusi daripada 16 dan jauh di bawah sasaran 15%</b>: kira-kira 4% undi sah di kerusi diisytihar SPR (lihat bahagian undi popular di atas).</div></div>
     <div class="tension-card"><div class="tension-title">Ujian 3 · PH di kawasan Melayu dan hubungan dengan BERSATU: PH tewas</div><div class="tension-txt">BERSATU menandatangani CSA dengan kerajaan Madani pada 29 Okt tetapi bertanding 7 kerusi, tiga daripadanya bertemu PH. Muhyiddin dilaporkan menafikan kerjasama rasmi dengan PH (tajuk Sinar Harian, 6 Nov). <b>PH hanya mempertahankan empat kerusi bandar (Ayer Keroh, Bandar Hilir, Kesidang, Kota Laksamana) dan kehilangan Bukit Katil; BERSATU tidak menang satu pun daripada tujuh kerusi.</b></div></div>
   </div>
 </div>
@@ -413,6 +414,7 @@ body{overflow-x:hidden}
 <div class="sec" id="berita">
   <div class="sec-title">Penjejak berita · 31 Okt hingga keputusan 14 Nov</div>
   <div class="news-grid">
+    <div class="news-item"><div class="news-date">14 Nov</div><div><div class="news-src">SPR · electiondata.my</div><div class="news-hl"><a href="https://electiondata.my/elections/mlk/SE-16/">SPR isytihar 26 daripada 28 kerusi: BN 21, PH 4, PN 1</a></div><div class="news-txt">Paya Rumput dan Bukit Katil belum diisytihar (akhbar: kedua-duanya PN). Majoriti terbesar: Sungai Udang 16,214 (Rais Yasin); PH menang Ayer Keroh (5,604), Kesidang (9,352), Kota Laksamana (9,424), Bandar Hilir (7,857).</div></div></div>
     <div class="news-item"><div class="news-date">14 Nov</div><div><div class="news-src">Utusan</div><div class="news-hl"><a href="https://www.utusan.com.my/top/2026/11/tidak-rasmi-bn-pn-menang-24-ph-pertahan-empat-kerusi/">Tidak rasmi: BN-PN menang 24, PH pertahan empat kerusi</a></div><div class="news-txt">PH kekal di Ayer Keroh, Bandar Hilir, Kesidang dan Kota Laksamana. Adly Zahari tewas di Bukit Katil kepada Muhammad Ridzuan Mohd Sarif (PN). PN juga menang Paya Rumput dan Bemban.</div></div></div>
     <div class="news-item"><div class="news-date">14 Nov</div><div><div class="news-src">Kosmo</div><div class="news-hl"><a href="https://www.kosmo.com.my/2026/11/14/prn-melaka-bn-pn-sah-menang-24-dun-calonkan-ab-rauf-ketua-menteri/">Zahid: BN-PN bentuk kerajaan dengan majoriti lebih dua pertiga, calonkan Ab Rauf</a></div><div class="news-txt">Zahid menyifatkan ini kemenangan hatrik selepas Johor dan negeri lain, dan menegaskan ia bukan alasan untuk berasa selesa. Pencalonan dihantar kepada Yang di-Pertua Negeri malam ini.</div></div></div>
     <div class="news-item"><div class="news-date">14 Nov</div><div><div class="news-src">RTM</div><div class="news-hl"><a href="https://berita.rtm.gov.my/mandat/berita/senarai-berita-mandat/berita/senarai-artikel/prn-melaka-bn-pn-raih-24-kerusi-lepasi-majoriti-dua-pertiga/">BN-PN raih 24 kerusi, lepasi majoriti dua pertiga</a></div><div class="news-txt">Menurut bilik gerakan parti; belum rasmi sehingga 8.50 malam dan tertakluk kepada pengumuman SPR.</div></div></div>
@@ -438,12 +440,12 @@ body{overflow-x:hidden}
     <b>Cara model berfungsi.</b> (1) Setiap kerusi bermula daripada majoriti 2021 sebagai peratus undi dijangka (andaian keluar mengundi 72%) bagi mengira pertandingan dua pihak: pakat BN+PN lawan PH. (2) Ayunan statewide dan ralat rawak ditambah (4 mata statewide, 6 mata bagi setiap calon, kerana landskap 2026 berbeza daripada 2021). (3) BERSAMA dan BERSATU mengambil undi dengan peratusan yang ditetapkan peluncur, dengan nisbah sumber berbeza. (4) Di kerusi tanpa calon PH (Lendu, Sungai Udang, Pantai Kundor, Bemban), undi sisi PH diagihkan kepada BERSAMA/BERSATU dan sedikit kepada pakat. (5) Calon dengan undi tertinggi menang.<br><br>
     <b>Had utama.</b> Majoriti 2021 diukur dalam landskap berbeza (pakat BN–PN dan BERSAMA tidak wujud). Tinjauan Ilham Centre (805 responden) tidak dimasukkan ke dalam model; ia dibandingkan secara berasingan. Model berpegang pada majoriti 2021 dan menghasilkan BN+PN lebih rendah daripada tinjauan itu; ayunan sekitar +9 mata diperlukan untuk menyamainya. Faktor tempatan (calon, jentera, kaum) tidak dimodelkan kerusi demi kerusi. Gunakan jadual sensitiviti, bukan satu nombor, untuk membuat penilaian.<br><br>
     <b>Data keluar mengundi langsung.</b> Daripada SPR melalui API electiondata.my (kemas kini 5 minit, melalui proksi pelayan; kunci API tidak didedahkan kepada pelayar). Jurang "5 kerusi PH 2021 lawan 23 kerusi lain" ialah proksi kasar. Medan unjuran dan kaum dalam API tidak mempunyai definisi didokumenkan. Keluar mengundi tidak dimasukkan ke dalam model kerusi; ia dipaparkan untuk membantu menilai.<br><br>
-    <b>Keputusan.</b> Pemenang setiap kerusi diambil daripada senarai tidak rasmi akhbar (Utusan, Kosmo, RTM) pada malam 14 Nov dan belum disahkan SPR. Skor model (kerusi betul, skor Brier) mengira kebarangkalian BN+PN menang setiap kerusi berbanding keputusan; skor Brier lebih rendah lebih baik. Penukaran DUN ke parlimen ialah anggaran kasar.
+    <b>Keputusan.</b> Pemenang dan undi setiap kerusi diambil daripada SPR melalui API /results electiondata.my (melalui proksi pelayan, disegarkan setiap minit). Kerusi yang belum diisytihar SPR menggunakan senarai akhbar (Utusan, Kosmo, RTM) dan ditanda dengan ?. Skor model (kerusi betul, skor Brier) mengira kebarangkalian BN+PN menang setiap kerusi berbanding keputusan; skor Brier lebih rendah lebih baik. Penukaran DUN ke parlimen ialah anggaran kasar.
   </div>
 </div>
 
 <div class="footer">
-  <p>PRN Melaka 2026 · Analisis risikan dikemaskini: 14 November 2026 (malam, keputusan tidak rasmi)</p>
+  <p>PRN Melaka 2026 · Analisis risikan dikemaskini: 14 November 2026 (malam, keputusan SPR separa)</p>
   <p style="margin-top:.3rem">Sumber: Utusan Malaysia · Malay Mail · The Star · The Rakyat Post · Malaysiakini · Bernama · Sinar Harian · NST · Kosmo · RTM/SPR · Awani · Buletin TV3 · Ilham Centre (melalui NST) · electiondata.my (keluar mengundi langsung, daripada SPR)</p>
   <p style="margin-top:.3rem">Analisis peribadi, bukan unjuran rasmi SPR.</p>
 </div>
@@ -741,7 +743,7 @@ function renderMap(){
     if(mode==='turn'){
       if(vals&&vals[i]!=null){var k=(vals[i]-mn)/Math.max(0.01,mx-mn);bg='hsl(212,72%,'+(18+k*36)+'%)';txt=vals[i].toFixed(1)+'%'}else txt='…';
     }else if(mode==='y21'){bg=COL2[(i===10||i===23)?'PN':(S.i==='H'?'PH':'BN')]}
-    else if(mode==='res'){var w=resOf(i);bg=COL2[w];txt=w}
+    else if(mode==='res'){var w=resOf(i);bg=COL2[w];txt=w+(resOfficial(i)?'':'?')}
     else{var pr=(mode==='poll')?PS:(R&&R.seats);if(pr){var vv=vecOf(pr[i]);bg=grad(vv);var mp=Math.max(vv.BN,vv.PN,vv.PH,vv.BSM,vv.BST,vv.OTH);txt=mp<0.995?Math.round(mp*100)+'%':''}}
     t.style.background=bg;v.textContent=txt;
   });
@@ -749,7 +751,7 @@ function renderMap(){
     base:'Peluang menang mengikut model asas (andaian semasa pada peluncur). Warna: BN biru, PN ungu, PH merah, BERSAMA kuning, BERSATU merah jambu. Titik putih = kerusi PH 2021.',
     poll:'Model dengan ayunan +9 mata ke BN+PN, selaras tinjauan Ilham (bukan ramalan bebas).',
     y21:'Keputusan PRN 2021: BN 21, PH 5, PN 2.',
-    res:'Pemenang tidak rasmi PRN 2026: BN biru, PN ungu, PH merah. Titik putih = 5 kerusi PH 2021. Belum disahkan SPR.'};
+    res:'Pemenang PRN 2026: kerusi diisytihar SPR (rasmi); tanda ? = menunggu SPR, berdasarkan akhbar. BN biru, PN ungu, PH merah. Titik putih = 5 kerusi PH 2021.'};
   $('tleg').textContent=leg[mode];
   markSel();
 }
@@ -760,7 +762,8 @@ function renderDetail(i){
   var S=SEATS[i],R=window.__R,PS=window.__POLLSEATS,h='<h4>N'+String(S.n).padStart(2,'0')+' '+S.s+' <span class="seat-sub">'+S.p+'</span></h4>';
   h+='<div class="cand" style="margin:.4rem 0">'+S.c.map(function(c){return '<div><span class="chip" style="background:'+COL[c[0]]+'">'+NAMES[c[0]]+'</span>'+c[1]+'</div>'}).join('')+'</div>';
   h+='<div class="kv">Pengundi berdaftar <b>'+fmtN(S.v)+'</b> · majoriti 2021 <b>'+fmtN(S.m)+'</b> ('+(S.i==='H'?'PH':'BN/PN')+')';
-  var wr=resOf(i);h+='<br>Keputusan (tidak rasmi): <b style="color:'+COL2[wr]+'">'+wr+' menang</b> (2021: '+Y21(i)+')';
+  var wr=resOf(i);h+='<br>Keputusan ('+(resOfficial(i)?'SPR':'tidak rasmi, akhbar')+'): <b style="color:'+COL2[wr]+'">'+wr+' menang</b> (2021: '+Y21(i)+')';
+  var xr=RESX&&RESX.seats[i];if(xr&&xr.declared){h+=' · majoriti <b>'+fmtN(xr.maj)+'</b> (2021: '+fmtN(S.m)+') · '+xr.b.map(function(c){return c.p+' '+fmtN(c.v)}).join(' · ')}else if(RESX){h+=' <span style="color:var(--muted)">(menunggu pengisytiharan SPR)</span>'}
   var u=LIVE&&LIVE.t[i];
   if(u){var d=u.overall_vto-LIVE.state.overall_vto;h+='<br>Keluar mengundi langsung <b>'+u.overall_vto.toFixed(1)+'%</b> ('+fmtN(u.overall_abs)+' undi) · '+(d>=0?'+':'')+d.toFixed(1)+' mata berbanding negeri · kedudukan '+rankOf(i)+' / 28'}
   function mdl(lbl,pr){if(!pr)return '';return '<br>'+lbl+': '+top2(pr[i]).slice(0,3).map(function(x){return '<b style="color:'+COL[PARTIES[x[0]]]+'">'+NAMES[PARTIES[x[0]]]+' '+pctS(x[1])+'</b>'}).join(' · ')+(blocHit(pr[i],i)?' ✓':' ✗')}
@@ -770,8 +773,12 @@ function renderDetail(i){
 
 
 /* ---------- RESULTS (unofficial, night of 14 Nov 2026) ---------- */
-var RES_PN=[12,16,23],RES_PH=[15,18,19,21];
-function resOf(i){return RES_PH.indexOf(i)>=0?'PH':RES_PN.indexOf(i)>=0?'PN':'BN'}
+var RES_PN=[12,16,23],RES_PH=[15,18,19,21],RESX=null;
+function coalBloc(c){return c==='BN'?'BN':c==='PH'?'PH':c==='PN'?'PN':null}
+function resOf(i){var x=RESX&&RESX.seats[i];if(x&&x.declared&&x.w){var b=coalBloc(x.w.coal);if(b)return b}return RES_PH.indexOf(i)>=0?'PH':RES_PN.indexOf(i)>=0?'PN':'BN'}
+function resOfficial(i){var x=RESX&&RESX.seats[i];return !!(x&&x.declared)}
+function nOfficial(){var n=0;for(var i=0;i<28;i++)if(resOfficial(i))n++;return n}
+function loadResults(){return fetch('/api/results',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()}).then(function(j){RESX=j.data;afterModel()}).catch(function(){})}
 function Y21(i){return (i===10||i===23)?'PN':(SEATS[i].i==='H'?'PH':'BN')}
 function resTotals(){var o={BN:0,PN:0,PH:0};SEATS.forEach(function(S,i){o[resOf(i)]++});return o}
 function parlFromRes(){var ph=[0,0,0,0,0,0],pa=[0,0,0,0,0,0];SEATS.forEach(function(S,i){if(resOf(i)==='PH')ph[S.pi]+=S.v;else pa[S.pi]+=S.v});var n=0;for(var q=0;q<6;q++)if(ph[q]>pa[q])n++;return n}
@@ -781,28 +788,46 @@ function brier(R){var s=0;R.seats.forEach(function(sp,i){var p=sp[0]+sp[1],o=res
 function hits(R){var n=0;R.seats.forEach(function(sp,i){if(blocHit(sp,i))n++});return n}
 function renderResults(){
   if(!document.getElementById('res-banner'))return;
-  var T=resTotals(),pact=T.BN+T.PN,tw=pact>=19;
+  var T=resTotals(),pact=T.BN+T.PN,tw=pact>=19,off=nOfficial(),pend=[];
+  for(var q=0;q<28;q++)if(!resOfficial(q))pend.push(q);
   var tot=28,seg=function(n,c){return '<i style="width:'+(n/tot*100)+'%;background:'+c+'" title="'+n+'"></i>'};
   var fin=LIVE&&parseInt(LIVE.slot,10)>=1800?LIVE.state.overall_vto.toFixed(2)+'%':null;
+  var bd=$('res-badge');
+  if(bd){if(RESX&&off===28){bd.textContent='RASMI · SPR';bd.style.background='rgba(16,185,129,.16)';bd.style.color='#34D399'}else if(RESX){bd.textContent='SPR: '+off+'/28 DIISYTIHAR';bd.style.background='rgba(251,191,36,.16)';bd.style.color='#FCD34D'}else{bd.textContent='TIDAK RASMI';bd.style.background='rgba(249,115,22,.16)';bd.style.color='#FDBA74'}}
+  var offTxt=RESX?('<b>Rasmi (SPR):</b> '+off+' daripada 28 kerusi diisytihar'+(pend.length?'. Menunggu SPR: '+pend.map(function(k){return SEATS[k].s+' (akhbar: '+resOf(k)+')'}).join(', '):'')+'.'):'Menunggu data SPR; angka berdasarkan akhbar.';
   $('res-banner').innerHTML='<div style="display:flex;gap:1.2rem;flex-wrap:wrap;align-items:flex-end"><div><div class="cd-lbl">BN + PN</div><div class="gapbig" style="font-size:3.2rem;color:#60A5FA">'+pact+' <span style="font-size:1.1rem;color:var(--muted)">/ 28</span></div></div>'+
-   '<div class="kv" style="flex:1;min-width:230px"><b style="color:#60A5FA">BN '+T.BN+'</b> · <b style="color:#A78BFA">PN '+T.PN+'</b> · <b style="color:#F87171">PH '+T.PH+'</b> · <b style="color:#FACC15">BERSAMA 0</b> · <b style="color:#F472B6">BERSATU 0</b><br>'+(tw?'<b style="color:#34D399">Melepasi majoriti dua pertiga (19)</b>':'Majoriti mudah (15)')+(fin?' · keluar mengundi akhir <b>'+fin+'</b>':'')+'<br><span style="color:var(--muted)">Zahid: BN dan PN mencalonkan Ab Rauf Yusoh sebagai Ketua Menteri. PH kehilangan Bukit Katil: Adly Zahari tewas kepada Muhammad Ridzuan Mohd Sarif (PN).</span></div></div>'+
+   '<div class="kv" style="flex:1;min-width:230px"><b style="color:#60A5FA">BN '+T.BN+'</b> · <b style="color:#A78BFA">PN '+T.PN+'</b> · <b style="color:#F87171">PH '+T.PH+'</b> · <b style="color:#FACC15">BERSAMA 0</b> · <b style="color:#F472B6">BERSATU 0</b><br>'+(tw?'<b style="color:#34D399">Melepasi majoriti dua pertiga (19)</b>':'Majoriti mudah (15)')+(fin?' · keluar mengundi akhir <b>'+fin+'</b>':'')+'<br>'+offTxt+'<br><span style="color:var(--muted)">Zahid: BN dan PN mencalonkan Ab Rauf Yusoh sebagai Ketua Menteri. Adly Zahari (PH) tewas di Bukit Katil kepada Muhammad Ridzuan Mohd Sarif (PN) menurut akhbar.</span></div></div>'+
    '<div class="stk" style="height:20px;margin-top:.8rem">'+seg(T.BN,'#3B82F6')+seg(T.PN,'#8B5CF6')+seg(T.PH,'#EF4444')+'<b style="left:'+(15/28*100)+'%"></b><b style="left:'+(19/28*100)+'%;background:#FBBF24"></b></div><div class="cd-scale"><span>garis putih = majoriti 15</span><span>garis kuning = dua pertiga 19</span></div>';
   var R0=window.__R,R1=window.__POLLR;
   if(R0&&R1){
-    var rows=[['Model asas (peluncur semasa)',R0.exp.BN+R0.exp.PN,hits(R0),brier(R0),pct(R0.pr.two)],['Model selaras tinjauan Ilham (+9)',R1.exp.BN+R1.exp.PN,hits(R1),brier(R1),pct(R1.pr.two)]];
+    var rows=[['Model asas (peluncur semasa)',R0.exp.BN+R0.exp.PN,hits(R0),brier(R0)],['Model selaras tinjauan Ilham (+9)',R1.exp.BN+R1.exp.PN,hits(R1),brier(R1)]];
     var t='<thead><tr><th>Sumber</th><th class="r">BN+PN dijangka</th><th class="r">Kerusi betul</th><th class="r">Skor Brier</th></tr></thead><tbody>';
     rows.forEach(function(r){var d=r[1]-pact;t+='<tr><td>'+r[0]+'</td><td class="r"><b>'+r[1].toFixed(1)+'</b> <span class="seat-sub">('+(d>=0?'+':'')+d.toFixed(1)+')</span></td><td class="r">'+r[2]+' / 28</td><td class="r">'+r[3].toFixed(3)+'</td></tr>'});
     t+='<tr><td>Ilham Centre (tinjauan 13 Nov)</td><td class="r"><b>24</b> <span class="seat-sub">(0)</span></td><td class="r">PH selamat 2, sengit 2</td><td class="r">–</td></tr>'+
        '<tr><td>Ong Kian Ming (13 Nov)</td><td class="r"><b>24–25</b> <span class="seat-sub">(0 hingga +1)</span></td><td class="r">Adly kalah di Bukit Katil ✓</td><td class="r">–</td></tr>'+
-       '<tr><td><b>Keputusan tidak rasmi</b></td><td class="r"><b>'+pact+'</b></td><td class="r">–</td><td class="r">–</td></tr></tbody>';
+       '<tr><td><b>Keputusan</b> <span class="seat-sub">('+(RESX&&off===28?'SPR':'SPR '+off+'/28 + akhbar')+')</span></td><td class="r"><b>'+pact+'</b></td><td class="r">–</td><td class="r">–</td></tr></tbody>';
     $('res-score').innerHTML=t;
     $('res-score-note').innerHTML='Skor Brier: 0 = sempurna, 0.25 = tekaan 50/50. Model asas, yang berpegang pada majoriti 2021, <b>menganggar BN+PN terlalu rendah sekitar '+(pact-(R0.exp.BN+R0.exp.PN)).toFixed(1)+' kerusi</b>; bacaan +9 hampir tepat, tetapi ayunan itu dipilih daripada tinjauan Ilham <b>sebelum</b> keputusan, jadi ia bukan ujian bebas. Satu pilihan raya tidak membuktikan model; ia menunjukkan arah ayunan BN yang diabaikan oleh andaian asas.';
-    function miss(R,lbl){var m=[];R.seats.forEach(function(sp,i){if(!blocHit(sp,i)){var t2=top2(sp)[0];m.push(SEATS[i].s+' (model: '+NAMES[PARTIES[t2[0]]]+' '+pctS(t2[1])+', menang: '+resOf(i)+')')}});return '<b>'+lbl+'</b>: '+(m.length?m.join('; '):'tiada')}
+    function miss(R,lbl){var m=[];R.seats.forEach(function(sp,k){if(!blocHit(sp,k)){var t2=top2(sp)[0];m.push(SEATS[k].s+' (model: '+NAMES[PARTIES[t2[0]]]+' '+pctS(t2[1])+', menang: '+resOf(k)+')')}});return '<b>'+lbl+'</b>: '+(m.length?m.join('; '):'tiada')}
     $('res-miss').innerHTML=miss(R0,'Model asas')+'<br>'+miss(R1,'Selaras tinjauan');
   }
-  var sw=[];SEATS.forEach(function(S,i){var a=Y21(i),b=resOf(i);if(a!==b)sw.push('<b>'+S.s+'</b>: '+a+' → <b style="color:'+COL2[b]+'">'+b+'</b>')});
-  $('res-swap').innerHTML=sw.length?sw.join('<br>')+'<br><span style="color:var(--muted)">2021: BN 21, PH 5, PN 2. 2026 (tidak rasmi): BN '+T.BN+', PN '+T.PN+', PH '+T.PH+'.</span>':'Tiada.';
+  var sw=[];SEATS.forEach(function(S,k){var a=Y21(k),b=resOf(k);if(a!==b)sw.push('<b>'+S.s+'</b>: '+a+' → <b style="color:'+COL2[b]+'">'+b+'</b>'+(resOfficial(k)?'':' <span style="color:var(--muted)">(akhbar)</span>'))});
+  $('res-swap').innerHTML=sw.length?sw.join('<br>')+'<br><span style="color:var(--muted)">2021: BN 21, PH 5, PN 2. 2026: BN '+T.BN+', PN '+T.PN+', PH '+T.PH+'.</span>':'Tiada.';
+  var vb=$('res-votes');if(!vb)return;
+  if(!RESX||!off){vb.innerHTML='<div class="kv">Menunggu data undi daripada SPR.</div>';return}
+  var vt={},valid=0,bsmIn=0,bsmValid=0,bsmN=0,bsmLost=0,bstN=0,bstLost=0;
+  RESX.seats.forEach(function(x){if(!x.declared)return;var v=0,hasB=false;x.b.forEach(function(c){v+=c.v});valid+=v;
+    x.b.forEach(function(c){var k=(c.c&&c.c!=='ALONE')?c.c:c.p;vt[k]=(vt[k]||0)+c.v;var P=String(c.p).toUpperCase();
+      if(P==='BERSAMA'){hasB=true;bsmN++;bsmIn+=c.v;if(c.r==='lost_deposit')bsmLost++}
+      if(P==='BERSATU'){bstN++;if(c.r==='lost_deposit')bstLost++}});
+    if(hasB)bsmValid+=v});
+  var VC={BN:'#3B82F6',PH:'#EF4444',PN:'#8B5CF6',BERSAMA:'#E3A008',BERSATU:'#E0457B'},ks=Object.keys(vt).sort(function(a,b){return vt[b]-vt[a]}),h='';
+  ks.forEach(function(k){var p=vt[k]/valid*100;h+='<div class="eb" style="grid-template-columns:90px 1fr 120px"><div class="nm" style="color:'+(VC[k]||'#94A3B8')+'">'+k+'</div><div class="tr"><div class="fill" style="left:0;width:'+p+'%;background:'+(VC[k]||'#64748B')+'"></div></div><div class="v"><b>'+p.toFixed(1)+'%</b> <small>'+fmtN(vt[k])+'</small></div></div>'});
+  vb.innerHTML=h;
+  $('res-votes-note').innerHTML='Kiraan daripada <b>'+off+' kerusi diisytihar</b> ('+fmtN(valid)+' undi sah); '+(off<28?'kerusi yang menunggu SPR belum dimasukkan. ':'')+
+    '<b>BERSAMA: '+(vt.BERSAMA?(vt.BERSAMA/valid*100).toFixed(1):'0')+'%</b> daripada undi sah di kerusi diisytihar ('+(bsmValid?(bsmIn/bsmValid*100).toFixed(1):'–')+'% di '+bsmN+' kerusi yang ditandingi), jauh di bawah sasaran 15% Rafizi; <b>'+bsmLost+' daripada '+bsmN+'</b> calon BERSAMA hilang deposit (di bawah 12.5%). <b>BERSATU</b>: '+(vt.BERSATU?(vt.BERSATU/valid*100).toFixed(1):'0')+'%, '+bstLost+' daripada '+bstN+' calon hilang deposit. Peratusan ini ialah undi sah di kerusi diisytihar sahaja, bukan angka seluruh negeri.';
 }
+
 /* analytics */
 function groups(abs,ele){
   var a=0,e=0,pa=0,pe=0,ra=0,re=0;
@@ -925,7 +950,7 @@ function renderGE(){
   GESC.forEach(function(x,i){var m=sc[i];t+='<tr><td>'+x[4]+' '+x[1]+' <span class="seat-sub">'+x[2]+'</span></td><td class="r"><b>'+m.PH+'</b></td><td class="r">'+(m.BN+m.PN)+'</td><td class="r">'+(m.BSM+m.LAIN)+'</td></tr>'});
   function rd(lbl,R){if(!R||R.phParlExp==null)return '';return '<tr><td>'+lbl+'</td><td class="r"><b>'+R.phParlExp.toFixed(1)+'</b></td><td class="r">'+(6-R.phParlExp).toFixed(1)+'</td><td class="r">–</td></tr>'}
   t+=rd('PRN Melaka: model asas (majoriti 2021)',R0)+rd('PRN Melaka: selaras tinjauan Ilham (+9)',R1);
-  var pa=parlFromRes();t+='<tr><td><b>PRN Melaka: keputusan tidak rasmi</b></td><td class="r"><b>'+pa+'</b></td><td class="r">'+(6-pa)+'</td><td class="r">–</td></tr>';
+  var pa=parlFromRes();t+='<tr><td><b>PRN Melaka: keputusan (SPR + akhbar)</b></td><td class="r"><b>'+pa+'</b></td><td class="r">'+(6-pa)+'</td><td class="r">–</td></tr>';
   document.getElementById('ge-mlk').innerHTML=t+'</tbody>';
   function nearest(R){var best=null;GESC.forEach(function(x,i){var dv=Math.abs(sc[i].PH-R.phParlExp);if(!best||dv<best.dv)best={dv:dv,i:i}});return GESC.filter(function(x,i){return Math.abs(sc[i].PH-R.phParlExp)-best.dv<0.01}).map(function(x){return x[1]}).join(' / ')}
   var L='';
@@ -934,12 +959,12 @@ function renderGE(){
       'Bacaan PRN kita: model asas PH ≈ <b>'+R0.phParlExp.toFixed(1)+'</b> parlimen (paling hampir: <b>'+nearest(R0)+'</b>); selaras tinjauan PH ≈ <b>'+R1.phParlExp.toFixed(1)+'</b> (paling hampir: <b>'+nearest(R1)+'</b>).<br>'+
       'Maksudnya, keputusan Melaka yang menyerupai kedua-dua bacaan ini akan menyokong senario <b>Worst / Trend 2026</b> berbanding Baseline 55%. Melaka ialah negeri ketiga selepas Johor dan N. Sembilan yang menguji arah ayunan BN.<br>'+
       '<span style="color:var(--muted)">Satu negeri dengan enam parlimen tidak mengubah kebarangkalian 55 / 20 / 25 secara automatik; ia isyarat, bukan kemas kini statistik. Kaitan DUN ke parlimen di sini ialah anggaran kasar.</span>';
-    L+='<br><b>Keputusan tidak rasmi:</b> PH menang '+resTotals().PH+' daripada 28 DUN, bersamaan kira-kira <b>'+parlFromRes()+' daripada 6</b> parlimen (anggaran kasar). Itu sepadan dengan <b>Worst case</b> dan <b>Trend 2026</b> (PH 1), bukan <b>Baseline</b> atau <b>Best case</b> (PH 6).';
+    L+='<br><b>Keputusan:</b> PH menang '+resTotals().PH+' daripada 28 DUN, bersamaan kira-kira <b>'+parlFromRes()+' daripada 6</b> parlimen (anggaran kasar). Itu sepadan dengan <b>Worst case</b> dan <b>Trend 2026</b> (PH 1), bukan <b>Baseline</b> atau <b>Best case</b> (PH 6).';
   }else L='Menunggu keputusan simulasi Melaka.';
   document.getElementById('ge-link').innerHTML=L;
 }
 
-loadLatest();loadSeries();loadGE();setInterval(loadLatest,60000);setInterval(loadSeries,120000);
+loadLatest();loadSeries();loadGE();loadResults();setInterval(loadLatest,60000);setInterval(loadSeries,120000);setInterval(loadResults,60000);
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <a class="home-fab" href="/" aria-label="Laman utama">🏠 Laman Utama</a>
