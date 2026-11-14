@@ -113,6 +113,52 @@ table.t td.r,table.t th.r{text-align:right}
 .box{background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:.75rem .9rem;font-size:.72rem;color:#B6C3D6;line-height:1.6}
 .warn{background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.35);color:#FED7AA}
 .footer{padding:1.5rem 1.25rem;text-align:center;color:var(--muted);font-size:.7rem;background:var(--surf);border-top:1px solid var(--brd)}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(1100px 520px at 12% -8%,#112650 0%,#020C1B 58%) no-repeat,#020C1B}
+.nav{position:sticky;top:0;z-index:30;display:flex;gap:.4rem;overflow-x:auto;padding:.55rem 1rem;background:rgba(2,12,27,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--brd)}
+.nav a{white-space:nowrap;font-size:.72rem;font-weight:700;padding:.32rem .85rem;border-radius:999px;background:rgba(255,255,255,.06);color:#CBD5E1}
+.nav a:hover{background:rgba(59,130,246,.28);color:#fff;text-decoration:none}
+.card{border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.012)),var(--surf2)}
+.live-badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.62rem;font-weight:800;letter-spacing:.05em;padding:.12rem .55rem;border-radius:999px;background:rgba(16,185,129,.16);color:#34D399;text-transform:none}
+.live-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:#34D399;animation:pulse 1.6s infinite}
+.live-badge.off{background:rgba(148,163,184,.15);color:#94A3B8}.live-badge.off::before{background:#94A3B8;animation:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:.75rem}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr}}
+.ringc{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.ring{position:relative;width:196px;height:196px;flex-shrink:0}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .c b{font-size:2.3rem;font-weight:900;letter-spacing:-.03em;line-height:1;color:#fff}
+.ring .c span{font-size:.62rem;color:var(--muted);margin-top:.3rem;text-transform:uppercase;letter-spacing:.06em;text-align:center}
+.kp{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;flex:1;min-width:230px}
+.kp div{background:rgba(255,255,255,.04);border:1px solid var(--brd);border-radius:10px;padding:.5rem .65rem}
+.kp b{display:block;font-size:1.1rem;color:#fff}.kp span{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.ethr{display:grid;grid-template-columns:84px 1fr 104px;gap:.6rem;align-items:center;margin-bottom:.65rem;font-size:.74rem}
+.ethr small{display:block;color:var(--muted);font-size:.6rem}
+.ethr .tr{position:relative;height:20px;background:#0A1930;border-radius:6px}
+.ethr .pj{position:absolute;top:0;bottom:0;left:0;border-radius:6px;background:repeating-linear-gradient(45deg,rgba(125,179,255,.32),rgba(125,179,255,.32) 4px,rgba(125,179,255,.12) 4px,rgba(125,179,255,.12) 8px)}
+.ethr .cu{position:absolute;top:4px;bottom:4px;left:0;border-radius:4px;background:#34D399}
+.ethr .bm{position:absolute;top:-3px;bottom:-3px;width:2px;background:#FBBF24}
+.ethr .v{text-align:right;color:#CBD5E1}.ethr .v b{color:#34D399}
+.seg{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.7rem}
+.seg button{font:inherit;font-size:.72rem;font-weight:700;padding:.38rem .9rem;border-radius:999px;border:1px solid var(--brd);background:var(--surf2);color:#CBD5E1;cursor:pointer}
+.seg button.on{background:var(--bn);border-color:var(--bn);color:#fff}
+#tmap{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.tl{position:relative;aspect-ratio:1.15;border-radius:10px;border:2px solid rgba(255,255,255,.1);overflow:hidden;cursor:pointer;color:#fff;text-align:left;padding:0;font:inherit;transition:border-color .15s}
+.tl:hover{border-color:#fff}.tl.sel{border-color:#FBBF24;box-shadow:0 0 0 2px rgba(251,191,36,.35)}
+.tl .n{position:absolute;left:5px;top:3px;font-size:.52rem;font-weight:700;opacity:.85}
+.tl .v{position:absolute;right:5px;top:3px;font-size:.62rem;font-weight:800;text-shadow:0 1px 3px rgba(0,0,0,.7)}
+.tl .nm{position:absolute;left:5px;bottom:4px;right:3px;font-size:.62rem;font-weight:800;line-height:1.05;text-shadow:0 1px 3px rgba(0,0,0,.75)}
+.tl .dot21{position:absolute;right:5px;bottom:5px;width:7px;height:7px;border-radius:50%;background:#fff}
+@media(min-width:640px){.tl .nm{font-size:.76rem}.tl .v{font-size:.76rem}.tl .n{font-size:.62rem}}
+.chart{width:100%;height:auto;display:block}
+.chart text{fill:#8193AB;font-size:10px}
+.rk{display:grid;grid-template-columns:118px 1fr 50px;gap:.5rem;align-items:center;font-size:.72rem;margin-bottom:.35rem}
+.rk .tr{height:12px;background:#0A1930;border-radius:4px;overflow:hidden}.rk .tr i{display:block;height:100%}
+.gapbig{font-size:2rem;font-weight:900;letter-spacing:-.03em;line-height:1}
+.kv{font-size:.74rem;line-height:1.75;color:#CBD5E1}
+.grid2>*,.hero-grid>*{min-width:0}
+body{overflow-x:hidden}
 </style>
 </head>
 <body>
@@ -120,13 +166,13 @@ table.t td.r,table.t th.r{text-align:right}
 <div class="hdr">
   <a class="intel-back" href="index.html">← Kembali ke GE16 Dashboard</a>
   <div class="hdr-top">
-    <div class="hdr-badge">HARI TERAKHIR KEMPEN · UNDI ESOK 14 NOV</div>
+    <div class="hdr-badge">HARI MENGUNDI · 14 NOV · LANGSUNG</div>
     <div class="hdr-dates">
       <span>Penamaan Calon: <strong>31 Okt 2026 ✓</strong></span>
       <span>Undi Awal: <strong>10 Nov 2026 ✓</strong></span>
-      <span>Kempen tamat: <strong>Jum 13 Nov, 11.59 mlm</strong></span>
-      <span>Hari Mengundi: <strong>Sab 14 Nov 2026</strong></span>
-      <span>Dikemas kini: <strong>13 Nov 2026</strong></span>
+      <span>Kempen tamat: <strong>13 Nov ✓</strong></span>
+      <span>Hari Mengundi: <strong>Sab 14 Nov 2026 (hari ini)</strong></span>
+      <span>Dikemas kini: <strong>14 Nov 2026</strong></span>
     </div>
   </div>
   <h1>PRN Melaka ke-16 · <span>2026</span></h1>
@@ -138,28 +184,67 @@ table.t td.r,table.t th.r{text-align:right}
     <span class="tag">BERSAMA 16 kerusi · BERSATU 7 kerusi</span>
   </div>
 </div>
+<div class="nav"><a href="#live">Langsung</a><a href="#peta">Peta</a><a href="#analitik-langsung">Analisis keluar mengundi</a><a href="#model">Model</a><a href="#tinjauan">Tinjauan</a><a href="#kerusi">28 kerusi</a><a href="#berita">Berita</a></div>
+
+<!-- LIVE TURNOUT -->
+<div class="sec" id="live">
+  <div class="sec-title">Keluar mengundi langsung <span class="live-badge off" id="lv-badge">Menyambung…</span></div>
+  <div class="hero-grid">
+    <div class="card"><div class="ringc">
+      <div class="ring"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="82" fill="none" stroke="#0A1930" stroke-width="16"/><circle id="ring-pj" cx="100" cy="100" r="82" fill="none" stroke="rgba(125,179,255,.38)" stroke-width="16" stroke-dasharray="0 600" stroke-linecap="round"/><circle id="ring-cu" cx="100" cy="100" r="82" fill="none" stroke="#34D399" stroke-width="16" stroke-dasharray="0 600" stroke-linecap="round"/></svg><div class="c"><b id="lv-pct">—</b><span id="lv-sub">keluar mengundi</span></div></div>
+      <div class="kp" id="lv-kp"></div>
+    </div></div>
+    <div class="card"><h4>Keluar mengundi mengikut kaum · semasa dan unjuran</h4><div id="eth"></div><p class="note" id="eth-note"></p></div>
+  </div>
+  <p class="note" id="lv-note">Sumber: SPR melalui electiondata.my, dikemas kini setiap 5 minit. Bar hijau = semasa; bar berjalur = unjuran; garis kuning = anggaran akhir Johor / N. Sembilan.</p>
+</div>
+
+<!-- SEAT MAP -->
+<div class="sec" id="peta">
+  <div class="sec-title">Peta kerusi · klik sebuah petak untuk butiran</div>
+  <div class="seg" id="mapmode"><button data-m="turn">Keluar mengundi (langsung)</button><button data-m="base" class="on">Model asas</button><button data-m="poll">Selaras tinjauan</button><button data-m="y21">Keputusan 2021</button></div>
+  <div id="tmap"></div>
+  <p class="note" id="tleg"></p>
+  <div class="card" id="tdet" style="margin-top:.75rem"><div class="kv">Klik sebuah petak untuk melihat calon, majoriti 2021, peluang menang mengikut model dan keluar mengundi langsung.</div></div>
+</div>
+
+<!-- LIVE ANALYTICS -->
+<div class="sec" id="analitik-langsung">
+  <div class="sec-title">Analisis keluar mengundi</div>
+  <div class="grid2">
+    <div class="card"><h4>Jurang: 5 kerusi PH 2021 lawan 23 kerusi lain</h4><div id="gapbox"></div><svg id="chart" class="chart" viewBox="0 0 640 250"></svg><p class="note" id="gapnote"></p></div>
+    <div class="card"><h4>Kadar undi dicatat (ribu pengundi sejam)</h4><svg id="pace" class="chart" viewBox="0 0 640 250"></svg><p class="note" id="pacenote"></p></div>
+    <div class="card"><h4>Kerusi tertinggi dan terendah</h4><div id="rank"></div></div>
+    <div class="card"><h4>Kerusi sengit (model) dan keluar mengundi</h4><div style="overflow-x:auto"><table class="t" id="closet"></table></div><p class="note">Lapan kerusi dengan peluang menang calon unggul paling rendah mengikut model semasa, bersama keluar mengundi langsung. Titik hijau = kerusi PH 2021.</p></div>
+    <div class="card"><h4>Unjuran akhir (daripada API)</h4><div id="proj" class="kv"></div></div>
+    <div class="card"><h4>Cara membaca</h4><div class="kv">
+      <b>5 kerusi PH 2021</b> (Ayer Keroh, Bukit Katil, Kesidang, Kota Laksamana, Bandar Hilir) ialah proksi kasar kawasan bandar dan bukan Melayu, bukan ukuran langsung undi PH.<br>
+      Di Johor dan N. Sembilan, keluar mengundi Melayu (77–78%) mengatasi Cina (63–67%) (anggaran Bridget Welsh melalui Malaysiakini). Jika jurang kekal atau melebar petang nanti, ia lebih menguntungkan pakat BN–PN; jika mengecil, ia membantu PH.<br>
+      Keluar mengundi tinggi tidak memihak mana-mana parti sendiri; ia mengubah komposisi pengundi. Unjuran kaum daripada API tidak mempunyai definisi didokumenkan, jadi anggap ia anggaran.</div></div>
+  </div>
+</div>
 
 <!-- STATUS -->
 <div class="sec">
-  <div class="sec-title">Apa yang berlaku sekarang · Status 13 Nov</div>
+  <div class="sec-title">Apa yang berlaku sekarang · Status 14 Nov</div>
   <div class="facts">
     <div class="fact"><b>687,697</b><span>pengundi layak</span></div>
     <div class="fact"><b>79</b><span>calon · 28 kerusi</span></div>
     <div class="fact"><b id="f-multi">—</b><span>kerusi 3+ penjuru</span></div>
-    <div class="fact"><b>94.96%</b><span>undi awal (~12.5k tentera/polis)</span></div>
+    <div class="fact"><b id="f-live">—</b><span>keluar mengundi langsung</span></div>
   </div>
-  <p class="note">Corak penamaan (Bernama/Sinar Harian): 11 kerusi satu lawan satu, 11 tiga penjuru, 6 empat penjuru. Berbeza daripada PRN 2021 yang kebanyakan kerusi lima atau enam calon tanpa satu lawan satu. Undi awal hanya melibatkan kira-kira 12,500 anggota tentera/polis dan pasangan, jadi ia bukan petunjuk undi umum.</p>
+  <p class="note">Corak penamaan (Bernama/Sinar Harian): 11 kerusi satu lawan satu, 11 tiga penjuru, 6 empat penjuru. Berbeza daripada PRN 2021 yang kebanyakan kerusi lima atau enam calon tanpa satu lawan satu. Undi awal hanya melibatkan sebahagian kecil pengundi (anggota tentera/polis dan pasangan), jadi ia bukan petunjuk undi umum.</p>
 </div>
 
 <!-- FORECAST -->
-<div class="sec">
+<div class="sec" id="model">
   <div class="sec-title">Unjuran model · senario asas</div>
   <div class="fcast" id="fcast"></div>
   <p class="note" id="fcast-note"></p>
 </div>
 
 <!-- POLLS & ANALYSTS -->
-<div class="sec">
+<div class="sec" id="tinjauan">
   <div class="sec-title">Tinjauan &amp; penganalisis · 13 Nov</div>
   <div class="grid2">
     <div class="card"><h4>Ilham Centre · tinjauan 1–12 Nov</h4><div class="cand" style="font-size:.74rem;line-height:1.7">
@@ -221,7 +306,7 @@ table.t td.r,table.t th.r{text-align:right}
 </div>
 
 <!-- SEAT TABLE -->
-<div class="sec">
+<div class="sec" id="kerusi">
   <div class="sec-title">28 kerusi DUN · calon rasmi, majoriti 2021 &amp; kebarangkalian menang</div>
   <p class="lead">Calon dan majoriti 2021 daripada senarai rasmi (Utusan Malaysia, 31 Okt 2026). Kebarangkalian dikira model, bukan dilaporkan.</p>
   <div style="overflow-x:auto"><table class="t" id="seatTbl"></table></div>
@@ -250,11 +335,11 @@ table.t td.r,table.t th.r{text-align:right}
 
 <!-- WHAT HAPPENS LATER -->
 <div class="sec">
-  <div class="sec-title">Apa akan berlaku · 13 Nov dan selepas</div>
+  <div class="sec-title">Apa akan berlaku · hari ini dan selepas</div>
   <div class="card" style="margin-bottom:.75rem">
     <div class="step done"><div class="dot"></div><div><div class="tm">31 Okt ✓ · 10 Nov ✓</div><div class="lb">Penamaan calon dan undi awal selesai</div></div></div>
-    <div class="step next"><div class="dot"></div><div><div class="tm">Kini hingga Jum 13 Nov, 11.59 mlm</div><div class="lb">Hari terakhir kempen dan ceramah penutup. PH menyasar pengundi muda</div></div></div>
-    <div class="step"><div class="dot"></div><div><div class="tm">Sab 14 Nov</div><div class="lb">Hari mengundi. Keputusan awal pada waktu malam; pantau kerusi bellwether di atas</div></div></div>
+    <div class="step done"><div class="dot"></div><div><div class="tm">13 Nov, 11.59 mlm ✓</div><div class="lb">Kempen tamat</div></div></div>
+    <div class="step next"><div class="dot"></div><div><div class="tm">Hari ini · Sab 14 Nov</div><div class="lb">Hari mengundi. Keluar mengundi dipantau langsung di atas; keputusan awal pada waktu malam</div></div></div>
     <div class="step"><div class="dot"></div><div><div class="tm">15 Nov dan seterusnya</div><div class="lb">Jika satu blok capai 15, Menteri Besar dilantik. Jika dewan tergantung, perundingan bermula; Yang Dipertua Negeri lazimnya memilih calon yang dianggap dapat sokongan majoriti</div></div></div>
   </div>
   <div class="tension-grid">
@@ -277,9 +362,10 @@ table.t td.r,table.t th.r{text-align:right}
 </div>
 
 <!-- NEWS -->
-<div class="sec">
-  <div class="sec-title">Penjejak berita · 31 Okt hingga 13 Nov</div>
+<div class="sec" id="berita">
+  <div class="sec-title">Penjejak berita · 31 Okt hingga 14 Nov</div>
   <div class="news-grid">
+    <div class="news-item"><div class="news-date">14 Nov</div><div><div class="news-src">SPR · electiondata.my · Kosmo</div><div class="news-hl"><a href="https://www.kosmo.com.my/2026/11/13/spr-teruskan-sistem-ocr-va-papar-bilangan-pengundi-masa-nyata/">SPR papar bilangan pengundi masa nyata pada hari mengundi</a></div><div class="news-txt">Keluar mengundi langsung diterbitkan SPR melalui dashboard.spr.gov.my berkat pendaftaran pengundi digital di pusat mengundi, dan dikongsi melalui API electiondata.my; halaman ini memaparkannya di atas.</div></div></div>
     <div class="news-item"><div class="news-date">13 Nov</div><div><div class="news-src">Malay Mail · The Star</div><div class="news-hl"><a href="https://www.malaymail.com/news/malaysia/2026/11/13/survey-bn-perikatan-poised-to-dominate-in-melaka-as-pakatan-bersatu-grassroots-synergy-sputters/243111">Ilham Centre: BN-PN mendahului di 24 kerusi; sinergi PH–BERSATU tersekat di akar umbi</a></div><div class="news-txt">805 responden, 1–12 Nov, ralat 3.45%. PH selamat hanya di Kota Laksamana dan Bandar Hilir; Ayer Keroh dan Kesidang sengit. <a href="https://www.thestar.com.my/news/nation/2026/11/13/melaka-polls-study-puts-bn-pn-in-front-as-pakatan-struggles-to-gain-malay-support">The Star</a>.</div></div></div>
     <div class="news-item"><div class="news-date">13 Nov</div><div><div class="news-src">The Rakyat Post</div><div class="news-hl"><a href="https://www.therakyatpost.com/news/malaysia/2026/11/13/melaka-polls-nostradamus-ong-kian-ming-sees-a-25-seat-bn-pn-sweep/">Ong Kian Ming: BN-PN 24–25 kerusi, PH 3–4; Adly dijangka tewas di Bukit Katil</a></div><div class="news-txt">Pada Johor, beliau menjangka BN hingga 53 daripada 56 kerusi dan BN menang 48.</div></div></div>
     <div class="news-item"><div class="news-date">13 Nov</div><div><div class="news-src">The Rakyat Post</div><div class="news-hl"><a href="https://therakyatpost.com/news/2026/11/13/ph-banks-on-youth-voters-to-improve-melaka-poll-performance">PH menyasar pengundi muda, menolak unjuran Ilham</a></div><div class="news-txt">Ketua PKR Youth Kamil Munim: "kuasa memilih terletak pada rakyat". PH akan menggerakkan jentera sehingga saat akhir.</div></div></div>
@@ -299,13 +385,14 @@ table.t td.r,table.t th.r{text-align:right}
   <div class="box warn">
     <b>Ini bukan tinjauan atau unjuran rasmi.</b> Ia model simulasi (12,000 larian) dengan andaian analis yang boleh anda ubah di atas.<br><br>
     <b>Cara model berfungsi.</b> (1) Setiap kerusi bermula daripada majoriti 2021 sebagai peratus undi dijangka (andaian keluar mengundi 72%) bagi mengira pertandingan dua pihak: pakat BN+PN lawan PH. (2) Ayunan statewide dan ralat rawak ditambah (4 mata statewide, 6 mata bagi setiap calon, kerana landskap 2026 berbeza daripada 2021). (3) BERSAMA dan BERSATU mengambil undi dengan peratusan yang ditetapkan peluncur, dengan nisbah sumber berbeza. (4) Di kerusi tanpa calon PH (Lendu, Sungai Udang, Pantai Kundor, Bemban), undi sisi PH diagihkan kepada BERSAMA/BERSATU dan sedikit kepada pakat. (5) Calon dengan undi tertinggi menang.<br><br>
-    <b>Had utama.</b> Majoriti 2021 diukur dalam landskap berbeza (pakat BN–PN dan BERSAMA tidak wujud). Tinjauan Ilham Centre (805 responden) tidak dimasukkan ke dalam model; ia dibandingkan secara berasingan. Model berpegang pada majoriti 2021 dan menghasilkan BN+PN lebih rendah daripada tinjauan itu; ayunan sekitar +9 mata diperlukan untuk menyamainya. Faktor tempatan (calon, jentera, kaum) tidak dimodelkan kerusi demi kerusi. Gunakan jadual sensitiviti, bukan satu nombor, untuk membuat penilaian.
+    <b>Had utama.</b> Majoriti 2021 diukur dalam landskap berbeza (pakat BN–PN dan BERSAMA tidak wujud). Tinjauan Ilham Centre (805 responden) tidak dimasukkan ke dalam model; ia dibandingkan secara berasingan. Model berpegang pada majoriti 2021 dan menghasilkan BN+PN lebih rendah daripada tinjauan itu; ayunan sekitar +9 mata diperlukan untuk menyamainya. Faktor tempatan (calon, jentera, kaum) tidak dimodelkan kerusi demi kerusi. Gunakan jadual sensitiviti, bukan satu nombor, untuk membuat penilaian.<br><br>
+    <b>Data keluar mengundi langsung.</b> Daripada SPR melalui API electiondata.my (kemas kini 5 minit, melalui proksi pelayan; kunci API tidak didedahkan kepada pelayar). Jurang "5 kerusi PH 2021 lawan 23 kerusi lain" ialah proksi kasar. Medan unjuran dan kaum dalam API tidak mempunyai definisi didokumenkan. Keluar mengundi tidak dimasukkan ke dalam model kerusi; ia dipaparkan untuk membantu menilai.
   </div>
 </div>
 
 <div class="footer">
-  <p>PRN Melaka 2026 · Analisis risikan dikemaskini: 13 November 2026</p>
-  <p style="margin-top:.3rem">Sumber: Utusan Malaysia · Malay Mail · The Star · The Rakyat Post · Malaysiakini · Bernama · Sinar Harian · NST · Kosmo · RTM/SPR · Awani · Buletin TV3 · Ilham Centre (melalui NST)</p>
+  <p>PRN Melaka 2026 · Analisis risikan dikemaskini: 14 November 2026 (hari mengundi)</p>
+  <p style="margin-top:.3rem">Sumber: Utusan Malaysia · Malay Mail · The Star · The Rakyat Post · Malaysiakini · Bernama · Sinar Harian · NST · Kosmo · RTM/SPR · Awani · Buletin TV3 · Ilham Centre (melalui NST) · electiondata.my (keluar mengundi langsung, daripada SPR)</p>
   <p style="margin-top:.3rem">Analisis peribadi, bukan unjuran rasmi SPR.</p>
 </div>
 
@@ -501,6 +588,7 @@ function sens(){
     var o=run(Q,N_SENS,false);
     var e=o.exp.BN+o.exp.PN;
     h+='<tr><td>'+r[0]+'</td><td class="r"><b>'+pct(o.pr.pact)+'</b></td><td class="r">'+pct(o.pr.two)+'</td><td class="r"><b>'+pct(o.pr.ph)+'</b></td><td class="r">'+pct(o.pr.hung)+'</td><td class="r">'+e.toFixed(1)+'</td><td class="r">'+o.exp.PH.toFixed(1)+'</td></tr>';
+    if(r[0].indexOf('Ilham')>=0)window.__POLLSEATS=o.seats;
     window.__SENS.push({a:r[0],pact:o.pr.pact,two:o.pr.two,ph:o.pr.ph,hung:o.pr.hung,bsm:o.exp.BSM,bnpn:e,phexp:o.exp.PH});
   });
   document.getElementById('sens').innerHTML=h+'</tbody>';
@@ -519,8 +607,167 @@ function labels(){
   document.getElementById('o-t').textContent=P.t+'%';
 }
 function refresh(full){
-  labels();var R=run(P,full?N_MAIN:6000,true);window.__R=R;render(R);sens();
+  labels();var R=run(P,full?N_MAIN:6000,true);window.__R=R;render(R);sens();if(typeof afterModel==='function')afterModel();
 }
+/* ---------- LIVE TURNOUT ---------- */
+var LIVE=null,SERIES=null,MAPMODE='base',USERPICK=false,SEL=-1;
+var PH21=[15,16,18,19,21];
+var BENCH={malay:[77,78],chinese:[63,67]};
+var SHORT={'Kuala Linggi':'K. Linggi','Tanjung Bidara':'T. Bidara','Taboh Naning':'Taboh N.','Durian Tunggal':'D. Tunggal','Sungai Udang':'S. Udang','Pantai Kundor':'P. Kundor','Paya Rumput':'P. Rumput','Pengkalan Batu':'P. Batu','Bukit Katil':'B. Katil','Ayer Molek':'A. Molek','Kota Laksamana':'Laksamana','Bandar Hilir':'B. Hilir','Machap Jaya':'M. Jaya','Sungai Rambai':'S. Rambai','Ayer Limau':'A. Limau','Ayer Keroh':'A. Keroh'};
+var ORD=['BN','PN','BSM','BST','OTH','PH'],COL2={BN:'#3B82F6',PN:'#8B5CF6',PH:'#EF4444',BSM:'#E3A008',BST:'#E0457B',OTH:'#64748B'};
+var $=function(id){return document.getElementById(id)};
+function nidx(k){var m=/^N\.(\d+)/.exec(k);return m?parseInt(m[1],10)-1:-1}
+function fj(u){return fetch(u,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})}
+function fmtN(x){return Math.round(x).toLocaleString('en-US')}
+function hhmm(ts){var m=/(\d\d):(\d\d)/.exec(ts||'');return m?m[1]+':'+m[2]:''}
+function slotMin(s){return parseInt(s.slice(0,2),10)*60+parseInt(s.slice(2),10)}
+function slotLbl(s){return s.slice(0,2)+':'+s.slice(2)}
+function kpi(b,s){return '<div><b>'+b+'</b><span>'+s+'</span></div>'}
+
+function loadLatest(){
+  return fj('/api/turnout?view=latest').then(function(j){
+    LIVE=j.data;LIVE.t=new Array(28);
+    Object.keys(LIVE.dun).forEach(function(k){var i=nidx(k);if(i>=0)LIVE.t[i]=LIVE.dun[k]});
+    renderLive();
+    if(!USERPICK&&MAPMODE!=='turn'){MAPMODE='turn';syncBtns()}
+    afterModel();
+  }).catch(function(){liveFail()});
+}
+function loadSeries(){return fj('/api/turnout?view=series').then(function(j){SERIES=j.data;renderAnalytics()}).catch(function(){})}
+function liveFail(){
+  if(LIVE)return;
+  var b=$('lv-badge');b.className='live-badge off';b.textContent='Data langsung tidak tersedia';
+  $('lv-note').textContent='Data keluar mengundi langsung tidak dapat dimuatkan sekarang. Bahagian model di bawah tidak terjejas.';
+}
+
+function renderLive(){
+  var L=LIVE,s=L.state,C=515.2,e=L.ethnicity,reg=0,pw=0;
+  if(e){Object.keys(e).forEach(function(k){reg+=e[k].registered;pw+=e[k].registered*e[k].projected})}
+  var pj=reg?pw/reg:0;L.projAll=pj;
+  $('lv-badge').className='live-badge';$('lv-badge').textContent='LANGSUNG · '+hhmm(L.timestamp)+' MYT';
+  $('ring-cu').setAttribute('stroke-dasharray',(C*s.overall_vto/100)+' '+C);
+  $('ring-pj').setAttribute('stroke-dasharray',(C*pj/100)+' '+C);
+  $('lv-pct').textContent=s.overall_vto.toFixed(1)+'%';
+  $('lv-sub').textContent='keluar mengundi';
+  var f=$('f-live');if(f)f.textContent=s.overall_vto.toFixed(1)+'%';
+  $('lv-kp').innerHTML=kpi(fmtN(s.overall_abs),'undi dicatat')+kpi(pj?pj.toFixed(1)+'%':'—','unjuran akhir')+kpi(s.biasa_vto.toFixed(1)+'%','pengundi biasa (hari ini)')+kpi(s.awal_vto.toFixed(1)+'%','undi awal ('+fmtN(s.awal_electorate)+' pengundi)');
+  if(e){
+    var EL=[['malay','Melayu'],['chinese','Cina'],['indian','India'],['other','Lain']],h='';
+    EL.forEach(function(x){var u=e[x[0]],b=BENCH[x[0]];
+      h+='<div class="ethr"><div><b>'+x[1]+'</b><small>'+fmtN(u.registered)+' berdaftar</small></div><div class="tr"><div class="pj" style="width:'+u.projected+'%"></div><div class="cu" style="width:'+u.current+'%"></div>'+(b?'<span class="bm" style="left:'+b[0]+'%" title="Johor '+b[0]+'%"></span><span class="bm" style="left:'+b[1]+'%" title="N. Sembilan '+b[1]+'%"></span>':'')+'</div><div class="v"><b>'+u.current.toFixed(1)+'%</b> → '+u.projected.toFixed(1)+'%</div></div>'});
+    $('eth').innerHTML=h;
+    var gp=e.malay.projected-e.chinese.projected,gc=e.malay.current-e.chinese.current;
+    $('eth-note').innerHTML='Jurang Melayu–Cina: semasa <b>'+gc.toFixed(1)+'</b> mata, unjuran <b>'+gp.toFixed(1)+'</b> mata. Rujukan: Johor kira-kira 14 mata (77% lawan 63%), N. Sembilan kira-kira 11 mata (78% lawan 67%). Unjuran Melayu <b>'+e.malay.projected.toFixed(1)+'%</b> lebih rendah daripada Johor/N. Sembilan, Cina <b>'+e.chinese.projected.toFixed(1)+'%</b> hampir sama dengan Johor.';
+  }
+  renderAnalytics();
+}
+
+/* map */
+var TILES=null;
+function buildMap(){
+  var m=$('tmap');
+  TILES=SEATS.map(function(S,i){
+    var b=document.createElement('button');b.type='button';b.className='tl';
+    b.innerHTML='<span class="n">N'+String(S.n).padStart(2,'0')+'</span><span class="v"></span><span class="nm">'+(SHORT[S.s]||S.s)+'</span>'+(PH21.indexOf(i)>=0?'<span class="dot21"></span>':'');
+    b.addEventListener('click',function(){SEL=i;renderDetail(i);markSel()});
+    m.appendChild(b);return b;
+  });
+}
+function vecOf(p){return {BN:p[0],PN:p[1],PH:p[2],BSM:p[3],BST:p[4],OTH:p[5]+p[6]}}
+function grad(v){var acc=0,st=[];ORD.forEach(function(p){var w=v[p]*100;if(w<0.01)return;st.push(COL2[p]+' '+acc.toFixed(2)+'% '+(acc+w).toFixed(2)+'%');acc+=w});return 'linear-gradient(90deg,'+st.join(',')+')'}
+function renderMap(){
+  if(!TILES)buildMap();
+  var mode=MAPMODE,R=window.__R,PS=window.__POLLSEATS,vals=null,mn=0,mx=1;
+  if(mode==='turn'&&LIVE){vals=LIVE.t.map(function(u){return u?u.overall_vto:null});var f=vals.filter(function(x){return x!=null});mn=Math.min.apply(null,f);mx=Math.max.apply(null,f)}
+  SEATS.forEach(function(S,i){
+    var t=TILES[i],v=t.querySelector('.v'),bg='#0F1B33',txt='';
+    if(mode==='turn'){
+      if(vals&&vals[i]!=null){var k=(vals[i]-mn)/Math.max(0.01,mx-mn);bg='hsl(212,72%,'+(18+k*36)+'%)';txt=vals[i].toFixed(1)+'%'}else txt='…';
+    }else if(mode==='y21'){bg=COL2[(i===10||i===23)?'PN':(S.i==='H'?'PH':'BN')]}
+    else{var pr=(mode==='poll')?PS:(R&&R.seats);if(pr){var vv=vecOf(pr[i]);bg=grad(vv);var mp=Math.max(vv.BN,vv.PN,vv.PH,vv.BSM,vv.BST,vv.OTH);txt=mp<0.995?Math.round(mp*100)+'%':''}}
+    t.style.background=bg;v.textContent=txt;
+  });
+  var leg={turn:LIVE?'Petak lebih terang = keluar mengundi lebih tinggi (julat '+mn.toFixed(1)+'% hingga '+mx.toFixed(1)+'%). Titik putih = 5 kerusi PH 2021.':'Menunggu data langsung.',
+    base:'Peluang menang mengikut model asas (andaian semasa pada peluncur). Warna: BN biru, PN ungu, PH merah, BERSAMA kuning, BERSATU merah jambu. Titik putih = kerusi PH 2021.',
+    poll:'Model dengan ayunan +9 mata ke BN+PN, selaras tinjauan Ilham (bukan ramalan bebas).',
+    y21:'Keputusan PRN 2021: BN 21, PH 5, PN 2.'};
+  $('tleg').textContent=leg[mode];
+  markSel();
+}
+function markSel(){if(!TILES)return;TILES.forEach(function(t,i){t.classList.toggle('sel',i===SEL)})}
+function syncBtns(){var b=$('mapmode').querySelectorAll('button');for(var i=0;i<b.length;i++)b[i].classList.toggle('on',b[i].getAttribute('data-m')===MAPMODE)}
+function rankOf(i){var arr=LIVE.t.map(function(u){return u?u.overall_vto:-1}),v=arr[i],r=1;arr.forEach(function(x){if(x>v)r++});return r}
+function renderDetail(i){
+  var S=SEATS[i],R=window.__R,PS=window.__POLLSEATS,h='<h4>N'+String(S.n).padStart(2,'0')+' '+S.s+' <span class="seat-sub">'+S.p+'</span></h4>';
+  h+='<div class="cand" style="margin:.4rem 0">'+S.c.map(function(c){return '<div><span class="chip" style="background:'+COL[c[0]]+'">'+NAMES[c[0]]+'</span>'+c[1]+'</div>'}).join('')+'</div>';
+  h+='<div class="kv">Pengundi berdaftar <b>'+fmtN(S.v)+'</b> · majoriti 2021 <b>'+fmtN(S.m)+'</b> ('+(S.i==='H'?'PH':'BN/PN')+')';
+  var u=LIVE&&LIVE.t[i];
+  if(u){var d=u.overall_vto-LIVE.state.overall_vto;h+='<br>Keluar mengundi langsung <b>'+u.overall_vto.toFixed(1)+'%</b> ('+fmtN(u.overall_abs)+' undi) · '+(d>=0?'+':'')+d.toFixed(1)+' mata berbanding negeri · kedudukan '+rankOf(i)+' / 28'}
+  function mdl(lbl,pr){if(!pr)return '';return '<br>'+lbl+': '+top2(pr[i]).slice(0,3).map(function(x){return '<b style="color:'+COL[PARTIES[x[0]]]+'">'+NAMES[PARTIES[x[0]]]+' '+pctS(x[1])+'</b>'}).join(' · ')}
+  h+=mdl('Model asas',R&&R.seats)+mdl('Selaras tinjauan',PS)+'</div>';
+  $('tdet').innerHTML=h;
+}
+
+/* analytics */
+function groups(abs,ele){
+  var a=0,e=0,pa=0,pe=0,ra=0,re=0;
+  for(var i=0;i<28;i++){a+=abs[i];e+=ele[i];if(PH21.indexOf(i)>=0){pa+=abs[i];pe+=ele[i]}else{ra+=abs[i];re+=ele[i]}}
+  return {st:a/e*100,ph:pa/pe*100,rest:ra/re*100,abs:a};
+}
+function svgChart(el,W,H,ml,mr,mt,mb){return {el:el,W:W,H:H,ml:ml,mr:mr,mt:mt,mb:mb,x:function(m){return ml+(m-480)/600*(W-ml-mr)},y:function(v,ymax){return mt+(1-v/ymax)*(H-mt-mb)}}}
+function axes(c,ymax,step,unit){
+  var s='';
+  for(var v=0;v<=ymax;v+=step){var y=c.y(v,ymax);s+='<line x1="'+c.ml+'" x2="'+(c.W-c.mr)+'" y1="'+y+'" y2="'+y+'" stroke="#1E3A5F" stroke-width="1"/><text x="'+(c.ml-6)+'" y="'+(y+3)+'" text-anchor="end">'+v+unit+'</text>'}
+  [480,600,720,840,960,1080].forEach(function(m){s+='<text x="'+c.x(m)+'" y="'+(c.H-8)+'" text-anchor="middle">'+String(m/60).padStart(2,'0')+':00</text>'});
+  return s;
+}
+function renderAnalytics(){
+  if(SERIES){
+    var ele=SERIES.electorate,pts=SERIES.slots.map(function(s){var g=groups(s.abs,ele);g.m=slotMin(s.slot);g.slot=s.slot;return g});
+    if(pts.length>1){
+      var c=svgChart($('chart'),640,250,40,16,18,26),ymax=80,s=axes(c,ymax,20,'%');
+      var defs=[['st','#E2E8F0','Negeri'],['ph','#EF4444','5 kerusi PH 2021'],['rest','#3B82F6','23 kerusi lain']];
+      defs.forEach(function(d){
+        s+='<polyline fill="none" stroke="'+d[1]+'" stroke-width="2.4" stroke-linejoin="round" points="'+pts.map(function(p){return c.x(p.m).toFixed(1)+','+c.y(p[d[0]],ymax).toFixed(1)}).join(' ')+'"/>';
+        var l=pts[pts.length-1];s+='<circle cx="'+c.x(l.m)+'" cy="'+c.y(l[d[0]],ymax)+'" r="3.5" fill="'+d[1]+'"/>';
+      });
+      if(LIVE&&LIVE.projAll){var yp=c.y(LIVE.projAll,ymax);s+='<line x1="'+c.ml+'" x2="'+(c.W-c.mr)+'" y1="'+yp+'" y2="'+yp+'" stroke="#7DB3FF" stroke-width="1.2" stroke-dasharray="5 4"/><text x="'+(c.W-c.mr)+'" y="'+(yp-4)+'" text-anchor="end" style="fill:#7DB3FF">unjuran akhir '+LIVE.projAll.toFixed(1)+'%</text>'}
+      defs.forEach(function(d,i){s+='<rect x="'+(c.ml+4+i*140)+'" y="4" width="10" height="10" rx="2" fill="'+d[1]+'"/><text x="'+(c.ml+18+i*140)+'" y="13">'+d[2]+'</text>'});
+      $('chart').innerHTML=s;
+      var base=pts.filter(function(p){return p.m>=510})[0]||pts[1],last=pts[pts.length-1],gnow=last.ph-last.rest,g0=base.ph-base.rest;
+      $('gapbox').innerHTML='<div class="gapbig" style="color:'+(gnow<0?'#F87171':'#34D399')+'">'+(gnow>0?'+':'')+gnow.toFixed(1)+' mata</div><div class="kv" style="margin:.25rem 0 .5rem">5 kerusi PH 2021: <b>'+last.ph.toFixed(1)+'%</b> · 23 kerusi lain: <b>'+last.rest.toFixed(1)+'%</b> pada '+slotLbl(last.slot)+'. Pada '+slotLbl(base.slot)+' jurang ialah '+(g0>0?'+':'')+g0.toFixed(1)+' mata.</div>';
+      $('gapnote').textContent=(gnow<g0?'Jurang melebar sepanjang hari: kerusi bandar dan bukan Melayu keluar lebih perlahan. ':'Jurang mengecil atau stabil. ')+'Proksi kasar sahaja; kerusi lain turut mempunyai pengundi bukan Melayu.';
+      /* pace */
+      var pc=svgChart($('pace'),640,250,40,16,18,26),bars=[],mx=0;
+      for(var i=1;i<pts.length;i++){var dm=pts[i].m-pts[i-1].m,r=(pts[i].abs-pts[i-1].abs)/dm*60/1000;bars.push({a:pts[i-1].m,b:pts[i].m,r:r,lbl:slotLbl(pts[i-1].slot)+'–'+slotLbl(pts[i].slot)});mx=Math.max(mx,r)}
+      var ym=Math.ceil(mx/20)*20||20,ps=axes(pc,ym,ym/4,'');
+      bars.forEach(function(b){var x1=pc.x(b.a)+2,x2=pc.x(b.b)-2,y=pc.y(b.r,ym);ps+='<rect x="'+x1+'" y="'+y+'" width="'+Math.max(2,x2-x1)+'" height="'+(pc.H-pc.mb-y)+'" rx="3" fill="#34D399" opacity=".85"/><text x="'+((x1+x2)/2)+'" y="'+(y-4)+'" text-anchor="middle" style="fill:#CBD5E1">'+b.r.toFixed(0)+'</text>'});
+      $('pace').innerHTML=ps;
+      var pk=bars.reduce(function(a,b){return b.r>a.r?b:a},bars[0]),lb=bars[bars.length-1];
+      $('pacenote').innerHTML='Puncak setakat ini: <b>'+pk.r.toFixed(1)+' ribu/jam</b> ('+pk.lbl+'). Selang terkini ('+lb.lbl+'): <b>'+lb.r.toFixed(1)+' ribu/jam</b>. '+(lb.r<pk.r*0.85?'Kadar kini lebih rendah daripada puncak; selepas ini bergantung pada lonjakan petang.':'Kadar masih hampir puncak.');
+    }
+  }
+  if(LIVE){
+    var rows=LIVE.t.map(function(u,i){return {i:i,v:u?u.overall_vto:0}}).sort(function(a,b){return b.v-a.v}),mxv=rows[0].v,lov=rows[rows.length-1].v-3,h='';
+    function rk(r){var S=SEATS[r.i],ph=PH21.indexOf(r.i)>=0;return '<div class="rk"><div>'+(SHORT[S.s]||S.s)+(ph?' <span style="color:#34D399">●</span>':'')+'</div><div class="tr"><i style="width:'+((r.v-lov)/(mxv-lov)*100)+'%;background:'+(ph?'#EF4444':'#3B82F6')+'"></i></div><div><b>'+r.v.toFixed(1)+'%</b></div></div>'}
+    h+='<div class="kv" style="margin-bottom:.3rem"><b>Tertinggi</b></div>'+rows.slice(0,5).map(rk).join('')+'<div class="kv" style="margin:.5rem 0 .3rem"><b>Terendah</b></div>'+rows.slice(-5).reverse().map(rk).join('');
+    $('rank').innerHTML=h;
+    var pj=LIVE.projAll,tot=LIVE.state.overall_electorate,pv=pj?tot*pj/100:0;
+    $('proj').innerHTML=pj?('Unjuran akhir berpemberat kaum: <b>'+pj.toFixed(1)+'%</b>, kira-kira <b>'+fmtN(pv)+'</b> undi.<br>Dicatat setakat ini: <b>'+fmtN(LIVE.state.overall_abs)+'</b>. Baki dijangka: <b>≈'+fmtN(Math.max(0,pv-LIVE.state.overall_abs))+'</b> undi.<br><span style="color:var(--muted)">Angka unjuran daripada API (tiada definisi didokumenkan); gabungan unjuran Melayu '+LIVE.ethnicity.malay.projected.toFixed(1)+'%, Cina '+LIVE.ethnicity.chinese.projected.toFixed(1)+'%.</span>'):'Unjuran tidak tersedia.';
+  }
+  renderClose();
+}
+function renderClose(){
+  var R=window.__R;if(!R)return;
+  var rows=R.seats.map(function(sp,i){var t=top2(sp)[0];return {i:i,j:t[0],p:t[1]}}).sort(function(a,b){return a.p-b.p}).slice(0,8);
+  var h='<thead><tr><th>Kerusi</th><th>Unggul (model)</th><th class="r">Keluar mengundi</th><th class="r">Vs negeri</th></tr></thead><tbody>';
+  rows.forEach(function(r){var S=SEATS[r.i],u=LIVE&&LIVE.t[r.i],d=u?u.overall_vto-LIVE.state.overall_vto:null,ph=PH21.indexOf(r.i)>=0;
+    h+='<tr><td><span class="seat-name">'+S.s+'</span>'+(ph?' <span style="color:#34D399">●</span>':'')+'</td><td><b style="color:'+COL[PARTIES[r.j]]+'">'+NAMES[PARTIES[r.j]]+' '+pctS(r.p)+'</b></td><td class="r">'+(u?u.overall_vto.toFixed(1)+'%':'—')+'</td><td class="r">'+(d==null?'—':(d>=0?'+':'')+d.toFixed(1))+'</td></tr>'});
+  $('closet').innerHTML=h+'</tbody>';
+}
+function afterModel(){renderMap();renderClose();if(SEL>=0)renderDetail(SEL)}
+$('mapmode').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;USERPICK=true;MAPMODE=b.getAttribute('data-m');syncBtns();renderMap()});
+
 ['swing','bsm','bst','aph','t'].forEach(function(id){
   document.getElementById(id).addEventListener('input',function(e){P[id]=parseFloat(e.target.value);refresh(false)});
 });
@@ -529,6 +776,7 @@ document.getElementById('reset').addEventListener('click',function(){
 });
 refresh(true);
 window.__SEATS=SEATS;
+loadLatest();loadSeries();setInterval(loadLatest,60000);setInterval(loadSeries,120000);
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
