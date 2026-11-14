@@ -157,6 +157,15 @@ body{background:radial-gradient(1100px 520px at 12% -8%,#112650 0%,#020C1B 58%) 
 .rk .tr{height:12px;background:#0A1930;border-radius:4px;overflow:hidden}.rk .tr i{display:block;height:100%}
 .gapbig{font-size:2rem;font-weight:900;letter-spacing:-.03em;line-height:1}
 .kv{font-size:.74rem;line-height:1.75;color:#CBD5E1}
+.cd{margin-top:.75rem}
+.cd-main{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:flex-end}
+.cd-lbl{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.cd-time{font-size:2.7rem;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:#fff;line-height:1.1}
+.cd-time.done{color:#94A3B8}
+.cd-bar{height:10px;background:#0A1930;border-radius:6px;margin-top:.75rem;overflow:hidden}
+.cd-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#3B82F6,#34D399);border-radius:6px}
+.cd-scale{display:flex;justify-content:space-between;font-size:.62rem;color:var(--muted);margin-top:.25rem}
+.cd-side{font-size:.74rem;line-height:1.65;color:#CBD5E1;max-width:430px}
 .grid2>*,.hero-grid>*{min-width:0}
 body{overflow-x:hidden}
 </style>
@@ -196,6 +205,7 @@ body{overflow-x:hidden}
     </div></div>
     <div class="card"><h4>Keluar mengundi mengikut kaum · semasa dan unjuran</h4><div id="eth"></div><p class="note" id="eth-note"></p></div>
   </div>
+  <div class="card cd"><div class="cd-main"><div><div class="cd-lbl" id="cd-lbl">Pusat mengundi tutup dalam</div><div class="cd-time" id="cd-time">--:--:--</div></div><div class="cd-side" id="cd-side"></div></div><div class="cd-bar"><i id="cd-fill"></i></div><div class="cd-scale"><span>8.00 pagi (buka)</span><span>6.00 petang (tutup)</span></div></div>
   <p class="note" id="lv-note">Sumber: SPR melalui electiondata.my, dikemas kini setiap 5 minit. Bar hijau = semasa; bar berjalur = unjuran; garis kuning = anggaran akhir Johor / N. Sembilan.</p>
 </div>
 
@@ -753,7 +763,7 @@ function renderAnalytics(){
     h+='<div class="kv" style="margin-bottom:.3rem"><b>Tertinggi</b></div>'+rows.slice(0,5).map(rk).join('')+'<div class="kv" style="margin:.5rem 0 .3rem"><b>Terendah</b></div>'+rows.slice(-5).reverse().map(rk).join('');
     $('rank').innerHTML=h;
     var pj=LIVE.projAll,tot=LIVE.state.overall_electorate,pv=pj?tot*pj/100:0;
-    $('proj').innerHTML=pj?('Unjuran akhir berpemberat kaum: <b>'+pj.toFixed(1)+'%</b>, kira-kira <b>'+fmtN(pv)+'</b> undi.<br>Dicatat setakat ini: <b>'+fmtN(LIVE.state.overall_abs)+'</b>. Baki dijangka: <b>≈'+fmtN(Math.max(0,pv-LIVE.state.overall_abs))+'</b> undi.<br><span style="color:var(--muted)">Angka unjuran daripada API (tiada definisi didokumenkan); gabungan unjuran Melayu '+LIVE.ethnicity.malay.projected.toFixed(1)+'%, Cina '+LIVE.ethnicity.chinese.projected.toFixed(1)+'%.</span>'):'Unjuran tidak tersedia.';
+    $('proj').innerHTML=pj?('Unjuran akhir berpemberat kaum: <b>'+pj.toFixed(1)+'%</b>, kira-kira <b>'+fmtN(pv)+'</b> undi.<br>Dicatat setakat ini: <b>'+fmtN(LIVE.state.overall_abs)+'</b>. Baki dijangka: <b>≈'+fmtN(Math.max(0,pv-LIVE.state.overall_abs))+'</b> undi.<br><span style="color:var(--muted)">Angka unjuran daripada API (tiada definisi didokumenkan); gabungan unjuran Melayu '+LIVE.ethnicity.malay.projected.toFixed(1)+'%, Cina '+LIVE.ethnicity.chinese.projected.toFixed(1)+'%.</span><br><span style="color:var(--muted)">SPR menjangka keluar mengundi mencecah kira-kira 70% (Bernama, 14 Nov).</span>'):'Unjuran tidak tersedia.';
   }
   renderClose();
 }
@@ -776,6 +786,32 @@ document.getElementById('reset').addEventListener('click',function(){
 });
 refresh(true);
 window.__SEATS=SEATS;
+/* ---------- COUNTDOWN (polling 08:00-18:00 MYT, SPR) ---------- */
+var OPEN_T=Date.UTC(2026,10,14,0,0,0),CLOSE_T=Date.UTC(2026,10,14,10,0,0);
+function pad2(n){return String(n).padStart(2,'0')}
+function fmtD(ms){var s=Math.max(0,Math.floor(ms/1000));return pad2(Math.floor(s/3600))+':'+pad2(Math.floor(s%3600/60))+':'+pad2(s%60)}
+function recentRate(){
+  if(!SERIES||SERIES.slots.length<2)return null;
+  var ele=SERIES.electorate,pts=SERIES.slots.map(function(s){return {m:slotMin(s.slot),a:groups(s.abs,ele).abs}}),l=pts[pts.length-1],p=pts[pts.length-2];
+  for(var i=pts.length-2;i>=0;i--){p=pts[i];if(l.m-pts[i].m>=30)break}
+  return (l.a-p.a)/(l.m-p.m)*60;
+}
+function tick(){
+  var now=Date.now(),t=$('cd-time'),lb=$('cd-lbl'),side=$('cd-side'),fill=0;
+  if(now<OPEN_T){lb.textContent='Pusat mengundi dibuka dalam';t.textContent=fmtD(OPEN_T-now);t.className='cd-time';side.textContent='Waktu mengundi 8.00 pagi hingga 6.00 petang (SPR).'}
+  else if(now<CLOSE_T){
+    lb.textContent='Pusat mengundi tutup dalam';t.textContent=fmtD(CLOSE_T-now);t.className='cd-time';fill=(now-OPEN_T)/(CLOSE_T-OPEN_T)*100;
+    var h='Tutup pada <b>6.00 petang</b> (SPR).';
+    if(LIVE&&LIVE.projAll){
+      var pv=LIVE.state.overall_electorate*LIVE.projAll/100,rem=Math.max(0,pv-LIVE.state.overall_abs),hl=(CLOSE_T-now)/3.6e6,need=hl>0?rem/hl:0,rate=recentRate();
+      h+='<br>Untuk capai unjuran <b>'+LIVE.projAll.toFixed(1)+'%</b> perlu kira-kira <b>'+(need/1000).toFixed(1)+' ribu</b> undi sejam'+(rate!=null?'; kadar 30 minit terakhir <b>'+(rate/1000).toFixed(1)+' ribu</b> sejam. '+(rate>=need?'Kadar semasa melebihi keperluan: unjuran boleh dicapai walaupun kadar menurun sehingga '+Math.round((1-need/rate)*100)+'%.':'Kadar semasa di bawah keperluan: unjuran sukar dicapai kecuali kadar meningkat petang nanti.'):'.');
+    }
+    side.innerHTML=h;
+  }else{lb.textContent='Pusat mengundi telah ditutup';t.textContent='00:00:00';t.className='cd-time done';fill=100;side.textContent='Pengundian tamat pada 6.00 petang. Pengiraan undi bermula; keputusan rasmi 28 kerusi diumumkan selepas penjumlahan rasmi (SPR).'}
+  $('cd-fill').style.width=fill+'%';
+}
+tick();setInterval(tick,1000);
+
 loadLatest();loadSeries();setInterval(loadLatest,60000);setInterval(loadSeries,120000);
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
