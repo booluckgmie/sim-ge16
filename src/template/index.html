@@ -528,7 +528,7 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;heigh
       <button class="sb sb-trend on" onclick="clickPreset('trend')">Trend 2026 <span style="opacity:.6;font-size:10px">main</span></button>
     </div>
     <div class="live-count">
-      <div class="lc-label">PH+BRSM</div>
+      <div class="lc-label">PH seats</div>
       <div class="lc-num" id="lc-num">—</div>
       <div class="lc-sub">of 112 needed</div>
     </div>
@@ -1630,7 +1630,7 @@ async function loadSummary(){
 
 function renderSummary(d){
   var c=d.coalitions,v=d.verdict;
-  var ph=c.ph,bm=c.bm,pn=c.pn,bn=c.bn,gps=c.gps,war=c.war,phB=ph+bm;
+  var ph=c.ph,bm=c.bm,pn=c.pn,bn=c.bn,gps=c.gps,war=c.war,phB=ph;
 
   var lcEl=document.getElementById('lc-num');
   if(lcEl){lcEl.textContent=phB;lcEl.style.color=phB>=112?'#4ADE80':phB>=100?'#FCD34D':'#F87171';}
